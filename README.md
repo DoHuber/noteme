@@ -3,4 +3,4 @@ Student project, so expect crude code and uselessness
 
 STAHP, Eclips what are you doing, STAHP
 
-test dominik erdmann
+test2 dominik erdmann  
