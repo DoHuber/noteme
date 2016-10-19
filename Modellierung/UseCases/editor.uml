@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="__YO5IJXgEea_SYPT6Wib5Q" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_OI5mMJXjEeaMzN1sqnykJg" name="Editor">
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_b3mx4JXjEeaMzN1sqnykJg" name="Notizen verwalten">
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_eB4REJXjEeaMzN1sqnykJg" name="Notizen verwalten"/>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ezIu4JXjEeaMzN1sqnykJg" name="CopyOf_Notizen verwalten_1">
+        <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ezIu4ZXjEeaMzN1sqnykJg" name="Notizen verwalten"/>
+      </ownedUseCase>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_fmAWQJXjEeaMzN1sqnykJg" name="Notizbücher verwalten"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_mnvToJXjEeaMzN1sqnykJg" name="Notizbücher freigeben"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_4B6EcJXjEeaMzN1sqnykJg" name="Fälligkeiten verwalten"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_ESQbwJXkEeaMzN1sqnykJg" name="Websites importieren"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_K7Ph8JXkEeaMzN1sqnykJg" name="Notizen ordnen"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_Njhy0JXkEeaMzN1sqnykJg" name="Notizen suchen"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_QbwZoJXjEeaMzN1sqnykJg" name="User"/>
+</uml:Model>
