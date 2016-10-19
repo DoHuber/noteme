@@ -4,7 +4,7 @@
     <packagedElement xmi:type="uml:UseCase" xmi:id="_fmAWQJXjEeaMzN1sqnykJg" name="Notiz(buch) verwalten"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_vR6_EJXvEeaMzN1sqnykJg" name="Notiz(buch) erstellen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_4B6EcJXjEeaMzN1sqnykJg" name="Fälligkeitsdaten setzen"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_IeuA4JX_Eea2L7PN__lsaQ" name="Notiz(buch) bearbeiten"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_IeuA4JX_Eea2L7PN__lsaQ" name="Notiz bearbeiten"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Actor" xmi:id="_QbwZoJXjEeaMzN1sqnykJg" name="User"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_tyGVoJXwEeaMzN1sqnykJg" memberEnd="_tysykJXwEeaMzN1sqnykJg _tyunwJXwEeaMzN1sqnykJg">
