@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_8Vj1gJXkEeaMzN1sqnykJg" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="__5nyIJXkEeaMzN1sqnykJg" name="Report generator">
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_IhqmAJXlEeaMzN1sqnykJg" name="Abzufragende Daten auswählen"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_dBYLcJXlEeaMzN1sqnykJg" name="Report einsehen"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_CI338JXlEeaMzN1sqnykJg" name="SuperUser"/>
+</uml:Model>

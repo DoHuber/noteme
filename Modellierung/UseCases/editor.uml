@@ -13,6 +13,7 @@
     <packagedElement xmi:type="uml:UseCase" xmi:id="_ESQbwJXkEeaMzN1sqnykJg" name="Websites importieren"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_K7Ph8JXkEeaMzN1sqnykJg" name="Notizen ordnen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_Njhy0JXkEeaMzN1sqnykJg" name="Notizen suchen"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_RpuWsJXlEeaMzN1sqnykJg" name="Rechte verwalten"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Actor" xmi:id="_QbwZoJXjEeaMzN1sqnykJg" name="User"/>
 </uml:Model>
