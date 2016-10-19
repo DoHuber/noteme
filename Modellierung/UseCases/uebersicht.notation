@@ -26,7 +26,7 @@
       </children>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Vnad0ZXxEeaMzN1sqnykJg" diagramLink="_bgr-UJXxEeaMzN1sqnykJg"/>
       <element xmi:type="uml:Package" href="uebersicht.uml#_VnYBkJXxEeaMzN1sqnykJg"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Vnad0pXxEeaMzN1sqnykJg" x="208" y="108" width="642" height="556"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Vnad0pXxEeaMzN1sqnykJg" x="54" y="38" width="642" height="556"/>
     </children>
     <styles xmi:type="notation:StringValueStyle" xmi:id="_Ubs4oZXxEeaMzN1sqnykJg" name="diagram_compatibility_version" stringValue="1.2.0"/>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Ubs4opXxEeaMzN1sqnykJg"/>

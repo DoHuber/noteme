@@ -4,7 +4,7 @@
     <packagedElement xmi:type="uml:UseCase" xmi:id="_IhqmAJXlEeaMzN1sqnykJg" name="Abzufragende Daten auswählen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_dBYLcJXlEeaMzN1sqnykJg" name="Report einsehen"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Actor" xmi:id="_CI338JXlEeaMzN1sqnykJg" name="SuperUser"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_CI338JXlEeaMzN1sqnykJg" name="User"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_Ok3BEJXxEeaMzN1sqnykJg" memberEnd="_Ok6EYJXxEeaMzN1sqnykJg _Ok6EYZXxEeaMzN1sqnykJg">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Ok42QJXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Ok5dUJXxEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>

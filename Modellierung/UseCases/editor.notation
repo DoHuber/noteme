@@ -29,19 +29,6 @@
         <element xmi:type="uml:UseCase" href="editor.uml#_mnvToJXjEeaMzN1sqnykJg"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_moGgAJXjEeaMzN1sqnykJg" x="14" y="80" width="179"/>
       </children>
-      <children xmi:type="notation:Shape" xmi:id="_4CZzsJXjEeaMzN1sqnykJg" type="UseCase_Shape_CN">
-        <children xmi:type="notation:DecorationNode" xmi:id="_4CaawJXjEeaMzN1sqnykJg" type="UseCase_NameLabel_CN"/>
-        <children xmi:type="notation:DecorationNode" xmi:id="_4CaawZXjEeaMzN1sqnykJg" type="UseCase_FloatingNameLabel_CN">
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_4CaawpXjEeaMzN1sqnykJg" y="5"/>
-        </children>
-        <children xmi:type="notation:BasicCompartment" xmi:id="_4Caaw5XjEeaMzN1sqnykJg" type="UseCase_ExtensionPointCompartment_CN">
-          <styles xmi:type="notation:SortingStyle" xmi:id="_4CbB0JXjEeaMzN1sqnykJg"/>
-          <styles xmi:type="notation:FilteringStyle" xmi:id="_4CbB0ZXjEeaMzN1sqnykJg"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4CbB0pXjEeaMzN1sqnykJg"/>
-        </children>
-        <element xmi:type="uml:UseCase" href="editor.uml#_4B6EcJXjEeaMzN1sqnykJg"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4CZzsZXjEeaMzN1sqnykJg" x="20" y="144" width="185"/>
-      </children>
       <children xmi:type="notation:Shape" xmi:id="_vSRkYJXvEeaMzN1sqnykJg" type="UseCase_Shape_CN">
         <children xmi:type="notation:DecorationNode" xmi:id="_vSSLcJXvEeaMzN1sqnykJg" type="UseCase_NameLabel_CN"/>
         <children xmi:type="notation:DecorationNode" xmi:id="_vSSLcZXvEeaMzN1sqnykJg" type="UseCase_FloatingNameLabel_CN">
@@ -53,7 +40,20 @@
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vSSLdpXvEeaMzN1sqnykJg"/>
         </children>
         <element xmi:type="uml:UseCase" href="editor.uml#_vR6_EJXvEeaMzN1sqnykJg"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vSRkYZXvEeaMzN1sqnykJg" x="34" y="211" width="176"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vSRkYZXvEeaMzN1sqnykJg" x="14" y="147" width="176"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_4CZzsJXjEeaMzN1sqnykJg" type="UseCase_Shape_CN">
+        <children xmi:type="notation:DecorationNode" xmi:id="_4CaawJXjEeaMzN1sqnykJg" type="UseCase_NameLabel_CN"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_4CaawZXjEeaMzN1sqnykJg" type="UseCase_FloatingNameLabel_CN">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_4CaawpXjEeaMzN1sqnykJg" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_4Caaw5XjEeaMzN1sqnykJg" type="UseCase_ExtensionPointCompartment_CN">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_4CbB0JXjEeaMzN1sqnykJg"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_4CbB0ZXjEeaMzN1sqnykJg"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4CbB0pXjEeaMzN1sqnykJg"/>
+        </children>
+        <element xmi:type="uml:UseCase" href="editor.uml#_4B6EcJXjEeaMzN1sqnykJg"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4CZzsZXjEeaMzN1sqnykJg" x="21" y="214" width="185"/>
       </children>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OJA68ZXjEeaMzN1sqnykJg"/>
     </children>
@@ -107,7 +107,7 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_tzCJwZXwEeaMzN1sqnykJg"/>
     <element xmi:type="uml:Association" href="editor.uml#_tyGVoJXwEeaMzN1sqnykJg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_tzCJwpXwEeaMzN1sqnykJg" points="[94, 223, -643984, -643984]$[228, 275, -643984, -643984]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_t14CYJXwEeaMzN1sqnykJg" id="(1.0,0.64)"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_t14CYJXwEeaMzN1sqnykJg" id="(1.0,0.3)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_t14CYZXwEeaMzN1sqnykJg" id="(0.0,0.31666666666666665)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_J02OsJXxEeaMzN1sqnykJg" type="Association_Edge" source="_Qb15MJXjEeaMzN1sqnykJg" target="_4CZzsJXjEeaMzN1sqnykJg">
