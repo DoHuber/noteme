@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="__YO5IJXgEea_SYPT6Wib5Q" name="RootElement">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="__YO5IJXgEea_SYPT6Wib5Q" name="RootElement">
   <packagedElement xmi:type="uml:Package" xmi:id="_OI5mMJXjEeaMzN1sqnykJg" name="Editor">
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_b3mx4JXjEeaMzN1sqnykJg" name="Notizen verwalten">
-      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_eB4REJXjEeaMzN1sqnykJg" name="Notizen verwalten"/>
-      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ezIu4JXjEeaMzN1sqnykJg" name="CopyOf_Notizen verwalten_1">
-        <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ezIu4ZXjEeaMzN1sqnykJg" name="Notizen verwalten"/>
-      </ownedUseCase>
-    </packagedElement>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_fmAWQJXjEeaMzN1sqnykJg" name="Notizbücher verwalten"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_mnvToJXjEeaMzN1sqnykJg" name="Notizbücher freigeben"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_4B6EcJXjEeaMzN1sqnykJg" name="Fälligkeiten verwalten"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_ESQbwJXkEeaMzN1sqnykJg" name="Websites importieren"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_K7Ph8JXkEeaMzN1sqnykJg" name="Notizen ordnen"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_Njhy0JXkEeaMzN1sqnykJg" name="Notizen suchen"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_RpuWsJXlEeaMzN1sqnykJg" name="Rechte verwalten"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_fmAWQJXjEeaMzN1sqnykJg" name="Notiz(buch) verwalten"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_mnvToJXjEeaMzN1sqnykJg" name="Notiz(buch) freigeben"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_4B6EcJXjEeaMzN1sqnykJg" name="Fälligkeitsdaten setzen"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_vR6_EJXvEeaMzN1sqnykJg" name="Notiz(buch) erstellen"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Actor" xmi:id="_QbwZoJXjEeaMzN1sqnykJg" name="User"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tyGVoJXwEeaMzN1sqnykJg" memberEnd="_tysykJXwEeaMzN1sqnykJg _tyunwJXwEeaMzN1sqnykJg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tyQGoJXwEeaMzN1sqnykJg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tyQtsJXwEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tysykJXwEeaMzN1sqnykJg" name="notiz(buch) erstellen" type="_vR6_EJXvEeaMzN1sqnykJg" association="_tyGVoJXwEeaMzN1sqnykJg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tyunwJXwEeaMzN1sqnykJg" name="user" type="_QbwZoJXjEeaMzN1sqnykJg" association="_tyGVoJXwEeaMzN1sqnykJg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_J0qBcJXxEeaMzN1sqnykJg" memberEnd="_J0r2opXxEeaMzN1sqnykJg _J0sdsJXxEeaMzN1sqnykJg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_J0r2oJXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_J0r2oZXxEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_J0r2opXxEeaMzN1sqnykJg" name="fälligkeitsdaten setzen" type="_4B6EcJXjEeaMzN1sqnykJg" association="_J0qBcJXxEeaMzN1sqnykJg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_J0sdsJXxEeaMzN1sqnykJg" name="user" type="_QbwZoJXjEeaMzN1sqnykJg" association="_J0qBcJXxEeaMzN1sqnykJg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Kpn6kJXxEeaMzN1sqnykJg" memberEnd="_KpohopXxEeaMzN1sqnykJg _KppIsJXxEeaMzN1sqnykJg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_KpohoJXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_KpohoZXxEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_KpohopXxEeaMzN1sqnykJg" name="notiz(buch) freigeben" type="_mnvToJXjEeaMzN1sqnykJg" association="_Kpn6kJXxEeaMzN1sqnykJg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_KppIsJXxEeaMzN1sqnykJg" name="user" type="_QbwZoJXjEeaMzN1sqnykJg" association="_Kpn6kJXxEeaMzN1sqnykJg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LXtIkJXxEeaMzN1sqnykJg" memberEnd="_LXvk0pXxEeaMzN1sqnykJg _LXwL4JXxEeaMzN1sqnykJg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_LXvk0JXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_LXvk0ZXxEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LXvk0pXxEeaMzN1sqnykJg" name="notiz(buch) verwalten" type="_fmAWQJXjEeaMzN1sqnykJg" association="_LXtIkJXxEeaMzN1sqnykJg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LXwL4JXxEeaMzN1sqnykJg" name="user" type="_QbwZoJXjEeaMzN1sqnykJg" association="_LXtIkJXxEeaMzN1sqnykJg"/>
+  </packagedElement>
 </uml:Model>

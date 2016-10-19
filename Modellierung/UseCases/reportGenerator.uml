@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_8Vj1gJXkEeaMzN1sqnykJg" name="RootElement">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_8Vj1gJXkEeaMzN1sqnykJg" name="RootElement">
   <packagedElement xmi:type="uml:Package" xmi:id="__5nyIJXkEeaMzN1sqnykJg" name="Report generator">
     <packagedElement xmi:type="uml:UseCase" xmi:id="_IhqmAJXlEeaMzN1sqnykJg" name="Abzufragende Daten auswählen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_dBYLcJXlEeaMzN1sqnykJg" name="Report einsehen"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Actor" xmi:id="_CI338JXlEeaMzN1sqnykJg" name="SuperUser"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Ok3BEJXxEeaMzN1sqnykJg" memberEnd="_Ok6EYJXxEeaMzN1sqnykJg _Ok6EYZXxEeaMzN1sqnykJg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Ok42QJXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Ok5dUJXxEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Ok6EYJXxEeaMzN1sqnykJg" name="abzufragende daten auswählen" type="_IhqmAJXlEeaMzN1sqnykJg" association="_Ok3BEJXxEeaMzN1sqnykJg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Ok6EYZXxEeaMzN1sqnykJg" name="superuser" type="_CI338JXlEeaMzN1sqnykJg" association="_Ok3BEJXxEeaMzN1sqnykJg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PQibUJXxEeaMzN1sqnykJg" memberEnd="_PQjpcZXxEeaMzN1sqnykJg _PQkQgJXxEeaMzN1sqnykJg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PQjCYJXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_PQjpcJXxEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PQjpcZXxEeaMzN1sqnykJg" name="report einsehen" type="_dBYLcJXlEeaMzN1sqnykJg" association="_PQibUJXxEeaMzN1sqnykJg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PQkQgJXxEeaMzN1sqnykJg" name="superuser" type="_CI338JXlEeaMzN1sqnykJg" association="_PQibUJXxEeaMzN1sqnykJg"/>
+  </packagedElement>
 </uml:Model>
