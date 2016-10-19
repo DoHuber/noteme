@@ -14,7 +14,7 @@
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ih3aVpXlEeaMzN1sqnykJg"/>
         </children>
         <element xmi:type="uml:UseCase" href="reportGenerator.uml#_IhqmAJXlEeaMzN1sqnykJg"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ih2zQZXlEeaMzN1sqnykJg" x="13" y="17" width="217"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ih2zQZXlEeaMzN1sqnykJg" x="13" y="17" width="141" height="58"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_dBlm0JXlEeaMzN1sqnykJg" type="UseCase_Shape_CN">
         <children xmi:type="notation:DecorationNode" xmi:id="_dBmN4JXlEeaMzN1sqnykJg" type="UseCase_NameLabel_CN"/>

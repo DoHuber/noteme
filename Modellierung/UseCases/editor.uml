@@ -2,9 +2,9 @@
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="__YO5IJXgEea_SYPT6Wib5Q" name="RootElement">
   <packagedElement xmi:type="uml:Package" xmi:id="_OI5mMJXjEeaMzN1sqnykJg" name="Editor">
     <packagedElement xmi:type="uml:UseCase" xmi:id="_fmAWQJXjEeaMzN1sqnykJg" name="Notiz(buch) verwalten"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_mnvToJXjEeaMzN1sqnykJg" name="Notiz(buch) freigeben"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_vR6_EJXvEeaMzN1sqnykJg" name="Notiz(buch) erstellen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_4B6EcJXjEeaMzN1sqnykJg" name="Fälligkeitsdaten setzen"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_IeuA4JX_Eea2L7PN__lsaQ" name="Notiz(buch) bearbeiten"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Actor" xmi:id="_QbwZoJXjEeaMzN1sqnykJg" name="User"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_tyGVoJXwEeaMzN1sqnykJg" memberEnd="_tysykJXwEeaMzN1sqnykJg _tyunwJXwEeaMzN1sqnykJg">
@@ -20,13 +20,6 @@
     </eAnnotations>
     <ownedEnd xmi:type="uml:Property" xmi:id="_J0r2opXxEeaMzN1sqnykJg" name="fälligkeitsdaten setzen" type="_4B6EcJXjEeaMzN1sqnykJg" association="_J0qBcJXxEeaMzN1sqnykJg"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_J0sdsJXxEeaMzN1sqnykJg" name="user" type="_QbwZoJXjEeaMzN1sqnykJg" association="_J0qBcJXxEeaMzN1sqnykJg"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_Kpn6kJXxEeaMzN1sqnykJg" memberEnd="_KpohopXxEeaMzN1sqnykJg _KppIsJXxEeaMzN1sqnykJg">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_KpohoJXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_KpohoZXxEeaMzN1sqnykJg" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_KpohopXxEeaMzN1sqnykJg" name="notiz(buch) freigeben" type="_mnvToJXjEeaMzN1sqnykJg" association="_Kpn6kJXxEeaMzN1sqnykJg"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_KppIsJXxEeaMzN1sqnykJg" name="user" type="_QbwZoJXjEeaMzN1sqnykJg" association="_Kpn6kJXxEeaMzN1sqnykJg"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_LXtIkJXxEeaMzN1sqnykJg" memberEnd="_LXvk0pXxEeaMzN1sqnykJg _LXwL4JXxEeaMzN1sqnykJg">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_LXvk0JXxEeaMzN1sqnykJg" source="org.eclipse.papyrus">
