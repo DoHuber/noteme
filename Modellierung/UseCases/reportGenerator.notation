@@ -33,7 +33,7 @@
     </children>
     <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="__5rcgZXkEeaMzN1sqnykJg"/>
     <element xmi:type="uml:Package" href="reportGenerator.uml#__5nyIJXkEeaMzN1sqnykJg"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5rcgpXkEeaMzN1sqnykJg" x="255" y="40" width="366" height="188"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__5rcgpXkEeaMzN1sqnykJg" x="255" y="40" width="185" height="188"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_CI5tIJXlEeaMzN1sqnykJg" type="Actor_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_CI5tIpXlEeaMzN1sqnykJg" type="Actor_NameLabel">
