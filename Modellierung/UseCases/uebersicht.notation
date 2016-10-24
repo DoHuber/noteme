@@ -11,7 +11,7 @@
           </children>
           <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Y5bBIZXxEeaMzN1sqnykJg"/>
           <element xmi:type="uml:Package" href="uebersicht.uml#_Y5VhkJXxEeaMzN1sqnykJg"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y5bBIpXxEeaMzN1sqnykJg" x="95" y="10" width="382" height="219"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y5bBIpXxEeaMzN1sqnykJg" x="12" y="11" width="382" height="219"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_Z43r8JXxEeaMzN1sqnykJg" type="Package_Shape_CN">
           <children xmi:type="notation:DecorationNode" xmi:id="_Z43r85XxEeaMzN1sqnykJg" type="Package_NameLabel_CN"/>
@@ -20,13 +20,13 @@
           </children>
           <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Z43r8ZXxEeaMzN1sqnykJg"/>
           <element xmi:type="uml:Package" href="uebersicht.uml#_Z4xlUJXxEeaMzN1sqnykJg"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z43r8pXxEeaMzN1sqnykJg" x="99" y="256" width="390" height="224"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z43r8pXxEeaMzN1sqnykJg" x="12" y="247" width="382" height="224"/>
         </children>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Vnc6EpXxEeaMzN1sqnykJg"/>
       </children>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Vnad0ZXxEeaMzN1sqnykJg" diagramLink="_bgr-UJXxEeaMzN1sqnykJg"/>
       <element xmi:type="uml:Package" href="uebersicht.uml#_VnYBkJXxEeaMzN1sqnykJg"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Vnad0pXxEeaMzN1sqnykJg" x="54" y="38" width="642" height="556"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Vnad0pXxEeaMzN1sqnykJg" x="54" y="38" width="429" height="514"/>
     </children>
     <styles xmi:type="notation:StringValueStyle" xmi:id="_Ubs4oZXxEeaMzN1sqnykJg" name="diagram_compatibility_version" stringValue="1.2.0"/>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Ubs4opXxEeaMzN1sqnykJg"/>

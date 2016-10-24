@@ -72,7 +72,7 @@
     </children>
     <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_OI93oZXjEeaMzN1sqnykJg"/>
     <element xmi:type="uml:Package" href="editor.uml#_OI5mMJXjEeaMzN1sqnykJg"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OI93opXjEeaMzN1sqnykJg" x="316" y="19" width="449" height="390"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OI93opXjEeaMzN1sqnykJg" x="316" y="19" width="243" height="390"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_Qb15MJXjEeaMzN1sqnykJg" type="Actor_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_Qb2gQJXjEeaMzN1sqnykJg" type="Actor_NameLabel">
