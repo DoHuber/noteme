@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Ne6KAJYPEea2L7PN__lsaQ" name="RootElement">
-  <packagedElement xmi:type="uml:Class" xmi:id="_UUMmsJoIEea2L7PN__lsaQ" name="Notiz"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_UUMmsJoIEea2L7PN__lsaQ" name="Notiz">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_bGinwJoJEeai_I18spuAAg" name="Attribute1"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_cPE9IJoJEeai_I18spuAAg" name="Attribute2"/>
+  </packagedElement>
 </uml:Model>

@@ -9,6 +9,14 @@
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VqJF8JoIEea2L7PN__lsaQ" source="PapyrusCSSForceValue">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_VqJtAJoIEea2L7PN__lsaQ" key="collapsed" value="true"/>
       </eAnnotations>
+      <children xmi:type="notation:Shape" xmi:id="_bIbeIJoJEeai_I18spuAAg" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="model.uml#_bGinwJoJEeai_I18spuAAg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bIbeIZoJEeai_I18spuAAg"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_cPa7YJoJEeai_I18spuAAg" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="model.uml#_cPE9IJoJEeai_I18spuAAg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cPa7YZoJEeai_I18spuAAg"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_UVAfAZoIEea2L7PN__lsaQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_UVAfApoIEea2L7PN__lsaQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_UVAfA5oIEea2L7PN__lsaQ"/>
