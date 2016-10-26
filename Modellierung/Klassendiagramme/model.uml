@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Ne6KAJYPEea2L7PN__lsaQ" name="RootElement">
   <packagedElement xmi:type="uml:Class" xmi:id="_t0OSwJtlEea2L7PN__lsaQ" name="Notice">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_wI-joJtlEea2L7PN__lsaQ" name="content">
@@ -80,4 +81,11 @@
     </eAnnotations>
     <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
   </profileApplication>
+=======
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Ne6KAJYPEea2L7PN__lsaQ" name="RootElement">
+  <packagedElement xmi:type="uml:Class" xmi:id="_UUMmsJoIEea2L7PN__lsaQ" name="Notiz">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_bGinwJoJEeai_I18spuAAg" name="Attribute1"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_cPE9IJoJEeai_I18spuAAg" name="Attribute2"/>
+  </packagedElement>
+>>>>>>> branch 'master' of https://github.com/DoHuber/it-projekt.git
 </uml:Model>

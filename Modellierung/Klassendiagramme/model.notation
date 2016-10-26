@@ -51,6 +51,7 @@
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_7cH8wJtuEea2L7PN__lsaQ" source="PapyrusCSSForceValue">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_7cH8wZtuEea2L7PN__lsaQ" key="collapsed" value="true"/>
       </eAnnotations>
+<<<<<<< HEAD
       <children xmi:type="notation:Shape" xmi:id="_FK7kYJtvEea2L7PN__lsaQ" type="Operation_ClassOperationLabel">
         <element xmi:type="uml:Operation" href="model.uml#_FKsT0JtvEea2L7PN__lsaQ"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_FK7kYZtvEea2L7PN__lsaQ"/>
@@ -59,6 +60,20 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_t0djV5tlEea2L7PN__lsaQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_t0djWJtlEea2L7PN__lsaQ"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_t0djWZtlEea2L7PN__lsaQ"/>
+=======
+      <children xmi:type="notation:Shape" xmi:id="_bIbeIJoJEeai_I18spuAAg" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="model.uml#_bGinwJoJEeai_I18spuAAg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bIbeIZoJEeai_I18spuAAg"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_cPa7YJoJEeai_I18spuAAg" type="Property_ClassAttributeLabel">
+        <element xmi:type="uml:Property" href="model.uml#_cPE9IJoJEeai_I18spuAAg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cPa7YZoJEeai_I18spuAAg"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_UVAfAZoIEea2L7PN__lsaQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_UVAfApoIEea2L7PN__lsaQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_UVAfA5oIEea2L7PN__lsaQ"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UVAfBJoIEea2L7PN__lsaQ"/>
+>>>>>>> branch 'master' of https://github.com/DoHuber/it-projekt.git
     </children>
     <children xmi:type="notation:BasicCompartment" xmi:id="_t0djWptlEea2L7PN__lsaQ" type="Class_NestedClassifierCompartment">
       <styles xmi:type="notation:TitleStyle" xmi:id="_t0djW5tlEea2L7PN__lsaQ"/>
