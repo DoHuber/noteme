@@ -17,8 +17,8 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_3D_EsJn2EeablpjWrqHyLA" name="Editor">
     <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_EsZn2EeablpjWrqHyLA" name="Notizbücher verwalten"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_Espn2EeablpjWrqHyLA" name="Notizbücher erstellen"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_ZqWbwJn3EeablpjWrqHyLA" name="Notizbücher freigeben"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_Espn2EeablpjWrqHyLA" name="Notizbuch erstellen"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_ZqWbwJn3EeablpjWrqHyLA" name="Notizbuch freigeben"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_dqPYwJn3EeablpjWrqHyLA" memberEnd="_dqQm4Zn3EeablpjWrqHyLA _dqRN8Jn3EeablpjWrqHyLA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_dqP_0Jn3EeablpjWrqHyLA" source="org.eclipse.papyrus">
