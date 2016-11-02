@@ -308,7 +308,7 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_eFolAJxMEeaMEt4143jKjg" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_-7jkEJxKEeaMEt4143jKjg" name="Class1"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-7jkEJxKEeaMEt4143jKjg" name="PermissionMapper"/>
   <packagedElement xmi:type="uml:Class" xmi:id="__ffssJxMEeaMEt4143jKjg" name="UserMapper">
     <ownedOperation xmi:type="uml:Operation" xmi:id="__ffssZxMEeaMEt4143jKjg" name="userMapper">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffsspxMEeaMEt4143jKjg" type="__ffssJxMEeaMEt4143jKjg" direction="return"/>
@@ -351,6 +351,29 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5zpxNEeaMEt4143jKjg" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
   </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4DgQUKDuEeaEwcvJqz8Oig" name="Source">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_B_L8sKD3EeaEwcvJqz8Oig" name="sourceid">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_HMg9MKD3EeaEwcvJqz8Oig" name="urlsource" type="_ZzSEAKD3EeaEwcvJqz8Oig"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_ula2MKD3EeaEwcvJqz8Oig" name="getSourceid">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_-lIbMKD3EeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_u9WOAKD3EeaEwcvJqz8Oig" name="setSourceid">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_DH_iYKD4EeaEwcvJqz8Oig" name="sourceid">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_EPhLIKD4EeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_H4grEKD4EeaEwcvJqz8Oig" name="Operation1"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_IRytwKD4EeaEwcvJqz8Oig" name="Operation2"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hlCCsKDvEeaEwcvJqz8Oig" name="QuelleMapper"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZwLssKD3EeaEwcvJqz8Oig" name="Class1"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Zx0rcKD3EeaEwcvJqz8Oig" name="Class2"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZzSEAKD3EeaEwcvJqz8Oig" name="URL"/>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_bmoL0JtjEea2L7PN__lsaQ">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bnaO8JtjEea2L7PN__lsaQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>

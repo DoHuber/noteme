@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_OBSAIKD4EeaEwcvJqz8Oig" name="RootElement">
+  <packagedElement xmi:type="uml:Interface" xmi:id="_eo7H0KD4EeaEwcvJqz8Oig" name="SharedInterface">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_oYe9YKD4EeaEwcvJqz8Oig" name="Operation1"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_pD1ngKD4EeaEwcvJqz8Oig" name="Operation2"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_pXnfIKD4EeaEwcvJqz8Oig" name="Operation3"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_iF4W4KD4EeaEwcvJqz8Oig" name="ReportGenerator">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_qvROkKD4EeaEwcvJqz8Oig" name="Operation1"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_rC-0wKD4EeaEwcvJqz8Oig" name="Operation2"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_rUrowKD4EeaEwcvJqz8Oig" name="Operation3"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_jVT-cKD4EeaEwcvJqz8Oig" name="ClientInterface">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_p36v0KD4EeaEwcvJqz8Oig" name="Operation1"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_qOOXAKD4EeaEwcvJqz8Oig" name="Operation2"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_qdKx8KD4EeaEwcvJqz8Oig" name="Operation3"/>
+  </packagedElement>
+</uml:Model>
