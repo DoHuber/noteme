@@ -1,2 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Z0LvAKEPEeaEwcvJqz8Oig" name="RootElement"/>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Z0LvAKEPEeaEwcvJqz8Oig" name="RootElement">
+  <packagedElement xmi:type="uml:Class" xmi:id="_PgIMgKKUEeaEwcvJqz8Oig" name="Note">
+    <generalization xmi:type="uml:Generalization" xmi:id="_q0xAYKKqEeaEwcvJqz8Oig" general="_RO1vEKKqEeaEwcvJqz8Oig"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Wwe0sKKUEeaEwcvJqz8Oig" name="Notebook">
+    <generalization xmi:type="uml:Generalization" xmi:id="_nj0NAKKqEeaEwcvJqz8Oig" general="_RO1vEKKqEeaEwcvJqz8Oig"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_W8nMMKKUEeaEwcvJqz8Oig" name="Source">
+    <generalization xmi:type="uml:Generalization" xmi:id="_ETy_gKKrEeaEwcvJqz8Oig" general="_RO1vEKKqEeaEwcvJqz8Oig"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_XEpG0KKUEeaEwcvJqz8Oig" name="Permission"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bMhiMKKUEeaEwcvJqz8Oig" name="NoteUser">
+    <generalization xmi:type="uml:Generalization" xmi:id="_pNHtIKKqEeaEwcvJqz8Oig" general="_RO1vEKKqEeaEwcvJqz8Oig"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mWX8wKKaEeaEwcvJqz8Oig" name="Ownership" memberEnd="_mW3E8KKaEeaEwcvJqz8Oig _mW3sAKKaEeaEwcvJqz8Oig">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mW0BoKKaEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mW0osKKaEeaEwcvJqz8Oig" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mW3sAKKaEeaEwcvJqz8Oig" name="Owner" type="_bMhiMKKUEeaEwcvJqz8Oig" association="_mWX8wKKaEeaEwcvJqz8Oig"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mW3E8KKaEeaEwcvJqz8Oig" name="Property " type="_Wwe0sKKUEeaEwcvJqz8Oig" association="_mWX8wKKaEeaEwcvJqz8Oig">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LPfkIKKcEeaEwcvJqz8Oig"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LQGBEKKcEeaEwcvJqz8Oig" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_zAQjgKKcEeaEwcvJqz8Oig" name="Validation" memberEnd="_zAudkKKcEeaEwcvJqz8Oig _zAvEoKKcEeaEwcvJqz8Oig">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_zARKkKKcEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_zARxoKKcEeaEwcvJqz8Oig" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_zAvEoKKcEeaEwcvJqz8Oig" name="Permission" type="_XEpG0KKUEeaEwcvJqz8Oig" association="_zAQjgKKcEeaEwcvJqz8Oig"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_zAudkKKcEeaEwcvJqz8Oig" name="Note" type="_PgIMgKKUEeaEwcvJqz8Oig" association="_zAQjgKKcEeaEwcvJqz8Oig"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_B2Bd4KKdEeaEwcvJqz8Oig" name="Content" memberEnd="_B2CsAKKdEeaEwcvJqz8Oig _B2DTEKKdEeaEwcvJqz8Oig">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_B2CE8KKdEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_B2CE8aKdEeaEwcvJqz8Oig" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_B2DTEKKdEeaEwcvJqz8Oig" name="Folder" type="_Wwe0sKKUEeaEwcvJqz8Oig" association="_B2Bd4KKdEeaEwcvJqz8Oig"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_B2CsAKKdEeaEwcvJqz8Oig" name="Element" type="_PgIMgKKUEeaEwcvJqz8Oig" association="_B2Bd4KKdEeaEwcvJqz8Oig"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_YaJyIKKdEeaEwcvJqz8Oig" name="Ownership" memberEnd="_YaKZMqKdEeaEwcvJqz8Oig _YaKZM6KdEeaEwcvJqz8Oig">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YaKZMKKdEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YaKZMaKdEeaEwcvJqz8Oig" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_YaKZM6KdEeaEwcvJqz8Oig" name="Divider" type="_bMhiMKKUEeaEwcvJqz8Oig" association="_YaJyIKKdEeaEwcvJqz8Oig"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_YaKZMqKdEeaEwcvJqz8Oig" name="Permission" type="_XEpG0KKUEeaEwcvJqz8Oig" association="_YaJyIKKdEeaEwcvJqz8Oig">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sdHxMKKdEeaEwcvJqz8Oig" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sdK0gKKdEeaEwcvJqz8Oig" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VODNEKKeEeaEwcvJqz8Oig" name="Author" memberEnd="_VOEbMaKeEeaEwcvJqz8Oig _VOFpUKKeEeaEwcvJqz8Oig">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VOD0IKKeEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_VOEbMKKeEeaEwcvJqz8Oig" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_VOFpUKKeEeaEwcvJqz8Oig" name="Author" type="_bMhiMKKUEeaEwcvJqz8Oig" association="_VODNEKKeEeaEwcvJqz8Oig"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_VOEbMaKeEeaEwcvJqz8Oig" name="Note" type="_PgIMgKKUEeaEwcvJqz8Oig" association="_VODNEKKeEeaEwcvJqz8Oig"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_2XodEKKeEeaEwcvJqz8Oig" name="Adoption" memberEnd="_2XpEIqKeEeaEwcvJqz8Oig _2XprMKKeEeaEwcvJqz8Oig">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2XpEIKKeEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_2XpEIaKeEeaEwcvJqz8Oig" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_2XprMKKeEeaEwcvJqz8Oig" name="Note" type="_PgIMgKKUEeaEwcvJqz8Oig" association="_2XodEKKeEeaEwcvJqz8Oig">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CvyskKKfEeaEwcvJqz8Oig"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Cv-SwKKfEeaEwcvJqz8Oig" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_2XpEIqKeEeaEwcvJqz8Oig" name="Source" type="_W8nMMKKUEeaEwcvJqz8Oig" association="_2XodEKKeEeaEwcvJqz8Oig">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EUCtkKKfEeaEwcvJqz8Oig"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EUI0MKKfEeaEwcvJqz8Oig" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_RO1vEKKqEeaEwcvJqz8Oig" name="DomainObject"/>
+</uml:Model>

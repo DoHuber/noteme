@@ -31,7 +31,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_epAnZKD4EeaEwcvJqz8Oig"/>
     </children>
     <element xmi:type="uml:Interface" href="model2.uml#_eo7H0KD4EeaEwcvJqz8Oig"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eo89AaD4EeaEwcvJqz8Oig" x="679" y="45" width="237" height="176"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eo89AaD4EeaEwcvJqz8Oig" x="679" y="45" width="187" height="155"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_iF7aMKD4EeaEwcvJqz8Oig" type="Interface_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_iF92cKD4EeaEwcvJqz8Oig" type="Interface_NameLabel"/>
