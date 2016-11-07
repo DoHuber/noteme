@@ -16,3 +16,5 @@ test SLACK > GITHUB integration
 Test Commit
 
 Test Commit2
+
+Test Commit 3
