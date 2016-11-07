@@ -92,6 +92,9 @@
     </children>
     <children xmi:type="notation:BasicCompartment" xmi:id="_tfkSBqTUEeacXfcUEd71OA" type="Class_AttributeCompartment">
       <children xmi:type="notation:Shape" xmi:id="_sUInYKTZEeacCoGDtjxvkg" type="Property_ClassAttributeLabel">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_O827oKTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_O83isKTqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+        </eAnnotations>
         <element xmi:type="uml:Property" href="Mapper.uml#_sTvl0KTZEeacCoGDtjxvkg"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_sUInYaTZEeacCoGDtjxvkg"/>
       </children>

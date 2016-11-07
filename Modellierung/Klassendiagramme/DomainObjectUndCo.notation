@@ -451,8 +451,8 @@
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9EN1kZtmEea2L7PN__lsaQ" x="583" y="-50" width="316" height="337"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_BBqlwZtrEea2L7PN__lsaQ" type="Class_Shape">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_EnevcaEJEeaEwcvJqz8Oig" source="displayNameLabelIcon">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_EnfWgKEJEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TfnVIKTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TfnVIaTqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_BBqlw5trEea2L7PN__lsaQ" type="Class_NameLabel"/>
     <children xmi:type="notation:DecorationNode" xmi:id="_BBqlxJtrEea2L7PN__lsaQ" type="Class_FloatingNameLabel">
@@ -481,14 +481,23 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PqpYEaTREeacXfcUEd71OA"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_xMiaYKTREeacXfcUEd71OA" type="Property_ClassAttributeLabel">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Tflf8KTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TfmHAKTqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+        </eAnnotations>
         <element xmi:type="uml:Property" href="DomainObjectUndCo.uml#_xL6IQKTREeacXfcUEd71OA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_xMiaYaTREeacXfcUEd71OA"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_x1vvcKTREeacXfcUEd71OA" type="Property_ClassAttributeLabel">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TfmuEKTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TfmuEaTqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+        </eAnnotations>
         <element xmi:type="uml:Property" href="DomainObjectUndCo.uml#_x1MV0KTREeacXfcUEd71OA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_x1wWgKTREeacXfcUEd71OA"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_IYPsAKTSEeacXfcUEd71OA" type="Property_ClassAttributeLabel">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TfnVIqTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TfnVI6TqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+        </eAnnotations>
         <element xmi:type="uml:Property" href="DomainObjectUndCo.uml#_IXv8wKTSEeacXfcUEd71OA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_IYPsAaTSEeacXfcUEd71OA"/>
       </children>

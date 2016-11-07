@@ -21,6 +21,9 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_QXQ6kKTeEeacCoGDtjxvkg" name="noteUser">
         <type xmi:type="uml:Class" href="model.uml#_i69NsJtmEea2L7PN__lsaQ"/>
       </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_3l7RcKTpEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_WTr1sKTeEeacCoGDtjxvkg" name="getNoteUserById">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y6mNkKTeEeacCoGDtjxvkg" name="id">
@@ -323,4 +326,162 @@
     <ownedOperation xmi:type="uml:Operation" xmi:id="_TpVeZ6TVEeacXfcUEd71OA" name="generateReport"/>
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_lh1BkKTjEeacCoGDtjxvkg" name="XMLDOM"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_k31skKTnEeaEwcvJqz8Oig" name="EditorImpl">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k31skaTnEeaEwcvJqz8Oig" name="getNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k31skqTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k31sk6TnEeaEwcvJqz8Oig" name="getNotebook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32ToKTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k32TpKTnEeaEwcvJqz8Oig" name="createNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TpaTnEeaEwcvJqz8Oig" name="note">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TpqTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k32Tp6TnEeaEwcvJqz8Oig" name="saveNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TqKTnEeaEwcvJqz8Oig" name="note">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TqaTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k32TqqTnEeaEwcvJqz8Oig" name="deleteNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32Tq6TnEeaEwcvJqz8Oig" name="note">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TrKTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:DataType" href="DomainObjectUndCo.uml#_lpjzQJu5EeaMEt4143jKjg"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k32TraTnEeaEwcvJqz8Oig" name="getAllNotesByUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TrqTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k32Tr6TnEeaEwcvJqz8Oig" name="getAllNotesByNotebook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TsKTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_k32TsaTnEeaEwcvJqz8Oig" name="getAllNotebooksByUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_k32TsqTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_uZPxYKTnEeaEwcvJqz8Oig" name="getPermissionsByUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_9PwSoKTnEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_BBqlwJtrEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_uiw5wKTnEeaEwcvJqz8Oig" name="createNoteBook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Anm_QKToEeaEwcvJqz8Oig" name="noteBook">
+        <type xmi:type="uml:Class" href="model.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_B_kQsKToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_us00sKTnEeaEwcvJqz8Oig" name="saveNoteBook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_F8hOcKToEeaEwcvJqz8Oig" name="noteBook">
+        <type xmi:type="uml:Class" href="model.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_HRI4AKToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_u1sc0KTnEeaEwcvJqz8Oig" name="deleteNoteBook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_KMUPsKToEeaEwcvJqz8Oig" name="noteBook">
+        <type xmi:type="uml:Class" href="model.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_LWbSYKToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:DataType" href="model.uml#_lpjzQJu5EeaMEt4143jKjg"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_vNIscKTnEeaEwcvJqz8Oig" name="createPermission">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_OqjVkKToEeaEwcvJqz8Oig" name="permission">
+        <type xmi:type="uml:Class" href="model.uml#_BBqlwJtrEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QRSC0KToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_BBqlwJtrEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_vuP1cKTnEeaEwcvJqz8Oig" name="savePermission">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_a5pvsKToEeaEwcvJqz8Oig" name="permission">
+        <type xmi:type="uml:Class" href="model.uml#_BBqlwJtrEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_b5c_0KToEeaEwcvJqz8Oig" name="deletePermission">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_fB9B0KToEeaEwcvJqz8Oig" name="permission">
+        <type xmi:type="uml:Class" href="model.uml#_BBqlwJtrEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_gVmbAKToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:DataType" href="model.uml#_lpjzQJu5EeaMEt4143jKjg"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_sCI6oKToEeaEwcvJqz8Oig" name="SharedInterfaceImpl">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_sCI6oaToEeaEwcvJqz8Oig" name="getNoteUserByGoogleId">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_sCI6oqToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_YXVugKTpEeaEwcvJqz8Oig" name="googleId">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_p2E2QKTpEeaEwcvJqz8Oig" name="createNoteUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_tnQB0KTpEeaEwcvJqz8Oig" name="noteUser">
+        <type xmi:type="uml:Class" href="model.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_vzyx4KTpEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_qJVJcKTpEeaEwcvJqz8Oig" name="saveNoteUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_yaAmMKTpEeaEwcvJqz8Oig" name="noteUser">
+        <type xmi:type="uml:Class" href="model.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_0rx0gKTpEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_qfK2kKTpEeaEwcvJqz8Oig" name="getNoteUserById">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_8iRPoKTpEeaEwcvJqz8Oig" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_A3AbQKTqEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_sCKIwKToEeaEwcvJqz8Oig" name="ReportGeneratorImpl">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_sCKIwaToEeaEwcvJqz8Oig" name="getAllNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_sCKIwqToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_sCKIw6ToEeaEwcvJqz8Oig" name="getAllNotebook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_sCKIxKToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_sCKIxaToEeaEwcvJqz8Oig" name="getAllNoteUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_sCKIxqToEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_sCKIx6ToEeaEwcvJqz8Oig" name="getNoteBookTitleAndDateReport">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_G7xPgKTpEeaEwcvJqz8Oig" type="_lh1BkKTjEeacCoGDtjxvkg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_JYnFYKTpEeaEwcvJqz8Oig" name="getPermissionReport">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Lu0HwKTpEeaEwcvJqz8Oig" type="_lh1BkKTjEeacCoGDtjxvkg" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
 </uml:Model>

@@ -481,14 +481,23 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PqpYEaTREeacXfcUEd71OA"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_xMiaYKTREeacXfcUEd71OA" type="Property_ClassAttributeLabel">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_aX2_UKTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_aX40gKTqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+        </eAnnotations>
         <element xmi:type="uml:Property" href="model.uml#_xL6IQKTREeacXfcUEd71OA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_xMiaYaTREeacXfcUEd71OA"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_x1vvcKTREeacXfcUEd71OA" type="Property_ClassAttributeLabel">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_aX40gaTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_aX40gqTqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+        </eAnnotations>
         <element xmi:type="uml:Property" href="model.uml#_x1MV0KTREeacXfcUEd71OA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_x1wWgKTREeacXfcUEd71OA"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_IYPsAKTSEeacXfcUEd71OA" type="Property_ClassAttributeLabel">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_aX5bkKTqEeaEwcvJqz8Oig" source="displayNameLabelIcon">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_aX5bkaTqEeaEwcvJqz8Oig" key="displayNameLabelIcon_value" value="false"/>
+        </eAnnotations>
         <element xmi:type="uml:Property" href="model.uml#_IXv8wKTSEeacXfcUEd71OA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_IYPsAaTSEeacXfcUEd71OA"/>
       </children>
