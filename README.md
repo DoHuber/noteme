@@ -18,3 +18,4 @@ Test Commit
 Test Commit2
 
 Test Commit 3
+Primary GitHub email address und Eclipse.
