@@ -271,90 +271,6 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_lpjzQJu5EeaMEt4143jKjg" name="void"/>
-  <packagedElement xmi:type="uml:Class" xmi:id="_1FuucJxKEeaMEt4143jKjg" name="NoteMapper">
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_mo74QJxLEeaMEt4143jKjg" name="noteMapper">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_rNxVYJxLEeaMEt4143jKjg" type="_1FuucJxKEeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_s285sJxLEeaMEt4143jKjg" name="create">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_0ilIoJxLEeaMEt4143jKjg" name="note" type="_t0OSwJtlEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_2_dawJxLEeaMEt4143jKjg" type="_t0OSwJtlEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_7T9V0JxLEeaMEt4143jKjg" name="findById">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_BiXY0JxMEeaMEt4143jKjg" name="note" type="_t0OSwJtlEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_CxSqEJxMEeaMEt4143jKjg" type="_t0OSwJtlEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_UNkTsJxMEeaMEt4143jKjg" name="save">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_W1UZEJxMEeaMEt4143jKjg" name="note" type="_t0OSwJtlEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_YlpuQJxMEeaMEt4143jKjg" type="_t0OSwJtlEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_ZmKJAJxMEeaMEt4143jKjg" name="delete">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_chyzsJxMEeaMEt4143jKjg" name="note" type="_t0OSwJtlEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_eFolAJxMEeaMEt4143jKjg" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_-7jkEJxKEeaMEt4143jKjg" name="PermissionMapper">
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_N1_18KHkEeaEwcvJqz8Oig" name="PermissionMapper">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_NBpycKHlEeaEwcvJqz8Oig" name="PermissionMapper" type="_-7jkEJxKEeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_OCR-cKHkEeaEwcvJqz8Oig" name="create">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_08Ww8KHlEeaEwcvJqz8Oig" name="permissionMapper" type="_-7jkEJxKEeaMEt4143jKjg"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_2JFp0KHlEeaEwcvJqz8Oig" type="_-7jkEJxKEeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_OMylUKHkEeaEwcvJqz8Oig" name="findById">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_4mPowKHlEeaEwcvJqz8Oig" name="permissionMapper" type="_-7jkEJxKEeaMEt4143jKjg"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_5nr3oKHlEeaEwcvJqz8Oig" type="_-7jkEJxKEeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_OWt9YKHkEeaEwcvJqz8Oig" name="save">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_73JY0KHlEeaEwcvJqz8Oig" name="permissionMapper" type="_-7jkEJxKEeaMEt4143jKjg"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_84ObUKHlEeaEwcvJqz8Oig" type="_-7jkEJxKEeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_OfjwUKHkEeaEwcvJqz8Oig" name="delete">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__qvmQKHlEeaEwcvJqz8Oig" name="permissionMapper" type="_-7jkEJxKEeaMEt4143jKjg"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_AtOW8KHmEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="__ffssJxMEeaMEt4143jKjg" name="NoteUserMapper">
-    <ownedOperation xmi:type="uml:Operation" xmi:id="__ffssZxMEeaMEt4143jKjg" name="noteUserMapper">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffsspxMEeaMEt4143jKjg" type="__ffssJxMEeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="__ffss5xMEeaMEt4143jKjg" name="create">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffstJxMEeaMEt4143jKjg" name="user" type="_i69NsJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffstZxMEeaMEt4143jKjg" type="_i69NsJtmEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="__ffstpxMEeaMEt4143jKjg" name="findById">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffst5xMEeaMEt4143jKjg" name="user" type="_i69NsJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffsuJxMEeaMEt4143jKjg" type="_i69NsJtmEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="__ffsuZxMEeaMEt4143jKjg" name="save">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffsupxMEeaMEt4143jKjg" name="user" type="_i69NsJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffsu5xMEeaMEt4143jKjg" type="_i69NsJtmEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="__ffsvJxMEeaMEt4143jKjg" name="delete">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffsvZxMEeaMEt4143jKjg" name="user" type="_i69NsJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="__ffsvpxMEeaMEt4143jKjg" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_bRw5wJxNEeaMEt4143jKjg" name="NotebookMapper">
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_bRw5wZxNEeaMEt4143jKjg" name="notebookMapper">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5wpxNEeaMEt4143jKjg" type="_bRw5wJxNEeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_bRw5w5xNEeaMEt4143jKjg" name="create">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5xJxNEeaMEt4143jKjg" name="notebook" type="_9EKyQJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5xZxNEeaMEt4143jKjg" type="_9EKyQJtmEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_bRw5xpxNEeaMEt4143jKjg" name="findById">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5x5xNEeaMEt4143jKjg" name="notebook" type="_9EKyQJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5yJxNEeaMEt4143jKjg" type="_9EKyQJtmEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_bRw5yZxNEeaMEt4143jKjg" name="save">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5ypxNEeaMEt4143jKjg" name="notebook" type="_9EKyQJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5y5xNEeaMEt4143jKjg" type="_9EKyQJtmEea2L7PN__lsaQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_bRw5zJxNEeaMEt4143jKjg" name="delete">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5zZxNEeaMEt4143jKjg" name="notebook" type="_9EKyQJtmEea2L7PN__lsaQ"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bRw5zpxNEeaMEt4143jKjg" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
-    </ownedOperation>
-  </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_4DgQUKDuEeaEwcvJqz8Oig" name="Source">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_HMg9MKD3EeaEwcvJqz8Oig" name="url" visibility="private" type="_GonLgKKPEeaEwcvJqz8Oig"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_pIiRcKKREeaEwcvJqz8Oig" name="Source"/>
@@ -363,27 +279,6 @@
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_ey0GgKTQEeacXfcUEd71OA" name="setUrl">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvn14KTQEeacXfcUEd71OA" name="url" type="_GonLgKKPEeaEwcvJqz8Oig"/>
-    </ownedOperation>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_hlCCsKDvEeaEwcvJqz8Oig" name="SourceMapper">
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_MteusKHkEeaEwcvJqz8Oig" name="SourceMapper">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_02hrMKHkEeaEwcvJqz8Oig" type="_hlCCsKDvEeaEwcvJqz8Oig" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_M_9l0KHkEeaEwcvJqz8Oig" name="create">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_igkyIKHlEeaEwcvJqz8Oig" name="sourceMapper" type="_hlCCsKDvEeaEwcvJqz8Oig"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_kDCDYKHlEeaEwcvJqz8Oig" type="_hlCCsKDvEeaEwcvJqz8Oig" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_NPMUoKHkEeaEwcvJqz8Oig" name="findById">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_nT1FwKHlEeaEwcvJqz8Oig" name="sourceMapper" type="_hlCCsKDvEeaEwcvJqz8Oig"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_otckEKHlEeaEwcvJqz8Oig" type="_hlCCsKDvEeaEwcvJqz8Oig" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_NckCQKHkEeaEwcvJqz8Oig" name="save">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_rCHVYKHlEeaEwcvJqz8Oig" name="sourceMapper" type="_hlCCsKDvEeaEwcvJqz8Oig"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_sOfB4KHlEeaEwcvJqz8Oig" type="_hlCCsKDvEeaEwcvJqz8Oig" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_NqiM0KHkEeaEwcvJqz8Oig" name="delete">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_um2ncKHlEeaEwcvJqz8Oig" name="sourceMapper" type="_hlCCsKDvEeaEwcvJqz8Oig"/>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_v6BfgKHlEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_Ym_GoKEQEeaEwcvJqz8Oig" name="DomainObject" isAbstract="true">

@@ -84,4 +84,88 @@
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_TpTpMKTVEeacXfcUEd71OA" name="SharedInterfaceImpl">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpUQQKTVEeacXfcUEd71OA" name="getNoteUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpUQQaTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_TpU3UKTVEeacXfcUEd71OA" name="EditorInterfaceImpl">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3UaTVEeacXfcUEd71OA" name="getNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3UqTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3U6TVEeacXfcUEd71OA" name="getNotebook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3VKTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3VaTVEeacXfcUEd71OA" name="createNoteUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3VqTVEeacXfcUEd71OA" name="noteUser">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3V6TVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3WKTVEeacXfcUEd71OA" name="createNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3WaTVEeacXfcUEd71OA" name="note">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3WqTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3W6TVEeacXfcUEd71OA" name="saveNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3XKTVEeacXfcUEd71OA" name="note">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3XaTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3XqTVEeacXfcUEd71OA" name="deleteNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3X6TVEeacXfcUEd71OA" name="note">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3YKTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:DataType" href="DomainObjectUndCo.uml#_lpjzQJu5EeaMEt4143jKjg"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3YaTVEeacXfcUEd71OA" name="getAllNotesByUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3YqTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3Y6TVEeacXfcUEd71OA" name="getAllNotesByNotebook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3ZKTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpU3ZaTVEeacXfcUEd71OA" name="getAllNotebooksByUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpU3ZqTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_TpVeYKTVEeacXfcUEd71OA" name="CopyOf_ReportGenerator_1">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpVeYaTVEeacXfcUEd71OA" name="getAllNote">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpVeYqTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_t0OSwJtlEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpVeY6TVEeacXfcUEd71OA" name="getAllNotebook">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpVeZKTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_9EKyQJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpVeZaTVEeacXfcUEd71OA" name="getAllNoteUser">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpVeZqTVEeacXfcUEd71OA" direction="return">
+        <type xmi:type="uml:Class" href="DomainObjectUndCo.uml#_i69NsJtmEea2L7PN__lsaQ"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TpVeZ6TVEeacXfcUEd71OA" name="generateReport"/>
+  </packagedElement>
 </uml:Model>
