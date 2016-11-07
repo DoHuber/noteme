@@ -104,7 +104,7 @@
     <ownedAttribute xmi:type="uml:Property" xmi:id="_goMrcJtnEea2L7PN__lsaQ" name="email" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_MRn74KTTEeacXfcUEd71OA" name="googleId">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_MRn74KTTEeacXfcUEd71OA" name="googleId" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_IvVCwJtwEea2L7PN__lsaQ" name="getFirstName" visibility="public">
@@ -161,6 +161,7 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_c9kUwKTTEeacXfcUEd71OA" name="googleId">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7x4hcKUeEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_9EKyQJtmEea2L7PN__lsaQ" name="NoteBook">
@@ -186,6 +187,7 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_k4YmQJu_EeaMEt4143jKjg" name="title">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_-LF0gKUeEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_NRiQwJu_EeaMEt4143jKjg" name="getSubTitle">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_YhErUJu_EeaMEt4143jKjg" direction="return">
@@ -247,6 +249,7 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_zIjQkKTQEeacXfcUEd71OA" name="content">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EJavaObject"/>
       </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_AImqEKUfEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_s_C7sKTQEeacXfcUEd71OA" name="getContent">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_2yd9kKTQEeacXfcUEd71OA" name="content" direction="return">
@@ -255,6 +258,7 @@
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_tMEEAKTQEeacXfcUEd71OA" name="setUser">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_8NPkMKTQEeacXfcUEd71OA" name="user" type="_i69NsJtmEea2L7PN__lsaQ"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Bm07kKUfEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_tZ8vAKTQEeacXfcUEd71OA" name="getUser">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_AM1mQKTREeacXfcUEd71OA" name="user" type="_i69NsJtmEea2L7PN__lsaQ" direction="return"/>
@@ -263,6 +267,7 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_oTBcAKTREeacXfcUEd71OA" name="level">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_DFeq4KUfEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_aWmkcKTREeacXfcUEd71OA" name="getLevel">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_kHa-QKTREeacXfcUEd71OA" name="level" direction="return">
@@ -363,6 +368,7 @@
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_ey0GgKTQEeacXfcUEd71OA" name="setUrl">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvn14KTQEeacXfcUEd71OA" name="url" type="_GonLgKKPEeaEwcvJqz8Oig"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mWZQQKUeEeaEwcvJqz8Oig" type="_lpjzQJu5EeaMEt4143jKjg" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_hlCCsKDvEeaEwcvJqz8Oig" name="SourceMapper">

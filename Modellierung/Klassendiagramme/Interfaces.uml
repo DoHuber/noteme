@@ -417,6 +417,9 @@
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_a5pvsKToEeaEwcvJqz8Oig" name="permission">
         <type xmi:type="uml:Class" href="model.uml#_BBqlwJtrEea2L7PN__lsaQ"/>
       </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_MmGskKUfEeaEwcvJqz8Oig" direction="return">
+        <type xmi:type="uml:Class" href="model.uml#_BBqlwJtrEea2L7PN__lsaQ"/>
+      </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_b5c_0KToEeaEwcvJqz8Oig" name="deletePermission">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_fB9B0KToEeaEwcvJqz8Oig" name="permission">
