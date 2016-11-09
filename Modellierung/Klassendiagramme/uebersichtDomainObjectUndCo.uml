@@ -34,8 +34,14 @@
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_B2CE8KKdEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_B2CE8aKdEeaEwcvJqz8Oig" key="nature" value="UML_Nature"/>
     </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_B2DTEKKdEeaEwcvJqz8Oig" name="Folder" type="_Wwe0sKKUEeaEwcvJqz8Oig" association="_B2Bd4KKdEeaEwcvJqz8Oig"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_B2CsAKKdEeaEwcvJqz8Oig" name="Element" type="_PgIMgKKUEeaEwcvJqz8Oig" association="_B2Bd4KKdEeaEwcvJqz8Oig"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_B2DTEKKdEeaEwcvJqz8Oig" name="Folder" type="_Wwe0sKKUEeaEwcvJqz8Oig" association="_B2Bd4KKdEeaEwcvJqz8Oig">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BYjL0KUbEeaNOKRJKE47ag" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BZBs8KUbEeaNOKRJKE47ag" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_B2CsAKKdEeaEwcvJqz8Oig" name="Element" type="_PgIMgKKUEeaEwcvJqz8Oig" association="_B2Bd4KKdEeaEwcvJqz8Oig">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CY8R0KUbEeaNOKRJKE47ag"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CZ_asKUbEeaNOKRJKE47ag" value="*"/>
+    </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_YaJyIKKdEeaEwcvJqz8Oig" name="Ownership" memberEnd="_YaKZMqKdEeaEwcvJqz8Oig _YaKZM6KdEeaEwcvJqz8Oig">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YaKZMKKdEeaEwcvJqz8Oig" source="org.eclipse.papyrus">
