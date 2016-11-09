@@ -363,7 +363,7 @@
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AZrx5qTgEeacCoGDtjxvkg" x="354" y="50" width="327" height="377"/>
       </children>
       <element xmi:type="uml:Interface" href="Interfaces.uml#_jVT-cKD4EeaEwcvJqz8Oig"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jVXBwaD4EeaEwcvJqz8Oig" x="551" y="29" width="327" height="377"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jVXBwaD4EeaEwcvJqz8Oig" x="388" y="22" width="327" height="377"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_lh3d0KTjEeacCoGDtjxvkg" type="DataType_Shape">
       <children xmi:type="notation:DecorationNode" xmi:id="_lh4E4KTjEeacCoGDtjxvkg" type="DataType_NameLabel"/>
@@ -383,7 +383,7 @@
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lh5TCaTjEeacCoGDtjxvkg"/>
       </children>
       <element xmi:type="uml:DataType" href="Interfaces.uml#_lh1BkKTjEeacCoGDtjxvkg"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lh3d0aTjEeacCoGDtjxvkg" x="437" y="21"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lh3d0aTjEeacCoGDtjxvkg" x="216" y="417"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_k33hwKTnEeaEwcvJqz8Oig" type="Class_Shape">
       <children xmi:type="notation:DecorationNode" xmi:id="_k33hwaTnEeaEwcvJqz8Oig" type="Class_NameLabel"/>
@@ -518,7 +518,7 @@
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k34I5aTnEeaEwcvJqz8Oig"/>
       </children>
       <element xmi:type="uml:Class" href="Interfaces.uml#_k31skKTnEeaEwcvJqz8Oig"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k34I5qTnEeaEwcvJqz8Oig" x="906" y="43" width="308" height="370"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k34I5qTnEeaEwcvJqz8Oig" x="769" y="17" width="335" height="368"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_sCKv0KToEeaEwcvJqz8Oig" type="Class_Shape">
       <children xmi:type="notation:DecorationNode" xmi:id="_sCKv0aToEeaEwcvJqz8Oig" type="Class_NameLabel"/>

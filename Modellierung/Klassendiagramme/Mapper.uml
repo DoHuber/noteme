@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_lRwjEKTUEeacXfcUEd71OA" name="RootElement">
   <packagedElement xmi:type="uml:Class" xmi:id="_tffZgKTUEeacXfcUEd71OA" name="NoteMapper">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_rPC5gKTXEeacXfcUEd71OA" name="noteMapper" visibility="private" isStatic="true" type="_tffZgKTUEeacXfcUEd71OA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_qWQl0KUjEeaEwcvJqz8Oig" name="noteMapper" visibility="private" type="_tffZgKTUEeacXfcUEd71OA"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_tffZgaTUEeacXfcUEd71OA" name="getNoteMapper">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_tffZgqTUEeacXfcUEd71OA" type="_tffZgKTUEeacXfcUEd71OA" direction="return"/>
     </ownedOperation>
@@ -37,10 +37,12 @@
         <type xmi:type="uml:DataType" href="DomainObjectUndCo.uml#_lpjzQJu5EeaMEt4143jKjg"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_xigboKTXEeacXfcUEd71OA" name="NoteMapper" visibility="protected"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_xigboKTXEeacXfcUEd71OA" name="NoteMapper" visibility="protected">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_xnJ9YKUfEeaEwcvJqz8Oig" type="_tffZgKTUEeacXfcUEd71OA" direction="return"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_tfhOsKTUEeacXfcUEd71OA" name="NoteBookMapper">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_r_E9YKTZEeacCoGDtjxvkg" name="noteBookMapper" visibility="private" isStatic="true" type="_tfhOsKTUEeacXfcUEd71OA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_xNXnkKUjEeaEwcvJqz8Oig" name="noteBookMapper" visibility="private" type="_tfhOsKTUEeacXfcUEd71OA"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_tfhOsaTUEeacXfcUEd71OA" name="getNoteBookMapper">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_tfhOsqTUEeacXfcUEd71OA" type="_tfhOsKTUEeacXfcUEd71OA" direction="return"/>
     </ownedOperation>
@@ -76,11 +78,13 @@
         <type xmi:type="uml:DataType" href="DomainObjectUndCo.uml#_lpjzQJu5EeaMEt4143jKjg"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_srKAQKTZEeacCoGDtjxvkg" name="NoteBookMapper" visibility="protected"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_srKAQKTZEeacCoGDtjxvkg" name="NoteBookMapper" visibility="protected">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_s3dUEKUfEeaEwcvJqz8Oig" type="_tfhOsKTUEeacXfcUEd71OA" direction="return"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_tfhOv6TUEeacXfcUEd71OA" name="SourceMapper">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_sTvl0KTZEeacCoGDtjxvkg" name="sourceMapper" visibility="private" isStatic="true" type="_tfhOv6TUEeacXfcUEd71OA"/>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_tfh1wKTUEeacXfcUEd71OA" name="SourceMapper" visibility="protected">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_4wNt8KUjEeaEwcvJqz8Oig" name="sourceMapper" visibility="private" type="_tfhOv6TUEeacXfcUEd71OA"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_tfh1wKTUEeacXfcUEd71OA" name="getSourceMapper" visibility="public">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_tfh1waTUEeacXfcUEd71OA" type="_tfhOv6TUEeacXfcUEd71OA" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_tfh1wqTUEeacXfcUEd71OA" name="create">
@@ -101,12 +105,12 @@
         <type xmi:type="uml:DataType" href="DomainObjectUndCo.uml#_lpjzQJu5EeaMEt4143jKjg"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_s7vZ8KTZEeacCoGDtjxvkg" name="getSourceMapper">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_s7vZ8KTZEeacCoGDtjxvkg" name="SourceMapper" visibility="protected">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_NDs04KTaEeacCoGDtjxvkg" name="sourceMapper" type="_tfhOv6TUEeacXfcUEd71OA" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_tfh1zqTUEeacXfcUEd71OA" name="NoteUserMapper">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_WC0hcKTZEeacCoGDtjxvkg" name="noteUserMapper" visibility="private" isStatic="true" type="_tfh1zqTUEeacXfcUEd71OA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_w9VAcKUjEeaEwcvJqz8Oig" name="noteUserMapper" visibility="private" type="_tfh1zqTUEeacXfcUEd71OA"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_tfh1z6TUEeacXfcUEd71OA" name="getNoteUserMapper">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_tfh10KTUEeacXfcUEd71OA" type="_tfh1zqTUEeacXfcUEd71OA" direction="return"/>
     </ownedOperation>
@@ -142,11 +146,13 @@
         <type xmi:type="uml:DataType" href="DomainObjectUndCo.uml#_lpjzQJu5EeaMEt4143jKjg"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_Z4X2sKTZEeacCoGDtjxvkg" name="NoteUserMapper" visibility="protected"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Z4X2sKTZEeacCoGDtjxvkg" name="NoteUserMapper" visibility="protected">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_vtYYUKUfEeaEwcvJqz8Oig" type="_tfh1zqTUEeacXfcUEd71OA" direction="return"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_tfic0KTUEeacXfcUEd71OA" name="PermissionMapper">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_TdeaYKTaEeacCoGDtjxvkg" name="permissionMapper" visibility="private" isStatic="true" type="_tfic0KTUEeacXfcUEd71OA"/>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_tfic0aTUEeacXfcUEd71OA" name="PermissionMapper" visibility="private">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_4-7fYKUjEeaEwcvJqz8Oig" name="permissionMapper" visibility="private" type="_tfic0KTUEeacXfcUEd71OA"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_tfic0aTUEeacXfcUEd71OA" name="getPermissionMapper" visibility="public">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_tfic0qTUEeacXfcUEd71OA" name="PermissionMapper" type="_tfic0KTUEeacXfcUEd71OA" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_tfic06TUEeacXfcUEd71OA" name="create">
@@ -167,7 +173,7 @@
         <type xmi:type="uml:DataType" href="DomainObjectUndCo.uml#_lpjzQJu5EeaMEt4143jKjg"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_THe8QKTaEeacCoGDtjxvkg" name="getPermissionMapper">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_THe8QKTaEeacCoGDtjxvkg" name="PermissionMapper" visibility="protected">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_c5r2IKTaEeacCoGDtjxvkg" name="permissionMapper" type="_tfic0KTUEeacXfcUEd71OA" direction="return"/>
     </ownedOperation>
   </packagedElement>
