@@ -1,8 +1,15 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
-public abstract class DomainObject {
+import java.io.Serializable;
 
-	public DomainObject() {
+public abstract class DomainObject implements Serializable {
+
+	/**
+	 * Default, hat in dem Falle eclipse selbst generiert
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected DomainObject() {
 		// TODO Auto-generated constructor stub
 	}
 
