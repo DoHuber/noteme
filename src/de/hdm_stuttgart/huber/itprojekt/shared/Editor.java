@@ -28,8 +28,4 @@ public interface Editor extends RemoteService {
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks();
 	
-
-	
-	
-
 }
