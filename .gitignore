@@ -1,7 +1,9 @@
 /test-classes/
 *.class
+
 !/lib/*
 !/lib/
+
 # Package Files #
 *.jar
 *.war
