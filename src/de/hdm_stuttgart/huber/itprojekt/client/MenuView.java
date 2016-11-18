@@ -121,10 +121,12 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			Label lb = new Label("Eine neue Seite wird geladen");
+			MenuView mView = new MenuView();
 			RootPanel.get().clear();
-			RootPanel.get().add(lb);
+			RootPanel.get().add(mView);
 			
+			ShowReport shwR = new ShowReport();
+			RootPanel.get().add(shwR);
 	
 		}
 	}
