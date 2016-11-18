@@ -125,8 +125,8 @@ public class MenuView extends VerticalPanel {
 			RootPanel.get().clear();
 			RootPanel.get().add(mView);
 			
-			ShowReport shwR = new ShowReport();
-			RootPanel.get().add(shwR);
+			ReportStart rpStrt = new ReportStart();
+			RootPanel.get().add(rpStrt);
 	
 		}
 	}
