@@ -29,4 +29,16 @@ public class ShowAllNotebooks extends BasicView {
 		
 	}
 
+	@Override
+	public String getSubHeadlineText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getHeadlineText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
