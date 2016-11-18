@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  *
  */
 
-public class ReportPara extends BasicView{
+public class ReportFilter extends BasicView{
 	
 	HorizontalPanel hPanel = new HorizontalPanel();
 
