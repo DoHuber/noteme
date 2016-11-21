@@ -7,14 +7,12 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 public class NoteMapper {
 	
-
 	private static NoteMapper noteMapper = null;
 	
 	public NoteMapper getNoteMapper(){
 		return noteMapper;
 	}
-	
-	
+		
 	/**
 	 * Neues Note-Objekt wird in Datenbank eingefügt
 	 * 
@@ -23,7 +21,7 @@ public class NoteMapper {
 	 */
 	
 	public Note create(Note note){
-		   Connection con = DataMapper.connection();
+		   Connection con = DataMapper.getConnection();
 
 		    try {
 		      Statement stmt = con.createStatement();
@@ -34,13 +32,13 @@ public class NoteMapper {
 
 		      if (rs.next()) {
 		      
-		        note.setId(rs.getInt("maxid") + 1);
+		        note.setNoteId(rs.getInt("maxid") + 1);
 
 		        stmt = con.createStatement();
 
 		    
 		        stmt.executeUpdate("INSERT INTO notes (id, content, title, owner, noteBook, dueDate, creationDate, subtitle, modificationDate) " + "VALUES ("
-		            + note.getId() + "," + note.getContent() +","+ note.getTitle() + note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
+		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() + note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
 		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
 		      }
 		    }
@@ -61,7 +59,7 @@ public class NoteMapper {
 	
 	public Note findById(int id){
 		
-		Connection connection = DataMapper.connection();
+		Connection connection = DataMapper.getConnection();
 		
 	try {
 		Statement stmt = connection.createStatement();
@@ -72,11 +70,11 @@ public class NoteMapper {
 		if (rs.next()) {
 	        
 	        Note note  = new Note();
-	        note.setId(rs.getInt("id"));
+	        note.setNoteId(rs.getInt("NoteId"));
 	        note.setContent(rs.getString("content"));
 	        note.setTitle(rs.getString("title"));
-	        note.setOwner(rs.getNoteUser("owner"));
-	        note.setNoteBook(rs.getNoteBook("notebook"));
+	     //   note.setOwner(rs.getNoteUser("owner"));
+	     //   note.setNoteBook(rs.getNoteBook("notebook"));
 	        note.setDueDate(rs.getDate("dueDate"));
 	        note.setCreationDate(rs.getDate("creationDate"));
 	        note.setSubtitle(rs.getString("subtitle"));
@@ -96,7 +94,7 @@ public class NoteMapper {
 
 	
 	public Note save(Note note){
-	    Connection con = DataMapper.connection();
+	    Connection con = DataMapper.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
@@ -110,7 +108,7 @@ public class NoteMapper {
 	      	+ "creationdate=\"" + note.getCreationDate() + "\", "
 	      	+ "subtitle=\"" + note.getSubtitle() + "\", "	             
 	      	+ "modificationDate=\"" + note.getModificationDate() + "\", "
-	      	+ "WHERE id=" + note.getId());
+	      	+ "WHERE noteId=" + note.getNoteId());
 
 	    }
 	    catch (SQLException e2) {
@@ -122,9 +120,6 @@ public class NoteMapper {
 	  }
 		      
 	
-	
-	
-	
 	/**
 	 * Daten eines bestimmten Note-Objekts werden aus der Datenbank gelöscht 
 	 * 
@@ -132,12 +127,12 @@ public class NoteMapper {
 	 */
 	
 	 public void delete(Note note) {
-		 Connection connection = DataMapper.connection();
+		 Connection connection = DataMapper.getConnection();
 
 		    try {
 		      Statement stmt = connection.createStatement();
 
-		      stmt.executeUpdate("DELETE FROM Note WHERE id=" + note.getId());
+		      stmt.executeUpdate("DELETE FROM Note WHERE noteId=" + note.getNoteId());
 		    }
 		    catch (SQLException e) {
 		      e.printStackTrace();
