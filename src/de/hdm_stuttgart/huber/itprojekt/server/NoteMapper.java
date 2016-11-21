@@ -14,7 +14,7 @@ public class NoteMapper {
 	}
 	
 	
-	/**
+		/**
 	 * Neues Note-Objekt wird in Datenbank eingefügt
 	 * 
 	 * @param note
