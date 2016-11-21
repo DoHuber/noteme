@@ -11,6 +11,7 @@ public class Note extends DomainObject {
 	 * Getter Methoden entsprechend dem Klassendiagramm für
 	 * die Klasse "Note"
 	 */
+	
 	private int noteId = 0;
 	private String content = null;
 	private String title = null;

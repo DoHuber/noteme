@@ -12,7 +12,8 @@ public class NoteMapper {
 	public NoteMapper getNoteMapper(){
 		return noteMapper;
 	}
-		
+	
+	
 	/**
 	 * Neues Note-Objekt wird in Datenbank eingefügt
 	 * 
