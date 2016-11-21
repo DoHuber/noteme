@@ -23,14 +23,14 @@ public class NoteMapper {
 	 */
 	
 	public Note create(Note note){
-		   Connection con = DataMapper.connection();
+		   Connection con = DataMapper.getConnection();
 
 		    try {
 		      Statement stmt = con.createStatement();
 
 		      
 		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-		          + "FROM notes ");
+		          + "FROM Note ");
 
 		      if (rs.next()) {
 		      
@@ -39,7 +39,7 @@ public class NoteMapper {
 		        stmt = con.createStatement();
 
 		    
-		        stmt.executeUpdate("INSERT INTO notes (id, content, title, owner, noteBook, dueDate, creationDate, subtitle, modificationDate) " + "VALUES ("
+		        stmt.executeUpdate("INSERT INTO Note(id, content, title, owner, noteBook, dueDate, creationDate, subtitle, modificationDate) " + "VALUES ("
 		            + note.getId() + "," + note.getContent() +","+ note.getTitle() + note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
 		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
 		      }
@@ -61,7 +61,7 @@ public class NoteMapper {
 	
 	public Note findById(int id){
 		
-		Connection connection = DataMapper.connection();
+		Connection connection = DataMapper.getConnection();
 		
 	try {
 		Statement stmt = connection.createStatement();
@@ -96,12 +96,12 @@ public class NoteMapper {
 
 	
 	public Note save(Note note){
-	    Connection con = DataMapper.connection();
+	    Connection con = DataMapper.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE notes " + 
+	      stmt.executeUpdate("UPDATE Note " + 
 	      "SET content=\""+ note.getContent() + "\", " 
 	      	+ "title=\"" + note.getTitle() + "\", "
 	      	+ "owner=\"" + note.getOwner() + "\", "
@@ -132,7 +132,7 @@ public class NoteMapper {
 	 */
 	
 	 public void delete(Note note) {
-		 Connection connection = DataMapper.connection();
+		 Connection connection = DataMapper.getConnection();
 
 		    try {
 		      Statement stmt = connection.createStatement();
