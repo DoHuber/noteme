@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.client;
+package de.hdm_stuttgart.huber.itprojekt.client.Report;
 
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,6 +11,8 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
 
 /**
  * Startseite des Report Gernerators

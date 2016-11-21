@@ -29,7 +29,7 @@ public class NoteMapper {
 
 		      
 		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-		          + "FROM notes ");
+		          + "FROM Note ");
 
 		      if (rs.next()) {
 		      
@@ -38,8 +38,13 @@ public class NoteMapper {
 		        stmt = con.createStatement();
 
 		    
+<<<<<<< HEAD
 		        stmt.executeUpdate("INSERT INTO notes (id, content, title, owner, noteBook, dueDate, creationDate, subtitle, modificationDate) " + "VALUES ("
 		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() + note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
+=======
+		        stmt.executeUpdate("INSERT INTO Note(id, content, title, owner, noteBook, dueDate, creationDate, subtitle, modificationDate) " + "VALUES ("
+		            + note.getId() + "," + note.getContent() +","+ note.getTitle() + note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
+>>>>>>> branch 'master' of https://github.com/DoHuber/it-projekt.git
 		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
 		      }
 		    }
@@ -100,7 +105,7 @@ public class NoteMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE notes " + 
+	      stmt.executeUpdate("UPDATE Note " + 
 	      "SET content=\""+ note.getContent() + "\", " 
 	      	+ "title=\"" + note.getTitle() + "\", "
 	      	+ "owner=\"" + note.getOwner() + "\", "
