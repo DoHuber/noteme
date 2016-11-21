@@ -12,14 +12,14 @@ public class DataMapper {
 	   static final String PASS = "itprojekt22";
 	   
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-	   Connection conn = null;
+	   Connection connection = null;
 	   
 	   //3. JDBC Treiber regestrieren
 	   Class.forName("com.mysql.jdbc.Driver");
 	   
 	   //4. Verbindung aufbauen
-	   conn = DriverManager.getConnection(DB_URL,USER,PASS);
-	   return conn;   
+	   connection = DriverManager.getConnection(DB_URL,USER,PASS);
+	   return connection;   
 	}
 
 }
