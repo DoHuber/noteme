@@ -19,17 +19,18 @@ public class NoteMapper {
 	 * 
 	 * @param note
 	 * @return
+		 * @throws SQLException 
+		 * @throws ClassNotFoundException 
 	 */
 	
-	public Note create(Note note){
+	public Note create(Note note) throws ClassNotFoundException, SQLException{
 		   Connection con = DataMapper.getConnection();
 
 		    try {
 		      Statement stmt = con.createStatement();
 
 		      
-		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-		          + "FROM Note ");
+		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid FROM Note ");
 
 		      if (rs.next()) {
 		      
@@ -38,19 +39,18 @@ public class NoteMapper {
 		        stmt = con.createStatement();
 
 		    
-<<<<<<< HEAD
-		        stmt.executeUpdate("INSERT INTO notes (id, content, title, owner, noteBook, dueDate, creationDate, subtitle, modificationDate) " + "VALUES ("
-		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() + note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
-=======
-		        stmt.executeUpdate("INSERT INTO Note(id, content, title, owner, noteBook, dueDate, creationDate, subtitle, modificationDate) " + "VALUES ("
-		            + note.getId() + "," + note.getContent() +","+ note.getTitle() + note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
->>>>>>> branch 'master' of https://github.com/DoHuber/it-projekt.git
+
+		       
+
+		        stmt.executeUpdate("INSERT INTO Note(NoteId, Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " + "VALUES ("
+		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() +","+ note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
 		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
 		      }
 		    }
-		    catch (SQLException e2) {
-		      e2.printStackTrace();
+		    catch (SQLException sqlExp) {
+		    sqlExp.printStackTrace();
 		    }
+		    return note;
 	
 	  }
 	
@@ -61,36 +61,38 @@ public class NoteMapper {
 	  * 
 	  * @param id
 	  * @return
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	  */
 	
-	public Note findById(int id){
+	public Note findById(int id) throws ClassNotFoundException, SQLException{
 		
 		Connection connection = DataMapper.getConnection();
 		
 	try {
 		Statement stmt = connection.createStatement();
 		
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE id="+ id);
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE id=" + id);
 		
 		
 		if (rs.next()) {
 	        
 	        Note note  = new Note();
 	        note.setNoteId(rs.getInt("NoteId"));
-	        note.setContent(rs.getString("content"));
-	        note.setTitle(rs.getString("title"));
-	     //   note.setOwner(rs.getNoteUser("owner"));
-	     //   note.setNoteBook(rs.getNoteBook("notebook"));
-	        note.setDueDate(rs.getDate("dueDate"));
-	        note.setCreationDate(rs.getDate("creationDate"));
-	        note.setSubtitle(rs.getString("subtitle"));
-	        note.setModificationDate(rs.getDate("modificationDate"));
+	        note.setContent(rs.getString("Content"));
+	        note.setTitle(rs.getString("Title"));
+	     // note.setOwner(rs.getNoteUser("Owner"));
+	     // note.setNoteBook(rs.getNoteBook("Notebook"));
+	        note.setDueDate(rs.getDate("DueDate"));
+	        note.setCreationDate(rs.getDate("CreationDate"));
+	        note.setSubtitle(rs.getString("Subtitle"));
+	        note.setModificationDate(rs.getDate("ModificationDate"));
 
 	        return note;
 		 }
 	    }
-	 catch (SQLException e2) {
-	      e2.printStackTrace();
+	 catch (SQLException sqlExp) {
+		 sqlExp.printStackTrace();
 	      return null;
 	    }
 
@@ -99,29 +101,29 @@ public class NoteMapper {
 	
 
 	
-	public Note save(Note note){
+	public Note save(Note note) throws ClassNotFoundException, SQLException{
 	    Connection con = DataMapper.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE Note " + 
-	      "SET content=\""+ note.getContent() + "\", " 
-	      	+ "title=\"" + note.getTitle() + "\", "
-	      	+ "owner=\"" + note.getOwner() + "\", "
-	      	+ "noteBook=\"" + note.getNoteBook() + "\", "
-	      	+ "dueDate=\"" + note.getDueDate() + "\", "
-	      	+ "creationdate=\"" + note.getCreationDate() + "\", "
-	      	+ "subtitle=\"" + note.getSubtitle() + "\", "	             
-	      	+ "modificationDate=\"" + note.getModificationDate() + "\", "
-	      	+ "WHERE noteId=" + note.getNoteId());
+	      "SET Content=\""+ note.getContent() + "\", " 
+	      	+ "Title=\"" + note.getTitle() + "\", "
+	      	+ "Owner=\"" + note.getOwner() + "\", "
+	      	+ "NoteBook=\"" + note.getNoteBook() + "\", "
+	      	+ "DueDate=\"" + note.getDueDate() + "\", "
+	      	+ "Creationdate=\"" + note.getCreationDate() + "\", "
+	      	+ "Subtitle=\"" + note.getSubtitle() + "\", "	             
+	      	+ "ModificationDate=\"" + note.getModificationDate() + "\", "
+	      	+ "WHERE NoteId=" + note.getNoteId());
 
 	    }
-	    catch (SQLException e2) {
-	      e2.printStackTrace();
+	    catch (SQLException sqlExp) {
+	    	sqlExp.printStackTrace();
 	    }
 
-	    // Um Analogie zu insert(Account a) zu wahren, geben wir a zurÃ¼ck
+	    
 	    return note;
 	  }
 		      
@@ -130,18 +132,20 @@ public class NoteMapper {
 	 * Daten eines bestimmten Note-Objekts werden aus der Datenbank gelöscht 
 	 * 
 	 * @param note
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	
-	 public void delete(Note note) {
+	 public void delete(Note note) throws ClassNotFoundException, SQLException {
 		 Connection connection = DataMapper.getConnection();
 
 		    try {
 		      Statement stmt = connection.createStatement();
 
-		      stmt.executeUpdate("DELETE FROM Note WHERE noteId=" + note.getNoteId());
+		      stmt.executeUpdate("DELETE FROM Note WHERE NoteId=" + note.getNoteId());
 		    }
-		    catch (SQLException e) {
-		      e.printStackTrace();
+		    catch (SQLException sqlExp) {
+		    sqlExp.printStackTrace();
 		    }
 		
 	 }
