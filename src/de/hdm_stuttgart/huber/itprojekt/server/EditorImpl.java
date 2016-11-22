@@ -2,21 +2,31 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.sql.SQLException;
 import java.util.Vector;
 
+import javax.servlet.ServletException;
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
-public class EditorImpl implements Editor {
+public class EditorImpl extends RemoteServiceServlet implements Editor {
+	
+	/**
+	 * AUTO-GENERATED
+	 */
+	private static final long serialVersionUID = 1L;
+	private NoteMapper noteMapper;
 
-	public EditorImpl() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void init() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
+		this.noteMapper = NoteMapper.getNoteMapper();
 
 	}
 
@@ -55,15 +65,35 @@ public class EditorImpl implements Editor {
 	@Override
 	public Note createNote(Note note) {
 		
-		// Gibt die ak
+		Note newNote = note;
+	
+		try {
+			
+			noteMapper.create(newNote);
+			newNote = noteMapper.findById(newNote.getNoteId());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		return null;
+		return newNote;
 	}
 
 	@Override
 	public Note saveNote(Note note) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// Aus Gründen der Sichtbarkeit (oder war das PHP?)
+		Note newNote = note;
+		
+		try { 
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new Note();
 	}
 
 	@Override

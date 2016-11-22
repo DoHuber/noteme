@@ -15,7 +15,7 @@ public class NoteMapper {
 	}
 	
 	// Öffentliche Methode um den Singleton-NoteMapper zu erhalten
-	public NoteMapper getNoteMapper() {
+	public static NoteMapper getNoteMapper() {
 		
 		if (noteMapper == null) {
 		   noteMapper = new NoteMapper();
