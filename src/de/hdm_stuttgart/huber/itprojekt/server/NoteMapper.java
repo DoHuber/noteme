@@ -2,6 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.sql.*;
 
+
 import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 

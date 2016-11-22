@@ -5,6 +5,7 @@ import com.google.gwt.dev.shell.JavaObject;
 import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 
+
 public class PermissionMapper {
 	
 private static PermissionMapper permissionMapper = null;

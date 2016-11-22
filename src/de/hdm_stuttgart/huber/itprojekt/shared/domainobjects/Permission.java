@@ -6,6 +6,7 @@ public class Permission extends DomainObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	
 	private int permissionId = 0;
 	private int level = 0;
 	private JavaObject content = null;

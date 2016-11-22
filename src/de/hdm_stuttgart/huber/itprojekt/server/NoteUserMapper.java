@@ -5,6 +5,7 @@ import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
+
 public class NoteUserMapper {
 	
 private static NoteUserMapper noteUserMapper = null;

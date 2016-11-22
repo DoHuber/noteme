@@ -10,6 +10,7 @@ public class NoteUser extends DomainObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	
 	private int noteUserId = 0;
 	private String firstName = null;
 	private String userName = null;
