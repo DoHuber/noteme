@@ -1,6 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
@@ -161,6 +162,33 @@ public class NoteMapper {
 		    catch (SQLException sqlExp) {
 		    sqlExp.printStackTrace();
 		    }
+		
+	 }
+	 
+	 public ArrayList<Note> getAllNotes() {
+		 
+		 ArrayList<Note> result = new ArrayList<Note>();
+		 
+		 try {
+			 
+			Connection connection = DBConnection.getConnection();
+			Statement stmt = connection.createStatement();
+			
+			// Das Verhalten wird sich erst später mit den HashMaps auszahlen!
+			ResultSet rs = stmt.executeQuery("SELECT id FROM Note");
+			while (rs.next()) {
+				result.add(this.findById(rs.getInt("id")));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		 return result;
 		
 	 }
 	 
