@@ -3,6 +3,8 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 import javax.servlet.ServletException;
@@ -130,8 +132,12 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public Vector<Note> getAllNotes() {
+		Vector<Note> result = new Vector<Note>();
+		ArrayList<Note> toCopy = noteMapper.getAllNotes();
 		
-		return null;
+		Collections.copy(result, toCopy);
+		
+		return result;
 	}
 
 	@Override
