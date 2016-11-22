@@ -6,11 +6,23 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 public class NoteMapper {
 	
+	// Statisches Attribut, welches den Singleton-NoteMapper enthält.
 	private static NoteMapper noteMapper = null;
 	
-	public NoteMapper getNoteMapper(){
-		return noteMapper;
+	// Nichtöffentlicher Konstruktor, um unauthorisiertes Instanziieren dieser Klasse zu verhindern.
+	protected NoteMapper () {
+		
 	}
+	
+	// Öffentliche Methode um den Singleton-NoteMapper zu erhalten
+	public NoteMapper getNoteMapper() {
+		
+		if (noteMapper == null) {
+		   noteMapper = new NoteMapper();
+		}
+
+		return noteMapper;
+ 	}	
 	
 	
 		/**
@@ -152,21 +164,5 @@ public class NoteMapper {
 		
 	 }
 	 
-	
-	 
-	 /**
-		 * 
-		 * statische Methode, welche Singleton-Eigenschaft sicherstellt indem sie daf�r sorgt, dass nur eine Instanz von NoteMapper existiert
-		 * @return
-		 */
-	
-	 protected static NoteMapper noteMapper() {
-			if (noteMapper == null) {
-			   noteMapper = new NoteMapper();
-			   }
-
-			    return noteMapper;
-			  }	
-	
 }
 
