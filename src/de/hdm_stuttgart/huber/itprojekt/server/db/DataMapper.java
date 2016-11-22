@@ -4,22 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+/**
+ * HashMap: Schlüssel und ein Wert (Schlüssel = id)
+ * Mapper merken sich welche Objekte schon geladen haben, bei z.B. findById
+ * geht es schneller durch HashMap zu schauen ob Objekt schon geladen haben
+ * @author Lisa
+ *
+ */
+
 public class DataMapper {
-	   //2 Datenbank Zugangsdaten anlegen
-	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	   static final String DB_URL = "jdbc:mysql://207.223.162.139:3306/Notizbuch";
-	   static final String USER = "lisakuechler";
-	   static final String PASS = "itprojekt22";
 	   
-	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-	   Connection connection = null;
-	   
-	   //3. JDBC Treiber regestrieren
-	   Class.forName("com.mysql.jdbc.Driver");
-	   
-	   //4. Verbindung aufbauen
-	   connection = DriverManager.getConnection(DB_URL,USER,PASS);
-	   return connection;   
 	}
 
-}
