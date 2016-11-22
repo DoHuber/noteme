@@ -2,7 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.sql.*;
 
-import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
+import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 public class NoteMapper {
@@ -16,7 +16,7 @@ public class NoteMapper {
 	
 		/**
 	 * Neues Note-Objekt wird in Datenbank eingefügt
-	 * 
+	 * Hierbei wird der Primärschlüssel des übergebenen Obejktes geprüft und falls nötig berichtigt
 	 * @param note
 	 * @return
 		 * @throws SQLException 
@@ -24,7 +24,7 @@ public class NoteMapper {
 	 */
 	
 	public Note create(Note note) throws ClassNotFoundException, SQLException{
-		   Connection con = DataMapper.getConnection();
+		   Connection con = DBConnection.getConnection();
 
 		    try {
 		      Statement stmt = con.createStatement();
@@ -67,7 +67,7 @@ public class NoteMapper {
 	
 	public Note findById(int id) throws ClassNotFoundException, SQLException{
 		
-		Connection connection = DataMapper.getConnection();
+		Connection connection = DBConnection.getConnection();
 		
 	try {
 		Statement stmt = connection.createStatement();
@@ -99,10 +99,16 @@ public class NoteMapper {
 	    return null;
 	  }
 	
-
+/**
+ * 
+ * @param  Note-Objekt wird wiederholt in die Datenbank geschrieben
+ * @return
+ * @throws ClassNotFoundException
+ * @throws SQLException
+ */
 	
 	public Note save(Note note) throws ClassNotFoundException, SQLException{
-	    Connection con = DataMapper.getConnection();
+	    Connection con = DBConnection.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
@@ -137,7 +143,7 @@ public class NoteMapper {
 	 */
 	
 	 public void delete(Note note) throws ClassNotFoundException, SQLException {
-		 Connection connection = DataMapper.getConnection();
+		 Connection connection = DBConnection.getConnection();
 
 		    try {
 		      Statement stmt = connection.createStatement();
@@ -151,6 +157,12 @@ public class NoteMapper {
 	 }
 	 
 	
+	 
+	 /**
+		 * 
+		 * statische Methode, welche Singleton-Eigenschaft sicherstellt indem sie dafür sorgt, dass nur eine Instanz von NoteMapper existiert
+		 * @return
+		 */
 	
 	 protected static NoteMapper noteMapper() {
 			if (noteMapper == null) {
