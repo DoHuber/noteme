@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.server;
+package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 public class PermissionMapper {
 	

@@ -1,8 +1,7 @@
-package de.hdm_stuttgart.huber.itprojekt.server;
+package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
 
-import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 public class NoteMapper {
@@ -15,8 +14,8 @@ public class NoteMapper {
 	
 	
 		/**
-	 * Neues Note-Objekt wird in Datenbank eingefügt
-	 * Hierbei wird der Primärschlüssel des übergebenen Obejktes geprüft und falls nötig berichtigt
+	 * Neues Note-Objekt wird in Datenbank eingefï¿½gt
+	 * Hierbei wird der Primï¿½rschlï¿½ssel des ï¿½bergebenen Obejktes geprï¿½ft und falls nï¿½tig berichtigt
 	 * @param note
 	 * @return
 		 * @throws SQLException 
@@ -27,8 +26,8 @@ public class NoteMapper {
 		   Connection con = DBConnection.getConnection();
 
 		    try {
+		    	
 		      Statement stmt = con.createStatement();
-
 		      
 		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid FROM Note ");
 
@@ -38,10 +37,6 @@ public class NoteMapper {
 
 		        stmt = con.createStatement();
 
-		    
-
-		       
-
 		        stmt.executeUpdate("INSERT INTO Note(NoteId, Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " + "VALUES ("
 		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() +","+ note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
 		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
@@ -50,6 +45,7 @@ public class NoteMapper {
 		    catch (SQLException sqlExp) {
 		    sqlExp.printStackTrace();
 		    }
+		    
 		    return note;
 	
 	  }
@@ -57,7 +53,7 @@ public class NoteMapper {
 	
 	
 	 /**
-	  * Bestimmte Notiz wird anhand der eindeutigen ID gesucht und zurückgegeben
+	  * Bestimmte Notiz wird anhand der eindeutigen ID gesucht und zurï¿½ckgegeben
 	  * 
 	  * @param id
 	  * @return
@@ -135,7 +131,7 @@ public class NoteMapper {
 		      
 	
 	/**
-	 * Daten eines bestimmten Note-Objekts werden aus der Datenbank gelöscht 
+	 * Daten eines bestimmten Note-Objekts werden aus der Datenbank gelï¿½scht 
 	 * 
 	 * @param note
 	 * @throws SQLException 
@@ -160,7 +156,7 @@ public class NoteMapper {
 	 
 	 /**
 		 * 
-		 * statische Methode, welche Singleton-Eigenschaft sicherstellt indem sie dafür sorgt, dass nur eine Instanz von NoteMapper existiert
+		 * statische Methode, welche Singleton-Eigenschaft sicherstellt indem sie dafï¿½r sorgt, dass nur eine Instanz von NoteMapper existiert
 		 * @return
 		 */
 	
@@ -171,9 +167,6 @@ public class NoteMapper {
 
 			    return noteMapper;
 			  }	
-		
-	 
-	
 	
 }
 
