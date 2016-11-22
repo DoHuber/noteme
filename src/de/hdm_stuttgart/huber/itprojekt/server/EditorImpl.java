@@ -87,25 +87,51 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		
 		try { 
 			
-			
+			noteMapper.save(newNote);
+			newNote = noteMapper.findById(newNote.getNoteId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return new Note();
+		return newNote;
 	}
 
 	@Override
 	public Note getNoteById(Note note) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try {
+			return noteMapper.findById(note.getNoteId());
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+			return new Note();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return new Note();
+		}
 	}
 
 	@Override
 	public void deleteNote(Note note) {
-		// TODO Auto-generated method stub
+		
+		try {
+			noteMapper.delete(note);
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 
+	}
+
+	@Override
+	public Vector<Note> getAllNotes() {
+		
+		return null;
 	}
 
 	@Override
@@ -113,5 +139,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

@@ -3,6 +3,7 @@
  */
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -34,5 +35,6 @@ public interface Editor extends RemoteService {
 	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks();
+	public Vector<Note> getAllNotes();
 	
 }
