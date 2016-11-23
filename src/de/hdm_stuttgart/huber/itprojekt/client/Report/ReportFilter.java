@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
+import de.hdm_stuttgart.huber.itprojekt.client.MenuView;
 
 
 /**
@@ -26,17 +27,20 @@ public class ReportFilter extends VerticalPanel{
 	Anchor showUsers = new Anchor("Ausgabe aller Nutzer");
 	Anchor showAllNotesR = new Anchor("Ausgabe aller Notizen");
 	Anchor showAllNotebooks = new Anchor("Ausgabe aller Notizbücher");
+	Anchor backToNoteMe = new Anchor("Zurück zu NoteMe");
 
 		
 	vPanel.add(showUsers);
 	vPanel.add(showAllNotesR);
 	vPanel.add(showAllNotebooks);
+	vPanel.add(backToNoteMe);
 		
 	RootPanel.get().add(vPanel);
 
 	showUsers.addClickHandler(new ShowUsersHandler());
 	showAllNotesR.addClickHandler(new ShowAllNotesHandler());
 	showAllNotebooks.addClickHandler(new ShowAllNotebooksHandler());
+	backToNoteMe.addClickHandler(new BackToNoteMeHandler());
 
 		
 	}
@@ -80,6 +84,17 @@ private class ShowAllNotebooksHandler implements ClickHandler {
 		ShowAllNotebooksR saNr = new ShowAllNotebooksR();
 		RootPanel.get().add(saNr);
 	}
+}
+
+private class BackToNoteMeHandler implements ClickHandler {
+
+	@Override
+	public void onClick(ClickEvent event) {
+		MenuView mV = new MenuView();
+		RootPanel.get().clear();
+		RootPanel.get().add(mV);
+	}
+	
 }
 
 
