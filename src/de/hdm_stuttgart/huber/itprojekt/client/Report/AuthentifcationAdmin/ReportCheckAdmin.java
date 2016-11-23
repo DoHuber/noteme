@@ -1,6 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin;
 
 
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
@@ -17,10 +18,10 @@ import de.hdm_stuttgart.huber.itprojekt.client.MenuView;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.BasicViewR;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportLanding;
-import de.hdm_stuttgart.huber.itprojekt.client.Report.ShowReportPara;
 
 /**
  * Startseite des Report Gernerators mit Abfrage für Admin Zugang
+ * und anschließende Weiterleitung zur Auswahlseite
  * @author dominik erdmann
  *
  */
@@ -59,28 +60,27 @@ public class ReportCheckAdmin extends VerticalPanel{
 	 */
 	private class LoginHandler implements ClickHandler {
 
-		@Override
 		public void onClick(ClickEvent event) {
 			ReportFilter rpF = new ReportFilter();
 			RootPanel.get().clear();
 			RootPanel.get().add(rpF);
 			
-			ReportLanding rpL = new ReportLanding();
-			//hPanel.add(shrp);
-			
-		}}
-	private class CancelHandler implements ClickHandler {
 
-		@Override
+			
+		}
+
+
+			
+		}
+
+	private class CancelHandler implements ClickHandler {
+		
 		public void onClick(ClickEvent event) {
 			MenuView mV = new MenuView();
 			RootPanel.get().clear();
 			RootPanel.get().add(mV);
-			
-			MenuView mView = new MenuView();
 		}
 	}
-	
 	
 	public String getHeadlineText(){
 		return "Report Generator";

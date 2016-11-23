@@ -3,6 +3,11 @@ package de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.FlowPanel;
 
+/**
+ * Basisklasse von der Landingpage mit Anmeldefunktion (vgl BasicView)
+ * @author dominik erdmann
+ *
+ */
 public abstract class BasicViewA extends FlowPanel{
 	public void onLoad(){
 		super.onLoad();
