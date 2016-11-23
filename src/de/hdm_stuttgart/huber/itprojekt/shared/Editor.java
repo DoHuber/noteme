@@ -30,11 +30,11 @@ public interface Editor extends RemoteService {
 	// CRUD-Methoden für Note
 	public Note createNote(Note note);
 	public Note saveNote(Note note);
-	public Note getNoteById(Note note);
+	public Note getNoteById(Note note) throws Exception;
 	public void deleteNote(Note note);
 	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks();
-	public Vector<Note> getAllNotes();
+	public Vector<Note> getAllNotes() throws BullshitException;
 	
 }

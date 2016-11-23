@@ -5,6 +5,7 @@ import java.util.Vector;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -31,10 +32,6 @@ public class ShowAllNotes extends BasicView {
 		hPanel.add(new HTML("<p> Hier kommt der <b>Huber</b>, <i>obacht!</i> </p>"));
 		
 		
-		
-		
-	    RootPanel.get().add(hPanel);
-		
 	    EditorAsync editor = GWT.create(Editor.class);
 		
 	    AsyncCallback<Vector<Note>> callback = new AsyncCallback<Vector<Note>>() {
@@ -43,12 +40,14 @@ public class ShowAllNotes extends BasicView {
 			public void onFailure(Throwable caught) {
 				
 				caught.printStackTrace();
+				hPanel.add(new Label(caught.toString()));
 				
 			}
 
 			@Override
 			public void onSuccess(Vector<Note> result) {
 				
+				hPanel.add(new HTML("<p> Als nächstes die Hubermethode! </p>"));
 				huberMethode(result);
 				
 			}
@@ -57,28 +56,33 @@ public class ShowAllNotes extends BasicView {
 	
 		editor.getAllNotes(callback);
 		
+		RootPanel.get().add(hPanel);
+		
 	}
 	
 	private void huberMethode(Vector<Note> result) {
 		
+		StringBuilder html = new StringBuilder();
+		
 		for (Note row : result) {
 			
-			hPanel.add(new HTML(row.toString()));
+			html.append(row.toString() + "<br>");
 			
 		}
+		
+		RootPanel.get().add(new HTMLPanel(html.toString()));
 		
 	}
 
 	@Override
 	public String getSubHeadlineText() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Unterüberschrift";
 	}
 
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "Überschrift";
 	}
 
 }

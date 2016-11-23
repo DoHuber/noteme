@@ -74,11 +74,11 @@ public class NoteMapper {
 	 * @throws ClassNotFoundException 
 	  */
 	
-	public Note findById(int id) throws ClassNotFoundException, SQLException{
+	public Note findById(int id) throws Exception {
 		
+	
 		Connection connection = DBConnection.getConnection();
 		
-	try {
 		Statement stmt = connection.createStatement();
 		
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE id=" + id);
@@ -99,12 +99,8 @@ public class NoteMapper {
 
 	        return note;
 		 }
-	    }
-	 catch (SQLException sqlExp) {
-		 sqlExp.printStackTrace();
-	      return null;
-	    }
-
+	    
+	
 	    return null;
 	  }
 	
@@ -165,28 +161,20 @@ public class NoteMapper {
 		
 	 }
 	 
-	 public ArrayList<Note> getAllNotes() {
+	 public ArrayList<Note> getAllNotes() throws Exception{
 		 
 		 ArrayList<Note> result = new ArrayList<Note>();
 		 
-		 try {
-			 
-			Connection connection = DBConnection.getConnection();
-			Statement stmt = connection.createStatement();
 			
-			// Das Verhalten wird sich erst später mit den HashMaps auszahlen!
-			ResultSet rs = stmt.executeQuery("SELECT id FROM Note");
-			while (rs.next()) {
-				result.add(this.findById(rs.getInt("id")));
-			}
+				Connection connection = DBConnection.getConnection();
+				Statement stmt = connection.createStatement();
+				
+				// Das Verhalten wird sich erst später mit den HashMaps auszahlen!
+				ResultSet rs = stmt.executeQuery("SELECT id FROM Note");
+				while (rs.next()) {
+					result.add(this.findById(rs.getInt("id")));
+				} 
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		 return result;
 		

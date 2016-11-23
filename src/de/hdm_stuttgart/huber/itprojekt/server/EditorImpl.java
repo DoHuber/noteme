@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
+import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
@@ -100,19 +101,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Note getNoteById(Note note) {
-		
-		try {
+	public Note getNoteById(Note note) throws Exception {
+	
 			return noteMapper.findById(note.getNoteId());
-		} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
-			return new Note();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			return new Note();
-		}
+	
 	}
 
 	@Override
@@ -131,12 +123,18 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<Note> getAllNotes() {
+	public Vector<Note> getAllNotes() throws BullshitException {
 		Vector<Note> result = new Vector<Note>();
+		try {
+		
 		ArrayList<Note> toCopy = noteMapper.getAllNotes();
 		
 		Collections.copy(result, toCopy);
 		
+		} catch (Exception e) {
+			throw new BullshitException("");
+		}
+	
 		return result;
 	}
 
