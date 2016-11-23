@@ -19,16 +19,9 @@ private static PermissionMapper permissionMapper = null;
 		
 		try {
 			Statement stmt = con.createStatement();
-						ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid FROM Permission "); //fehlt da Perm.Id?
-			
-			if (rs.next()) {
-				permission.setPermissionId(rs.getInt("maxid") + 1);
-				stmt = con.createStatement();
-				
-				stmt.executeUpdate("INSERT INTO Permission(PermissionId, content, user, level) " 
-				+ "VALUES (" + permission.getPermissionId() + "," + permission.getContent() 
-				+ "," + permission.getUser() + "," + permission.getLevel() + ")");
-			}
+										
+				int rs = stmt.executeUpdate("INSERT INTO Permission(Content, User, Level) " + "VALUES (" 
+				+ permission.getContent() + "," + permission.getUser() + "," + permission.getLevel() + ")");
 		}
 		catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();

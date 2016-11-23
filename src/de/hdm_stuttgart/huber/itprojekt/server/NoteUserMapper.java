@@ -2,7 +2,6 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.sql.*;
 import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
 
@@ -18,18 +17,10 @@ private static NoteUserMapper noteUserMapper = null;
 		
 		try {
 			Statement stmt = con.createStatement();
-						ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid FROM NoteUser "); //fehlt da NoteUserId?
-			
-			if (rs.next()) {
-				noteUser.setNoteUserId(rs.getInt("maxid") + 1);
-				stmt = con.createStatement();
-				
-				stmt.executeUpdate("INSERT INTO NoteUser(NoteUserId, firstName, userName, surName, email, googleId) " 
-														//googleId und dafür keine NoteUserId?
-				+ "VALUES (" + noteUser.getNoteUserId() + "," + noteUser.getFirstName() 
-				+ "," + noteUser.getUserName() + "," + noteUser.getSurName() 
+						
+				int rs = stmt.executeUpdate("INSERT INTO NoteUser(FirstName, UserName, SurName, Email, GoogleId) "
+				+ "VALUES (" + noteUser.getFirstName() + "," + noteUser.getUserName() + "," + noteUser.getSurName() 
 				+ "," + noteUser.getEmail() + "," + noteUser.getGoogleId() + ")");
-			}
 		}
 		catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
