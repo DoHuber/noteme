@@ -9,7 +9,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportCheckAdmin;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin.ReportCheckAdmin;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin.ReportGenerator;
 
 /**
  * 
@@ -129,12 +131,11 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
+			ReportCheckAdmin rpChA = new ReportCheckAdmin();
 			RootPanel.get().clear();
-			RootPanel.get().add(mView);
+			RootPanel.get().add(rpChA);
 			
-			ReportCheckAdmin rpStrt = new ReportCheckAdmin();
-			RootPanel.get().add(rpStrt);
+
 	
 		}
 	}

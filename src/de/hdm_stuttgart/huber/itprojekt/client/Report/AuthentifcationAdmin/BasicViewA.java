@@ -1,16 +1,9 @@
-package de.hdm_stuttgart.huber.itprojekt.client.Report;
+package de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin;
 
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.FlowPanel;
 
-/**
- * Basisklasse für den Report Generator nach dem Beispiel der BasicView Klasse vom Editor
- * @author dominik Erdmann
- *
- */
-
-public abstract class BasicViewR extends FlowPanel{
-	
+public abstract class BasicViewA extends FlowPanel{
 	public void onLoad(){
 		super.onLoad();
 		this.add(createHeadline(getHeadlineText(), getSubHeadlineText()));

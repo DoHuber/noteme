@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.client.Report;
+package de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin;
 
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -13,6 +13,11 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
+import de.hdm_stuttgart.huber.itprojekt.client.MenuView;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.BasicViewR;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportLanding;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.ShowReportPara;
 
 /**
  * Startseite des Report Gernerators mit Abfrage für Admin Zugang
@@ -20,19 +25,19 @@ import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
  *
  */
 
-public class ReportCheckAdmin extends BasicViewR{
+public class ReportCheckAdmin extends VerticalPanel{
 	
-	private VerticalPanel vPanel = new VerticalPanel();
-	private HorizontalPanel hPanel = new HorizontalPanel();
-	private TextBox tb = new TextBox();
-	private Label loginN = new Label("Admin-Zugangsname");
-	private PasswordTextBox ptb = new PasswordTextBox();
-	private Label psswrd = new Label("Passwort");
-	private Button confirmButton = new Button("Login");
+	protected void onLoad(){
 	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+	VerticalPanel vPanel = new VerticalPanel();
+	TextBox tb = new TextBox();
+	Label loginN = new Label("Admin-Zugangsname");
+	PasswordTextBox ptb = new PasswordTextBox();
+	Label psswrd = new Label("Passwort");
+	Button confirmButton = new Button("Login");
+	Button cancelButton = new Button("Abbruch");
+	
+
 		vPanel.add(loginN);
 		vPanel.add(tb);
 		
@@ -40,11 +45,12 @@ public class ReportCheckAdmin extends BasicViewR{
 		vPanel.add(ptb);
 		
 		vPanel.add(confirmButton);
-
+		vPanel.add(cancelButton);
 		
 		RootPanel.get().add(vPanel);
 		
 		confirmButton.addClickHandler(new LoginHandler());
+		cancelButton.addClickHandler(new CancelHandler());
 	}
 	/**
 	 * "fake" Login, momentan nicht funktionsfähig
@@ -55,21 +61,32 @@ public class ReportCheckAdmin extends BasicViewR{
 
 		@Override
 		public void onClick(ClickEvent event) {
-			ReportCheckAdmin rpStrt = new ReportCheckAdmin();
+			ReportFilter rpF = new ReportFilter();
 			RootPanel.get().clear();
-			RootPanel.get().add(rpStrt);
+			RootPanel.get().add(rpF);
 			
-			ShowReportPara shrp = new ShowReportPara();
+			ReportLanding rpL = new ReportLanding();
 			//hPanel.add(shrp);
 			
 		}}
+	private class CancelHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			MenuView mV = new MenuView();
+			RootPanel.get().clear();
+			RootPanel.get().add(mV);
+			
+			MenuView mView = new MenuView();
+		}
+	}
+	
 	
 	public String getHeadlineText(){
 		return "Report Generator";
 		// TODO Auto-generated method stub
 	}
 
-	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
 		return "Bitte anmelden";
