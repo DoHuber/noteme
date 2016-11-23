@@ -20,7 +20,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
  *
  */
 
-public class ReportStart extends BasicView{
+public class ReportStart extends BasicViewR{
 	
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel = new HorizontalPanel();

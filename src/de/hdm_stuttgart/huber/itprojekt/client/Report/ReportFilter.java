@@ -16,7 +16,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
  *
  */
 
-public class ReportFilter extends BasicView{
+public class ReportFilter extends BasicViewR{
 	
 	VerticalPanel vPanel = new VerticalPanel();
 
