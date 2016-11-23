@@ -15,12 +15,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
 
 /**
- * Startseite des Report Gernerators
+ * Startseite des Report Gernerators mit Abfrage für Admin Zugang
  * @author dominik erdmann
  *
  */
 
-public class ReportStart extends BasicViewR{
+public class ReportCheckAdmin extends BasicViewR{
 	
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel = new HorizontalPanel();
@@ -55,7 +55,7 @@ public class ReportStart extends BasicViewR{
 
 		@Override
 		public void onClick(ClickEvent event) {
-			ReportStart rpStrt = new ReportStart();
+			ReportCheckAdmin rpStrt = new ReportCheckAdmin();
 			RootPanel.get().clear();
 			RootPanel.get().add(rpStrt);
 			

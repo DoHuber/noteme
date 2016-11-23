@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportStart;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportCheckAdmin;
 
 /**
  * 
@@ -133,7 +133,7 @@ public class MenuView extends VerticalPanel {
 			RootPanel.get().clear();
 			RootPanel.get().add(mView);
 			
-			ReportStart rpStrt = new ReportStart();
+			ReportCheckAdmin rpStrt = new ReportCheckAdmin();
 			RootPanel.get().add(rpStrt);
 	
 		}

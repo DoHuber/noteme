@@ -11,12 +11,15 @@ import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
 
 
 /**
- * 
+ * Startseite nach Abfrage des Admin Zugangs -> Auswahl des jeweiligen Reports
+ * Durch Anchor gelangt der Admin jeweils auf eine neue Seite für den entsprechenden Report
  * @author dominik erdmann
  *
  */
 
-public class ReportFilter extends BasicViewR{
+public class ReportFilter extends VerticalPanel{
+	
+	protected void onLoad(){
 	
 	VerticalPanel vPanel = new VerticalPanel();
 
@@ -24,29 +27,16 @@ public class ReportFilter extends BasicViewR{
 	Anchor showAllNotesR = new Anchor("Ausgabe aller Notizen");
 	Anchor showAllNotebooks = new Anchor("Ausgabe aller Notizbücher");
 
-	
-	@Override
-	public String getHeadlineText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public String getSubHeadlineText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void run() {
 		
-		vPanel.add(showUsers);
-		vPanel.add(showAllNotesR);
-		vPanel.add(showAllNotebooks);
+	vPanel.add(showUsers);
+	vPanel.add(showAllNotesR);
+	vPanel.add(showAllNotebooks);
 		
-		RootPanel.get().add(vPanel);
+	RootPanel.get().add(vPanel);
 
-		showUsers.addClickHandler(new ShowUsersHandler());
-		showAllNotesR.addClickHandler(new ShowAllNotesHandler());
-		showAllNotebooks.addClickHandler(new ShowAllNotebooksHandler());
+	showUsers.addClickHandler(new ShowUsersHandler());
+	showAllNotesR.addClickHandler(new ShowAllNotesHandler());
+	showAllNotebooks.addClickHandler(new ShowAllNotebooksHandler());
 
 		
 	}
