@@ -132,7 +132,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		Collections.copy(result, toCopy);
 		
 		} catch (Exception e) {
-			throw new BullshitException("");
+			throw new BullshitException(e.toString());
 		}
 	
 		return result;
