@@ -74,4 +74,10 @@ public class NoteBook extends DomainObject {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void setNoteBookId(int i) {
+		// Automatisch generiert weil eclipse sonst rumgeheult hätte
+		// TODO Auto-generated method stub
+		
+	}
+
 }

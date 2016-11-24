@@ -12,7 +12,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
  *
  */
 
-public class ShowAllNotebooksR extends BasicView{
+public class ShowAllNotebooksR extends BasicViewR{
 
 	HorizontalPanel hPanel = new HorizontalPanel();
 

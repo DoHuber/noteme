@@ -1,12 +1,10 @@
-package de.hdm_stuttgart.huber.itprojekt.server;
+package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
-import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
@@ -20,7 +18,7 @@ private static NotebookMapper notebookMapper = null;
 	
 	/**
 	 * 
-	 * Neues NoteBook-Obejkt wird in Datenbank eingefügt
+	 * Neues NoteBook-Obejkt wird in Datenbank eingefï¿½gt
 	 * 
 	 * @param notebook
 	 * @return
@@ -64,7 +62,7 @@ private static NotebookMapper notebookMapper = null;
 	
 	
 	/**
-	 * Bestimmtes NoteBook wird anhand der eindeutigen ID gesucht und zurückgegeben 
+	 * Bestimmtes NoteBook wird anhand der eindeutigen ID gesucht und zurï¿½ckgegeben 
 	 * 
 	 * @param id
 	 * @return
@@ -140,7 +138,7 @@ private static NotebookMapper notebookMapper = null;
 	
 	
 	/**
-	 * Daten eines bestimmten Notebook-Objekts werden aus der Datenbank gelöscht 
+	 * Daten eines bestimmten Notebook-Objekts werden aus der Datenbank gelï¿½scht 
 	 * 
 	 * @param note
 	 * @throws ClassNotFoundException
@@ -165,7 +163,7 @@ private static NotebookMapper notebookMapper = null;
 	
 	/**
 	 * 
-	 * statische Methode, welche Singleton-Eigenschaft sicherstellt indem sie dafür sorgt, dass nur eine Instanz von NotebookMapper existiert
+	 * statische Methode, welche Singleton-Eigenschaft sicherstellt indem sie dafï¿½r sorgt, dass nur eine Instanz von NotebookMapper existiert
 	 * @return
 	 */
 

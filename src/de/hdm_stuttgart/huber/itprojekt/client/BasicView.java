@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * 
+ * Basisklasse 
  * @author Nikita Nalivayko
  *
  */
@@ -24,9 +24,9 @@ public abstract class BasicView extends FlowPanel {
 	}
 
 	/**
-	 * Abstrakte Einschubmethoden, die in den Subklassen zu realisieren sind.
+	 * Abstrakte Einschubmethoden, die in den Subklassen zu realisieren sind. 
 	 */
-
+	
 	public abstract String getHeadlineText();
 
 	public abstract String getSubHeadlineText();

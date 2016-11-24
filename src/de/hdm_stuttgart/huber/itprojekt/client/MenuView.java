@@ -9,7 +9,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportStart;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin.ReportCheckAdmin;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin.ReportGenerator;
 
 /**
  * 
@@ -41,6 +43,8 @@ public class MenuView extends VerticalPanel {
 		Anchor createNote = new Anchor("New Note");
 		Anchor reportAnchor = new Anchor("Report");
 		Anchor logoutAnchor = new Anchor("Logout");
+		//Test
+		Anchor hello = new Anchor("Say Hello");
 
 		vPanel.add(home);
 		vPanel.add(showNotes);
@@ -49,6 +53,8 @@ public class MenuView extends VerticalPanel {
 		vPanel.add(createNote);
 		vPanel.add(reportAnchor);
 		vPanel.add(logoutAnchor);
+		//Test
+		vPanel.add(hello);
 
 
 
@@ -65,6 +71,8 @@ public class MenuView extends VerticalPanel {
 		createNote.addClickHandler(new CreateNoteHandler());
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
+		//Test
+		hello.addClickHandler(new testClickHandler());
 	}
 	
 	/*Einfache ClickHandler werden implementiert 
@@ -123,12 +131,11 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
+			ReportCheckAdmin rpChA = new ReportCheckAdmin();
 			RootPanel.get().clear();
-			RootPanel.get().add(mView);
+			RootPanel.get().add(rpChA);
 			
-			ReportStart rpStrt = new ReportStart();
-			RootPanel.get().add(rpStrt);
+
 	
 		}
 	}
@@ -143,6 +150,22 @@ public class MenuView extends VerticalPanel {
 			
 		
 		}
+	}
+	//Später löschen 
+	private class testClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			MenuView mView = new MenuView();
+			RootPanel.get().clear();
+			RootPanel.get().add(mView);
+			
+			HelloWorld hw = new HelloWorld();
+			
+			RootPanel.get().add(hw);
+			
+		}
+		
 	}
 
 

@@ -12,7 +12,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
  *
  */
 
-public class ShowUsers extends BasicView{
+public class ShowUsers extends BasicViewR{
 
 	HorizontalPanel hPanel = new HorizontalPanel();
 

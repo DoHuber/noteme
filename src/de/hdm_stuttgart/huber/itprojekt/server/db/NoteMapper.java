@@ -1,23 +1,34 @@
-package de.hdm_stuttgart.huber.itprojekt.server;
+package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
+import java.util.ArrayList;
 
-
-import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 public class NoteMapper {
 	
+	// Statisches Attribut, welches den Singleton-NoteMapper enthÃ¤lt.
 	private static NoteMapper noteMapper = null;
 	
-	public NoteMapper getNoteMapper(){
-		return noteMapper;
+	// NichtÃ¶ffentlicher Konstruktor, um unauthorisiertes Instanziieren dieser Klasse zu verhindern.
+	protected NoteMapper () {
+		
 	}
+	
+	// Ã–ffentliche Methode um den Singleton-NoteMapper zu erhalten
+	public static NoteMapper getNoteMapper() {
+		
+		if (noteMapper == null) {
+		   noteMapper = new NoteMapper();
+		}
+
+		return noteMapper;
+ 	}	
 	
 	
 		/**
-	 * Neues Note-Objekt wird in Datenbank eingefügt
-	 * Hierbei wird der Primärschlüssel des übergebenen Obejktes geprüft und falls nötig berichtigt
+	 * Neues Note-Objekt wird in Datenbank eingefï¿½gt
+	 * Hierbei wird der Primï¿½rschlï¿½ssel des ï¿½bergebenen Obejktes geprï¿½ft und falls nï¿½tig berichtigt
 	 * @param note
 	 * @return
 		 * @throws SQLException 
@@ -28,8 +39,8 @@ public class NoteMapper {
 		   Connection con = DBConnection.getConnection();
 
 		    try {
+		    	
 		      Statement stmt = con.createStatement();
-
 		      
 		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid FROM Note ");
 
@@ -39,10 +50,6 @@ public class NoteMapper {
 
 		        stmt = con.createStatement();
 
-		    
-
-		       
-
 		        stmt.executeUpdate("INSERT INTO Note(NoteId, Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " + "VALUES ("
 		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() +","+ note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
 		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
@@ -51,6 +58,7 @@ public class NoteMapper {
 		    catch (SQLException sqlExp) {
 		    sqlExp.printStackTrace();
 		    }
+		    
 		    return note;
 	
 	  }
@@ -58,7 +66,7 @@ public class NoteMapper {
 	
 	
 	 /**
-	  * Bestimmte Notiz wird anhand der eindeutigen ID gesucht und zurückgegeben
+	  * Bestimmte Notiz wird anhand der eindeutigen ID gesucht und zurï¿½ckgegeben
 	  * 
 	  * @param id
 	  * @return
@@ -66,11 +74,11 @@ public class NoteMapper {
 	 * @throws ClassNotFoundException 
 	  */
 	
-	public Note findById(int id) throws ClassNotFoundException, SQLException{
+	public Note findById(int id) throws Exception {
 		
+	
 		Connection connection = DBConnection.getConnection();
 		
-	try {
 		Statement stmt = connection.createStatement();
 		
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE id=" + id);
@@ -91,12 +99,8 @@ public class NoteMapper {
 
 	        return note;
 		 }
-	    }
-	 catch (SQLException sqlExp) {
-		 sqlExp.printStackTrace();
-	      return null;
-	    }
-
+	    
+	
 	    return null;
 	  }
 	
@@ -136,7 +140,7 @@ public class NoteMapper {
 		      
 	
 	/**
-	 * Daten eines bestimmten Note-Objekts werden aus der Datenbank gelöscht 
+	 * Daten eines bestimmten Note-Objekts werden aus der Datenbank gelï¿½scht 
 	 * 
 	 * @param note
 	 * @throws SQLException 
@@ -157,24 +161,24 @@ public class NoteMapper {
 		
 	 }
 	 
-	
-	 
-	 /**
-		 * 
-		 * statische Methode, welche Singleton-Eigenschaft sicherstellt indem sie dafür sorgt, dass nur eine Instanz von NoteMapper existiert
-		 * @return
-		 */
-	
-	 protected static NoteMapper noteMapper() {
-			if (noteMapper == null) {
-			   noteMapper = new NoteMapper();
-			   }
-
-			    return noteMapper;
-			  }	
+	 public ArrayList<Note> getAllNotes() throws Exception{
+		 
+		 ArrayList<Note> result = new ArrayList<Note>();
+		 
+			
+				Connection connection = DBConnection.getConnection();
+				Statement stmt = connection.createStatement();
+				
+				// Das Verhalten wird sich erst spÃ¤ter mit den HashMaps auszahlen!
+				ResultSet rs = stmt.executeQuery("SELECT id FROM Note");
+				while (rs.next()) {
+					result.add(this.findById(rs.getInt("id")));
+				} 
+			
 		
+		 return result;
+		
+	 }
 	 
-	
-	
 }
 
