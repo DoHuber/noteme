@@ -8,15 +8,14 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class IT_Projekt implements EntryPoint {
 	
-	
 	public void onModuleLoad() {
 		loadMenu();
 	}
 	
 	/*
-	 *Navigationsmenu wird geladen  
+	 *	Navigationsmenu wird geladen  
+	 *	
 	 */
-
 	private void loadMenu() {
 		MenuView navigation = new MenuView();
 		RootPanel.get().add(navigation);

@@ -1,6 +1,5 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
-import java.security.acl.Owner;
 import java.sql.*;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -40,27 +39,30 @@ public class NoteMapper {
 		 * @throws ClassNotFoundException 
 	 */
 	
-	
-
 	public Note create(Note note) throws ClassNotFoundException, SQLException{
 		   Connection con = DBConnection.getConnection();
 
 		    try {
 		    	
 		      
-		    	PreparedStatement stmt =  con.prepareStatement("INSERT INTO Note( Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " 
-		    	+ "VALUES (?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS );
+		    	PreparedStatement stmt =  con.prepareStatement("INSERT INTO Note(Title, Content, CreationDate, DueDate, ModificationDate, Subtitle, Source, noteBookId, noteUserId, permissionId, dreierId) " 
+		    	+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS );
 		      
-		    	stmt.setString(1, note.getContent());
-		    	stmt.setString(2, note.getTitle());
-		    	stmt.setLong(3, note.getOwner().getNoteUserId());
-		    	stmt.setLong(4, note.getNoteId());
-		    	stmt.setDate(5, (Date) note.getDueDate());
-		    	stmt.setDate(6, (Date) note.getCreationDate());
-		    	stmt.setString(7, note.getTitle());
-		    	stmt.setDate(8, (Date) note.getModificationDate());
+		    	stmt.setString(1, note.getTitle());
+		    	stmt.setString(2, note.getContent());
 		    	
+		    	stmt.setDate(3, new Date(7777));
+		    	stmt.setDate(4, new Date(7777));
+		    	stmt.setDate(5, new Date(7777));
 		    	
+		    	stmt.setString(6, note.getSubtitle());
+		    	stmt.setString(7, "Platzhalter");
+		    	
+		    	stmt.setInt(8, 1);
+		    	stmt.setInt(9, 1);
+		    	stmt.setInt(10, 1);
+		    	stmt.setInt(11, 0);
+		    
 		    	stmt.executeUpdate();
 		    	ResultSet rs = stmt.getGeneratedKeys();
 		    	
@@ -94,23 +96,21 @@ public class NoteMapper {
 		
 	try {
 		
-		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Note WHERE id = ?");
+		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Note WHERE NoteId = ?");
          stmt.setLong(1, id);
 		
 		ResultSet rs=stmt.executeQuery();
 		if (rs.next()) {
-	        return new Note(
-	        rs.getInt("NoteId"),
-	        rs.getString("Content"),
-	        rs.getString("Title"),
-	        (new NoteUser()),
-	        (new NoteBook()),
-	        rs.getDate("DueDate"),
-	        rs.getDate("CreationDate"),
-	        rs.getString("Subtitle"),
-	        rs.getDate("ModificationDate"));
-	        
-	        
+			
+	        return new Note(rs.getInt("NoteId"),
+	        		rs.getString("Content"),
+	        		rs.getString("Title"),
+	        		rs.getString("Subtitle"),
+	        		new NoteUser(),
+	        		new NoteBook(),
+	        		new Date(77777),
+	        		new Date(77777),
+	        		new Date(77777));
 
 	    }
 	}
@@ -180,7 +180,6 @@ public class NoteMapper {
 		
 	 }
 	 
-
 	 public Vector<Note> getAllNotes() throws Exception{
 		 
 		 Vector<Note> result = new Vector<Note>();
