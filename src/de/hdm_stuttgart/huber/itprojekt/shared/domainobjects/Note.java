@@ -8,7 +8,7 @@ public class Note extends DomainObject {
 	
 	/**
 	 * anlegen von Variablen und den entsprechenden Setter und
-	 * Getter Methoden entsprechend dem Klassendiagramm für
+	 * Getter Methoden entsprechend dem Klassendiagramm fï¿½r
 	 * die Klasse "Note"
 	 */
 	
@@ -22,6 +22,12 @@ public class Note extends DomainObject {
 	private Date creationDate = null;
 	private Date modificationDate = null;
 	
+	@Override
+	public String toString() {
+		return "Note [noteId=" + noteId + ", content=" + content + ", title=" + title + ", subtitle=" + subtitle
+				+ ", owner=" + owner + ", noteBook=" + noteBook + ", dueDate=" + dueDate + ", creationDate="
+				+ creationDate + ", modificationDate=" + modificationDate + "]";
+	}
 	public int getNoteId() {
 		return noteId;
 	}
