@@ -10,8 +10,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
-import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin.ReportCheckAdmin;
-import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin.ReportGenerator;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportCheckAdmin;
+import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportGenerator;
 
 /**
  * 
