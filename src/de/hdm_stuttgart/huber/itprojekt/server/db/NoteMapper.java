@@ -1,7 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
@@ -50,8 +49,8 @@ public class NoteMapper {
 
 		        stmt = con.createStatement();
 
-		        stmt.executeUpdate("INSERT INTO Note(NoteId, Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " + "VALUES ("
-		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() +","+ note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
+		        stmt.executeUpdate("INSERT INTO Note( Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " + "VALUES ("
+		            + note.getContent() +","+ note.getTitle() +","+ note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
 		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
 		      }
 		    }
@@ -74,11 +73,11 @@ public class NoteMapper {
 	 * @throws ClassNotFoundException 
 	  */
 	
-	public Note findById(int id) throws Exception {
+	public Note findById(int id) throws ClassNotFoundException, SQLException{
 		
-	
 		Connection connection = DBConnection.getConnection();
 		
+	try {
 		Statement stmt = connection.createStatement();
 		
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE id=" + id);
@@ -90,8 +89,8 @@ public class NoteMapper {
 	        note.setNoteId(rs.getInt("NoteId"));
 	        note.setContent(rs.getString("Content"));
 	        note.setTitle(rs.getString("Title"));
-	     // note.setOwner(rs.getNoteUser("Owner"));
-	     // note.setNoteBook(rs.getNoteBook("Notebook"));
+	      note.setOwner(rs.getNoteUser("Owner"));
+	      note.setNoteBook(rs.getNoteBook("Notebook"));
 	        note.setDueDate(rs.getDate("DueDate"));
 	        note.setCreationDate(rs.getDate("CreationDate"));
 	        note.setSubtitle(rs.getString("Subtitle"));
@@ -99,8 +98,12 @@ public class NoteMapper {
 
 	        return note;
 		 }
-	    
-	
+	    }
+	 catch (SQLException sqlExp) {
+		 sqlExp.printStackTrace();
+	      return null;
+	    }
+
 	    return null;
 	  }
 	
@@ -161,24 +164,4 @@ public class NoteMapper {
 		
 	 }
 	 
-	 public ArrayList<Note> getAllNotes() throws Exception{
-		 
-		 ArrayList<Note> result = new ArrayList<Note>();
-		 
-			
-				Connection connection = DBConnection.getConnection();
-				Statement stmt = connection.createStatement();
-				
-				// Das Verhalten wird sich erst später mit den HashMaps auszahlen!
-				ResultSet rs = stmt.executeQuery("SELECT id FROM Note");
-				while (rs.next()) {
-					result.add(this.findById(rs.getInt("id")));
-				} 
-			
-		
-		 return result;
-		
-	 }
-	 
 }
-
