@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentifcationAdmin;
+package de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.FlowPanel;

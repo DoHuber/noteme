@@ -19,6 +19,7 @@
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>IT_Projekt.html</welcome-file>
+    <welcome-file>Report.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
