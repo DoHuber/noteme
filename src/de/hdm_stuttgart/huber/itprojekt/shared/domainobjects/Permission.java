@@ -14,6 +14,9 @@ public class Permission extends DomainObject {
 	private JavaObject content = null;
 	private NoteUser user = null;
 	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public int getPermissionId() {
 		return permissionId;
 	}
