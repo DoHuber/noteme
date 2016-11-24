@@ -43,7 +43,7 @@ public class NoteMapper {
 		    	
 		      Statement stmt = con.createStatement();
 		      
-		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid FROM Note ");
+		      ResultSet rs = stmt.executeQuery("SELECT MAX(NoteId) AS maxid FROM Note ");
 
 		      if (rs.next()) {
 		      
