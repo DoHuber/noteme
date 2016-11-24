@@ -1,6 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -41,26 +42,36 @@ public class NoteMapper {
 
 		    try {
 		    	
-		      Statement stmt = con.createStatement();
 		      
 		      ResultSet rs = stmt.executeQuery("SELECT MAX(NoteId) AS maxid FROM Note ");
 
 		      if (rs.next()) {
+		    	PreparedStatement stmt =  con.prepareStatement("INSERT INTO Note( Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " 
+		    	+ "VALUES (?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS );
 		      
-		        note.setNoteId(rs.getInt("maxid") + 1);
-
-		        stmt = con.createStatement();
-
-		        stmt.executeUpdate("INSERT INTO Note(NoteId, Content, Title, Owner, NoteBook, DueDate, CreationDate, Subtitle, ModificationDate) " + "VALUES ("
-		            + note.getNoteId() + "," + note.getContent() +","+ note.getTitle() +","+ note.getOwner() + "," + note.getNoteBook() + "," + note.getDueDate() +
-		            ","+ note.getCreationDate() + ","+ note.getSubtitle() + ","+ note.getModificationDate()+ ")");
-		      }
-		    }
-		    catch (SQLException sqlExp) {
+		    	stmt.setString(1, note.getContent());
+		    	stmt.setString(2, note.getTitle());
+		    	stmt.setLong(3, note.getOwner().getNoteUserId());
+		    	stmt.setLong(4, note.getNoteId());
+		    	stmt.setDate(5, (Date) note.getDueDate());
+		    	stmt.setDate(6, (Date) note.getCreationDate());
+		    	stmt.setString(7, note.getTitle());
+		    	stmt.setDate(8, (Date) note.getModificationDate());
+		    	
+		    	
+		    	stmt.executeUpdate();
+		    	ResultSet rs = stmt.getGeneratedKeys();
+		    	
+		    	if(rs.next()){
+		    		return findById(rs.getLong(1));
+		    		
+		    	}
+		    	
+		    } catch (SQLException sqlExp) {
 		    sqlExp.printStackTrace();
+		   
 		    }
-		    
-		    return note;
+			return note;
 	
 	  }
 	
@@ -75,33 +86,38 @@ public class NoteMapper {
 	 * @throws ClassNotFoundException 
 	  */
 	
-	public Note findById(int id) throws Exception {
+	public Note findById(Long id) throws ClassNotFoundException, SQLException{
 		
-	
 		Connection connection = DBConnection.getConnection();
 		
-		Statement stmt = connection.createStatement();
+	try {
 		
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE NoteId=" + id);
+		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Note WHERE id = ?");
+         stmt.setLong(1, id);
 		
-		
+		ResultSet rs=stmt.executeQuery();
 		if (rs.next()) {
+	        return new Note(
+	       rs.getInt("NoteId"),
+	        rs.getString("Content"),
+	        rs.getString("Title"),
+	        rs.getNoteUser("Owner"),
+	        rs.getNoteBook("Notebook"),
+	        rs.getDate("DueDate"),
+	        rs.getDate("CreationDate"),
+	        rs.getString("Subtitle"),
+	        rs.getDate("ModificationDate"));
 	        
-	        Note note  = new Note();
-	        note.setNoteId(rs.getInt("NoteId"));
-	        note.setContent(rs.getString("Content"));
-	        note.setTitle(rs.getString("Title"));
-	     // note.setOwner(rs.getNoteUser("Owner"));
-	     // note.setNoteBook(rs.getNoteBook("Notebook"));
-	        note.setDueDate(rs.getDate("DueDate"));
-	        note.setCreationDate(rs.getDate("CreationDate"));
-	        note.setSubtitle(rs.getString("Subtitle"));
-	        note.setModificationDate(rs.getDate("ModificationDate"));
+	        
 
-	        return note;
-		 }
-	    
-	
+	    }
+	}
+		
+	 catch (SQLException sqlExp) {
+		 sqlExp.printStackTrace();
+	      return null;
+	    }
+
 	    return null;
 	  }
 	

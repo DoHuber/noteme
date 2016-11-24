@@ -32,23 +32,11 @@ private static NotebookMapper notebookMapper = null;
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      
-		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid FROM Notebook ");
 
-		      if (rs.next()) {
-		      
-		        notebook.setNoteBookId(rs.getInt("maxid") + 1);
-
-		        stmt = con.createStatement();
-
-		    
-
-		       
-
-		        stmt.executeUpdate("INSERT INTO Note(NoteBookId, Title, Subtitle, Owner, CreationDate, ModificationDate) " + "VALUES ("
-		            + notebook.getNoteId() + "," +  notebook.getTitle() +","+  notebook.getSubtitle() + "," +  notebook.getOwner() + 
+		      ResultSet rs =  stmt.executeUpdate("INSERT INTO Note( Title, Subtitle, Owner, CreationDate, ModificationDate) " + "VALUES ("
+		             +  notebook.getTitle() +","+  notebook.getSubtitle() + "," +  notebook.getOwner() + 
 		            ","+  notebook.getCreationDate() + ","+  notebook.getModificationDate()+ ")");
-		      }
+		      
 		    }
 		    catch (SQLException sqlExp) {
 		    sqlExp.printStackTrace();
@@ -86,7 +74,7 @@ private static NotebookMapper notebookMapper = null;
 	        notebook.setNoteBookId(rs.getInt("NoteBookId"));
 	        notebook.setTitle(rs.getString("Title"));
 	        notebook.setSubtitle(rs.getString("Subtitle"));
-	     // note.setOwner(rs.getNoteUser("Owner")); 
+	        notebook.setOwner(rs.getNoteUser("Owner")); 
 	        notebook.setCreationDate(rs.getDate("CreationDate"));
 	        notebook.setModificationDate(rs.getDate("ModificationDate"));
 
@@ -116,7 +104,7 @@ private static NotebookMapper notebookMapper = null;
 	    Connection con = DBConnection.getConnection();
 
 	    try {
-	      Statement stmt = con.createStatement();
+	       Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE Notebook " + 
           "SET Title=\"" + notebook.getTitle() + "\", "
