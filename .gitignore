@@ -33,3 +33,6 @@ www-test/
 .gwt-tmp/
 /.classpath
 /.project
+.classpath
+.project
+/.dbeaver-data-sources.xml

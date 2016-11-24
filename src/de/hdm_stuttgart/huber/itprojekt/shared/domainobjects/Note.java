@@ -22,6 +22,39 @@ public class Note extends DomainObject {
 	private Date creationDate = null;
 	private Date modificationDate = null;
 	
+	public Note() {
+		
+	}
+	
+	
+	
+	/**
+	 * @param noteId
+	 * @param content
+	 * @param title
+	 * @param subtitle
+	 * @param owner
+	 * @param noteBook
+	 * @param dueDate
+	 * @param creationDate
+	 * @param modificationDate
+	 */
+	public Note(int noteId, String content, String title, String subtitle, NoteUser owner, NoteBook noteBook,
+			Date dueDate, Date creationDate, Date modificationDate) {
+		super();
+		this.noteId = noteId;
+		this.content = content;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.owner = owner;
+		this.noteBook = noteBook;
+		this.dueDate = dueDate;
+		this.creationDate = creationDate;
+		this.modificationDate = modificationDate;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Note [noteId=" + noteId + ", content=" + content + ", title=" + title + ", subtitle=" + subtitle
@@ -29,10 +62,7 @@ public class Note extends DomainObject {
 				+ creationDate + ", modificationDate=" + modificationDate + "]";
 	}
 	
-	public Note(int int1, String string, String string2, NoteUser noteUser, NoteBook noteBook2, java.sql.Date date,
-			java.sql.Date date2, String string3, java.sql.Date date3) {
-		
-	}
+	
 	public int getNoteId() {
 		return noteId;
 	}

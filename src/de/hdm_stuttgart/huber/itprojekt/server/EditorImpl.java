@@ -73,7 +73,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		try {
 			
 			noteMapper.create(newNote);
-			newNote = noteMapper.findById(newNote.getNoteId());
+			newNote = noteMapper.findById((long) newNote.getNoteId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		try { 
 			
 			noteMapper.save(newNote);
-			newNote = noteMapper.findById(newNote.getNoteId());
+			newNote = noteMapper.findById((long) newNote.getNoteId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,7 +103,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public Note getNoteById(Note note) throws Exception {
 	
-			return noteMapper.findById(note.getNoteId());
+			return noteMapper.findById((long) note.getNoteId());
 	
 	}
 
