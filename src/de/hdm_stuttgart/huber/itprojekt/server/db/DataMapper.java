@@ -1,9 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-
 
 /**
  * HashMap: Schlüssel und ein Wert (Schlüssel = id)
@@ -12,8 +10,18 @@ import java.sql.SQLException;
  * @author Lisa
  *
  */
+public abstract class DataMapper {
+	
+	 protected Connection connection;
 
-public class DataMapper {
+	    protected DataMapper() throws ClassNotFoundException, SQLException
+	    {
+	    	new DBConnection();
+	    	connection = DBConnection.getConnection();
+
+
+	    }
+
 	   
 	}
 

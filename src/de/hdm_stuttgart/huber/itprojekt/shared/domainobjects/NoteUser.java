@@ -10,13 +10,22 @@ public class NoteUser extends DomainObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private int noteUserId;
+	private String firstName;
+	private String userName;
+	private String surName;
+	private String email;
+	private String googleId;
 	
-	private int noteUserId = 0;
-	private String firstName = null;
-	private String userName = null;
-	private String surName = null;
-	private String email = null;
-	private String googleId = null;
+	public NoteUser(int noteUserId, String firstName, String userName, String surName, String email, String googleId) {
+		super();
+		this.noteUserId = noteUserId;
+		this.firstName = firstName;
+		this.userName = userName;
+		this.surName = surName;
+		this.email = email;
+		this.googleId = googleId;
+	}
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;

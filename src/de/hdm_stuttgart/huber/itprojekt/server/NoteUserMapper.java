@@ -1,89 +1,117 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.sql.*;
+//import java.util.ArrayList;
+
 import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
+import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
 
-public class NoteUserMapper {
+public class NoteUserMapper extends DataMapper {
 	
+	//Konstruktor
+	protected NoteUserMapper() throws ClassNotFoundException, SQLException {
+		super();
+	}
+
 private static NoteUserMapper noteUserMapper = null;
 	
 	public NoteUserMapper getNoteUserMapper(){
 		return noteUserMapper;
 	}
-	public NoteUser create (NoteUser noteUser) throws ClassNotFoundException, SQLException{
-		Connection con = DBConnection.getConnection();
+	
+	//create Methode
+	public NoteUser create(NoteUser noteUser) throws ClassNotFoundException, SQLException {
 		
 		try {
-			Statement stmt = con.createStatement();
-						
-				ResultSet rs = stmt.executeUpdate("INSERT INTO NoteUser(FirstName, UserName, SurName, Email, GoogleId) "
-				+ "VALUES (" + noteUser.getFirstName() + "," + noteUser.getUserName() + "," + noteUser.getSurName() 
-				+ "," + noteUser.getEmail() + "," + noteUser.getGoogleId() + ")");
-		}
-		catch (SQLException sqlExp) {
+			
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO noteUser(firstName, userName, surName, email, googleId) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+					
+			stmt.setString(1,  noteUser.getFirstName());
+			stmt.setString(2,  noteUser.getUserName());
+			stmt.setString(3,  noteUser.getSurName());
+			stmt.setString(4,  noteUser.getEmail());
+			stmt.setString(5,  noteUser.getGoogleId());
+			
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			
+			if (rs.next()) {
+				return findById(rs.getInt(1));
+			} else {
+				throw new SQLException("Sorry Bro");
+			}
+			
+		} 	catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
 		}
 		return noteUser;
-		
+				
 	}
 
+		//findById Methode
 		public NoteUser findById(int NoteUserId) throws ClassNotFoundException, SQLException{
-			Connection connection = DBConnection.getConnection();
-		
+					
 		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM NoteUser WHERE noteUserId = " + NoteUserId);
+			PreparedStatement stmt = connection.prepareStatement(" SELECT * FROM NoteUser where noteUserid = ?");
+			stmt.setInt(1,  NoteUserId);
 			
-			if (rs.next()) {
-				NoteUser noteUser = new NoteUser();
-				noteUser.setNoteUserId(rs.getInt("NoteUserId"));
-				noteUser.setFirstName(rs.getString("FirstName"));
-				noteUser.setUserName(rs.getString("UserName"));
-				noteUser.setSurName(rs.getString("SurName"));
-			    noteUser.setEmail(rs.getString("Email"));
-				noteUser.setGoogleId(rs.getString("GoogleId"));
-							
-				return noteUser;
-			}
-		}
-		catch (SQLException sqlExp) {
+			//Ergebnis holen
+			ResultSet results = stmt.executeQuery();
+			if (results.next()) {
+				return new NoteUser(NoteUserId, results.getString("firstName"), results.getString("userName"), results.getString("surName"), results.getString("email"), results.getString("googleId"));
+			} else {
+				throw new SQLException("Exception");
+			} 
+			
+		}	catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
-			return null;
 		}
 		return null;
 	}
-	public NoteUser save(NoteUser noteUser) throws ClassNotFoundException, SQLException {
-		Connection con = DBConnection.getConnection();
+	
 		
+		public NoteUser save(NoteUser noteUser) throws ClassNotFoundException, SQLException {
+				
 		try {
-			Statement stmt = con.createStatement();
-			stmt.executeUpdate("UPDATE NoteUser " + 
-				      "SET FirstName=\""+ noteUser.getFirstName() + "\", " 
-				      	+ "UserName=\"" + noteUser.getUserName() + "\", "
-				      	+ "SurName=\"" + noteUser.getSurName() + "\", "
-				      	+ "Email=\"" + noteUser.getEmail() + "\", "
-						+ "GoogleId=\"" + noteUser.getGoogleId() + "\", "
-				      	+ "WHERE NoteUserId=" + noteUser.getNoteUserId());
-		}
-		catch (SQLException sqlExp) {
+			PreparedStatement stmt = connection.prepareStatement("UPDATE NoteUser SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE noteUserId=?");
+			
+			stmt.setString(1,  noteUser.getFirstName());
+			stmt.setString(2,  noteUser.getUserName());
+			stmt.setString(3,  noteUser.getSurName());
+			stmt.setString(4,  noteUser.getEmail());
+			stmt.setString(5,  noteUser.getGoogleId());
+			
+			stmt.executeUpdate();
+			
+		} 	catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
 		}
+		//aktualisierte Person zurückgeben
 		return noteUser;
-	}
-	public void delete(NoteUser noteUser) throws ClassNotFoundException, SQLException {
-		Connection connection = DBConnection.getConnection();
 		
+	}
+		
+		
+	public void delete(NoteUser noteUser) throws ClassNotFoundException, SQLException {
+				
 		try {
-			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("DELETE FROM NoteUser WHERE NoteUserId=" + noteUser.getNoteUserId());
-			}
-		catch (SQLException sqlExp) {
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM NoteUser WHERE NoteUserId = ?");
+			stmt.setInt(1, noteUser.getNoteUserId());
+			stmt.executeUpdate();
+			
+		} 	catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
 		}
 	}
-	protected static NoteUserMapper noteUserMapper() {
+	
+	//public ArrayList<NoteUser> getAllNoteUsers() {
+		//vector <NoteUser> retVal = new ArrayList<>();
+		
+//	}
+	
+	protected static NoteUserMapper noteUserMapper() throws ClassNotFoundException, SQLException {
 		if (noteUserMapper == null) {
 			noteUserMapper = new NoteUserMapper();
 		}
