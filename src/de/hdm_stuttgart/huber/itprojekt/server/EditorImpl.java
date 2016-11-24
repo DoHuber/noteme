@@ -124,18 +124,17 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public Vector<Note> getAllNotes() throws BullshitException {
-		Vector<Note> result = new Vector<Note>();
+		
 		try {
-		
-		ArrayList<Note> toCopy = noteMapper.getAllNotes();
-		
-		Collections.copy(result, toCopy);
-		
+			
+			return noteMapper.getAllNotes();
+			
 		} catch (Exception e) {
+			
+			e.printStackTrace();
 			throw new BullshitException(e.toString());
 		}
-	
-		return result;
+		
 	}
 
 	@Override

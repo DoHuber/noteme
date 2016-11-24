@@ -2,6 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
@@ -81,7 +82,7 @@ public class NoteMapper {
 		
 		Statement stmt = connection.createStatement();
 		
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE id=" + id);
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Note WHERE NoteId=" + id);
 		
 		
 		if (rs.next()) {
@@ -161,18 +162,18 @@ public class NoteMapper {
 		
 	 }
 	 
-	 public ArrayList<Note> getAllNotes() throws Exception{
+	 public Vector<Note> getAllNotes() throws Exception{
 		 
-		 ArrayList<Note> result = new ArrayList<Note>();
+		 Vector<Note> result = new Vector<Note>();
 		 
 			
 				Connection connection = DBConnection.getConnection();
 				Statement stmt = connection.createStatement();
 				
 				// Das Verhalten wird sich erst später mit den HashMaps auszahlen!
-				ResultSet rs = stmt.executeQuery("SELECT id FROM Note");
+				ResultSet rs = stmt.executeQuery("SELECT NoteId FROM Note");
 				while (rs.next()) {
-					result.add(this.findById(rs.getInt("id")));
+					result.add(this.findById(rs.getInt("NoteId")));
 				} 
 			
 		
