@@ -18,7 +18,7 @@ private static NoteUserMapper noteUserMapper = null;
 		try {
 			Statement stmt = con.createStatement();
 						
-				int rs = stmt.executeUpdate("INSERT INTO NoteUser(FirstName, UserName, SurName, Email, GoogleId) "
+				ResultSet rs = stmt.executeUpdate("INSERT INTO NoteUser(FirstName, UserName, SurName, Email, GoogleId) "
 				+ "VALUES (" + noteUser.getFirstName() + "," + noteUser.getUserName() + "," + noteUser.getSurName() 
 				+ "," + noteUser.getEmail() + "," + noteUser.getGoogleId() + ")");
 		}

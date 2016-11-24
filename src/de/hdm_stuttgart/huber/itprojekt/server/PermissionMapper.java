@@ -20,7 +20,7 @@ private static PermissionMapper permissionMapper = null;
 		try {
 			Statement stmt = con.createStatement();
 										
-				int rs = stmt.executeUpdate("INSERT INTO Permission(Content, User, Level) " + "VALUES (" 
+				ResultSet rs = stmt.executeUpdate("INSERT INTO Permission(Content, User, Level) " + "VALUES (" 
 				+ permission.getContent() + "," + permission.getUser() + "," + permission.getLevel() + ")");
 		}
 		catch (SQLException sqlExp) {
