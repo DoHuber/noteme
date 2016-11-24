@@ -3,6 +3,9 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 import java.security.acl.Owner;
 import java.sql.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Vector;
+
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 public class NoteMapper {
@@ -176,3 +179,24 @@ public class NoteMapper {
 	 }
 	 
 }
+	 public Vector<Note> getAllNotes() throws Exception{
+		 
+		 Vector<Note> result = new Vector<Note>();
+		 
+			
+				Connection connection = DBConnection.getConnection();
+				Statement stmt = connection.createStatement();
+				
+				// Das Verhalten wird sich erst später mit den HashMaps auszahlen!
+				ResultSet rs = stmt.executeQuery("SELECT NoteId FROM Note");
+				while (rs.next()) {
+					result.add(this.findById(rs.getInt("NoteId")));
+				} 
+			
+		
+		 return result;
+		
+	 }
+	 
+}
+
