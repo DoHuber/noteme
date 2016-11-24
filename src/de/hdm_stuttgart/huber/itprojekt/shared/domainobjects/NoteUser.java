@@ -18,6 +18,9 @@ public class NoteUser extends DomainObject {
 	private String email = null;
 	private String googleId = null;
 	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public int getNoteUserId() {
 		return noteUserId;
 	}
