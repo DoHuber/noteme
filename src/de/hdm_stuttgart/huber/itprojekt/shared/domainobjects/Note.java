@@ -28,6 +28,11 @@ public class Note extends DomainObject {
 				+ ", owner=" + owner + ", noteBook=" + noteBook + ", dueDate=" + dueDate + ", creationDate="
 				+ creationDate + ", modificationDate=" + modificationDate + "]";
 	}
+	
+	public Note(int int1, String string, String string2, NoteUser noteUser, NoteBook noteBook2, java.sql.Date date,
+			java.sql.Date date2, String string3, java.sql.Date date3) {
+		
+	}
 	public int getNoteId() {
 		return noteId;
 	}
