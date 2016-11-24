@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
 public class NoteMapper {
 	
@@ -98,11 +100,11 @@ public class NoteMapper {
 		ResultSet rs=stmt.executeQuery();
 		if (rs.next()) {
 	        return new Note(
-	       rs.getInt("NoteId"),
+	        rs.getInt("NoteId"),
 	        rs.getString("Content"),
 	        rs.getString("Title"),
-	        rs.getNoteUser("Owner"),
-	        rs.getNoteBook("Notebook"),
+	        (new NoteUser()),
+	        (new NoteBook()),
 	        rs.getDate("DueDate"),
 	        rs.getDate("CreationDate"),
 	        rs.getString("Subtitle"),
@@ -178,7 +180,7 @@ public class NoteMapper {
 		
 	 }
 	 
-}
+
 	 public Vector<Note> getAllNotes() throws Exception{
 		 
 		 Vector<Note> result = new Vector<Note>();
@@ -190,7 +192,7 @@ public class NoteMapper {
 				// Das Verhalten wird sich erst später mit den HashMaps auszahlen!
 				ResultSet rs = stmt.executeQuery("SELECT NoteId FROM Note");
 				while (rs.next()) {
-					result.add(this.findById(rs.getInt("NoteId")));
+					result.add(this.findById(rs.getLong("NoteId")));
 				} 
 			
 		

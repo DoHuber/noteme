@@ -22,6 +22,10 @@ public class Note extends DomainObject {
 	private Date creationDate = null;
 	private Date modificationDate = null;
 	
+	public Note(int int1, String string, String string2, NoteUser noteUser, NoteBook noteBook2, java.sql.Date date,
+			java.sql.Date date2, String string3, java.sql.Date date3) {
+		// TODO Auto-generated constructor stub
+	}
 	public int getNoteId() {
 		return noteId;
 	}
