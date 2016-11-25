@@ -27,6 +27,10 @@ public class NoteUser extends DomainObject {
 		this.googleId = googleId;
 	}
 	
+	public NoteUser() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
