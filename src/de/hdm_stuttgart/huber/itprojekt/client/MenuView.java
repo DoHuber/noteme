@@ -86,7 +86,7 @@ public class MenuView extends VerticalPanel {
 			RootPanel.get().clear();
 			RootPanel.get().add(mView);
 
-			ShowAllNotes san = new ShowAllNotes();
+			ShowAllNotes san = new ShowAllNotes(null);
 			RootPanel.get().add(san);
 		}
 	}

@@ -1,22 +1,29 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import java.util.Vector;
+
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 /**
  * 
- *Eine Klasse zum Test der Client-Server Kommunikation 
- *Wird später gelöscht.  
-
+ * Eine Klasse zum Test der Client-Server Kommunikation Wird später gelöscht.
  *
+ * 
  */
 
-public class HelloWorld extends BasicView{
+public class HelloWorld extends BasicView {
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	Label lb;
+	HorizontalPanel hPanel = new HorizontalPanel();
 	@Override
 	public String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -31,10 +38,13 @@ public class HelloWorld extends BasicView{
 
 	@Override
 	public void run() {
+		
+		
 		sayHello();
 		
 		
 	}
+
 
 	private void  sayHello() {
 		editorVerwaltung.getHelloWorld(new HelloCallback());
@@ -53,8 +63,8 @@ public class HelloWorld extends BasicView{
 		@Override
 		public void onSuccess(String result) {
 			String hello =result;
-			lb=new Label(hello);
-			RootPanel.get().add(lb);
+			hPanel.add(new HTML(hello));
+			RootPanel.get().add(hPanel);
 			
 		}
 		

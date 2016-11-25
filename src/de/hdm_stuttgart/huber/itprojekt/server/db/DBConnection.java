@@ -15,7 +15,7 @@ public class DBConnection {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		   
 	   //3. JDBC Treiber regestrieren
-	   // Class.forName("com.mysql.jdbc.Driver");
+	   //Class.forName("com.mysql.jdbc.Driver");
 		   
 	   //4. Verbindung aufbauen
 	   Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);

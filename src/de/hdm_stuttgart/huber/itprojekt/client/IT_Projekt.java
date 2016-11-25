@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -9,6 +10,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class IT_Projekt implements EntryPoint {
 	
 	public void onModuleLoad() {
+		
 		loadMenu();
 	}
 	
