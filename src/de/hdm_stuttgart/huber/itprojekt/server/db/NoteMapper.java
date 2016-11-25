@@ -1,8 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
@@ -132,29 +130,41 @@ public class NoteMapper {
  */
 	
 	public Note save(Note note) throws ClassNotFoundException, SQLException{
-	    Connection con = DBConnection.getConnection();
+	   
+		Connection con = DBConnection.getConnection();
 
 	    try {
-	      Statement stmt = con.createStatement();
+	      
+	      PreparedStatement stmt = con.prepareStatement("UPDATE Note SET Title=?, Content=?, CreationDate=?, DueDate=?, ModificationDate=?, Subtitle=?, Source=?, noteBookId=?, noteUserId=?, permissionId=?, dreierId=? WHERE id = ?");
+	      
+	      	stmt.setString(1, note.getTitle());
+	    	stmt.setString(2, note.getContent());
+	    	
+	    	stmt.setDate(3, new Date(7777));
+	    	stmt.setDate(4, new Date(7777));
+	    	stmt.setDate(5, new Date(7777));
+	    	
+	    	stmt.setString(6, note.getSubtitle());
+	    	stmt.setString(7, "Source");
+	    	
+	    	stmt.setInt(8, 1);
+	    	stmt.setInt(9, 1);
+	    	stmt.setInt(10, 1);          //noch ‰ndern
+	    	stmt.setInt(11, 0);
+	    	
+	    	stmt.setLong(12, note.getNoteId());
+	    	
+	    	stmt.executeUpdate();
 
-	      stmt.executeUpdate("UPDATE Note " + 
-	      "SET Content=\""+ note.getContent() + "\", " 
-	      	+ "Title=\"" + note.getTitle() + "\", "
-	      	+ "Owner=\"" + note.getOwner() + "\", "
-	      	+ "NoteBook=\"" + note.getNoteBook() + "\", "
-	      	+ "DueDate=\"" + note.getDueDate() + "\", "
-	      	+ "Creationdate=\"" + note.getCreationDate() + "\", "
-	      	+ "Subtitle=\"" + note.getSubtitle() + "\", "	             
-	      	+ "ModificationDate=\"" + note.getModificationDate() + "\", "
-	      	+ "WHERE NoteId=" + note.getNoteId());
+	    
 
 	    }
 	    catch (SQLException sqlExp) {
 	    	sqlExp.printStackTrace();
+	    	throw new IllegalArgumentException();
 	    }
 
-	    
-	    return note;
+	    return findById((long)note.getNoteId());
 	  }
 		      
 	
@@ -167,37 +177,57 @@ public class NoteMapper {
 	 */
 	
 	 public void delete(Note note) throws ClassNotFoundException, SQLException {
+		
 		 Connection connection = DBConnection.getConnection();
 
-		    try {
-		      Statement stmt = connection.createStatement();
+		 try {
 
-		      stmt.executeUpdate("DELETE FROM Note WHERE NoteId=" + note.getNoteId());
-		    }
-		    catch (SQLException sqlExp) {
-		    sqlExp.printStackTrace();
-		    }
-		
-	 }
+	            PreparedStatement stmt = connection.prepareStatement("DELETE FROM Note WHERE id = ?");
+	            stmt.setLong(1, note.getNoteId());
+	            stmt.executeUpdate();
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            throw new IllegalArgumentException();
+	        }
+
+	    }
 	 
-	 public Vector<Note> getAllNotes() throws Exception{
-		 
-		 Vector<Note> result = new Vector<Note>();
-		 
-			
-				Connection connection = DBConnection.getConnection();
-				Statement stmt = connection.createStatement();
-				
-				// Das Verhalten wird sich erst sp√§ter mit den HashMaps auszahlen!
-				ResultSet rs = stmt.executeQuery("SELECT NoteId FROM Note");
-				while (rs.next()) {
-					result.add(this.findById(rs.getLong("NoteId")));
-				} 
-			
-		
-		 return result;
-		
-	 }
+	 
+	 
+	 public Vector<Note> getAllNotes() throws ClassNotFoundException, SQLException {
+		 	
+		 Connection connection = DBConnection.getConnection();
+	        Vector<Note> v = new Vector<>();
+
+	        try {
+
+	            Statement stmt = connection.createStatement();
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM Note");
+
+	            while (rs.next()) {
+
+	                Note note = new Note(rs.getInt("NoteId"),
+	    	        		rs.getString("Content"),
+	    	        		rs.getString("Title"),
+	    	        		rs.getString("Subtitle"),
+	    	        		new NoteUser(),
+	    	        		new NoteBook(),
+	    	        		new Date(77777),
+	    	        		new Date(77777),
+	    	        		new Date(77777));
+
+	                v.add(note);
+
+	            } 
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return v;
+
+	    }
 	 
 }
 
