@@ -12,14 +12,14 @@ import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
  *
  */
 
-public class ShowAllNotebooksR extends BasicViewR{
+public class ShowAllNotebooksR extends BasicView{
 
 	HorizontalPanel hPanel = new HorizontalPanel();
 
 	public void run() {
 		
 	
-		Label lb = new Label("Alle Notizbücher");
+		Label lb = new Label("Alle Notizbï¿½cher");
 		
 		hPanel.add(lb);
 		

@@ -15,13 +15,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
 import de.hdm_stuttgart.huber.itprojekt.client.MenuView;
-import de.hdm_stuttgart.huber.itprojekt.client.Report.BasicViewR;
+
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportLanding;
 
 /**
- * Startseite des Report Gernerators mit Abfrage für Admin Zugang
- * und anschließende Weiterleitung zur Auswahlseite
+ * Startseite des Report Gernerators mit Abfrage fï¿½r Admin Zugang
+ * und anschlieï¿½ende Weiterleitung zur Auswahlseite
  * @author dominik erdmann
  *
  */
@@ -54,7 +54,7 @@ public class ReportCheckAdmin extends VerticalPanel{
 		cancelButton.addClickHandler(new CancelHandler());
 	}
 	/**
-	 * "fake" Login, momentan nicht funktionsfähig
+	 * "fake" Login, momentan nicht funktionsfï¿½hig
 	 * @author domin
 	 *
 	 */

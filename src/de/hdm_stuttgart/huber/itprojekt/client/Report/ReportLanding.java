@@ -1,6 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.client.Report;
 
-public class ReportLanding extends BasicViewR{
+import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
+
+public class ReportLanding extends BasicView{
 
 	@Override
 	public String getHeadlineText() {
@@ -11,7 +13,7 @@ public class ReportLanding extends BasicViewR{
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Wählen Sie ihren Report aus";
+		return "Wï¿½hlen Sie ihren Report aus";
 	}
 
 	@Override
