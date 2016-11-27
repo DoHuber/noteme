@@ -2,23 +2,24 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
 import java.util.Vector;
-
+import java.util.HashMap;
+import java.util.Map;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
-public class NoteMapper {
+public class NoteMapper extends DataMapper {
 	
 	// Statisches Attribut, welches den Singleton-NoteMapper enthält.
 	private static NoteMapper noteMapper = null;
 	
 	// Nichtöffentlicher Konstruktor, um unauthorisiertes Instanziieren dieser Klasse zu verhindern.
-	protected NoteMapper () {
+	protected NoteMapper () throws ClassNotFoundException, SQLException {
 		
 	}
 	
 	// Öffentliche Methode um den Singleton-NoteMapper zu erhalten
-	public static NoteMapper getNoteMapper() {
+	public static NoteMapper getNoteMapper() throws ClassNotFoundException, SQLException {
 		
 		if (noteMapper == null) {
 		   noteMapper = new NoteMapper();
@@ -26,6 +27,9 @@ public class NoteMapper {
 
 		return noteMapper;
  	}	
+	
+	
+	NoteMapper nMapper = new NoteMapper();
 	
 	
 		/**
@@ -91,36 +95,45 @@ public class NoteMapper {
 	public Note findById(Long id) throws ClassNotFoundException, SQLException{
 		
 		Connection connection = DBConnection.getConnection();
+		Object note = new Note();
 		
-	try {
-		
-		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Note WHERE NoteId = ?");
-         stmt.setLong(1, id);
-		
-		ResultSet rs=stmt.executeQuery();
-		if (rs.next()) {
+		if(nMapper.isObjectLoaded(id)==true){
+	     note = loadedObjects.get(id);
+	     return (Note) note;
+		}
+		else{
 			
-	        return new Note(rs.getInt("NoteId"),
-	        		rs.getString("Content"),
-	        		rs.getString("Title"),
-	        		rs.getString("Subtitle"),
-	        		new NoteUser(),
-	        		new NoteBook(),
-	        		new Date(77777),
-	        		new Date(77777),
-	        		new Date(77777));
-
-	    }
-	}
 		
-	 catch (SQLException sqlExp) {
-		 sqlExp.printStackTrace();
-	      return null;
-	    }
+			try {
+		
+				PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Note WHERE NoteId = ?");
+				stmt.setLong(1, id);
+		
+				ResultSet rs=stmt.executeQuery();
+				if (rs.next()) {
+			
+					note = new Note(rs.getInt("NoteId"),
+							rs.getString("Content"),
+							rs.getString("Title"),
+							rs.getString("Subtitle"),
+							new NoteUser(),
+							new NoteBook(),
+							new Date(77777),
+							new Date(77777),
+							new Date(77777));
+	        
+					nMapper.addToHashMap(rs.getInt("NoteId"), note);    
+				}
+			}
+		
+			catch (SQLException sqlExp) {
+				sqlExp.printStackTrace();
+				return null;
+			}
 
-	    return null;
+			return (Note) note;
 	  }
-	
+	}
 /**
  * 
  * @param  Note-Objekt wird wiederholt in die Datenbank geschrieben

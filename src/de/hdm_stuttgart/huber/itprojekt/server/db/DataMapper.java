@@ -2,6 +2,8 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * HashMap: Schlüssel und ein Wert (Schlüssel = id)
@@ -11,6 +13,29 @@ import java.sql.SQLException;
  *
  */
 public abstract class DataMapper {
+	
+	
+
+	protected Map<Long, Object> loadedObjects =new HashMap<Long, Object>();
+
+	protected void addToHashMap(long id,Object o){
+		loadedObjects.put(id, o);
+	}
+	
+	protected boolean isObjectLoaded(long id){
+		boolean x =false;
+		
+		for(long idKey : loadedObjects.keySet()){
+			if(idKey == id){
+				x = true;
+			}
+			else{
+				x= false;	
+			}
+		}
+		return x;
+	}
+	
 	
 	 protected Connection connection;
 
