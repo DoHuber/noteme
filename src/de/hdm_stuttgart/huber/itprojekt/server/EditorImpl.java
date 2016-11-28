@@ -29,7 +29,15 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public void init() throws IllegalArgumentException {
 		
-		this.noteMapper = NoteMapper.getNoteMapper();
+		try {
+			this.noteMapper = NoteMapper.getNoteMapper();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

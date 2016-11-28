@@ -29,7 +29,7 @@ public class NoteMapper extends DataMapper {
  	}	
 	
 	
-	NoteMapper nMapper = new NoteMapper();
+	// NoteMapper nMapper = new NoteMapper();
 	
 	
 		/**
@@ -97,7 +97,7 @@ public class NoteMapper extends DataMapper {
 		Connection connection = DBConnection.getConnection();
 		Object note = new Note();
 		
-		if(nMapper.isObjectLoaded(id)==true){
+		if(this.isObjectLoaded(id)==true){
 	     note = loadedObjects.get(id);
 	     return (Note) note;
 		}
@@ -122,7 +122,7 @@ public class NoteMapper extends DataMapper {
 							new Date(77777),
 							new Date(77777));
 	        
-					nMapper.addToHashMap(rs.getInt("NoteId"), note);    
+					this.addToHashMap(rs.getInt("NoteId"), note);    
 				}
 			}
 		
@@ -162,7 +162,7 @@ public class NoteMapper extends DataMapper {
 	    	
 	    	stmt.setInt(8, 1);
 	    	stmt.setInt(9, 1);
-	    	stmt.setInt(10, 1);          //noch ändern
+	    	stmt.setInt(10, 1);          //noch ï¿½ndern
 	    	stmt.setInt(11, 0);
 	    	
 	    	stmt.setLong(12, note.getNoteId());

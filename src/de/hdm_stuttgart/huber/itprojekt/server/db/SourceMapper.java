@@ -10,7 +10,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Source;
 
 public class SourceMapper extends DataMapper {
 	
-	// Statisches Attribut, welches den Singleton-SourceMapper enthält
+	// Statisches Attribut, welches den Singleton-SourceMapper enthï¿½lt
 	private static SourceMapper sourceMapper = null;
 	
 	// Konstruktor (protected, um unauthorisiertes Instanziieren der Klasse zu verhindern)
@@ -18,7 +18,7 @@ public class SourceMapper extends DataMapper {
 		super();
 	}
 
-	// Öffentliche statische Methode, um den Singleton-SourceMapper zu erhalten
+	// ï¿½ffentliche statische Methode, um den Singleton-SourceMapper zu erhalten
 	public static SourceMapper getSourceMapper() throws ClassNotFoundException, SQLException {
 		if (sourceMapper == null ) {
 			sourceMapper = new SourceMapper();
@@ -34,7 +34,7 @@ public class SourceMapper extends DataMapper {
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO source(Url)" 
 			+ "VALUES (?)", Statement.RETURN_GENERATED_KEYS);
 			
-			stmt.setURL(1,  source.getURL());
+			stmt.setString(1,  source.getURL().toString());
 			
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -79,13 +79,13 @@ public class SourceMapper extends DataMapper {
 		try {
 			PreparedStatement stmt = con.prepareStatement("UPDATE Source SET url=? WHERE urlId=?");
 
-			stmt.setURL(1,  source.getURL());
+			stmt.setString(1,  source.getURL().toString());
 			stmt.executeUpdate();
 		}
 		catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
 		}
-		//aktualisierte Berechtigung zurückgeben
+		//aktualisierte Berechtigung zurï¿½ckgeben
 		return source;
 	}
 	
