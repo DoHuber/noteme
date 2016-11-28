@@ -14,6 +14,10 @@ public class Permission extends DomainObject {
 	private JavaObject content = null;
 	private NoteUser user = null;
 	
+	public Permission(Object object, int int1, NoteUser noteUser, NoteBook noteBook, Note note) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
