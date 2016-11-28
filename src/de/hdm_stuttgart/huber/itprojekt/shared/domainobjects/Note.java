@@ -26,8 +26,6 @@ public class Note extends DomainObject {
 		
 	}
 	
-	
-	
 	/**
 	 * @param noteId
 	 * @param content

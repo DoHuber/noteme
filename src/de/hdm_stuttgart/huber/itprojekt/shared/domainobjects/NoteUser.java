@@ -27,6 +27,10 @@ public class NoteUser extends DomainObject {
 		this.googleId = googleId;
 	}
 	
+	public NoteUser() {
+		
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -63,7 +67,7 @@ public class NoteUser extends DomainObject {
 	public String getGoogleId() {
 		return googleId;
 	}
-	public void setGoogleId(String googleId) {	//fällt für googleId die NoteUserId weg?
+	public void setGoogleId(String googleId) {	//fï¿½llt fï¿½r googleId die NoteUserId weg?
 		this.googleId = googleId;
 	}
 
