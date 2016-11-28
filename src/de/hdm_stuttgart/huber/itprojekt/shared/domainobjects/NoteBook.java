@@ -15,6 +15,8 @@ public class NoteBook extends DomainObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private long NoteBookId;
+	
 
 	private String title;
 	private String subtitle;
@@ -22,7 +24,13 @@ public class NoteBook extends DomainObject {
 	private Date creationDate;
 	private Date modificationDate;
 	
-	
+	public long getNoteBookId() {
+		return NoteBookId;
+	}
+
+	public void setNoteBookId(long noteBookId) {
+		NoteBookId = noteBookId;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -71,6 +79,11 @@ public class NoteBook extends DomainObject {
 	 * 
 	 */
 	public NoteBook() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public NoteBook(int int1, String string, String string2, NoteUser noteUser, java.sql.Date date,
+			java.sql.Date date2) {
 		// TODO Auto-generated constructor stub
 	}
 

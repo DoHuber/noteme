@@ -9,7 +9,6 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 public class NoteUser extends DomainObject {
 	
 	private static final long serialVersionUID = 1L;
-	
 	private int noteUserId;
 	private String firstName;
 	private String userName;
@@ -17,7 +16,7 @@ public class NoteUser extends DomainObject {
 	private String email;
 	private String googleId;
 	
-	public NoteUser(int noteUserId, String firstName, String userName, String surName, String email, String googleId) {
+	public NoteUser(String firstName, String userName, String surName, String email, String googleId) {
 		super();
 		this.noteUserId = noteUserId;
 		this.firstName = firstName;
