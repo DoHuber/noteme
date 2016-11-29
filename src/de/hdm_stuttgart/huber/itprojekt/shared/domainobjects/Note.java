@@ -60,6 +60,12 @@ public class Note extends DomainObject {
 				+ creationDate + ", modificationDate=" + modificationDate + "]";
 	}
 	
+	public String toHtmlString() {
+		return "<p> Note <br> [noteId=" + noteId + "<br>, content=" + content + "<br>, title=" + title + "<br>, subtitle=" + subtitle
+				+ "<br>, owner=" + owner + "<br>, noteBook=" + noteBook + "<br>, dueDate=" + dueDate + "<br>, creationDate="
+				+ creationDate + "<br>, modificationDate=" + modificationDate + "] </p>";
+	}
+	
 	
 	public int getNoteId() {
 		return noteId;
