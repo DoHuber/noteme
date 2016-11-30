@@ -1,6 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Note extends DomainObject {
 	
@@ -12,7 +12,6 @@ public class Note extends DomainObject {
 	 * die Klasse "Note"
 	 */
 	
-	private int noteId = 0;
 	private String content = null;
 	private String title = null;
 	private String subtitle = null;
@@ -40,7 +39,7 @@ public class Note extends DomainObject {
 	public Note(int noteId, String content, String title, String subtitle, NoteUser owner, NoteBook noteBook,
 			Date dueDate, Date creationDate, Date modificationDate) {
 		super();
-		this.noteId = noteId;
+		this.id = noteId;
 		this.content = content;
 		this.title = title;
 		this.subtitle = subtitle;
@@ -51,27 +50,31 @@ public class Note extends DomainObject {
 		this.modificationDate = modificationDate;
 	}
 
+	public Note (int id) {
+		this.id = id;
+	}
+
 
 
 	@Override
 	public String toString() {
-		return "Note [noteId=" + noteId + ", content=" + content + ", title=" + title + ", subtitle=" + subtitle
+		return "Note [id=" + id + ", content=" + content + ", title=" + title + ", subtitle=" + subtitle
 				+ ", owner=" + owner + ", noteBook=" + noteBook + ", dueDate=" + dueDate + ", creationDate="
 				+ creationDate + ", modificationDate=" + modificationDate + "]";
 	}
 	
 	public String toHtmlString() {
-		return "<p> Note <br> [noteId=" + noteId + "<br>, content=" + content + "<br>, title=" + title + "<br>, subtitle=" + subtitle
-				+ "<br>, owner=" + owner + "<br>, noteBook=" + noteBook + "<br>, dueDate=" + dueDate + "<br>, creationDate="
+		return "<p> Note <br> [id=" + id + "<br>, content=" + content + "<br>, title=" + title + "<br>, subtitle=" + subtitle
+				+ "<br>, owner=" + owner.toString() + "<br>, noteBook=" + noteBook + "<br>, dueDate=" + dueDate + "<br>, creationDate="
 				+ creationDate + "<br>, modificationDate=" + modificationDate + "] </p>";
 	}
 	
 	
-	public int getNoteId() {
-		return noteId;
+	public int getId() {
+		return id;
 	}
-	public void setNoteId(int noteId) {
-		this.noteId = noteId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getContent() {
 		return content;

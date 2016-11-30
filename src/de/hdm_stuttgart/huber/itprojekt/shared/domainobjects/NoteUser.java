@@ -9,36 +9,49 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 public class NoteUser extends DomainObject {
 	
 	private static final long serialVersionUID = 1L;
-	private int noteUserId;
+
 	private String firstName;
 	private String userName;
 	private String surName;
 	private String email;
 	private String googleId;
 	
-	public NoteUser(String firstName, String userName, String surName, String email, String googleId) {
+	public NoteUser(int id, String firstName, String userName, String surName, String email, String googleId) {
 		super();
-		this.noteUserId = noteUserId;
+
+		this.id = id;
 		this.firstName = firstName;
 		this.userName = userName;
 		this.surName = surName;
 		this.email = email;
 		this.googleId = googleId;
 	}
+
+	// DEVELOPMENT!!!
+	public NoteUser(int id) {
+	    this.id = id;
+    }
 	
 	public NoteUser() {
 		
 	}
-	
-	public static long getSerialversionuid() {
+
+    @Override
+    public String toString() {
+        return "NoteUser{" +
+                "firstName='" + firstName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", surName='" + surName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public int getNoteUserId() {
-		return noteUserId;
-	}
-	public void setNoteUserId(int noteUserId) {
-		this.noteUserId = noteUserId;
-	}
+	public int getId() {
+	    return this.id;
+    }
 	public String getFirstName() {
 		return firstName;
 	}

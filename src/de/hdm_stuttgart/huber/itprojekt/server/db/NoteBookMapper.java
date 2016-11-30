@@ -11,20 +11,20 @@ import java.util.Vector;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
-public class NotebookMapper {
+public class NoteBookMapper {
 	
-private static NotebookMapper notebookMapper = null;
+private static NoteBookMapper noteBookMapper = null;
 	
-	public NotebookMapper getNotebookMapper(){
-		return notebookMapper;
+	protected NoteBookMapper () {
+		super();
 	}
 
-	 protected static NotebookMapper notebookMapper() {
-		if (notebookMapper == null) {
-			 notebookMapper = new NotebookMapper();
-		}
+	 public static NoteBookMapper getNoteBookMapper() {
+		if (noteBookMapper == null) {
 
-			return notebookMapper;
+			 noteBookMapper = new NoteBookMapper();
+		}
+			return noteBookMapper;
 	}	
 
 	public NoteBook create(NoteBook notebook) throws ClassNotFoundException, SQLException{
@@ -86,12 +86,14 @@ private static NotebookMapper notebookMapper = null;
 			ResultSet rs=stmt.executeQuery();
 			if (rs.next()) {
 				
-		        return new NoteBook(rs.getInt("NoteBookId"),
-		        		rs.getString("Title"),
-		        		rs.getString("Subtitle"),
-		        		new NoteUser(),
-		        		new Date(77777),
-		        		new Date(77777));
+		        return new NoteBook(
+
+                        rs.getInt("id"),
+		                rs.getString("title"),
+		        		rs.getString("subtitle"),
+		        		NoteUserMapper.getNoteUserMapper().findById(rs.getLong("author_id")),
+		        		rs.getDate("creation_date"),
+		        		rs.getDate("modification_date"));
 
 		    }
 		}
@@ -124,7 +126,7 @@ private static NotebookMapper notebookMapper = null;
 	    	stmt.setDate(4, new Date(7777));
 	    	stmt.setDate(5, new Date(7777));
 	    	
-	    	stmt.setLong(6, notebook.getNoteBookId());
+	    	stmt.setInt(6, notebook.getId());
 	    	
 	    	stmt.executeUpdate();
 
@@ -136,7 +138,7 @@ private static NotebookMapper notebookMapper = null;
 	    	throw new IllegalArgumentException();
 	    }
 
-	    return findById(notebook.getNoteBookId());
+	    return findById(notebook.getId());
 	  }
 		  
 	
@@ -155,7 +157,7 @@ private static NotebookMapper notebookMapper = null;
 		 try {
 
 	            PreparedStatement stmt = connection.prepareStatement("DELETE FROM Notebook WHERE id = ?");
-	            stmt.setLong(1, notebook.getNoteBookId());
+	            stmt.setLong(1, notebook.getId());
 	            stmt.executeUpdate();
 
 	        } catch (SQLException e) {
@@ -179,7 +181,7 @@ private static NotebookMapper notebookMapper = null;
 	            Statement stmt = connection.createStatement();
 	            ResultSet rs = stmt.executeQuery("SELECT * FROM Notebook");
 
-	            while (rs.next()) {
+	            /*while (rs.next()) {
 
 	                NoteBook notebook = new NoteBook(rs.getInt("NoteBookId"),
 			        		rs.getString("Title"),
@@ -190,7 +192,7 @@ private static NotebookMapper notebookMapper = null;
 
 	                v.add(notebook);
 
-	            } 
+	            } */
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
