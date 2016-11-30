@@ -1,6 +1,10 @@
 /test-classes/
 *.class
 
+# JetBrains DataGrip #
+*.iml
+/.idea/
+
 !/lib/*
 !/lib/
 

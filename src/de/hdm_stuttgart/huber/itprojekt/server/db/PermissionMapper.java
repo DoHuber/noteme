@@ -12,7 +12,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 
 public class PermissionMapper extends DataMapper {
 	
-	// Statisches Attribut, welches den Singleton-PermissionMapper enthält
+	// Statisches Attribut, welches den Singleton-PermissionMapper enthÃ¤lt
 	private static PermissionMapper permissionMapper = null;
 	
 	// Konstruktor (protected, um unauthorisiertes Instanziieren der Klasse zu verhindern)
@@ -20,7 +20,7 @@ public class PermissionMapper extends DataMapper {
 		super();
 	}
 
-	// Öffentliche statische Methode, um den Singleton-PermissionMapper zu erhalten
+	// Ã–ffentliche statische Methode, um den Singleton-PermissionMapper zu erhalten
 	public static PermissionMapper getPermissionMapper() throws ClassNotFoundException, SQLException {
 		if (permissionMapper == null ) {
 			permissionMapper = new PermissionMapper();
@@ -33,10 +33,11 @@ public class PermissionMapper extends DataMapper {
 		Connection con = DBConnection.getConnection();
 		
 		try {
+
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO permission(Content, User, Level, noteUserId, noteId, notebookId)" 
 			+ "VALUES ( ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
-			stmt.setObject(1,  permission.getContent());
+		//	stmt.setString(1,  permission.getContent());
 		//	stmt.setNoteUser(2, permission.getUser());
 			stmt.setInt(3,  permission.getLevel());
 			stmt.setInt(4, 1);
@@ -90,7 +91,7 @@ public class PermissionMapper extends DataMapper {
 		try {
 			PreparedStatement stmt = con.prepareStatement("UPDATE Permission SET content=?, user=?, level=?, noteUserId=?, noteBookId=?, noteId=? WHERE permissionId=?");
 
-			stmt.setObject(1,  permission.getContent());
+			// stmt.setObject(1,  permission.getContent());
 			// stmt.setNoteUser(2, permission.getUser());
 			stmt.setInt(3,  permission.getLevel());
 			stmt.setInt(4, 1);
@@ -102,7 +103,7 @@ public class PermissionMapper extends DataMapper {
 		catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
 		}
-		//aktualisierte Berechtigung zurückgeben
+		//aktualisierte Berechtigung zurÃ¼ckgeben
 		return permission;
 	}
 	

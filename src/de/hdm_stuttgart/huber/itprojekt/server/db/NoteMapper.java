@@ -106,21 +106,21 @@ public class NoteMapper extends DataMapper {
 		
 			try {
 		
-				PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Note WHERE NoteId = ?");
+				PreparedStatement stmt = connection.prepareStatement("SELECT * FROM note WHERE id = ?");
 				stmt.setLong(1, id);
 		
 				ResultSet rs=stmt.executeQuery();
 				if (rs.next()) {
 			
-					note = new Note(rs.getInt("NoteId"),
-							rs.getString("Content"),
-							rs.getString("Title"),
-							rs.getString("Subtitle"),
+					note = new Note(rs.getInt("id"),
+							rs.getString("content"),
+							rs.getString("title"),
+							rs.getString("subtitle"),
 							new NoteUser(),
 							new NoteBook(),
-							new Date(77777),
-							new Date(77777),
-							new Date(77777));
+							rs.getDate("creation_date"),
+							rs.getDate("due_date"),
+							rs.getDate("modification_date"));
 	        
 					this.addToHashMap(rs.getInt("NoteId"), note);    
 				}
@@ -136,7 +136,6 @@ public class NoteMapper extends DataMapper {
 	}
 /**
  * 
- * @param  Note-Objekt wird wiederholt in die Datenbank geschrieben
  * @return
  * @throws ClassNotFoundException
  * @throws SQLException
@@ -216,19 +215,19 @@ public class NoteMapper extends DataMapper {
 	        try {
 
 	            Statement stmt = connection.createStatement();
-	            ResultSet rs = stmt.executeQuery("SELECT * FROM Note");
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM note");
 
 	            while (rs.next()) {
 
-	                Note note = new Note(rs.getInt("NoteId"),
-	    	        		rs.getString("Content"),
-	    	        		rs.getString("Title"),
-	    	        		rs.getString("Subtitle"),
+	                Note note = new Note(rs.getInt("id"),
+	    	        		rs.getString("content"),
+	    	        		rs.getString("title"),
+	    	        		rs.getString("subtitle"),
 	    	        		new NoteUser(),
 	    	        		new NoteBook(),
-	    	        		new Date(77777),
-	    	        		new Date(77777),
-	    	        		new Date(77777));
+	    	        		rs.getDate("creation_date"),
+	    	        		rs.getDate("modification_date"),
+	    	        		rs.getDate("due_date"));
 
 	                v.add(note);
 

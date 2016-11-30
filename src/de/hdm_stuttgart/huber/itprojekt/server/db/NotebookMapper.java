@@ -18,9 +18,7 @@ private static NotebookMapper notebookMapper = null;
 	public NotebookMapper getNotebookMapper(){
 		return notebookMapper;
 	}
-	
-	
-	
+
 	 protected static NotebookMapper notebookMapper() {
 		if (notebookMapper == null) {
 			 notebookMapper = new NotebookMapper();
@@ -28,18 +26,6 @@ private static NotebookMapper notebookMapper = null;
 
 			return notebookMapper;
 	}	
-	
-	/**
-	 * 
-	 * Neues NoteBook-Obejkt wird in Datenbank eingef�gt
-	 * 
-	 * @param notebook
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
-	 
-	 
 
 	public NoteBook create(NoteBook notebook) throws ClassNotFoundException, SQLException{
 		 Connection con = DBConnection.getConnection();
@@ -47,7 +33,7 @@ private static NotebookMapper notebookMapper = null;
 		    try {
 		    	
 		      
-		    	PreparedStatement stmt =  con.prepareStatement("INSERT INTO Note( Title, Subtitle, Owner, CreationDate, ModificationDate) " 
+		    	PreparedStatement stmt =  con.prepareStatement("INSERT INTO notizbuch.notebook(title, subtitle, creation_date, modification_date, author_id) "
 		    	+ "VALUES (?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS );
 		      
 		    	stmt.setString(1, notebook.getTitle());
@@ -94,7 +80,7 @@ private static NotebookMapper notebookMapper = null;
 		
 		try {
 			
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Notebook WHERE NoteId = ?");
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.notebook WHERE id = ?");
 	         stmt.setLong(1, id);
 			
 			ResultSet rs=stmt.executeQuery();
@@ -121,23 +107,19 @@ private static NotebookMapper notebookMapper = null;
 	/**
 	 * NoteBook-Objekt wird wiederholt in die Datenbank geschrieben
 	 * 
-	 * @param note
 	 * @return
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	
-	
 	public NoteBook save(NoteBook notebook) throws ClassNotFoundException, SQLException{
 		Connection con = DBConnection.getConnection();
 
 	    try {
 	      
-	      PreparedStatement stmt = con.prepareStatement("UPDATE Notebook SET Title=?, Subtitle=?, Owner=?, CreationDate=?, ModificationDated=? WHERE id = ?");
+	      PreparedStatement stmt = con.prepareStatement("UPDATE notizbuch.notebook SET title=?, subtitle=?, creation_date=?, modification_date=?, author_id=? WHERE id = ?");
 	      
 	      	stmt.setString(1, notebook.getTitle());
 	    	stmt.setString(2, notebook.getSubtitle());
-	    	
 	    	stmt.setString(3, "Owner");
 	    	stmt.setDate(4, new Date(7777));
 	    	stmt.setDate(5, new Date(7777));
@@ -161,14 +143,11 @@ private static NotebookMapper notebookMapper = null;
 	
 	
 	/**
-	 * Daten eines bestimmten Notebook-Objekts werden aus der Datenbank gel�scht 
+	 * Daten eines bestimmten Notebook-Objekts werden aus der Datenbank gelöscht
 	 * 
-	 * @param note
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	
-	
 	 public void delete(NoteBook notebook) throws ClassNotFoundException, SQLException {
 			
 		 Connection connection = DBConnection.getConnection();

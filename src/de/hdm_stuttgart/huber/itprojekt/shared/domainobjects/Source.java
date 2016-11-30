@@ -1,6 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
-import java.net.URL;
+
+import com.google.gwt.http.client.URL;
 
 public class Source extends DomainObject {
 	

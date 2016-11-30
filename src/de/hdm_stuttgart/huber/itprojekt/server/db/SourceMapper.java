@@ -1,12 +1,9 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Source;
+
 import java.sql.*;
 import java.util.Vector;
-import com.google.gwt.dev.shell.JavaObject;
-import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
-import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Source;
 
 public class SourceMapper extends DataMapper {
 	
@@ -62,7 +59,7 @@ public class SourceMapper extends DataMapper {
 			//Ergebnis holen
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
-				return new Source(results.getURL("URL"));
+				return null; // new Source(results.getURL("URL"));
 			}
 		}	catch (SQLException sqlExp) {
 				sqlExp.printStackTrace();
