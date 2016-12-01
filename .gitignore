@@ -1,6 +1,10 @@
 /test-classes/
 *.class
 
+# JetBrains DataGrip #
+*.iml
+/.idea/
+
 !/lib/*
 !/lib/
 
@@ -10,7 +14,6 @@
 
 # gwt caches and compiled units #
 war/gwt_bree/
-gwt-unitCache/
 war/classes/
 
 # boilerplate generated classes #

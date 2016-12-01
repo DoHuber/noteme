@@ -1,233 +1,194 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
-import java.sql.*;
-import java.util.Vector;
-
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
-public class NoteMapper {
-	
-	// Statisches Attribut, welches den Singleton-NoteMapper enthält.
-	private static NoteMapper noteMapper = null;
-	
-	// Nichtöffentlicher Konstruktor, um unauthorisiertes Instanziieren dieser Klasse zu verhindern.
-	protected NoteMapper () {
-		
-	}
-	
-	// Öffentliche Methode um den Singleton-NoteMapper zu erhalten
-	public static NoteMapper getNoteMapper() {
-		
-		if (noteMapper == null) {
-		   noteMapper = new NoteMapper();
-		}
+import java.sql.*;
+import java.util.Vector;
 
-		return noteMapper;
- 	}	
-	
-	
-		/**
-	 * Neues Note-Objekt wird in Datenbank eingef�gt
-	 * Hierbei wird der Prim�rschl�ssel des �bergebenen Obejktes gepr�ft und falls n�tig berichtigt
-	 * @param note
-	 * @return
-		 * @throws SQLException 
-		 * @throws ClassNotFoundException 
-	 */
-	
-	public Note create(Note note) throws ClassNotFoundException, SQLException{
-		   Connection con = DBConnection.getConnection();
+public class NoteMapper extends DataMapper {
 
-		    try {
-		    	
-		      
-		    	PreparedStatement stmt =  con.prepareStatement("INSERT INTO Note(Title, Content, CreationDate, DueDate, ModificationDate, Subtitle, Source, noteBookId, noteUserId, permissionId, dreierId) " 
-		    	+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS );
-		      
-		    	stmt.setString(1, note.getTitle());
-		    	stmt.setString(2, note.getContent());
-		    	
-		    	stmt.setDate(3, new Date(7777));
-		    	stmt.setDate(4, new Date(7777));
-		    	stmt.setDate(5, new Date(7777));
-		    	
-		    	stmt.setString(6, note.getSubtitle());
-		    	stmt.setString(7, "Platzhalter");
-		    	
-		    	stmt.setInt(8, 1);
-		    	stmt.setInt(9, 1);
-		    	stmt.setInt(10, 1);
-		    	stmt.setInt(11, 0);
-		    
-		    	stmt.executeUpdate();
-		    	ResultSet rs = stmt.getGeneratedKeys();
-		    	
-		    	if(rs.next()){
-		    		return findById(rs.getLong(1));
-		    		
-		    	}
-		    	
-		    } catch (SQLException sqlExp) {
-		    sqlExp.printStackTrace();
-		   
-		    }
-			return note;
-	
-	  }
-	
-	
-	
-	 /**
-	  * Bestimmte Notiz wird anhand der eindeutigen ID gesucht und zur�ckgegeben
-	  * 
-	  * @param id
-	  * @return
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	  */
-	
-	public Note findById(Long id) throws ClassNotFoundException, SQLException{
-		
-		Connection connection = DBConnection.getConnection();
-		
-	try {
-		
-		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Note WHERE NoteId = ?");
-         stmt.setLong(1, id);
-		
-		ResultSet rs=stmt.executeQuery();
-		if (rs.next()) {
-			
-	        return new Note(rs.getInt("NoteId"),
-	        		rs.getString("Content"),
-	        		rs.getString("Title"),
-	        		rs.getString("Subtitle"),
-	        		new NoteUser(),
-	        		new NoteBook(),
-	        		new Date(77777),
-	        		new Date(77777),
-	        		new Date(77777));
+    // Statisches Attribut, welches den Singleton-NoteMapper enthält.
+    private static NoteMapper noteMapper = null;
 
-	    }
-	}
-		
-	 catch (SQLException sqlExp) {
-		 sqlExp.printStackTrace();
-	      return null;
-	    }
+    // Nichtöffentlicher Konstruktor, um "unauthorisiertes" Instanziieren dieser Klasse zu verhindern.
+    protected NoteMapper() throws ClassNotFoundException, SQLException {
 
-	    return null;
-	  }
-	
-/**
- * 
- * @param  Note-Objekt wird wiederholt in die Datenbank geschrieben
- * @return
- * @throws ClassNotFoundException
- * @throws SQLException
- */
-	
-	public Note save(Note note) throws ClassNotFoundException, SQLException{
-	   
-		Connection con = DBConnection.getConnection();
+    }
 
-	    try {
-	      
-	      PreparedStatement stmt = con.prepareStatement("UPDATE Note SET Title=?, Content=?, CreationDate=?, DueDate=?, ModificationDate=?, Subtitle=?, Source=?, noteBookId=?, noteUserId=?, permissionId=?, dreierId=? WHERE id = ?");
-	      
-	      	stmt.setString(1, note.getTitle());
-	    	stmt.setString(2, note.getContent());
-	    	
-	    	stmt.setDate(3, new Date(7777));
-	    	stmt.setDate(4, new Date(7777));
-	    	stmt.setDate(5, new Date(7777));
-	    	
-	    	stmt.setString(6, note.getSubtitle());
-	    	stmt.setString(7, "Source");
-	    	
-	    	stmt.setInt(8, 1);
-	    	stmt.setInt(9, 1);
-	    	stmt.setInt(10, 1);          //noch �ndern
-	    	stmt.setInt(11, 0);
-	    	
-	    	stmt.setLong(12, note.getNoteId());
-	    	
-	    	stmt.executeUpdate();
+    // Öffentliche Methode um den Singleton-NoteMapper zu erhalten
+    public static NoteMapper getNoteMapper() throws ClassNotFoundException, SQLException {
 
-	    
+        if (noteMapper == null) {
 
-	    }
-	    catch (SQLException sqlExp) {
-	    	sqlExp.printStackTrace();
-	    	throw new IllegalArgumentException();
-	    }
+            noteMapper = new NoteMapper();
 
-	    return findById((long)note.getNoteId());
-	  }
-		      
-	
-	/**
-	 * Daten eines bestimmten Note-Objekts werden aus der Datenbank gel�scht 
-	 * 
-	 * @param note
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 */
-	
-	 public void delete(Note note) throws ClassNotFoundException, SQLException {
-		
-		 Connection connection = DBConnection.getConnection();
+        }
 
-		 try {
+        return noteMapper;
+    }
 
-	            PreparedStatement stmt = connection.prepareStatement("DELETE FROM Note WHERE id = ?");
-	            stmt.setLong(1, note.getNoteId());
-	            stmt.executeUpdate();
+    public Note create(Note note) throws ClassNotFoundException, SQLException {
 
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            throw new IllegalArgumentException();
-	        }
+        try {
 
-	    }
-	 
-	 
-	 
-	 public Vector<Note> getAllNotes() throws ClassNotFoundException, SQLException {
-		 	
-		 Connection connection = DBConnection.getConnection();
-	        Vector<Note> v = new Vector<>();
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO notizbuch.note" +
+                    "(title, subtitle, content, note_source, creation_date, due_date, modification_date, notebook_id, author_id) VALUES (?,?,?,?,?,?,?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
 
-	        try {
+            stmt.setString(1, note.getTitle());
+            stmt.setString(2, note.getSubtitle());
+            stmt.setString(3, note.getContent());
+            stmt.setString(4, "https://Platzhalter");
 
-	            Statement stmt = connection.createStatement();
-	            ResultSet rs = stmt.executeQuery("SELECT * FROM Note");
+            stmt.setDate(5, note.getCreationDate());
+            stmt.setDate(6, note.getDueDate());
+            stmt.setDate(7, note.getModificationDate());
 
-	            while (rs.next()) {
+            stmt.setInt(8, note.getNoteBook().getId());
+            stmt.setInt(9, note.getOwner().getId());
 
-	                Note note = new Note(rs.getInt("NoteId"),
-	    	        		rs.getString("Content"),
-	    	        		rs.getString("Title"),
-	    	        		rs.getString("Subtitle"),
-	    	        		new NoteUser(),
-	    	        		new NoteBook(),
-	    	        		new Date(77777),
-	    	        		new Date(77777),
-	    	        		new Date(77777));
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
 
-	                v.add(note);
+            if (rs.next()) {
+                return findById(rs.getInt(1));
 
-	            } 
+            }
 
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
+        } catch (SQLException sqlExp) {
+            sqlExp.printStackTrace();
 
-	        return v;
+        }
+        return note;
 
-	    }
-	 
+    }
+
+    public Note findById(int id) throws ClassNotFoundException, SQLException {
+
+        if (isObjectLoaded(id, Note.class)) {
+            return (Note) loadedObjects.get(id);
+        }
+
+            try {
+
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE id = ?");
+                stmt.setInt(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+
+                    Note note = new Note(rs.getInt("id"),
+                            rs.getString("content"),
+                            rs.getString("title"),
+                            rs.getString("subtitle"),
+                            NoteUserMapper.getNoteUserMapper().findById(rs.getLong("author_id")),
+                            NoteBookMapper.getNoteBookMapper().findById(rs.getLong("notebook_id")),
+                            rs.getDate("creation_date"),
+                            rs.getDate("due_date"),
+                            rs.getDate("modification_date"));
+
+                    loadedObjects.put(rs.getInt("id"), note);
+
+                    return note;
+                }
+
+            } catch (SQLException sqlExp) {
+                sqlExp.printStackTrace();
+                return null;
+            }
+
+        return null;
+    }
+
+    public Note save(Note note) throws ClassNotFoundException, SQLException {
+
+        try {
+
+            PreparedStatement stmt = connection.prepareStatement(
+                    "UPDATE notizbuch.note SET title=?, subtitle=?, content=?, note_source=?, creation_date=?, due_date=?, modification_date=?, notebook_id=?, author_id=? WHERE id = ?");
+
+            // Alle String-Inhalte
+            stmt.setString(1, note.getTitle());
+            stmt.setString(2, note.getSubtitle());
+            stmt.setString(3, note.getContent());
+            stmt.setString(4, "PLATZHALTER SORUCE"); // TODO
+
+            // Daten
+            stmt.setDate(5, note.getCreationDate());
+            stmt.setDate(6, note.getDueDate());
+            stmt.setDate(7, new Date(System.currentTimeMillis()));
+
+            // IDs
+            stmt.setInt(8, note.getNoteBook().getId());
+            stmt.setInt(9, note.getOwner().getId());
+
+            // Id der zu speichernden Notiz
+            stmt.setInt(10, note.getId());
+
+            stmt.executeUpdate();
+
+
+        } catch (SQLException sqlExp) {
+            sqlExp.printStackTrace();
+            throw new IllegalArgumentException();
+        }
+
+        return findById(note.getId());
+    }
+
+    public void delete(Note note) throws ClassNotFoundException, SQLException {
+
+        try {
+
+            PreparedStatement stmt = connection.prepareStatement("DELETE FROM notizbuch.note WHERE id = ?");
+            stmt.setInt(1, note.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException();
+        }
+
+    }
+
+
+    public Vector<Note> getAllNotes() throws ClassNotFoundException, SQLException {
+
+        Connection connection = DBConnection.getConnection();
+        Vector<Note> v = new Vector<>();
+
+        try {
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.note");
+            NoteUserMapper noteUserMapper = NoteUserMapper.getNoteUserMapper();
+            NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
+
+            while (rs.next()) {
+
+                Note note = new Note(rs.getInt("id"),
+                        rs.getString("content"),
+                        rs.getString("title"),
+                        rs.getString("subtitle"),
+                        noteUserMapper.findById(rs.getLong("author_id")),
+                        noteBookMapper.findById(rs.getLong("notebook_id")),
+                        rs.getDate("creation_date"),
+                        rs.getDate("modification_date"),
+                        rs.getDate("due_date"));
+
+                v.add(note);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return v;
+
+    }
+
 }
 

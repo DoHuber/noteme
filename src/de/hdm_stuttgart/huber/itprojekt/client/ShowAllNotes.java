@@ -97,7 +97,7 @@ public class ShowAllNotes extends BasicView {
 
 		for (Note row : result) {
 
-			html.append(row.toString() + "<br>");
+			html.append(row.toHtmlString() + "<br>");
 
 		}
 

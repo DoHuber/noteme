@@ -10,13 +10,21 @@
     <servlet-name>testServlet</servlet-name>
     <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.EditorImpl</servlet-class>
   </servlet>
-  
-  <servlet-mapping>
+    <servlet>
+        <servlet-name>de.hdm_stuttgart.huber.itprojekt.Report Editor</servlet-name>
+        <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.EditorImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
     <servlet-name>testServlet</servlet-name>
     <url-pattern>/it_projekt/testEditor</url-pattern>
   </servlet-mapping>
-  
-  <!-- Default page to serve -->
+    <servlet-mapping>
+        <servlet-name>de.hdm_stuttgart.huber.itprojekt.Report Editor</servlet-name>
+        <url-pattern>/ReportGenerator/testEditor</url-pattern>
+    </servlet-mapping>
+
+    <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>IT_Projekt.html</welcome-file>
     <welcome-file>Report.html</welcome-file>

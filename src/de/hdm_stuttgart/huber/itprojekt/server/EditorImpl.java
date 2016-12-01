@@ -3,11 +3,7 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Vector;
-
-import javax.servlet.ServletException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -29,7 +25,15 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public void init() throws IllegalArgumentException {
 		
-		this.noteMapper = NoteMapper.getNoteMapper();
+		try {
+			this.noteMapper = NoteMapper.getNoteMapper();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -73,7 +77,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		try {
 			
 			noteMapper.create(newNote);
-			newNote = noteMapper.findById((long) newNote.getNoteId());
+			newNote = noteMapper.findById(newNote.getId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +95,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		try { 
 			
 			noteMapper.save(newNote);
-			newNote = noteMapper.findById((long) newNote.getNoteId());
+			newNote = noteMapper.findById(newNote.getId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,7 +107,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public Note getNoteById(Note note) throws Exception {
 	
-			return noteMapper.findById((long) note.getNoteId());
+			return noteMapper.findById(note.getId());
 	
 	}
 

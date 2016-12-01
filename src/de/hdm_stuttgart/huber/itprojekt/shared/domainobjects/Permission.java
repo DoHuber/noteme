@@ -1,7 +1,5 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
-import com.google.gwt.dev.shell.JavaObject;
-
 public class Permission extends DomainObject {
 	
 	private static final long serialVersionUID = 1L;
@@ -11,11 +9,14 @@ public class Permission extends DomainObject {
 	public static final int LEVEL_READ = 0;
 	public static final int LEVEL_EDIT = 0;
 	public static final int LEVEL_ROOT = 0;
-	private JavaObject content = null;
 	private NoteUser user = null;
 	
 	public Permission(Object object, int int1, NoteUser noteUser, NoteBook noteBook, Note note) {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Permission () {
+
 	}
 	
 	public static long getSerialversionuid() {
@@ -43,13 +44,7 @@ public class Permission extends DomainObject {
 	public static int getLevelRoot() {
 		return LEVEL_ROOT;
 	}
-	
-	public JavaObject getContent() {
-		return content;
-	}
-	public void setContent(JavaObject content) {
-		this.content = content;
-	}
+
 	public NoteUser getUser() {
 		return user;
 	}

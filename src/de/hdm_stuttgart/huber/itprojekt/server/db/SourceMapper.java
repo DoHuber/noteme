@@ -1,5 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Source;
+
 import java.sql.*;
 import java.util.Vector;
 import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
@@ -8,7 +10,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Source;
 
 public class SourceMapper extends DataMapper {
 	
-	// Statisches Attribut, welches den Singleton-SourceMapper enthält
+	// Statisches Attribut, welches den Singleton-SourceMapper enthï¿½lt
 	private static SourceMapper sourceMapper = null;
 	
 	// Konstruktor (protected, um unauthorisiertes Instanziieren der Klasse zu verhindern)
@@ -16,7 +18,7 @@ public class SourceMapper extends DataMapper {
 		super();
 	}
 
-	// Öffentliche statische Methode, um den Singleton-SourceMapper zu erhalten
+	// ï¿½ffentliche statische Methode, um den Singleton-SourceMapper zu erhalten
 	public static SourceMapper getSourceMapper() throws ClassNotFoundException, SQLException {
 		if (sourceMapper == null ) {
 			sourceMapper = new SourceMapper();
@@ -60,7 +62,7 @@ public class SourceMapper extends DataMapper {
 			//Ergebnis holen
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
-				return new Source(results.getURL("URL"));
+				return null; // new Source(results.getURL("URL"));
 			}
 		}	catch (SQLException sqlExp) {
 				sqlExp.printStackTrace();
@@ -83,7 +85,7 @@ public class SourceMapper extends DataMapper {
 		catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
 		}
-		//aktualisierte Berechtigung zurückgeben
+		//aktualisierte Berechtigung zurï¿½ckgeben
 		return source;
 	}
 	
