@@ -37,7 +37,7 @@ public class PermissionMapper extends DataMapper {
 			+ "VALUES ( ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
 			stmt.setObject(1,  permission.getContent());
-		//	stmt.setNoteUser(2, permission.getUser());
+			stmt.setInt(2, permission.getUser());
 			stmt.setInt(3,  permission.getLevel());
 			stmt.setInt(4, 1);
 			stmt.setInt(5, 1);
@@ -63,7 +63,7 @@ public class PermissionMapper extends DataMapper {
 			Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Permission WHERE PermissionId = ?");
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Permission WHERE Id = ?");
 			stmt.setLong(1, id);
 			
 			//Ergebnis holen
@@ -88,7 +88,7 @@ public class PermissionMapper extends DataMapper {
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("UPDATE Permission SET content=?, user=?, level=?, noteUserId=?, noteBookId=?, noteId=? WHERE permissionId=?");
+			PreparedStatement stmt = con.prepareStatement("UPDATE Permission SET content=?, user=?, level=?, noteUserId=?, noteBookId=?, noteId=? WHERE Id=?");
 
 			stmt.setObject(1,  permission.getContent());
 			// stmt.setNoteUser(2, permission.getUser());
@@ -112,7 +112,7 @@ public class PermissionMapper extends DataMapper {
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM Permission WHERE PermissionId=?");
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM Permission WHERE Id=?");
 			stmt.setLong(1,  permission.getPermissionId());
 			stmt.executeUpdate();
 		}
@@ -125,7 +125,7 @@ public class PermissionMapper extends DataMapper {
 		Vector <Permission> result = new Vector<Permission>();
 		
 		Connection con = DBConnection.getConnection();
-		PreparedStatement stmt = con.prepareStatement("SELECT PermissionId FROM Permission");
+		PreparedStatement stmt = con.prepareStatement("SELECT Id FROM Permission");
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
 			result.add(this.findById(rs.getLong("NoteUserId")));
