@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -12,6 +13,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportCheckAdmin;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportGenerator;
+import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
+import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 
 /**
  * 
@@ -30,9 +33,11 @@ public class MenuView extends VerticalPanel {
 	protected void onLoad() {
 
 		
-		
+		FlowPanel menu  = new FlowPanel();
+		FlowPanel pureMenu  = new FlowPanel();
+		UnorderedListWidget menuList = new UnorderedListWidget();
 
-		VerticalPanel vPanel = new VerticalPanel();
+	//	VerticalPanel vPanel = new VerticalPanel();
 
 		
 		
@@ -45,21 +50,30 @@ public class MenuView extends VerticalPanel {
 		Anchor logoutAnchor = new Anchor("Logout");
 		//Test
 		Anchor hello = new Anchor("Say Hello");
+		
+		menuList.add(new ListItemWidget(showNotes));
+		menuList.add(new ListItemWidget(showNotebooks));
+		menuList.add(new ListItemWidget(createNotebook));
+		menuList.add(new ListItemWidget(createNote));
+		menuList.add(new ListItemWidget(reportAnchor));
+		menuList.add(new ListItemWidget(logoutAnchor));
 
-		vPanel.add(home);
-		vPanel.add(showNotes);
-		vPanel.add(showNotebooks);
-		vPanel.add(createNotebook);
-		vPanel.add(createNote);
-		vPanel.add(reportAnchor);
-		vPanel.add(logoutAnchor);
-		//Test
-		vPanel.add(hello);
+//		vPanel.add(home);
+//		vPanel.add(showNotes);
+//		vPanel.add(showNotebooks);
+//		vPanel.add(createNotebook);
+//		vPanel.add(createNote);
+//		vPanel.add(reportAnchor);
+//		vPanel.add(logoutAnchor);
+//		//Test
+//		vPanel.add(hello);
+//		RootPanel.get().add(vPanel);
+			pureMenu.add(home);
+			pureMenu.add(menuList);
+			menu.add(pureMenu);
 
-
-
-		RootPanel.get().add(vPanel);
-		/*
+			RootPanel.get("menu").add(menu);
+	      /**
 	       * Die "Buttons"  werden mit dem ClickHandler verbunden. Die "Buttons reagieren aud den Mausklick."
 	       *
 	    */
@@ -83,11 +97,12 @@ public class MenuView extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			MenuView mView = new MenuView();
-			RootPanel.get().clear();
-			RootPanel.get().add(mView);
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(mView);
 
 			ShowAllNotes san = new ShowAllNotes(null);
-			RootPanel.get().add(san);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 		}
 	}
 
@@ -96,7 +111,7 @@ public class MenuView extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			MenuView mView = new MenuView();
-			RootPanel.get().clear();
+			RootPanel.get("menu").clear();
 			RootPanel.get().add(mView);
 
 			ShowAllNotebooks san = new ShowAllNotebooks();
@@ -108,8 +123,8 @@ public class MenuView extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			MenuView mView = new MenuView();
-			RootPanel.get().clear();
-			RootPanel.get().add(mView);
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(mView);
 
 			CreateNotebook cN = new CreateNotebook();
 			RootPanel.get().add(cN);
@@ -120,11 +135,12 @@ public class MenuView extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			MenuView mView = new MenuView();
-			RootPanel.get().clear();
+			RootPanel.get("menu").clear();
 			RootPanel.get().add(mView);
 
 			CreateNote cN = new CreateNote();
-			RootPanel.get().add(cN);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(cN);
 		}
 	}
 	private class ReportHandler implements ClickHandler {
@@ -132,7 +148,7 @@ public class MenuView extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			ReportCheckAdmin rpChA = new ReportCheckAdmin();
-			RootPanel.get().clear();
+			RootPanel.get("menu").clear();
 			RootPanel.get().add(rpChA);
 			
 
@@ -145,7 +161,7 @@ public class MenuView extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			Label lb = new Label("Ich melde mich ab");
-			RootPanel.get().clear();
+			RootPanel.get("menu").clear();
 			RootPanel.get().add(lb);
 			
 		
@@ -157,7 +173,7 @@ public class MenuView extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			MenuView mView = new MenuView();
-			RootPanel.get().clear();
+			RootPanel.get("menu").clear();
 			RootPanel.get().add(mView);
 			
 			HelloWorld hw = new HelloWorld();

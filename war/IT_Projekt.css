@@ -10,25 +10,27 @@ h1 {
   text-align: center;
 }
 
-.sendButton {
-  display: block;
-  font-size: 16pt;
+#layout {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 960px;
+	width: auto;
+	height: 100%;
+	min-height: 900px;
+	background: #fff;
+	padding-bottom: 30px;
 }
+#menu {
+	max-width: 252px;
 
-/** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-  width: 400px;
+	float: left;
+	padding: 10px;
+	padding-right: 0px;
 }
-
-.dialogVPanel {
-  margin: 5px;
-}
-
-.serverResponseLabelError {
-  color: red;
-}
-
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
-}
+#main{
+	
+	height: 100%;
+	background: #fff;
+	margin-top: 1px;
+	}
+	

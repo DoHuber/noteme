@@ -101,7 +101,7 @@ public class ShowAllNotes extends BasicView {
 
 		}
 
-		RootPanel.get().add(new HTMLPanel(html.toString()));
+		RootPanel.get("main").add(new HTMLPanel(html.toString()));
 
 	}
 
