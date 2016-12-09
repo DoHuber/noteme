@@ -42,8 +42,7 @@ public class NoteTable {
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn	= new Button("Update");
 	private Button releseBtn = new Button("Relese");
-	//Wird später gelöscht 
-	private Button testBtn = new Button("Test");
+	
 	private NoteBook notebook=null;
 	private Note selected = null;
 	private Vector<Note> notes;
@@ -53,11 +52,11 @@ public class NoteTable {
 		this.notes = list;
 	}
 
-	public Vector<Note> getNotebooks() {
+	public Vector<Note> getNotes() {
 		return notes;
 	}
 
-	public void setNotebooks(Vector<Note> notes) {
+	public void setNotes(Vector<Note> notes) {
 		this.notes = notes;
 	}
 
@@ -74,7 +73,7 @@ public class NoteTable {
 
 			@Override
 			public String getValue(Note note) {
-				// TODO Auto-generated method stub
+				
 				return note.getTitle();
 			}
 		};
@@ -121,7 +120,7 @@ public class NoteTable {
 		table.addColumn(dueDate, "Due Date");
 		
 		table.setRowCount(notes.size(), false);
-
+		table.setWidth("80%");
 		table.setVisibleRange(0, notes.size());
 		table.setRowData(0, notes);
 		LayoutPanel panel = new LayoutPanel();
@@ -131,29 +130,14 @@ public class NoteTable {
 		//deleteBtn.addClickHandler(new DeleteClickHandler());
 		buttonPanel.add(editBtn);
 		buttonPanel.add(releseBtn);
-		//Test
-		buttonPanel.add(testBtn);
-		testBtn.addClickHandler(new TestClickHandler());
+	
 		
 		fPanel.add(buttonPanel);
 		fPanel.add(panel);
 
 		return fPanel;
 	}
-	private class TestClickHandler implements ClickHandler{
 
-		@Override
-		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get().clear();
-			RootPanel.get().add(mView);
-
-			ShowNote sn = new ShowNote();
-			RootPanel.get().add(sn);
-			
-		}
-		
-	}
 	private class DeleteClickHandler implements ClickHandler{
 
 		@Override
@@ -189,8 +173,8 @@ public class NoteTable {
 			selected=selection.getSelectedObject();
 			ShowNote sn = new ShowNote();
 			
-			RootPanel.get().clear();
-			RootPanel.get().add(sn);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(sn);
 			
 			
 		}}
