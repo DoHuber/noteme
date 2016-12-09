@@ -153,7 +153,7 @@ public class PermissionMapper extends DataMapper {
 	
 	// Konstruktor (protected, um unauthorisiertes Instanziieren der Klasse zu verhindern)
 	protected PermissionMapper() throws ClassNotFoundException, SQLException {
-		super();
+		
 	}
 
 	// Öffentliche statische Methode, um den Singleton-PermissionMapper zu erhalten
@@ -170,47 +170,52 @@ public class PermissionMapper extends DataMapper {
 		
 		try {
 
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO permission(Content, User, Level, noteUserId, noteId, notebookId)" 
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO permission(Content, User, Level, author_id, note_id, notebook_id)" 
 			+ "VALUES ( ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
-		//	stmt.setString(1,  permission.getContent());
-		//	stmt.setNoteUser(2, permission.getUser());
-			stmt.setInt(3,  permission.getLevel());
-			stmt.setInt(4, 1);
-			stmt.setInt(5, 1);
-			stmt.setInt(6, 1);
+			stmt.setString(1,  	permission.getContent());
+			stmt.setString(2, 	permission.getNoteUser().getUser());
+			stmt.setInt(3,  	permission.getLevel());
+			stmt.setInt(4, 		permission.getNoteUser().getId());
+			stmt.setInt(5, 		permission.getNote().getId());
+			stmt.setInt(6, 		permission.getNotebook().getId());
 			
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			
 			if (rs.next()) {
 				return findById(rs.getInt(1));
-			}	// else {
-				// throw new SQLException("Sorry");
-				// }
+			}	
 		}	catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
 		}
 		return permission;
-		
 	}
 
 		//findById Methode:
-		public Permission findById(long id) throws ClassNotFoundException, SQLException{
+		public Permission findById(int id) throws ClassNotFoundException, SQLException{
 			Connection con = DBConnection.getConnection();
+			
+			if (isObjectLoaded(id, Permission.class)) {
+	            return (Permission) loadedObjects.get(id);
+	        }
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Permission WHERE PermissionId = ?");
-			stmt.setLong(1, id);
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM notizbuch.permission WHERE id = ?");
+			stmt.setInt(1, id);
 			
 			//Ergebnis holen
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
-				return new Permission	(results.getObject("Content"),
+				
+				Permission permission = new Permission(results.getInt("id"),
+										results.getObject("Content"),
 										results.getInt("Level"),
-										new NoteUser(),
-										new NoteBook(),
-										new Note());
+										NoteUserMapper.getNoteUserMapper().findById(results.getLong("author_id")),
+										NoteMapper.getNotemapper().findById(results.getLong("note_id")),
+										NoteBookMapper.getNoteBookMapper().findById(results.getLong("notebook_id")));
+				loadedObjects.put(results.getInt("id"), permission);
+				return permission;					
 			}
 		}	catch (SQLException sqlExp) {
 				sqlExp.printStackTrace();
@@ -225,22 +230,22 @@ public class PermissionMapper extends DataMapper {
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("UPDATE Permission SET content=?, user=?, level=?, noteUserId=?, noteBookId=?, noteId=? WHERE permissionId=?");
+			PreparedStatement stmt = con.prepareStatement("UPDATE notizbuch.permission SET content=?, user=?, level=?, noteUserId=?, noteBookId=?, noteId=? WHERE id=?");
 
-			// stmt.setObject(1,  permission.getContent());
-			// stmt.setNoteUser(2, permission.getUser());
-			stmt.setInt(3,  permission.getLevel());
-			stmt.setInt(4, 1);
-			stmt.setInt(5, 1);
-			stmt.setInt(6, 1);
+			stmt.setString(1,  	permission.getContent());
+			stmt.setString(2, 	permission.getNoteUser().getUser());
+			stmt.setInt(3,  	permission.getLevel());
+			stmt.setInt(4, 		permission.getNoteUser().getId());
+			stmt.setInt(5, 		permission.getNote().getId());
+			stmt.setInt(6, 		permission.getNotebook().getId());
 
 			stmt.executeUpdate();
 		}
 		catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
+			throw new IllegalArgumentException();
 		}
-		//aktualisierte Berechtigung zurückgeben
-		return permission;
+		return findById(permission.getId());
 	}
 	
 	
@@ -249,23 +254,38 @@ public class PermissionMapper extends DataMapper {
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM Permission WHERE PermissionId=?");
-			stmt.setLong(1,  permission.getPermissionId());
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM notizbuch.permission WHERE id=?");
+			stmt.setInt(1,  permission.getId());
 			stmt.executeUpdate();
 		}
 			catch (SQLException sqlExp) {
 			sqlExp.printStackTrace();
+			throw new IllegalArgumentException();
 		}
 	}
 	
-	public Vector<Permission> getAllPermission() throws Exception {
-		Vector <Permission> result = new Vector<Permission>();
-		
+	public Vector<Permission> getAllPermission() throws ClassNotFoundException, SQLException {
 		Connection con = DBConnection.getConnection();
-		PreparedStatement stmt = con.prepareStatement("SELECT PermissionId FROM Permission");
-		ResultSet rs = stmt.executeQuery();
-		while (rs.next()) {
-			result.add(this.findById(rs.getLong("NoteUserId")));
+		Vector<Permission> result = new Vector<>();
+		
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.permission");
+			NoteUserMapper noteUserMapper = NoteUserMapper.getNoteUserMapper();
+			NoteMapper noteMapper = NoteMapper.getNoteMapper();
+            NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
+            
+            while (rs.next()) {
+            	Permission permission = new Permission(rs.getInt("id"),
+            								results.getObject("Content"),
+            								results.getInt("Level"),
+            								NoteUserMapper.getNoteUserMapper().findById(results.getLong("author_id")),
+            								NoteMapper.getNotemapper().findById(results.getLong("note_id")),
+            								NoteBookMapper.getNoteBookMapper().findById(results.getLong("notebook_id")));
+            	result.add(permission);
+            }
+		}	catch (SQLException sqlExp) {
+			sqlExp.printStackTrace();
 		}
 	return result;
 	}
