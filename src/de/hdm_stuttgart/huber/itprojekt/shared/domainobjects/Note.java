@@ -5,13 +5,7 @@ import java.sql.Date;
 public class Note extends DomainObject {
 	
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * anlegen von Variablen und den entsprechenden Setter und
-	 * Getter Methoden entsprechend dem Klassendiagramm f�r
-	 * die Klasse "Note"
-	 */
-	
+
 	private String content = null;
 	private String title = null;
 	private String subtitle = null;
@@ -24,6 +18,13 @@ public class Note extends DomainObject {
 	public Note() {
 		
 	}
+	
+	// id wird von DomainObject geerbt
+	public Note (int id) {
+		this.id = id;
+	}
+
+
 	
 	/**
 	 * @param noteId
@@ -49,12 +50,6 @@ public class Note extends DomainObject {
 		this.creationDate = creationDate;
 		this.modificationDate = modificationDate;
 	}
-
-	public Note (int id) {
-		this.id = id;
-	}
-
-
 
 	@Override
 	public String toString() {
