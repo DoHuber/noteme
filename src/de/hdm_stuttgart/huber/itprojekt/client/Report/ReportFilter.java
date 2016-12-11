@@ -1,19 +1,17 @@
 package de.hdm_stuttgart.huber.itprojekt.client.Report;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
 import de.hdm_stuttgart.huber.itprojekt.client.MenuView;
 
 
 /**
  * Startseite nach Abfrage des Admin Zugangs -> Auswahl des jeweiligen Reports
- * Durch Anchor gelangt der Admin jeweils auf eine neue Seite für den entsprechenden Report
+ * Durch Anchor gelangt der Admin jeweils auf eine neue Seite fï¿½r den entsprechenden Report
  * @author dominik erdmann
  *
  */
@@ -26,8 +24,8 @@ public class ReportFilter extends VerticalPanel{
 
 	Anchor showUsers = new Anchor("Ausgabe aller Nutzer");
 	Anchor showAllNotesR = new Anchor("Ausgabe aller Notizen");
-	Anchor showAllNotebooks = new Anchor("Ausgabe aller Notizbücher");
-	Anchor backToNoteMe = new Anchor("Zurück zu NoteMe");
+	Anchor showAllNotebooks = new Anchor("Ausgabe aller Notizbï¿½cher");
+	Anchor backToNoteMe = new Anchor("Zurï¿½ck zu NoteMe");
 
 		
 	vPanel.add(showUsers);

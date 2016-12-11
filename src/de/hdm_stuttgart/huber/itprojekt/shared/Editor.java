@@ -3,7 +3,6 @@
  */
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;

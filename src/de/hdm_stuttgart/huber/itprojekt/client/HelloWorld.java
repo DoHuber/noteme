@@ -1,18 +1,11 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-import java.util.Vector;
-
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 /**
  * 

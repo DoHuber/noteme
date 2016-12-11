@@ -1,9 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
-
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 

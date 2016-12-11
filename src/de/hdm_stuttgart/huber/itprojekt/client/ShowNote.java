@@ -2,11 +2,8 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
-import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 
 public class ShowNote extends BasicView {
 	/**

@@ -4,20 +4,16 @@ package de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.BasicView;
 import de.hdm_stuttgart.huber.itprojekt.client.MenuView;
 
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
-import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportLanding;
 
 /**
  * Startseite des Report Gernerators mit Abfrage f�r Admin Zugang

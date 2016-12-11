@@ -17,8 +17,6 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
-import de.hdm_stuttgart.huber.itprojekt.client.MenuView;
-import de.hdm_stuttgart.huber.itprojekt.client.ShowAllNotebooks;
 import de.hdm_stuttgart.huber.itprojekt.client.ShowNote;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;

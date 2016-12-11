@@ -26,11 +26,7 @@ public abstract class DataMapper {
     protected <T> boolean isObjectLoaded(long id, Class<T> classToCheck) {
 
         Object o = loadedObjects.get(id);
-        if (o == null) {
-            return false;
-        }
-
-        return classToCheck.isAssignableFrom(o.getClass());
+        return o != null && classToCheck.isAssignableFrom(o.getClass());
 
     }
 

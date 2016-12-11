@@ -10,9 +10,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportCheckAdmin;
-import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportGenerator;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 
