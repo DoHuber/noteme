@@ -91,7 +91,7 @@ private static NoteBookMapper noteBookMapper = null;
                         rs.getInt("id"),
 		                rs.getString("title"),
 		        		rs.getString("subtitle"),
-		        		NoteUserMapper.getNoteUserMapper().findById(rs.getLong("author_id")),
+		        		NoteUserMapper.getNoteUserMapper().findById(rs.getInt("author_id")),
 		        		rs.getDate("creation_date"),
 		        		rs.getDate("modification_date"));
 
@@ -171,7 +171,7 @@ private static NoteBookMapper noteBookMapper = null;
 
 
 
-	 public Vector<NoteBook> getAllNotes() throws ClassNotFoundException, SQLException {
+	 public Vector<NoteBook> getAllNoteBooks() throws ClassNotFoundException, SQLException {
 		 	
 		 Connection connection = DBConnection.getConnection();
 	        Vector<NoteBook> v = new Vector<>();
@@ -179,20 +179,20 @@ private static NoteBookMapper noteBookMapper = null;
 	        try {
 
 	            Statement stmt = connection.createStatement();
-	            ResultSet rs = stmt.executeQuery("SELECT * FROM Notebook");
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.notebook");
 
-	            /*while (rs.next()) {
+	            while (rs.next()) {
 
-	                NoteBook notebook = new NoteBook(rs.getInt("NoteBookId"),
-			        		rs.getString("Title"),
-			        		rs.getString("Subtitle"),
-			        		new NoteUser(),
-			        		new Date(77777),
-			        		new Date(77777));
+	                NoteBook notebook = new NoteBook(rs.getInt("id"),
+			        		rs.getString("title"),
+			        		rs.getString("subtitle"),
+			        		NoteUserMapper.getNoteUserMapper().findById(rs.getInt("author_id")),
+			        		rs.getDate("creation_date"),
+			        		rs.getDate("modification_date"));
 
 	                v.add(notebook);
 
-	            } */
+	            }
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();

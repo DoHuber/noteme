@@ -148,7 +148,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException{
 		
 		try {
-			return notebookmapper.getAllNotebooks();
+			return notebookmapper.getAllNoteBooks();
 		} catch (Exception e){
 			
 			e.printStackTrace();

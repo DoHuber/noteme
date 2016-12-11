@@ -102,7 +102,7 @@ public class ShowAllNotes extends BasicView {
 //
 //		};
 //
-//		editorVerwaltung.getAllNotes(callback);
+//		editorVerwaltung.getAllNoteBooks(callback);
 //
 //		RootPanel.get().add(hPanel);
 //
