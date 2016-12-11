@@ -25,7 +25,7 @@ public interface Editor extends RemoteService {
 	public String getHelloWorld();
 	
 	// CRUD-Methoden für NoteBook
-	public NoteBook createNoteBook(NoteBook noteBook);
+	public NoteBook createNoteBook(NoteBook notebook);
 	public NoteBook saveNoteBook(NoteBook noteBook);
 	public NoteBook getNoteBookById(NoteBook noteBook);
 	public void deleteNoteBook(NoteBook noteBook);

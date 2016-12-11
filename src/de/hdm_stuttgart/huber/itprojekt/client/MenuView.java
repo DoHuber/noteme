@@ -101,12 +101,13 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get().add(mView);
+//			MenuView mView = new MenuView();
+//			RootPanel.get("menu").clear();
+//			RootPanel.get().add(mView);
 
-			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get("main").add(san);
+			ShowAllNotebooks saNb = new ShowAllNotebooks();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(saNb);
 		}
 	}
 	private class CreateNotebookHandler implements ClickHandler {
