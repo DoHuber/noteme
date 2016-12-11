@@ -27,7 +27,7 @@ public interface Editor extends RemoteService {
 	// CRUD-Methoden für NoteBook
 	public NoteBook createNoteBook(NoteBook notebook);
 	public NoteBook saveNoteBook(NoteBook noteBook);
-	public NoteBook getNoteBookById(NoteBook noteBook);
+	public NoteBook getNoteBookById(NoteBook notebook)throws Exception;
 	public void deleteNoteBook(NoteBook noteBook);
 	
 	// CRUD-Methoden für Note
@@ -37,7 +37,7 @@ public interface Editor extends RemoteService {
 	public void deleteNote(Note note);
 	
 	// Zusätzliche Methoden zu NoteBook
-	public Vector<NoteBook> getAllNoteBooks();
+	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;
 	public Vector<Note> getAllNotes() throws BullshitException;
 	
 }
