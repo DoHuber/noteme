@@ -22,7 +22,7 @@ public class IT_Projekt implements EntryPoint {
 	 */
 	private void loadMenu() {
 		MenuView navigation = new MenuView();
-		RootPanel.get().add(navigation);
+		RootPanel.get("menu").add(navigation);
 	 	
 	}
 }

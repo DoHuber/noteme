@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
@@ -20,13 +21,14 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	 */
 	private static final long serialVersionUID = 1L;
 	private NoteMapper noteMapper;
-
+	private NoteBookMapper notebookmapper;
 
 	@Override
 	public void init() throws IllegalArgumentException {
 		
 		try {
 			this.noteMapper = NoteMapper.getNoteMapper();
+			this.notebookmapper =NoteBookMapper.getNoteBookMapper();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,11 +60,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public NoteBook getNoteBookById(NoteBook noteBook) {
-		// TODO Auto-generated method stub
-		return null;
+	public NoteBook getNoteBookById(NoteBook notebook) throws Exception {
+		
+		return notebookmapper.findById(notebook.getId());
 	}
-
 	@Override
 	public void deleteNoteBook(NoteBook noteBook) {
 		// TODO Auto-generated method stub
@@ -110,6 +111,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 			return noteMapper.findById(note.getId());
 	
 	}
+	
+
 
 	@Override
 	public void deleteNote(Note note) {
@@ -142,9 +145,15 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<NoteBook> getAllNoteBooks() {
-		// TODO Auto-generated method stub
-		return null;
+	public Vector<NoteBook> getAllNoteBooks() throws BullshitException{
+		
+		try {
+			return notebookmapper.getAllNotebooks();
+		} catch (Exception e){
+			
+			e.printStackTrace();
+			throw new BullshitException(e.toString());
+		}
 	}
 	
 	

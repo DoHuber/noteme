@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
@@ -22,18 +23,22 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
  *
  */
 public class CreateNote extends BasicView {
-	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	
+	HorizontalPanel contentPanel = new HorizontalPanel();
+	VerticalPanel alignPanel = new VerticalPanel();
+	Button createButton = new Button("Create");
+	
+	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private RichTextArea noteArea = new RichTextArea();
-	private VerticalPanel vPanel = new VerticalPanel();
-	private HorizontalPanel hPanel = new HorizontalPanel();
+
 	private TextBox titleTextBox = new TextBox();
 	private TextBox SubtitleTextBox = new TextBox();
-	private Button createButton = new Button("Create");
+	
 	private DateBox dueDateBox = new DateBox();
 	private Label title = new Label("Title");
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
+	private Label test = new Label();
 
 	@Override
 	public void run() {
@@ -41,20 +46,22 @@ public class CreateNote extends BasicView {
 		 * Widgets
 		 * 
 		 */
-		vPanel.add(title);
-		vPanel.add(titleTextBox);
+		alignPanel.add(title);
+		alignPanel.add(titleTextBox);
 
-		vPanel.add(subtitle);
-		vPanel.add(SubtitleTextBox);
+		alignPanel.add(subtitle);
+		alignPanel.add(SubtitleTextBox);
 
-		vPanel.add(dueDate);
-		vPanel.add(dueDateBox);
-
-		vPanel.add(createButton);
+		alignPanel.add(dueDate);
+		alignPanel.add(dueDateBox);
+		
+		alignPanel.add(test);
+		alignPanel.add(createButton);
 		createButton.addClickHandler(new CreateClickHandler());
-		hPanel.add(vPanel);
-		hPanel.add(noteArea);
-		RootPanel.get().add(hPanel);
+		
+		contentPanel.add(alignPanel);
+		contentPanel.add(noteArea);
+		RootPanel.get("main").add(contentPanel);
 
 	}
 
