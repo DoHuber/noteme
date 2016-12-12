@@ -15,7 +15,7 @@
 
 # gwt caches and compiled units #
 war/gwt_bree/
-war/classes/
+war/classes/h
 
 # boilerplate generated classes #
 .apt_generated/
