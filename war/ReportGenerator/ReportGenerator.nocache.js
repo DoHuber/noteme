@@ -22,7 +22,15 @@
   var $head = $doc.head || $doc.getElementsByTagName('head')[0];
   // Compute some codeserver urls so as the user does not need bookmarklets
   var hostName = $wnd.location.hostname;
+<<<<<<< HEAD
   var serverUrl = 'http://' + hostName + ':64468';
+=======
+<<<<<<< HEAD
+  var serverUrl = 'http://' + hostName + ':55275';
+=======
+  var serverUrl = 'http://' + hostName + ':58671';
+>>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
+>>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
   var module = 'ReportGenerator';
   var nocacheUrl = serverUrl + '/recompile-requester/' + module;
 
