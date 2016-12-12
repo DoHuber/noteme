@@ -1,36 +1,116 @@
 /** Add css rules here for your application. */
-
-
 /** Example rules used by the template application (remove for your app) */
 h1 {
   font-size: 2em;
   font-weight: bold;
-  color: #777777;
+  color: #2E8B57;
+  /*margin: 10% 0% 25%;*/
   margin: 40px 0px 70px;
   text-align: center;
 }
 
-#layout {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 960px;
-	width: auto;
-	height: 100%;
-	min-height: 900px;
-	background: #fff;
-	padding-bottom: 30px;
+/*layout {
+	margin: 0;
+	width: 1000px;
+	height: 700px;
+	background: #000000;
 }
-#menu {
-	max-width: 252px;
+.pure-menu-link {
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #777;
+}*/
 
+/*navigation {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 100px;
+	margin-right: 100px;
+	padding-right: 510px;
+	position: absolute;
+	height: 660px;
+	width: 290px;
 	float: left;
 	padding: 10px;
-	padding-right: 0px;
+	font-color: #800000;
+	background-color: #98FB98;
 }
-#main{
-	
-	height: 100%;
-	background: #fff;
-	margin-top: 1px;
+
+MenuView {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 100px;
+	margin-right: 100px;
+	padding-right: 510px;
+	position: absolute;
+	height: 660px;
+	width: 290px;
+	float: left;*/
+	/*padding: 10px;*/
+/*	font-color: #2E8B57;
+	background-color: #98FB98;
+}
+
+body {
+	margin-top: 20px;
+	margin-down: 20px;
+	margin-left:100px;
+	margin-right: 100px;
+	padding-left: 300px;
+	position: absolute;
+	height: 660px;
+	widht: 500px;
+	background: #E6E6FA;
+} */
+
+main {
+	margin-top: 20px;
+	margin-down: 20px;
+	margin-left:100px;
+	margin-right: 100px;
+	position: absolute;
+	height: 660px;
+	widht: 800px;
+	background: #E6E6FA;
+	/*padding-left: 30em;*/
 	}
+	
+div#layout {
+	width: 1000px;
+	height: 700px;
+	background: #E6E6FA;
+}
+
+div#header {
+	margin: 5px;
+	background: #E6E6FA;
+}
+
+div#menu {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 100px;
+	margin-right: 100px;
+	padding-right: 510px;
+	position: absolute;
+	overflow: scroll;
+	height: 660px;
+	width: 290px;
+	float: left;
+	/*padding: 10px;*/
+	font-color: #2E8B57;
+	background-color: #98FB98;
+}
+
+div#trailer {
+	clear: both;
+	padding: 10px 0;
+	margin: 0 auto;      /* standardkonforme horizontale Zentrierung */
+	border-top: 1px dashed silver;
+	font-size: 80%;
+	text-align: center;
+	background: #E6E6FA;
+}
+	
 	
