@@ -1,11 +1,15 @@
 package de.hdm_stuttgart.huber.itprojekt.client.gui;
 
-import java.util.Date;
 import java.util.Vector;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -13,14 +17,15 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
-import de.hdm_stuttgart.huber.itprojekt.client.ShowAllNotes;
+import de.hdm_stuttgart.huber.itprojekt.client.ShowNotebook;
+
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
 /**
  * Die Klasse NotebookTable wird alle Notizbücher in einer Tabelle Darstellen
  * 
- * @author Nikita Nalivayko
+ * @author Erdmann, Nalivayko
  *
  */
 
@@ -28,20 +33,29 @@ public class NotebookTable {
 
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private FlowPanel fPanel = new FlowPanel();
-	private NoteBook selected =null;
-	private Vector<NoteBook> notebooks;
+	private FlowPanel buttonPanel = new FlowPanel();
+	/**
+	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
+	 */
+	private Button deleteBtn = new Button("Delete");
+	private Button editBtn	= new Button("Update");
+	private Button releseBtn = new Button("Relese");
+	
+	private NoteBook notebook=null;
+	private NoteBook selected = null;
+	private Vector<NoteBook> noteB;
 	DataGrid<NoteBook> table = new DataGrid<NoteBook>();
 
 	public NotebookTable(Vector<NoteBook> list) {
-		this.notebooks = list;
+		this.noteB = list;
 	}
 
-	public Vector<NoteBook> getNotebooks() {
-		return notebooks;
+	public Vector<NoteBook> getNoteBooks() {
+		return noteB;
 	}
 
-	public void setNotebooks(Vector<NoteBook> notebooks) {
-		this.notebooks = notebooks;
+	public void setNoteBooks(Vector<NoteBook> noteB) {
+		this.noteB = noteB;
 	}
 
 	public DataGrid<NoteBook> getTable() {
@@ -56,9 +70,9 @@ public class NotebookTable {
 		TextColumn<NoteBook> title = new TextColumn<NoteBook>() {
 
 			@Override
-			public String getValue(NoteBook nBook) {
-				// TODO Auto-generated method stub
-				return nBook.getTitle();
+			public String getValue(NoteBook noteB) {
+				
+				return noteB.getTitle();
 			}
 		};
 		table.addColumn(title, "Title");
@@ -66,52 +80,66 @@ public class NotebookTable {
 		TextColumn<NoteBook> subtitle = new TextColumn<NoteBook>() {
 
 			@Override
-			public String getValue(NoteBook nBook) {
+			public String getValue(NoteBook noteB) {
 				// TODO Auto-generated method stub
-				return nBook.getSubtitle();
+				return noteB.getSubtitle();
 			}
 		};
 		table.addColumn(subtitle, "Subtitle");
-
+		
 		TextColumn<NoteBook> creationDate = new TextColumn<NoteBook>() {
 
 			@Override
-			public String getValue(NoteBook nBook) {
+			public String getValue(NoteBook noteB) {
 				// !!!! Könnte Fehler verursachen
-				return nBook.getCreationDate().toString();
+				return noteB.getCreationDate().toString();
 			}
 		};
 		table.addColumn(creationDate, "Creation Date");
-
-		TextColumn<NoteBook> modificationDate = new TextColumn<NoteBook>() {
-
-			@Override
-			public String getValue(NoteBook nBook) {
-				// TODO Auto-generated method stub
-				return nBook.getModificationDate().toString();
-			}
-		};
-		table.addColumn(modificationDate, "Modification Date");
-
-		table.setRowCount(notebooks.size(), false);
 		
-		table.setVisibleRange(0, notebooks.size());
-		table.setRowData(0, notebooks);
+		table.setRowCount(noteB.size(), false);
+		table.setWidth("80%");
+		table.setVisibleRange(0, noteB.size());
+		table.setRowData(0, noteB);
 		LayoutPanel panel = new LayoutPanel();
 		panel.setSize("50em", "40em");
 		panel.add(table);
+		buttonPanel.add(deleteBtn);
+		//deleteBtn.addClickHandler(new DeleteClickHandler());
+		buttonPanel.add(editBtn);
+		buttonPanel.add(releseBtn);
+	
+		
+		fPanel.add(buttonPanel);
 		fPanel.add(panel);
 
 		return fPanel;
 	}
+
+	private class DeleteClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			/**
+			 * Sicherheitsfunktion. Soll das Notizbuch wirklich gelöscht werden?
+			 */
+		if (Window.confirm("Wollen Sie das notizbuch löschen?")){
+			fPanel.add(new HTML("<p> Das Notizbuch wurde gelöscht</p>"));
+		}
+			
+		}
+		
+	}
 	/**
-	 * Notizbuch wird angeklickt. Übersicht der Notizen in deisem Notizbuch wird gezeigt 
+	 * Ein angeklicktes Notizbuch wird angezeigt
 	 */
-	public void addClickNotebook(){
+
+	public void addClickNote() {
 		final SingleSelectionModel<NoteBook> selection = new SingleSelectionModel<NoteBook>();
 		table.setSelectionModel(selection);
 		selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
 	}
+
 	private class SelectionChangeHandler implements Handler{
 		private final SingleSelectionModel<NoteBook> selection;
 		private SelectionChangeHandler(SingleSelectionModel<NoteBook> selection){
@@ -120,13 +148,13 @@ public class NotebookTable {
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
-			selected=selection.getSelectedObject();
-			ShowAllNotes sN = new ShowAllNotes(selected);
-			RootPanel.get().clear();
-			RootPanel.get().add(sN);
+			selected = selection.getSelectedObject();
+			ShowNotebook sn = new ShowNotebook();
+			
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(sn);
 			
 			
-		}
-	
-	}
+		}}
+
 }

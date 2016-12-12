@@ -72,16 +72,7 @@ public class MenuView extends VerticalPanel {
 		logoutAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(logoutAnchor));
 
-//		vPanel.add(home);
-//		vPanel.add(showNotes);
-//		vPanel.add(showNotebooks);
-//		vPanel.add(createNotebook);
-//		vPanel.add(createNote);
-//		vPanel.add(reportAnchor);
-//		vPanel.add(logoutAnchor);
-//		//Test
-//		vPanel.add(hello);
-//		RootPanel.get().add(vPanel);
+
 			pureMenu.add(home);
 			pureMenu.add(menuList);
 			menu.add(pureMenu);
@@ -100,8 +91,11 @@ public class MenuView extends VerticalPanel {
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
 		
+<<<<<<< HEAD
 		//Test
 		//hello.addClickHandler(new testClickHandler());
+=======
+>>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
 	}
 	
 	/*Einfache ClickHandler werden implementiert 
@@ -111,13 +105,14 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(mView);
+//			MenuView mView = new MenuView();
+//			RootPanel.get("menu").clear();
+//			RootPanel.get("menu").add(mView);
 
 			ShowAllNotes san = new ShowAllNotes(null);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(san);
+			
 		}
 	}
 
@@ -125,9 +120,9 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get().add(mView);
+//			MenuView mView = new MenuView();
+//			RootPanel.get("menu").clear();
+//			RootPanel.get().add(mView);
 
 			ShowAllNotebooks san = new ShowAllNotebooks();
 			RootPanel.get().add(san);
@@ -182,6 +177,7 @@ public class MenuView extends VerticalPanel {
 		
 		}
 	}
+<<<<<<< HEAD
 	//Später löschen 
 	//private class testClickHandler implements ClickHandler{
 
@@ -197,4 +193,9 @@ public class MenuView extends VerticalPanel {
 	//}
 
 
+=======
+>>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
 }
+
+
+

@@ -16,18 +16,13 @@ public class NoteBook extends DomainObject {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String title;
-	private String subtitle;
-	private NoteUser owner;
-	private Date creationDate;
-	private Date modificationDate;
+	private String title = null;
+	private String subtitle = null;
+	private NoteUser owner = null;
+	private Date creationDate = null;
+	private Date modificationDate = null;
 
     public NoteBook() {
-    }
-
-    // REINE TESTMETHODE!!!
-    public NoteBook(int id) {
-        this.id = id;
     }
 
     public NoteBook(int id, String title, String subtitle, NoteUser owner, Date creationDate, Date modificationDate) {
@@ -40,6 +35,11 @@ public class NoteBook extends DomainObject {
         this.modificationDate = modificationDate;
     }
 
+    // REINE TESTMETHODE!!!
+    public NoteBook(int id) {
+        this.id = id;
+    }
+    
     @Override
 	public String toString() {
 		return "NoteBook{" +
@@ -50,6 +50,8 @@ public class NoteBook extends DomainObject {
 				", modificationDate=" + modificationDate +
 				'}';
 	}
+    
+    
 
 	public int getId() {
         return this.id;

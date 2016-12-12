@@ -2,19 +2,11 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
-import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
-import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
@@ -28,8 +20,14 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  */
 public class ShowAllNotes extends BasicView {
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	HorizontalPanel hPanel = new HorizontalPanel();
+	AllNotesCallback callback = new AllNotesCallback();
+	
+	//HorizontalPanel hPanel = new HorizontalPanel();
 	private Vector<Note> notes = new Vector<Note>();
+	
+	public ShowAllNotes(Vector<Note> nList){
+		notes=nList;
+	}
 
 	/**
 	 * No-Argument Konstruktor
@@ -52,63 +50,90 @@ public class ShowAllNotes extends BasicView {
 		this.notes = liste;
 
 	}
-
 	@Override
-	public void run() {
-//		FlowPanel contentPanel = new FlowPanel();
-//		FlowPanel contentPanel2 = new FlowPanel();
-//		contentPanel2.add(contentPanel);
-//		NoteTable nt = new NoteTable(notes);
-//		nt.addClickNote();
-//		RootPanel.get().add(contentPanel);
-//		RootPanel.get().add(nt.start());
-		
-
-		hPanel.add(new HTML("<p> Hier kommt der <b>Huber</b>, <i>obacht!</i> </p>"));
-
-		AsyncCallback<Vector<Note>> callback = new AsyncCallback<Vector<Note>>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-
-				caught.printStackTrace();
-				hPanel.add(new Label(caught.toString()));
-			}
-
-			@Override
-			public void onSuccess(Vector<Note> result) {
-
-				hPanel.add(new HTML("<p> Als nächstes die Hubermethode! </p>"));
-				huberMethode(result);
-
-			}
-
-		};
-
-		editorVerwaltung.getAllNotes(callback);
-
-		RootPanel.get().add(hPanel);
-
+	public void run(){
+		  	FlowPanel contentPanel = new FlowPanel();
+		    FlowPanel fPanel2 = new FlowPanel();
+		    FlowPanel buttonsPanel = new FlowPanel();
+		    contentPanel.add(buttonsPanel);
+		    fPanel2.add(contentPanel);
+		    editorVerwaltung.getAllNotes(callback);
+		    NoteTable nt = new NoteTable(notes);
+		    nt.addClickNote();
+		    RootPanel.get("main").add(contentPanel);
+		    RootPanel.get("main").add(nt.start());
 	}
+	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
+    @Override
+    public void onSuccess(Vector<Note> result) {
+      addNotesToTable(result);
+    }
 
-	private void huberMethode(Vector<Note> result) {
+    @Override
+    public void onFailure(Throwable caught) {}
 
-		StringBuilder html = new StringBuilder();
+	
+  }
 
-		for (Note row : result) {
 
-			html.append(row.toHtmlString() + "<br>");
+//	@Override
+//	public void run() {
 
-		}
+//		
+//
+//		hPanel.add(new HTML("<p> Hier kommt der <b>Huber</b>, <i>obacht!</i> </p>"));
+//
+//		AsyncCallback<Vector<Note>> callback = new AsyncCallback<Vector<Note>>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//
+//				caught.printStackTrace();
+//				hPanel.add(new Label(caught.toString()));
+//			}
+//
+//			@Override
+//			public void onSuccess(Vector<Note> result) {
+//
+//				hPanel.add(new HTML("<p> Als nächstes die Hubermethode! </p>"));
+//				huberMethode(result);
+//
+//			}
+//
+//		};
+//
+//		editorVerwaltung.getAllNotes(callback);
+//
+//		RootPanel.get().add(hPanel);
+//
+//	}
 
-		RootPanel.get("main").add(new HTMLPanel(html.toString()));
-
-	}
+//	private void huberMethode(Vector<Note> result) {
+//
+//		StringBuilder html = new StringBuilder();
+//
+//		for (Note row : result) {
+//
+//			html.append(row.toHtmlString() + "<br>");
+//
+//		}
+//
+//		RootPanel.get("main").add(new HTMLPanel(html.toString()));
+//
+//	}
 
 	@Override
 	public String getSubHeadlineText() {
 		return "Notizbuch xy";
 	}
+
+	public void addNotesToTable(Vector<Note> result) {
+	notes = result;
+	NoteTable nt = new NoteTable(notes);
+	nt.addClickNote();
+	RootPanel.get("main").clear();
+	RootPanel.get("main").add(nt.start());
+}
 
 	@Override
 	public String getHeadlineText() {
