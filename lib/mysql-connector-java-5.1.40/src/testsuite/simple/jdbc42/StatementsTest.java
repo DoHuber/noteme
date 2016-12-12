@@ -46,7 +46,7 @@ import java.util.concurrent.Callable;
 import testsuite.BaseTestCase;
 
 public class StatementsTest extends BaseTestCase {
-    // Shared test data
+    // NoteMeSharedService test data
     private final String testDateString = "2015-08-04";
     private final String testTimeString = "12:34:56";
     private final String testDateTimeString = testDateString + " " + testTimeString + ".0";

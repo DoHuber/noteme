@@ -5,29 +5,41 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>testServlet</servlet-name>
-    <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.EditorImpl</servlet-class>
-  </servlet>
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>testServlet</servlet-name>
+        <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.EditorImpl</servlet-class>
+    </servlet>
+
     <servlet>
         <servlet-name>de.hdm_stuttgart.huber.itprojekt.Report Editor</servlet-name>
         <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.EditorImpl</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>sharedServices</servlet-name>
+        <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.NoteMeSharedServiceImpl</servlet-class>
+    </servlet>
+
     <servlet-mapping>
-    <servlet-name>testServlet</servlet-name>
-    <url-pattern>/it_projekt/testEditor</url-pattern>
-  </servlet-mapping>
+        <servlet-name>testServlet</servlet-name>
+        <url-pattern>/it_projekt/testEditor</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>de.hdm_stuttgart.huber.itprojekt.Report Editor</servlet-name>
         <url-pattern>/ReportGenerator/testEditor</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>sharedServices</servlet-name>
+        <url-pattern>/ReportGenerator/NoteMeSharedService</url-pattern>
+    </servlet-mapping>
 
     <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>IT_Projekt.html</welcome-file>
-    <welcome-file>Report.html</welcome-file>
-  </welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>IT_Projekt.html</welcome-file>
+        <welcome-file>Report.html</welcome-file>
+    </welcome-file-list>
 
 </web-app>
