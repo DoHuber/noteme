@@ -11,7 +11,8 @@ public class IT_Projekt implements EntryPoint {
 	
 	public void onModuleLoad() {
 		
-		loadMenu();
+		 loadMenu();
+
 
 	}
 	

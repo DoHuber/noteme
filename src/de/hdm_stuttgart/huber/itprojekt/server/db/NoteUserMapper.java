@@ -13,7 +13,7 @@ public class NoteUserMapper extends DataMapper {
 
     //Konstruktor (protected, um unauthorisiertes Instanziieren der Klasse zu verhindern)
     protected NoteUserMapper() throws ClassNotFoundException, SQLException {
-        super();
+     
     }
 
     //Öffentliche statische Methode, um den Singleton-NoteUserMapper zu erhalten
@@ -42,42 +42,46 @@ public class NoteUserMapper extends DataMapper {
 
             if (rs.next()) {
                 return findById(rs.getInt(1));
-            }    // else {
-            // throw new SQLException("Sorry Bro");
-            // }
+            }   
         } catch (SQLException sqlExp) {
             sqlExp.printStackTrace();
         }
         return noteUser;
-
     }
 
     //findById Methode:
     // bestimmte Notiz wird anhand der eindeutigen ID gesucht und zurückgegeben
     // long wegen DomainObject
-    public NoteUser findById(long id) throws ClassNotFoundException, SQLException {
+    public NoteUser findById(int id) throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
 
-        try {
+      //Was macht die isObjectLoaded Verzweigung hier?
+       if (isObjectLoaded(id, NoteUser.class)) {
+    	   return (NoteUser) loadedObjects.get(id);
+       }
+       
+       try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM notizbuch.noteuser WHERE id = ?");
-            stmt.setLong(1, id);
+            stmt.setInt(1, id);
 
             //Ergebnis holen
             ResultSet results = stmt.executeQuery();
             if (results.next()) {
 
-                return new NoteUser(
-
-                        results.getInt("id"),
-                        results.getString("firstname"),
+                NoteUser noteUser = new NoteUser(results.getInt("id"),
+            	        results.getString("firstname"),
                         results.getString("username"),
                         results.getString("lastname"),
                         results.getString("email"),
                         results.getString("google_id"));
+                
+                loadedObjects.put(results.getInt("id"), noteUser);
+                return noteUser;
             }
 
         } catch (SQLException sqlExp) {
             sqlExp.printStackTrace();
+            return null;
         }
 
         return null;
@@ -89,7 +93,7 @@ public class NoteUserMapper extends DataMapper {
         Connection con = DBConnection.getConnection();
 
         try {
-            PreparedStatement stmt = con.prepareStatement("UPDATE NoteUser SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE noteUserId=?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE NoteUser SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE id=?");
 
             stmt.setString(1, noteUser.getFirstName());
             stmt.setString(2, noteUser.getUserName());
@@ -101,10 +105,9 @@ public class NoteUserMapper extends DataMapper {
 
         } catch (SQLException sqlExp) {
             sqlExp.printStackTrace();
+            throw new IllegalArgumentException();
         }
-        //aktualisierten NoteUser zurückgeben
-        return noteUser;
-
+        return findById(noteUser.getId());
     }
 
 
@@ -112,26 +115,39 @@ public class NoteUserMapper extends DataMapper {
         Connection con = DBConnection.getConnection();
 
         try {
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM NoteUser WHERE NoteUserId = ?");
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM notizbuch.noteUser WHERE id = ?");
             stmt.setLong(1, noteUser.getId());
             stmt.executeUpdate();
 
         } catch (SQLException sqlExp) {
             sqlExp.printStackTrace();
+            throw new IllegalArgumentException();
         }
     }
 
-    public Vector<NoteUser> getAllNoteUser() throws Exception {
-        Vector<NoteUser> result = new Vector<>();
-
+    public Vector<NoteUser> getAllNoteUser() throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
-        PreparedStatement stmt = con.prepareStatement("SELECT NoteUserId FROM NoteUser");
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            result.add(this.findById(rs.getLong("NoteUserId")));
+        Vector<NoteUser> result = new Vector<>();
+        
+        try {
+        // wieso kein prepared Statement mehr?
+        // PreparedStatement stmt = con.prepareStatement("SELECT NoteUserId FROM NoteUser");
+        Statement stmt = con.createStatement();
+        ResultSet results = stmt.executeQuery("SELECT * FROM notizbuch.noteUser");
+        	
+       while (results.next()){
+    	   NoteUser noteUser = new NoteUser(results.getInt("id"),
+    			   results.getString("firstname"),
+                   results.getString("username"),
+                   results.getString("lastname"),
+                   results.getString("email"),
+                   results.getString("google_id"));
+    	   result.add(noteUser);
+       	   }
+        } catch (SQLException e) {
+        	e.printStackTrace();
         }
         return result;
     }
-
-
+    
 }

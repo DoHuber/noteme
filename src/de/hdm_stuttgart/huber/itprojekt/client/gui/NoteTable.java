@@ -41,7 +41,7 @@ public class NoteTable {
 	 */
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn	= new Button("Update");
-	private Button releseBtn = new Button("Relese");
+	private Button releseBtn = new Button("Release");
 	
 	private NoteBook notebook=null;
 	private Note selected = null;

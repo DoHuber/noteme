@@ -83,8 +83,8 @@ public class NoteMapper extends DataMapper {
                             rs.getString("content"),
                             rs.getString("title"),
                             rs.getString("subtitle"),
-                            NoteUserMapper.getNoteUserMapper().findById(rs.getLong("author_id")),
-                            NoteBookMapper.getNoteBookMapper().findById(rs.getLong("notebook_id")),
+                            NoteUserMapper.getNoteUserMapper().findById(rs.getInt("author_id")),
+                            NoteBookMapper.getNoteBookMapper().findById(rs.getInt("notebook_id")),
                             rs.getDate("creation_date"),
                             rs.getDate("due_date"),
                             rs.getDate("modification_date"));
@@ -172,8 +172,8 @@ public class NoteMapper extends DataMapper {
                         rs.getString("content"),
                         rs.getString("title"),
                         rs.getString("subtitle"),
-                        noteUserMapper.findById(rs.getLong("author_id")),
-                        noteBookMapper.findById(rs.getLong("notebook_id")),
+                        noteUserMapper.findById(rs.getInt("author_id")),
+                        noteBookMapper.findById(rs.getInt("notebook_id")),
                         rs.getDate("creation_date"),
                         rs.getDate("modification_date"),
                         rs.getDate("due_date"));

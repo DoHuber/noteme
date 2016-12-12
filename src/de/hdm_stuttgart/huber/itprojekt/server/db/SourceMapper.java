@@ -4,6 +4,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Source;
 
 import java.sql.*;
 import java.util.Vector;
+import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
+import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Source;
 
 public class SourceMapper extends DataMapper {
 	
@@ -53,7 +56,7 @@ public class SourceMapper extends DataMapper {
 			Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Source WHERE SourceId = ?");
+			PreparedStatement stmt = con.prepareStatement("SELECT Source FROM Notebook.Note WHERE Id = ?");
 			stmt.setLong(1, id);
 			
 			//Ergebnis holen
@@ -92,8 +95,7 @@ public class SourceMapper extends DataMapper {
 		Connection con = DBConnection.getConnection();
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM Source WHERE SourceId=?");
-			new Source();
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM Source WHERE Id=?");
 			stmt.setLong(1,  source.getSourceId());
 			stmt.executeUpdate();
 		}
@@ -106,10 +108,10 @@ public class SourceMapper extends DataMapper {
 		Vector <Source> result = new Vector<Source>();
 		
 		Connection con = DBConnection.getConnection();
-		PreparedStatement stmt = con.prepareStatement("SELECT SourceId FROM Source");
+		PreparedStatement stmt = con.prepareStatement("SELECT Id FROM Source");
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
-			result.add(this.findById(rs.getLong("SourceId")));
+			result.add(this.findById(rs.getLong("Id")));
 		}
 	return result;
 	}
