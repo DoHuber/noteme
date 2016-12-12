@@ -91,11 +91,7 @@ public class MenuView extends VerticalPanel {
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
 		
-<<<<<<< HEAD
-		//Test
-		//hello.addClickHandler(new testClickHandler());
-=======
->>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
+
 	}
 	
 	/*Einfache ClickHandler werden implementiert 
@@ -109,7 +105,7 @@ public class MenuView extends VerticalPanel {
 //			RootPanel.get("menu").clear();
 //			RootPanel.get("menu").add(mView);
 
-			ShowAllNotes san = new ShowAllNotes(null);
+			ShowAllNotes san = new ShowAllNotes();
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(san);
 			
@@ -177,24 +173,7 @@ public class MenuView extends VerticalPanel {
 		
 		}
 	}
-<<<<<<< HEAD
-	//Später löschen 
-	//private class testClickHandler implements ClickHandler{
 
-		//@Override
-		//public void onClick(ClickEvent event) {
-		//	MenuView mView = new MenuView();
-		//	RootPanel.get("menu").clear();
-		//	RootPanel.get().add(mView);
-		//	HelloWorld hw = new HelloWorld();
-		//	RootPanel.get().add(hw);
-		//}
-		
-	//}
-
-
-=======
->>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
 }
 
 
