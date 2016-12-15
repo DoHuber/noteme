@@ -3,7 +3,7 @@
 h1 {
   font-size: 2em;
   font-weight: bold;
-  color: #2E8B57;
+  color: #000000;
   /*margin: 10% 0% 25%;*/
   margin: 40px 0px 70px;
   text-align: center;
@@ -64,53 +64,59 @@ body {
 	background: #E6E6FA;
 } */
 
-main {
-	margin-top: 20px;
-	margin-down: 20px;
-	margin-left:100px;
-	margin-right: 100px;
-	position: absolute;
-	height: 660px;
-	widht: 800px;
-	background: #E6E6FA;
-	/*padding-left: 30em;*/
-	}
 	
 div#layout {
 	width: 1000px;
 	height: 700px;
 	background: #E6E6FA;
+	/* margin-top: 250px; */
+	margin-left: 200px;
 }
 
 div#header {
 	margin: 5px;
-	background: #E6E6FA;
+	width: 1000px;
+	background: #a2a2f9;
+	color: #ffffff;
 }
 
 div#menu {
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 	margin-bottom: 20px;
 	margin-left: 100px;
-	margin-right: 100px;
-	padding-right: 510px;
+	margin-right: 20px;
 	position: absolute;
-	overflow: scroll;
-	height: 660px;
-	width: 290px;
+	/* overflow: scroll; */
+	height: 225px;
+	width: 150px;
 	float: left;
-	/*padding: 10px;*/
+	padding: 10px;
 	font-color: #2E8B57;
-	background-color: #98FB98;
+	background-color: #ffffff;
 }
 
-div#trailer {
+div#main {
+	/*margin-top: 20px; */
+	margin-bottom: 20px;
+	margin-left: 300px;
+	margin-right: 100px;
+	position: absolute;
+	height: 550px;
+	width: 600px;
+	background: #a2a2f9;
+	/* Wie leg ich Abstand zwischen body und Datensätzen an? */
+	}
+
+/*div#trailer {
 	clear: both;
 	padding: 10px 0;
-	margin: 0 auto;      /* standardkonforme horizontale Zentrierung */
+	/* margin: 0 auto;      standardkonforme horizontale Zentrierung */
+	/* margin-down: 10px;
+	margin-left: 200px;
 	border-top: 1px dashed silver;
-	font-size: 80%;
-	text-align: center;
+	/*font-size: 80%;*/
+	/*text-align: center;
 	background: #E6E6FA;
-}
+} */
 	
 	

@@ -39,7 +39,7 @@ public class MenuView extends VerticalPanel {
 
 	//	VerticalPanel vPanel = new VerticalPanel();
 
-		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#98FB98");
+		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#ffffff");
 		
 		//Home "Button"
 		Anchor home = new Anchor("NoteMe", GWT.getHostPageBaseURL() + "IT_Projekt.html");
