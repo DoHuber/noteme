@@ -11,7 +11,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 /**
- * Klasse zur Darstellung von Notizbüchern, gleiche Funktionsweise wie "ShowAllNotes"
+ * Klasse zur Darstellung von Notizbï¿½chern, gleiche Funktionsweise wie "ShowAllNotes"
  * @author erdmann, nalivayko
  *
  */
@@ -36,7 +36,7 @@ public class ShowAllNotebooks extends BasicView {
 
 	}
 
-	// Gibt alle Notizbücher zurÃ¼ck
+	// Gibt alle Notizbï¿½cher zurÃ¼ck
 	public Vector<NoteBook> getAllNotebooksListe() {
 		return notebook;
 
@@ -50,8 +50,7 @@ public class ShowAllNotebooks extends BasicView {
 	public void run(){
 		  	FlowPanel contentPanel = new FlowPanel();
 		    FlowPanel fPanel2 = new FlowPanel();
-		    FlowPanel buttonsPanel = new FlowPanel();
-		    contentPanel.add(buttonsPanel);
+		   
 		    fPanel2.add(contentPanel);
 		    editorVerwaltung.getAllNoteBooks(callback);
 		    NotebookTable nbt = new NotebookTable(notebook);

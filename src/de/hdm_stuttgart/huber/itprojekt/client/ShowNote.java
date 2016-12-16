@@ -1,12 +1,22 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
+import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 public class ShowNote extends BasicView {
 	/**
@@ -16,35 +26,87 @@ public class ShowNote extends BasicView {
 	 * Funktionen: Löschen, Editieren, Freigeben, Fähligkeitsdatum setzen -
 	 * Ebene: einzelne Notizen
 	 */
-	private VerticalPanel vp = new VerticalPanel();
+	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+	Note n = null;
+	private HorizontalPanel vp = new HorizontalPanel();
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
 	private Button releseBtn = new Button("Relese");
-	private Button dueDateBtn = new Button("Due Date");
+	
+	private RichTextArea noteArea = new RichTextArea();
+	private DateBox dueDateBox = new DateBox();
+	private TextBox subtitleTextBox = new TextBox();
+	
+
+	public ShowNote(Note note) {
+		this.n = note;
+		
+	}
 
 	@Override
 	public String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Notiz xy";
+		return "Notizbuch:"+ n.getNoteBook().getTitle();
 	}
 
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Notiz ";
+		return "Notiz: "+n.getTitle();
 	}
+	
 
 	@Override
 	public void run() {
-
+		
 		FlowPanel contentPanel = new FlowPanel();
 		vp.add(deleteBtn);
+		deleteBtn.addClickHandler(new DeleteClickHandler());
 		vp.add(editBtn);
 		vp.add(releseBtn);
-		vp.add(dueDateBtn);
+		
+		noteArea.setText(n.getContent());
+		dueDateBox.setValue(n.getDueDate());
+		subtitleTextBox.setText(n.getSubtitle());
 		contentPanel.add(vp);
-		RootPanel.get().add(contentPanel);
+		contentPanel.add(subtitleTextBox);
+		contentPanel.add(dueDateBox);
+		contentPanel.add(noteArea);
+		
+		RootPanel.get("main").add(contentPanel);
 
 	}
+	private class DeleteClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+		if(	Window.confirm("Möchten Sie die Notiz "+ n.getTitle()+ " wirklich löschen?")){
+			editorVerwaltung.deleteNote(n, new DeleteCallback());
+		}
+			
+			
+		}
+		
+	}
+	private class DeleteCallback implements AsyncCallback<Void>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			caught.printStackTrace();
+			vp.add(new Label(caught.toString()));
+			
+		}
+
+		@Override
+		public void onSuccess(Void result) {
+			MenuView navigation = new MenuView();
+			RootPanel.get("menu").add(navigation);	
+			
+		}
+		
+	}
+	
+	
+
 
 }

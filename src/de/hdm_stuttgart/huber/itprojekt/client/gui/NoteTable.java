@@ -35,13 +35,11 @@ public class NoteTable {
 
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private FlowPanel fPanel = new FlowPanel();
-	private FlowPanel buttonPanel = new FlowPanel();
+	
 	/**
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 	 */
-	private Button deleteBtn = new Button("Delete");
-	private Button editBtn	= new Button("Update");
-	private Button releseBtn = new Button("Release");
+
 	
 	private NoteBook notebook=null;
 	private Note selected = null;
@@ -126,32 +124,16 @@ public class NoteTable {
 		LayoutPanel panel = new LayoutPanel();
 		panel.setSize("50em", "40em");
 		panel.add(table);
-		buttonPanel.add(deleteBtn);
-		//deleteBtn.addClickHandler(new DeleteClickHandler());
-		buttonPanel.add(editBtn);
-		buttonPanel.add(releseBtn);
+		
 	
 		
-		fPanel.add(buttonPanel);
+	
 		fPanel.add(panel);
 
 		return fPanel;
 	}
 
-	private class DeleteClickHandler implements ClickHandler{
 
-		@Override
-		public void onClick(ClickEvent event) {
-			/**
-			 * Sicherheitsfunktion. Soll das Notizbuch wirklich gelöscht werden?
-			 */
-		if (Window.confirm("Wollen Sie das notizbuch löschen?")){
-			fPanel.add(new HTML("<p> Das Notizbuch wurde gelöscht</p>"));
-		}
-			
-		}
-		
-	}
 	/**
 	 * Eine Angeklickte Notiz wird angezeigt 
 	 */
@@ -171,7 +153,7 @@ public class NoteTable {
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
 			selected=selection.getSelectedObject();
-			ShowNote sn = new ShowNote();
+			ShowNote sn = new ShowNote(selected);
 			
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sn);

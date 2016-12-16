@@ -2,8 +2,13 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
 public class ShowNotebook extends BasicView{
 	
@@ -13,21 +18,27 @@ public class ShowNotebook extends BasicView{
 	/**
 	 * Funktionen: Löschen, Editieren, Freigeben, 
 	 */
-	private VerticalPanel vp = new VerticalPanel();
+	private HorizontalPanel vp = new HorizontalPanel();
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
 	private Button releseBtn = new Button("Relese");
+	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+	NoteBook nb = null;
+
+	public ShowNotebook(NoteBook selected) {
+	this.nb =selected;
+	}
 
 	@Override
 	public String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Notizbuch xy";
+		return "Notizbuch: "+ nb.getTitle();
 	}
 
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Notizbuch ";
+		return "Subtitle: "+ nb.getSubtitle();
 	}
 
 	@Override
@@ -38,7 +49,7 @@ public class ShowNotebook extends BasicView{
 		vp.add(editBtn);
 		vp.add(releseBtn);
 		contentPanel.add(vp);
-		RootPanel.get().add(contentPanel);
+		RootPanel.get("main").add(contentPanel);
 
 	}
 
