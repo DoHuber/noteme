@@ -121,7 +121,8 @@ public class MenuView extends VerticalPanel {
 //			RootPanel.get().add(mView);
 
 			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get().add(san);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 		}
 	}
 	private class CreateNotebookHandler implements ClickHandler {
