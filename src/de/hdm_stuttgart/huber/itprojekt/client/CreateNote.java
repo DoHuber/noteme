@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
+import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
@@ -33,7 +34,7 @@ public class CreateNote extends BasicView {
 
 	private TextBox titleTextBox = new TextBox();
 	private TextBox SubtitleTextBox = new TextBox();
-	
+	private RichTextToolbar richTextToolbar=new RichTextToolbar(noteArea);
 	private DateBox dueDateBox = new DateBox();
 	private Label title = new Label("Title");
 	private Label subtitle = new Label("Subtitle");
@@ -59,6 +60,7 @@ public class CreateNote extends BasicView {
 		alignPanel.add(createButton);
 		createButton.addClickHandler(new CreateClickHandler());
 		
+		contentPanel.add(richTextToolbar);
 		contentPanel.add(alignPanel);
 		contentPanel.add(noteArea);
 		RootPanel.get("main").add(contentPanel);
