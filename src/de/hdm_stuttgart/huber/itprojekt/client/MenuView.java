@@ -134,7 +134,8 @@ public class MenuView extends VerticalPanel {
 			RootPanel.get("menu").add(mView);
 
 			CreateNotebook cN = new CreateNotebook();
-			RootPanel.get().add(cN);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(cN);
 		}
 	}
 	private class CreateNoteHandler implements ClickHandler {
@@ -143,7 +144,7 @@ public class MenuView extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			MenuView mView = new MenuView();
 			RootPanel.get("menu").clear();
-			RootPanel.get().add(mView);
+			RootPanel.get("menu").add(mView);
 
 			CreateNote cN = new CreateNote();
 			RootPanel.get("main").clear();

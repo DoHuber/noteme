@@ -63,6 +63,7 @@ public class ShowNote extends BasicView {
 		vp.add(deleteBtn);
 		deleteBtn.addClickHandler(new DeleteClickHandler());
 		vp.add(editBtn);
+		editBtn.addClickHandler(new UpdateClickHandler());
 		vp.add(releseBtn);
 		
 		noteArea.setText(n.getContent());
@@ -101,6 +102,34 @@ public class ShowNote extends BasicView {
 		public void onSuccess(Void result) {
 			MenuView navigation = new MenuView();
 			RootPanel.get("menu").add(navigation);	
+			
+		}
+		
+	}
+	private class UpdateClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+		if(Window.confirm("Möchten Sie die Änderungen speichern?")){
+			
+			editorVerwaltung.saveNote(n, new UpdateCallback());
+		}
+			
+		}
+		
+	}
+	private class UpdateCallback implements AsyncCallback{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			caught.printStackTrace();
+			vp.add(new Label(caught.toString()));
+			
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			
 			
 		}
 		
