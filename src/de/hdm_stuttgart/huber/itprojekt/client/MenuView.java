@@ -21,38 +21,56 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
  */
 
 /*
- * Die Klasse stellt Navigationsmenu des Systems dar.
+ * Die Klasse stellt das Navigationsmenu des Systems dar.
  * 
  *
  */
 
 public class MenuView extends VerticalPanel {
-	
+
 	private Anchor logoutAnchor;
-	
+
 	protected void onLoad() {
 
-		
+		//MenuPanel
 		FlowPanel menu  = new FlowPanel();
 		FlowPanel pureMenu  = new FlowPanel();
 		UnorderedListWidget menuList = new UnorderedListWidget();
 
-		//	VerticalPanel vPanel = new VerticalPanel();
+	//	VerticalPanel vPanel = new VerticalPanel();
+
+		
+		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#98FB98");
+
+		//Home "Button"
 		Anchor home = new Anchor("NoteMe", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		//Weitere Button Definitions
 		Anchor showNotes = new Anchor("Notes ");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		Anchor createNotebook = new Anchor("New Notebook");
 		Anchor createNote = new Anchor("New Note");
 		Anchor reportAnchor = new Anchor("Report");
-		
+
 		//Test
-		Anchor hello = new Anchor("Say Hello");
+		//Anchor hello = new Anchor("Say Hello");
 		
+		//Den Buttons werden Widgets hinzugef�gt
+		showNotes.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotes));
+
+		showNotebooks.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotebooks));
+
+		createNotebook.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNotebook));
+
+		createNote.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNote));
+
+		reportAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(reportAnchor));
+
+		logoutAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(logoutAnchor));
 
 
@@ -62,7 +80,7 @@ public class MenuView extends VerticalPanel {
 
 			RootPanel.get("menu").add(menu);
 	      /**
-	       * Die "Buttons"  werden mit dem ClickHandler verbunden. Die "Buttons reagieren aud den Mausklick."
+	       * Die "Buttons"  werden mit dem ClickHandler verbunden. Die "Buttons reagieren auf den Mausklick."
 	       *
 	    */
 
@@ -102,9 +120,8 @@ public class MenuView extends VerticalPanel {
 //			RootPanel.get("menu").clear();
 //			RootPanel.get().add(mView);
 
-			ShowAllNotebooks saNb = new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(saNb);
+			ShowAllNotebooks san = new ShowAllNotebooks();
+			RootPanel.get().add(san);
 		}
 	}
 	private class CreateNotebookHandler implements ClickHandler {
@@ -156,11 +173,11 @@ public class MenuView extends VerticalPanel {
 		
 		}
 	}
-	
+
 	public void setLogoutAnchor(Anchor a) {
 		this.logoutAnchor = a;
 	}
-	
+
 }
 
 
