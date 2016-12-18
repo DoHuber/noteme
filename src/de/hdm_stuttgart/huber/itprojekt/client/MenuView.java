@@ -28,7 +28,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 
 public class MenuView extends VerticalPanel {
 
-	private Anchor logoutAnchor;
+	private Anchor logoutAnchor = new Anchor();
 
 	protected void onLoad() {
 
