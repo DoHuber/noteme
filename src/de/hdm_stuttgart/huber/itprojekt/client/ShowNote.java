@@ -101,6 +101,7 @@ public class ShowNote extends BasicView {
 		@Override
 		public void onSuccess(Void result) {
 			MenuView navigation = new MenuView();
+			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(navigation);	
 			
 		}

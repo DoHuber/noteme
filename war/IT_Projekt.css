@@ -58,7 +58,9 @@ div#main {
 	background: #a2a2f9;
 	/* Wie leg ich Abstand zwischen body und Datensätzen an? */
 	}
-
+.testName{
+	backround: #FFFFFF; 
+}
 /*div#trailer {
 	clear: both;
 	padding: 10px 0;
