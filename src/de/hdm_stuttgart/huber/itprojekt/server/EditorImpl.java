@@ -3,6 +3,7 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -154,6 +155,18 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 			e.printStackTrace();
 			throw new BullshitException(e.toString());
 		}
+	}
+
+	@Override
+	public void createNote(String title, String subtitle, String content, String source, Date due_date, int notebook_id,
+			int author_id) {
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	
