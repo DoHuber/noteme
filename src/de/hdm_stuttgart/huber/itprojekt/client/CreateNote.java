@@ -32,6 +32,7 @@ public class CreateNote extends BasicView {
 	
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private RichTextArea noteArea = new RichTextArea();
+	//RichTextArea.get("noteArea").getElement().getStyle().setBackgroundColor("#ffffff");	
 
 	private TextBox titleTextBox = new TextBox();
 	private TextBox SubtitleTextBox = new TextBox();
@@ -63,7 +64,7 @@ public class CreateNote extends BasicView {
 		createButton.addClickHandler(new CreateClickHandler());
 		grid.setWidget(0, 0, richTextToolbar);
 
-		noteArea.setSize("445px", "100px");
+		noteArea.setSize("500px", "100px");
 		grid.setWidget(1, 0, noteArea);
 		
 		//contentPanel.add(richTextToolbar);
@@ -71,6 +72,8 @@ public class CreateNote extends BasicView {
 		//contentPanel.add(noteArea);
 		contentPanel.add(grid);
 		RootPanel.get("main").add(contentPanel);
+		
+		noteArea.setStyleName("noteArea");
 
 	}
 

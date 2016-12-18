@@ -16,7 +16,17 @@ h1 {
     white-space: nowrap;
     color: #777;
 }*/
-	
+
+.noteArea {
+	background-color: ffffff;
+	width: 475px;
+}
+
+.googleTable {
+	margin-left: 20px;
+	margin-top: 50px;
+}
+
 div#layout {
 	width: 1000px;
 	height: 700px;
