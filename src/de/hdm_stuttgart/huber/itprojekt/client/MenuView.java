@@ -39,9 +39,8 @@ public class MenuView extends VerticalPanel {
 
 	//	VerticalPanel vPanel = new VerticalPanel();
 
+		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#ffffff");
 		
-		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#98FB98");
-
 		//Home "Button"
 		Anchor home = new Anchor("NoteMe", GWT.getHostPageBaseURL() + "IT_Projekt.html");
 		//Weitere Button Definitions
@@ -57,19 +56,19 @@ public class MenuView extends VerticalPanel {
 		//Den Buttons werden Widgets hinzugef�gt
 		showNotes.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotes));
-
+		
 		showNotebooks.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotebooks));
-
+		
 		createNotebook.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNotebook));
-
+		
 		createNote.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNote));
-
+		
 		reportAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(reportAnchor));
-
+		
 		logoutAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(logoutAnchor));
 
@@ -92,6 +91,7 @@ public class MenuView extends VerticalPanel {
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
 		
+
 	}
 	
 	/*Einfache ClickHandler werden implementiert 
@@ -121,7 +121,8 @@ public class MenuView extends VerticalPanel {
 //			RootPanel.get().add(mView);
 
 			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get().add(san);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 		}
 	}
 	private class CreateNotebookHandler implements ClickHandler {
@@ -133,7 +134,8 @@ public class MenuView extends VerticalPanel {
 			RootPanel.get("menu").add(mView);
 
 			CreateNotebook cN = new CreateNotebook();
-			RootPanel.get().add(cN);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(cN);
 		}
 	}
 	private class CreateNoteHandler implements ClickHandler {
@@ -142,7 +144,7 @@ public class MenuView extends VerticalPanel {
 		public void onClick(ClickEvent event) {
 			MenuView mView = new MenuView();
 			RootPanel.get("menu").clear();
-			RootPanel.get().add(mView);
+			RootPanel.get("menu").add(mView);
 
 			CreateNote cN = new CreateNote();
 			RootPanel.get("main").clear();

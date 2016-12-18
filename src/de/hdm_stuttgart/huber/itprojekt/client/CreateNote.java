@@ -4,6 +4,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
@@ -12,6 +14,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
+import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
@@ -32,12 +35,13 @@ public class CreateNote extends BasicView {
 
 	private TextBox titleTextBox = new TextBox();
 	private TextBox SubtitleTextBox = new TextBox();
-	
+	private RichTextToolbar richTextToolbar=new RichTextToolbar(noteArea);
 	private DateBox dueDateBox = new DateBox();
 	private Label title = new Label("Title");
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
+	private Grid grid = new Grid(2,1);
 
 	@Override
 	public void run() {
@@ -57,10 +61,20 @@ public class CreateNote extends BasicView {
 		alignPanel.add(test);
 		alignPanel.add(createButton);
 		createButton.addClickHandler(new CreateClickHandler());
+		grid.setWidget(0, 0, richTextToolbar);
+	
+		noteArea.setSize("475px", "100px");
+
+		noteArea.setSize("445px", "100px");
+		grid.setWidget(1, 0, noteArea);
 		
+		//contentPanel.add(richTextToolbar);
 		contentPanel.add(alignPanel);
-		contentPanel.add(noteArea);
+		//contentPanel.add(noteArea);
+		contentPanel.add(grid);
 		RootPanel.get("main").add(contentPanel);
+		
+		noteArea.setStyleName("noteArea");
 
 	}
 

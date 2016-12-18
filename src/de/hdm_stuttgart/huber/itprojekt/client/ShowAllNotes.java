@@ -54,8 +54,7 @@ public class ShowAllNotes extends BasicView {
 	public void run(){
 		  	FlowPanel contentPanel = new FlowPanel();
 		    FlowPanel fPanel2 = new FlowPanel();
-		    FlowPanel buttonsPanel = new FlowPanel();
-		    contentPanel.add(buttonsPanel);
+		  
 		    fPanel2.add(contentPanel);
 		    editorVerwaltung.getAllNotes(callback);
 		    NoteTable nt = new NoteTable(notes);

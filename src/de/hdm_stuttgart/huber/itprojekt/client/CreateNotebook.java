@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -20,7 +21,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  */
 public class CreateNotebook extends BasicView {
 	private EditorAsync editorVerwaltung  = ClientsideSettings.getEditorVerwaltung();
-
+	private HorizontalPanel hPanel = new HorizontalPanel();
 	private VerticalPanel vPanel = new VerticalPanel();
 	private TextBox titleTextBox = new TextBox();
 	private TextBox subtitleTextBox = new TextBox();
@@ -40,22 +41,24 @@ public class CreateNotebook extends BasicView {
 		vPanel.add(subtitle);
 		vPanel.add(subtitleTextBox);
 		vPanel.add(createButton);
+		//hPanel.add(vPanel);
 		createButton.addClickHandler(new CreateClickHandler());
-		RootPanel.get().add(vPanel);
+		
+		RootPanel.get("main").add(vPanel);
 
 	}
-
 	@Override
 	public String getHeadlineText() {
-
-		return "Create New Notebook";
+		// TODO Auto-generated method stub
+		return "Create New NoteBook";
 	}
-
 	@Override
 	public String getSubHeadlineText() {
-
-		return "Sinnvoller Text!";
+		// TODO Auto-generated method stub
+		return "Text";
 	}
+
+	
 	//Clickhandler für CreateButton 
 	private class CreateClickHandler implements ClickHandler{
 
@@ -94,5 +97,6 @@ public class CreateNotebook extends BasicView {
 		}
 		
 	}
+
 
 }

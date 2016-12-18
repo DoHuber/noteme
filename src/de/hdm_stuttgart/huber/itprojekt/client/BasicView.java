@@ -17,18 +17,14 @@ public abstract class BasicView extends FlowPanel {
 	@Override
 	public void onLoad() {
 		super.onLoad();
+	//	RootPanel.get("main").clear();
 		this.add(createHeadline(getHeadlineText(), getSubHeadlineText()));
+		
 		run();
 
 	}
 
-	/**
-	 * Abstrakte Einschubmethoden, die in den Subklassen zu realisieren sind. 
-	 */
 	
-	public abstract String getHeadlineText();
-
-	public abstract String getSubHeadlineText();
 
 	/**
 	 * 
@@ -50,6 +46,13 @@ public abstract class BasicView extends FlowPanel {
 		headline.setHTML("<h1>" + header + "</h1><h2>" + subHeader + "</h2>");
 		return headline;
 	}
+	/**
+	 * Abstrakte Einschubmethoden, die in den Subklassen zu realisieren sind. 
+	 */
+	
+	public abstract String getHeadlineText();
+
+	public abstract String getSubHeadlineText();
 
 	public abstract void run();
 

@@ -37,9 +37,7 @@ public class NotebookTable {
 	/**
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 	 */
-	private Button deleteBtn = new Button("Delete");
-	private Button editBtn	= new Button("Update");
-	private Button releseBtn = new Button("Release");
+	
 	
 	private NoteBook notebook=null;
 	private NoteBook selected = null;
@@ -104,10 +102,7 @@ public class NotebookTable {
 		LayoutPanel panel = new LayoutPanel();
 		panel.setSize("50em", "40em");
 		panel.add(table);
-		buttonPanel.add(deleteBtn);
-		//deleteBtn.addClickHandler(new DeleteClickHandler());
-		buttonPanel.add(editBtn);
-		buttonPanel.add(releseBtn);
+	
 	
 		
 		fPanel.add(buttonPanel);
@@ -149,7 +144,7 @@ public class NotebookTable {
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
 			selected = selection.getSelectedObject();
-			ShowNotebook sn = new ShowNotebook();
+			ShowNotebook sn = new ShowNotebook(selected);
 			
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sn);
