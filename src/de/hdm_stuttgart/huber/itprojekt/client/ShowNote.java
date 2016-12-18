@@ -31,7 +31,7 @@ public class ShowNote extends BasicView {
 	private HorizontalPanel vp = new HorizontalPanel();
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
-	private Button releseBtn = new Button("Relese");
+	private Button releseBtn = new Button("Release");
 	
 	private RichTextArea noteArea = new RichTextArea();
 	private DateBox dueDateBox = new DateBox();
