@@ -27,8 +27,9 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
  */
 
 public class MenuView extends VerticalPanel {
-
-	private Anchor logoutAnchor = new Anchor();
+	
+	private static String logOutUrl;
+	private Anchor logoutAnchor;
 
 	protected void onLoad() {
 
@@ -49,6 +50,9 @@ public class MenuView extends VerticalPanel {
 		Anchor createNotebook = new Anchor("New Notebook");
 		Anchor createNote = new Anchor("New Note");
 		Anchor reportAnchor = new Anchor("Report");
+		
+		logoutAnchor = new Anchor("Log out");
+		logoutAnchor.setHref(logOutUrl);
 
 		//Test
 		//Anchor hello = new Anchor("Say Hello");
@@ -175,11 +179,11 @@ public class MenuView extends VerticalPanel {
 		
 		}
 	}
-
-	public void setLogoutAnchor(Anchor a) {
-		this.logoutAnchor = a;
+	public static void setLogOutUrl(String logOutUrl) {
+		MenuView.logOutUrl = logOutUrl;
 	}
 
+	
 }
 
 

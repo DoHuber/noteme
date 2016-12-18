@@ -55,10 +55,9 @@ public class IT_Projekt implements EntryPoint {
 	 *	
 	 */
 	private void loadMenu() {
+		
 		MenuView navigation = new MenuView();
-		Anchor a = new Anchor("Log out");
-		a.setHref(userInfo.getLogoutUrl());
-		navigation.setLogoutAnchor(a);
+		MenuView.setLogOutUrl(userInfo.getLogoutUrl());
 		RootPanel.get("menu").add(navigation);
 	 	
 	}
