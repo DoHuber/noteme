@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
@@ -40,6 +41,7 @@ public class CreateNote extends BasicView {
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
+	private Grid grid = new Grid(2,1);
 
 	@Override
 	public void run() {
@@ -59,10 +61,15 @@ public class CreateNote extends BasicView {
 		alignPanel.add(test);
 		alignPanel.add(createButton);
 		createButton.addClickHandler(new CreateClickHandler());
+		grid.setWidget(0, 0, richTextToolbar);
+
+		noteArea.setSize("445px", "100px");
+		grid.setWidget(1, 0, noteArea);
 		
-		contentPanel.add(richTextToolbar);
+		//contentPanel.add(richTextToolbar);
 		contentPanel.add(alignPanel);
-		contentPanel.add(noteArea);
+		//contentPanel.add(noteArea);
+		contentPanel.add(grid);
 		RootPanel.get("main").add(contentPanel);
 
 	}

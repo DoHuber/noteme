@@ -42,10 +42,10 @@ public class CreateNotebook extends BasicView {
 		vPanel.add(subtitle);
 		vPanel.add(subtitleTextBox);
 		vPanel.add(createButton);
-		hPanel.add(vPanel);
+		//hPanel.add(vPanel);
 		createButton.addClickHandler(new CreateClickHandler());
 		
-		RootPanel.get("main").add(hPanel);
+		RootPanel.get("main").add(vPanel);
 
 	}
 	@Override
