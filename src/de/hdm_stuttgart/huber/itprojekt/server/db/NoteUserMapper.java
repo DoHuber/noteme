@@ -1,6 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.*;
 import java.util.Vector;
@@ -25,16 +25,16 @@ public class NoteUserMapper extends DataMapper {
     }
 
     //create Methode
-    public NoteUser create(NoteUser noteUser) throws ClassNotFoundException, SQLException {
+    public UserInfo create(UserInfo noteUser) throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
 
         try {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO noteUser(FirstName, UserName, SurName, Email, GoogleId) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, noteUser.getFirstName());
-            stmt.setString(2, noteUser.getUserName());
+            stmt.setString(2, noteUser.getNickname());
             stmt.setString(3, noteUser.getSurName());
-            stmt.setString(4, noteUser.getEmail());
+            stmt.setString(4, noteUser.getEmailAddress());
             stmt.setString(5, noteUser.getGoogleId());
 
             stmt.executeUpdate();
@@ -52,12 +52,12 @@ public class NoteUserMapper extends DataMapper {
     //findById Methode:
     // bestimmte Notiz wird anhand der eindeutigen ID gesucht und zurückgegeben
     // long wegen DomainObject
-    public NoteUser findById(int id) throws ClassNotFoundException, SQLException {
+    public UserInfo findById(int id) throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
 
       //Was macht die isObjectLoaded Verzweigung hier?
-       if (isObjectLoaded(id, NoteUser.class)) {
-    	   return (NoteUser) loadedObjects.get(id);
+       if (isObjectLoaded(id, UserInfo.class)) {
+    	   return (UserInfo) loadedObjects.get(id);
        }
        
        try {
@@ -68,7 +68,7 @@ public class NoteUserMapper extends DataMapper {
             ResultSet results = stmt.executeQuery();
             if (results.next()) {
 
-                NoteUser noteUser = new NoteUser(results.getInt("id"),
+                UserInfo noteUser = new UserInfo(results.getInt("id"),
             	        results.getString("firstname"),
                         results.getString("username"),
                         results.getString("lastname"),
@@ -89,16 +89,16 @@ public class NoteUserMapper extends DataMapper {
 
 
     //save-Methode: NoteUser-Objekt wird wiederholt in die DB geschrieben
-    public NoteUser save(NoteUser noteUser) throws ClassNotFoundException, SQLException {
+    public UserInfo save(UserInfo noteUser) throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
 
         try {
             PreparedStatement stmt = con.prepareStatement("UPDATE NoteUser SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE id=?");
 
             stmt.setString(1, noteUser.getFirstName());
-            stmt.setString(2, noteUser.getUserName());
+            stmt.setString(2, noteUser.getNickname());
             stmt.setString(3, noteUser.getSurName());
-            stmt.setString(4, noteUser.getEmail());
+            stmt.setString(4, noteUser.getEmailAddress());
             stmt.setString(5, noteUser.getGoogleId());
 
             stmt.executeUpdate();
@@ -111,7 +111,7 @@ public class NoteUserMapper extends DataMapper {
     }
 
 
-    public void delete(NoteUser noteUser) throws ClassNotFoundException, SQLException {
+    public void delete(UserInfo noteUser) throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
 
         try {
@@ -125,9 +125,9 @@ public class NoteUserMapper extends DataMapper {
         }
     }
 
-    public Vector<NoteUser> getAllNoteUser() throws ClassNotFoundException, SQLException {
+    public Vector<UserInfo> getAllNoteUser() throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
-        Vector<NoteUser> result = new Vector<>();
+        Vector<UserInfo> result = new Vector<>();
         
         try {
         // wieso kein prepared Statement mehr?
@@ -136,7 +136,7 @@ public class NoteUserMapper extends DataMapper {
         ResultSet results = stmt.executeQuery("SELECT * FROM notizbuch.noteUser");
         	
        while (results.next()){
-    	   NoteUser noteUser = new NoteUser(results.getInt("id"),
+    	   UserInfo noteUser = new UserInfo(results.getInt("id"),
     			   results.getString("firstname"),
                    results.getString("username"),
                    results.getString("lastname"),

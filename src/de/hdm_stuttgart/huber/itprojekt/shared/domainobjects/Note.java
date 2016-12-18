@@ -9,7 +9,7 @@ public class Note extends DomainObject {
 	private String content = null;
 	private String title = null;
 	private String subtitle = null;
-	private NoteUser owner = null;
+	private UserInfo owner = null;
 	private NoteBook noteBook = null;
 	private Date dueDate = null;
 	private Date creationDate = null;
@@ -37,7 +37,7 @@ public class Note extends DomainObject {
 	 * @param creationDate
 	 * @param modificationDate
 	 */
-	public Note(int noteId, String content, String title, String subtitle, NoteUser owner, NoteBook noteBook,
+	public Note(int noteId, String content, String title, String subtitle, UserInfo owner, NoteBook noteBook,
 			Date dueDate, Date creationDate, Date modificationDate) {
 		super();
 		this.id = noteId;
@@ -89,10 +89,10 @@ public class Note extends DomainObject {
 	public void setSubtitle(String subtitle) {
 		this.subtitle = subtitle;
 	}
-	public NoteUser getOwner() {
+	public UserInfo getOwner() {
 		return owner;
 	}
-	public void setOwner(NoteUser owner) {
+	public void setOwner(UserInfo owner) {
 		this.owner = owner;
 	}
 	public NoteBook getNoteBook() {

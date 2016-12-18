@@ -27,7 +27,9 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
  */
 
 public class MenuView extends VerticalPanel {
-
+	
+	private Anchor logoutAnchor;
+	
 	protected void onLoad() {
 
 		
@@ -35,17 +37,14 @@ public class MenuView extends VerticalPanel {
 		FlowPanel pureMenu  = new FlowPanel();
 		UnorderedListWidget menuList = new UnorderedListWidget();
 
-	//	VerticalPanel vPanel = new VerticalPanel();
-
-		
-		
+		//	VerticalPanel vPanel = new VerticalPanel();
 		Anchor home = new Anchor("NoteMe", GWT.getHostPageBaseURL() + "IT_Projekt.html");
 		Anchor showNotes = new Anchor("Notes ");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		Anchor createNotebook = new Anchor("New Notebook");
 		Anchor createNote = new Anchor("New Note");
 		Anchor reportAnchor = new Anchor("Report");
-		Anchor logoutAnchor = new Anchor("Logout");
+		
 		//Test
 		Anchor hello = new Anchor("Say Hello");
 		
@@ -157,6 +156,11 @@ public class MenuView extends VerticalPanel {
 		
 		}
 	}
+	
+	public void setLogoutAnchor(Anchor a) {
+		this.logoutAnchor = a;
+	}
+	
 }
 
 

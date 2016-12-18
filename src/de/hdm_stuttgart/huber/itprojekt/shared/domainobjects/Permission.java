@@ -8,9 +8,9 @@ public class Permission extends DomainObject {
     private static final long serialVersionUID = 1L;
     public int level = 0;
     private int permissionId = 0;
-    private NoteUser user = null;
+    private UserInfo user = null;
 
-    public Permission(Object object, int int1, NoteUser noteUser, NoteBook noteBook, Note note) {
+    public Permission(Object object, int int1, UserInfo noteUser, NoteBook noteBook, Note note) {
         // TODO Auto-generated constructor stub
     }
 
@@ -50,11 +50,11 @@ public class Permission extends DomainObject {
         this.level = level;
     }
 
-    public NoteUser getUser() {
+    public UserInfo getUser() {
         return user;
     }
 
-    public void setUser(NoteUser user) {
+    public void setUser(UserInfo user) {
         this.user = user;
     }
 
