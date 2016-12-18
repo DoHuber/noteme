@@ -67,6 +67,7 @@ public class NoteTable {
 	}
 
 	public FlowPanel start() {
+		
 		TextColumn<Note> title = new TextColumn<Note>() {
 
 			@Override
