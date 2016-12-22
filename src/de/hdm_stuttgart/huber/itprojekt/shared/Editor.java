@@ -37,6 +37,7 @@ public interface Editor extends RemoteService {
 	
 	// CRUD-Methoden nach User, nur nach Login verwendbar!
 	public Vector<Note> getAllNotesForCurrentUser();
+	public Vector<NoteBook> getAllNoteBooksForCurrentUser();
 	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;

@@ -39,7 +39,7 @@ public class NoteTable {
 	 */
 
 	
-	private NoteBook notebook=null;
+	private NoteBook notebook = null;
 	private Note selected = null;
 	private Vector<Note> notes;
 	DataGrid<Note> table = new DataGrid<Note>();

@@ -29,7 +29,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	
 	
 	private NoteMapper noteMapper;
-	private NoteBookMapper notebookmapper;
+	private NoteBookMapper noteBookMapper;
 	private UserInfoMapper userInfoMapper;
 	
 	@Override
@@ -37,7 +37,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		
 		try {
 			this.noteMapper = NoteMapper.getNoteMapper();
-			this.notebookmapper = NoteBookMapper.getNoteBookMapper();
+			this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
 			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
 			
 		} catch (ClassNotFoundException e) {
@@ -59,8 +59,13 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public NoteBook createNoteBook(NoteBook noteBook) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Date currentDate = new Date(System.currentTimeMillis());
+		noteBook.setCreationDate(currentDate);
+		noteBook.setModificationDate(currentDate);
+		noteBook.setOwner(getCurrentUser());		
+		
+		return noteBookMapper.create(noteBook);
 	}
 
 	@Override
@@ -72,7 +77,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public NoteBook getNoteBookById(NoteBook notebook) throws Exception {
 		
-		return notebookmapper.findById(notebook.getId());
+		return noteBookMapper.findById(notebook.getId());
 	}
 	@Override
 	public void deleteNoteBook(NoteBook noteBook) {
@@ -162,7 +167,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException{
 		
 		try {
-			return notebookmapper.getAllNoteBooks();
+			return noteBookMapper.getAllNoteBooks();
 		} catch (Exception e){
 			
 			e.printStackTrace();
@@ -192,6 +197,14 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		
 		return userInfoMapper.findUserByGoogleId(currentGoogleUser.getUserId());
 		
+	}
+
+	@Override
+	public Vector<NoteBook> getAllNoteBooksForCurrentUser() {
+		
+		UserInfo currentUser = getCurrentUser();
+		return noteBookMapper.getAllNoteBooksForUserId(currentUser.getId());
+				
 	}
 	
 

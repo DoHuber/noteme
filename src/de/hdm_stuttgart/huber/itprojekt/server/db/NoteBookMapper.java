@@ -10,41 +10,45 @@ import java.util.Vector;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
-public class NoteBookMapper {
+public class NoteBookMapper extends DataMapper {
 	
 private static NoteBookMapper noteBookMapper = null;
 	
-	protected NoteBookMapper () {
+	protected NoteBookMapper() throws ClassNotFoundException, SQLException {
 		super();
 	}
 
 	 public static NoteBookMapper getNoteBookMapper() {
 		if (noteBookMapper == null) {
 
-			 noteBookMapper = new NoteBookMapper();
+			 try {
+				 
+				noteBookMapper = new NoteBookMapper();
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			} 
 		}
 			return noteBookMapper;
 	}	
 
-	public NoteBook create(NoteBook notebook) throws ClassNotFoundException, SQLException{
-		 Connection con = DBConnection.getConnection();
-
+	public NoteBook create(NoteBook notebook) {
+	
 		    try {
 		    	
-		      
-		    	PreparedStatement stmt =  con.prepareStatement("INSERT INTO notizbuch.notebook(title, subtitle, creation_date, modification_date, author_id) "
-		    	+ "VALUES (?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS );
+		    	PreparedStatement stmt =  connection.prepareStatement("INSERT INTO notizbuch.notebook(title, subtitle, creation_date, modification_date, author_id) "
+		    	+ "VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS );
 		      
 		    	stmt.setString(1, notebook.getTitle());
 		    	stmt.setString(2, notebook.getSubtitle());
 		    	
-		    	stmt.setString(3, "Owner");
-		    	stmt.setDate(4, new Date(7777));
-		    	stmt.setDate(5, new Date(7777));
+		    	stmt.setDate(3, notebook.getCreationDate());
+		    	stmt.setDate(4, notebook.getModificationDate());
 		    	
+		    	stmt.setInt(5, notebook.getOwner().getId());
 		    	
-		    
 		    	stmt.executeUpdate();
+		    	
 		    	ResultSet rs = stmt.getGeneratedKeys();
 		    	
 		    	if(rs.next()){
@@ -52,10 +56,12 @@ private static NoteBookMapper noteBookMapper = null;
 		    		
 		    	}
 		    	
-		    } catch (SQLException sqlExp) {
-		    sqlExp.printStackTrace();
-		   
+		    } catch (SQLException | ClassNotFoundException sqlExp) {
+		    	
+		    	sqlExp.printStackTrace();
+		    	
 		    }
+		    
 			return notebook;
 	
 	  }
@@ -182,18 +188,52 @@ private static NoteBookMapper noteBookMapper = null;
 
 	            while (rs.next()) {
 
-	                NoteBook notebook = new NoteBook(rs.getInt("id"),
-			        		rs.getString("title"),
-			        		rs.getString("subtitle"),
-			        		UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")),
-			        		rs.getDate("creation_date"),
-			        		rs.getDate("modification_date"));
-
-	                v.add(notebook);
+	                NoteBook resultRow = new NoteBook(rs.getInt("id"));
+	                
+	                resultRow.setTitle(rs.getString("title"));
+	                resultRow.setSubtitle(rs.getString("subtitle"));
+	                resultRow.setCreationDate(rs.getDate("creation_date"));
+	                resultRow.setModificationDate(rs.getDate("modification_date"));
+	                resultRow.setOwner(UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")));
+	                
+	                v.add(resultRow);
 
 	            }
 
 	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return v;
+
+	    }
+	 
+	 	public Vector<NoteBook> getAllNoteBooksForUserId(int userId) {
+		 	
+	 		Vector<NoteBook> v = new Vector<>();
+
+	        try {
+
+	            PreparedStatement ps = connection.prepareStatement("SELECT * FROM notizbuch.notebook WHERE author_id = ?");
+	            ps.setInt(1, userId);
+	            
+	            ResultSet rs = ps.executeQuery();
+	            
+	            while (rs.next()) {
+
+	                NoteBook resultRow = new NoteBook(rs.getInt("id"));
+	                
+	                resultRow.setTitle(rs.getString("title"));
+	                resultRow.setSubtitle(rs.getString("subtitle"));
+	                resultRow.setCreationDate(rs.getDate("creation_date"));
+	                resultRow.setModificationDate(rs.getDate("modification_date"));
+	                resultRow.setOwner(UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")));
+	                
+	                v.add(resultRow);
+
+	            }
+
+	        } catch (SQLException | ClassNotFoundException e) {
 	            e.printStackTrace();
 	        }
 

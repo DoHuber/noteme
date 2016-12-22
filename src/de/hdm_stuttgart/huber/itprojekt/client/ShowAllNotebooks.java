@@ -52,7 +52,7 @@ public class ShowAllNotebooks extends BasicView {
 		    FlowPanel fPanel2 = new FlowPanel();
 		   
 		    fPanel2.add(contentPanel);
-		    editorVerwaltung.getAllNoteBooks(callback);
+		    editorVerwaltung.getAllNoteBooksForCurrentUser(callback);
 		    NotebookTable nbt = new NotebookTable(notebook);
 		    nbt.addClickNote();
 		    RootPanel.get("main").add(contentPanel);

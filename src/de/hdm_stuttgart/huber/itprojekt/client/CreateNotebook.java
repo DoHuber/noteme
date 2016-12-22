@@ -2,6 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -70,10 +71,14 @@ public class CreateNotebook extends BasicView {
 	}
 	//Neues Notizbuch wird erstellt 
 	public void createNotebook(){
+		
 		NoteBook nb = new NoteBook();
-//		nb.setTitle(titleTextBox.getText());
-//		nb.setSubtitle(subtitleTextBox.getText());
+		
+		nb.setTitle(titleTextBox.getText());
+		nb.setSubtitle(subtitleTextBox.getText());
+		
 		editorVerwaltung.createNoteBook(nb, new CreateNotebookCallback());
+		
 	}
 	/**
 	 * 
@@ -85,14 +90,15 @@ public class CreateNotebook extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
+			
+			caught.printStackTrace();
 			
 		}
 
 		@Override
 		public void onSuccess(NoteBook result) {
 			
-		
+			Window.alert("This worked");
 			
 		}
 		
