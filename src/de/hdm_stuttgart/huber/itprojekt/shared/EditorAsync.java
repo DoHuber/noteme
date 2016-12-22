@@ -1,6 +1,5 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
-import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -33,9 +32,6 @@ public interface EditorAsync {
 	void saveNote(Note note, AsyncCallback<Note> callback);
 
 	void saveNoteBook(NoteBook noteBook, AsyncCallback<NoteBook> callback);
-
-	void createNote(String title, String subtitle, String content, String source, Date due_date, int notebook_id,
-			int author_id, AsyncCallback<Void> callback);
 
 	void getAllNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
 

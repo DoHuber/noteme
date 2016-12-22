@@ -91,6 +91,7 @@ public class NoteTable {
 			@Override
 			public String getValue(Note note) {
 				// !!!! Könnte Fehler verursachen
+				// RICHITGGG Veursacht auch Fehler 
 				return note.getCreationDate().toString();
 			}
 		};
@@ -110,8 +111,13 @@ public class NoteTable {
 
 			@Override
 			public String getValue(Note note) {
-				// TODO Auto-generated method stub
-				return note.getDueDate().toString();
+				
+				String resultValue = "Keines gesetzt";
+				if (!(note.getDueDate() == null)) {
+					resultValue = note.getDueDate().toString();
+				}		
+				
+				return resultValue;
 			}
 		};
 		table.addColumn(dueDate, "Due Date");

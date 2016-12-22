@@ -45,8 +45,9 @@ public class IT_Projekt implements EntryPoint {
 				userInfo = result;
 				
 				if (userInfo.isLoggedIn()) {
-					Window.alert(userInfo.toString());
+					
 					loadMenu();
+					
 				} else {
 					loadLogin();
 				}

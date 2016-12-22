@@ -3,7 +3,6 @@
  */
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
-import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -38,9 +37,6 @@ public interface Editor extends RemoteService {
 	
 	// CRUD-Methoden nach User, nur nach Login verwendbar!
 	public Vector<Note> getAllNotesForCurrentUser();
-	
-	// Ohne Objekte zu verwenden, noch weniger Logik im Client
-	public void createNote(String title, String subtitle, String content, String source, Date due_date, int notebook_id, int author_id);
 	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;

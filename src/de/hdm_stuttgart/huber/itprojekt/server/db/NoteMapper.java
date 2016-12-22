@@ -44,7 +44,14 @@ public class NoteMapper extends DataMapper {
             stmt.setDate(6, note.getDueDate());
             stmt.setDate(7, note.getModificationDate());
 
-            stmt.setInt(8, note.getNoteBook().getId());
+         
+            if (!(note.getNoteBook() == null)) {
+            	int noteBookId = note.getNoteBook().getId();
+            	stmt.setInt(8, noteBookId);
+            } else {
+            	stmt.setNull(8, 0);
+            }
+            
             stmt.setInt(9, note.getOwner().getId());
 
             stmt.executeUpdate();
@@ -202,16 +209,19 @@ public class NoteMapper extends DataMapper {
             NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
 
             while (rs.next()) {
-
-                Note note = new Note(rs.getInt("id"),
-                        rs.getString("content"),
-                        rs.getString("title"),
-                        rs.getString("subtitle"),
-                        noteUserMapper.findById(userId),
-                        noteBookMapper.findById(rs.getInt("notebook_id")),
-                        rs.getDate("creation_date"),
-                        rs.getDate("modification_date"),
-                        rs.getDate("due_date"));
+            	
+            	Note note = new Note(rs.getInt("id"));
+            	
+            	note.setContent(rs.getString("content"));
+            	note.setTitle(rs.getString("title"));
+            	note.setSubtitle(rs.getString("subtitle"));
+            	
+            	note.setOwner(noteUserMapper.findById(userId));
+            	note.setNoteBook(noteBookMapper.findById(rs.getInt("notebook_id")));
+            	
+            	note.setCreationDate(rs.getDate("creation_date"));
+            	note.setDueDate(rs.getDate("due_date"));
+            	note.setModificationDate(rs.getDate("modification_date"));
 
                 v.add(note);
 
