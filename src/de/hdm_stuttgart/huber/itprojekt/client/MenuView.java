@@ -43,7 +43,8 @@ public class MenuView extends VerticalPanel {
 		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#ffffff");
 		
 		//Home "Button"
-		Anchor home = new Anchor("NoteMe", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		//RootPanel.get("home").getElement().getStyle().setColor("#660033");
 		//Weitere Button Definitions
 		Anchor showNotes = new Anchor("Notes ");
 		Anchor showNotebooks = new Anchor("Notebooks");
@@ -87,7 +88,6 @@ public class MenuView extends VerticalPanel {
 	       *
 	    */
 
-	
 		showNotes.addClickHandler(new ShowAllNotesHandler());
 		showNotebooks.addClickHandler(new ShowAllNotebooksHandler());
 		createNotebook.addClickHandler(new CreateNotebookHandler());
