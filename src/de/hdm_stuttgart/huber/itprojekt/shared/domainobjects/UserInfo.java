@@ -21,6 +21,16 @@ public class UserInfo extends DomainObject {
 	private String emailAddress;
 	private String nickname;
 	
+	private boolean isAdmin;
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	
+	public void setAdminStatus(boolean status) {
+		this.isAdmin = status;
+	}
+	
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}

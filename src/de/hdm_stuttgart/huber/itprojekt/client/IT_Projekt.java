@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
@@ -28,10 +29,10 @@ public class IT_Projekt implements EntryPoint {
 	      "Please sign in to your Google Account to access the cool and nice application.");
 	private Anchor signInLink = new Anchor("Sign In");
 	
+	private Audio adminSound;
+	
 	public void onModuleLoad() {
 		
-		Logger l = Logger.getLogger("test");
-		l.log(Level.INFO, "Servus i bims");
 		
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
 		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
@@ -45,6 +46,11 @@ public class IT_Projekt implements EntryPoint {
 				userInfo = result;
 				
 				if (userInfo.isLoggedIn()) {
+					
+					if (userInfo.isAdmin()) {
+						initializeAudio();
+						IT_Projekt.this.adminSound.play();
+					}
 					
 					loadMenu();
 					
@@ -77,6 +83,13 @@ public class IT_Projekt implements EntryPoint {
 		loginPanel.add(loginLabel);
 		loginPanel.add(signInLink);
 		RootPanel.get("menu").add(loginPanel);
+		
+	}
+	
+	private void initializeAudio() {
+		
+		adminSound = Audio.createIfSupported();
+		adminSound.setSrc("style/startup.mp3");
 		
 	}
 	
