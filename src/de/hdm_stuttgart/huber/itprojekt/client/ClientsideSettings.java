@@ -4,6 +4,8 @@ import com.google.gwt.core.shared.GWT;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
+import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
 
 public class ClientsideSettings {
 	/**
@@ -36,4 +38,10 @@ public class ClientsideSettings {
 		}
 		return editorVerwaltung;
 	}
+
+	public static SharedServicesAsync getSharedService() {
+
+	    return GWT.create(SharedServices.class);
+
+    }
 }

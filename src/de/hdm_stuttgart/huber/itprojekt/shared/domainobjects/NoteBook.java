@@ -18,14 +18,14 @@ public class NoteBook extends DomainObject {
 
 	private String title = null;
 	private String subtitle = null;
-	private NoteUser owner = null;
+	private UserInfo owner = null;
 	private Date creationDate = null;
 	private Date modificationDate = null;
 
     public NoteBook() {
     }
 
-    public NoteBook(int id, String title, String subtitle, NoteUser owner, Date creationDate, Date modificationDate) {
+    public NoteBook(int id, String title, String subtitle, UserInfo owner, Date creationDate, Date modificationDate) {
 
         this.id = id;
         this.title = title;
@@ -64,7 +64,7 @@ public class NoteBook extends DomainObject {
         return subtitle;
     }
 
-    public NoteUser getOwner() {
+    public UserInfo getOwner() {
         return owner;
     }
 
@@ -84,7 +84,7 @@ public class NoteBook extends DomainObject {
         this.subtitle = subtitle;
     }
 
-    public void setOwner(NoteUser owner) {
+    public void setOwner(UserInfo owner) {
         this.owner = owner;
     }
 

@@ -2,7 +2,6 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Basisklasse 

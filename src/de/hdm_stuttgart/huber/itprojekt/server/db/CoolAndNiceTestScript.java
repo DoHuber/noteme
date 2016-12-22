@@ -2,7 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -43,7 +43,7 @@ public class CoolAndNiceTestScript {
         NoteBook nb = new NoteBook(5);
         n.setNoteBook(nb);
 
-        NoteUser nu = new NoteUser(5);
+        UserInfo nu = new UserInfo(5);
         n.setOwner(nu);
 
         try {

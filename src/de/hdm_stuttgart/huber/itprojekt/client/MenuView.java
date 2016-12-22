@@ -10,9 +10,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportCheckAdmin;
-import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportGenerator;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 
@@ -29,6 +27,9 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
  */
 
 public class MenuView extends VerticalPanel {
+	
+	private static String logOutUrl;
+	private Anchor logoutAnchor;
 
 	protected void onLoad() {
 
@@ -50,7 +51,10 @@ public class MenuView extends VerticalPanel {
 		Anchor createNotebook = new Anchor("New Notebook");
 		Anchor createNote = new Anchor("New Note");
 		Anchor reportAnchor = new Anchor("Report");
-		Anchor logoutAnchor = new Anchor("Logout");
+		
+		logoutAnchor = new Anchor("Log out");
+		logoutAnchor.setHref(logOutUrl);
+
 		//Test
 		//Anchor hello = new Anchor("Say Hello");
 		
@@ -175,7 +179,11 @@ public class MenuView extends VerticalPanel {
 		
 		}
 	}
+	public static void setLogOutUrl(String logOutUrl) {
+		MenuView.logOutUrl = logOutUrl;
+	}
 
+	
 }
 
 

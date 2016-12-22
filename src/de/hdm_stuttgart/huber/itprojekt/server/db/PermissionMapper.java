@@ -6,7 +6,7 @@ import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 
 
@@ -71,7 +71,7 @@ public class PermissionMapper extends DataMapper {
 			if (results.next()) {
 				return new Permission(results.getObject("Content"),
 						results.getInt("Level"),
-						new NoteUser(),
+						new UserInfo(),
 						new NoteBook(),
 						new Note());
 			}

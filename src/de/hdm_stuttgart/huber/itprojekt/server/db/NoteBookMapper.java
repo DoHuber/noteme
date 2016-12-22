@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteUser;
 
 public class NoteBookMapper {
 	
