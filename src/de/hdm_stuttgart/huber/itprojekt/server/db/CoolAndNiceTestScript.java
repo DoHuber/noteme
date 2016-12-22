@@ -1,11 +1,14 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
+import de.hdm_stuttgart.huber.itprojekt.server.EditorImpl;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Vector;
 
 /**
  * Testskript zum Ausprobieren ob die DataMapper richtig funktionieren.
@@ -15,16 +18,12 @@ import java.sql.SQLException;
 public class CoolAndNiceTestScript {
 
 
-    public static void main(String[] args) {
-
-        Note n1 = createNoteTest();             // PASS
-        Note n2 = saveNoteTest(n1);             // PASS
-        findNoteByIdTest(n2.getId());           // PASS
-
-        Note n3 = new Note(349);
-        deleteNoteTest(n3);                     // PASS
-
-
+    public static void main(String[] args) throws Throwable {
+    	
+    	Vector<Note> vector = NoteMapper.getNoteMapper().getAllNotesForUserId(503);
+    	System.out.println(Arrays.toString(vector.toArray()));
+    	
+	
     }
 
     private static Note createNoteTest() {

@@ -6,30 +6,43 @@ import java.sql.*;
 import java.util.Vector;
 
 
-public class NoteUserMapper extends DataMapper {
+public class UserInfoMapper extends DataMapper {
 
     //Statisches Attribut, welches den Singleton-NoteUserMapper enthält
-    private static NoteUserMapper noteUserMapper = null;
+    private static UserInfoMapper userInfoMapper = null;
 
     //Konstruktor (protected, um unauthorisiertes Instanziieren der Klasse zu verhindern)
-    protected NoteUserMapper() throws ClassNotFoundException, SQLException {
+    protected UserInfoMapper() throws ClassNotFoundException, SQLException {
      
     }
 
     //Öffentliche statische Methode, um den Singleton-NoteUserMapper zu erhalten
-    public static NoteUserMapper getNoteUserMapper() throws ClassNotFoundException, SQLException {
-        if (noteUserMapper == null) {
-            noteUserMapper = new NoteUserMapper();
+    public static UserInfoMapper getUserInfoMapper() {
+        if (userInfoMapper == null) {
+        	
+            try {
+				userInfoMapper = new UserInfoMapper();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
         }
-        return noteUserMapper;
+       
+        return userInfoMapper;
     }
 
     //create Methode
+    // Use register
+    @Deprecated 
     public UserInfo create(UserInfo noteUser) throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
 
         try {
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO noteUser(FirstName, UserName, SurName, Email, GoogleId) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO userinfo(FirstName, UserName, SurName, Email, GoogleId) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, noteUser.getFirstName());
             stmt.setString(2, noteUser.getNickname());
@@ -49,9 +62,7 @@ public class NoteUserMapper extends DataMapper {
         return noteUser;
     }
 
-    //findById Methode:
-    // bestimmte Notiz wird anhand der eindeutigen ID gesucht und zurückgegeben
-    // long wegen DomainObject
+    // FINDBYID
     public UserInfo findById(int id) throws ClassNotFoundException, SQLException {
         Connection con = DBConnection.getConnection();
 
@@ -61,7 +72,7 @@ public class NoteUserMapper extends DataMapper {
        }
        
        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM notizbuch.noteuser WHERE id = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM notizbuch.userinfo WHERE id = ?");
             stmt.setInt(1, id);
 
             //Ergebnis holen
@@ -93,7 +104,7 @@ public class NoteUserMapper extends DataMapper {
         Connection con = DBConnection.getConnection();
 
         try {
-            PreparedStatement stmt = con.prepareStatement("UPDATE NoteUser SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE id=?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE userinfo SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE id=?");
 
             stmt.setString(1, noteUser.getFirstName());
             stmt.setString(2, noteUser.getNickname());
@@ -115,7 +126,7 @@ public class NoteUserMapper extends DataMapper {
         Connection con = DBConnection.getConnection();
 
         try {
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM notizbuch.noteUser WHERE id = ?");
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM notizbuch.userinfo WHERE id = ?");
             stmt.setLong(1, noteUser.getId());
             stmt.executeUpdate();
 
@@ -133,7 +144,7 @@ public class NoteUserMapper extends DataMapper {
         // wieso kein prepared Statement mehr?
         // PreparedStatement stmt = con.prepareStatement("SELECT NoteUserId FROM NoteUser");
         Statement stmt = con.createStatement();
-        ResultSet results = stmt.executeQuery("SELECT * FROM notizbuch.noteUser");
+        ResultSet results = stmt.executeQuery("SELECT * FROM notizbuch.userinfo");
         	
        while (results.next()){
     	   UserInfo noteUser = new UserInfo(results.getInt("id"),
@@ -148,6 +159,82 @@ public class NoteUserMapper extends DataMapper {
         	e.printStackTrace();
         }
         return result;
+    }
+    
+    public boolean isUserRegistered(String googleId) {
+    	
+    	try {
+    	
+    	PreparedStatement ps = connection.prepareStatement("SELECT EXISTS(SELECT * FROM notizbuch.userinfo WHERE google_id = ?) AS does_exist");
+    	ps.setString(1, googleId);
+    	
+    	ResultSet rs = ps.executeQuery();
+    	
+    	if (rs.next()) {
+    		
+    		return rs.getBoolean("does_exist");
+    	
+    	} 
+    	
+    	} catch (SQLException e) {
+    		
+    		e.printStackTrace();
+    		
+    	}
+    	
+    	return false;
+    }
+    
+    /**
+     * Registriert einen User mit seiner GoogleId in der Datenbank
+     * Diese Funktion registriert nur username, email und GoogleId um Chaos zu vermeiden
+     * Später wird dem User nach der Registrierung angeboten, den Rest auch gleich zu setzen
+     * @param u
+     */
+    public void registerUser(UserInfo u) {
+    	
+    	try {
+    		
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO notizbuch.userinfo(username, email, google_id)" + 
+					" VALUES (?, ?, ?)");
+			
+			ps.setString(1, u.getNickname());
+			ps.setString(2, u.getEmailAddress());
+			ps.setString(3, u.getGoogleId());
+						
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    public UserInfo findUserByGoogleId(String googleId) {
+    	
+    	try {
+    		
+			PreparedStatement ps = connection.prepareCall("SELECT id FROM notizbuch.userinfo WHERE google_id = ?");
+			ps.setString(1, googleId);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+				return findById(rs.getInt("id"));
+				
+			} else {
+				
+				throw new IllegalArgumentException("Logikfehler: Kein User gefunden");
+				
+			}
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return null;
     }
     
 }

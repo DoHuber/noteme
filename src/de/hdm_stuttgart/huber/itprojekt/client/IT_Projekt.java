@@ -1,8 +1,12 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Label;
@@ -21,10 +25,13 @@ public class IT_Projekt implements EntryPoint {
 	private UserInfo userInfo = null;
 	private VerticalPanel loginPanel = new VerticalPanel();
 	private Label loginLabel = new Label(
-	      "Please sign in to your Google Account to access the StockWatcher application.");
+	      "Please sign in to your Google Account to access the cool and nice application.");
 	private Anchor signInLink = new Anchor("Sign In");
 	
 	public void onModuleLoad() {
+		
+		Logger l = Logger.getLogger("test");
+		l.log(Level.INFO, "Servus i bims");
 		
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
 		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
@@ -38,6 +45,7 @@ public class IT_Projekt implements EntryPoint {
 				userInfo = result;
 				
 				if (userInfo.isLoggedIn()) {
+					Window.alert(userInfo.toString());
 					loadMenu();
 				} else {
 					loadLogin();

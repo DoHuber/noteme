@@ -90,7 +90,7 @@ private static NoteBookMapper noteBookMapper = null;
                         rs.getInt("id"),
 		                rs.getString("title"),
 		        		rs.getString("subtitle"),
-		        		NoteUserMapper.getNoteUserMapper().findById(rs.getInt("author_id")),
+		        		UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")),
 		        		rs.getDate("creation_date"),
 		        		rs.getDate("modification_date"));
 
@@ -185,7 +185,7 @@ private static NoteBookMapper noteBookMapper = null;
 	                NoteBook notebook = new NoteBook(rs.getInt("id"),
 			        		rs.getString("title"),
 			        		rs.getString("subtitle"),
-			        		NoteUserMapper.getNoteUserMapper().findById(rs.getInt("author_id")),
+			        		UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")),
 			        		rs.getDate("creation_date"),
 			        		rs.getDate("modification_date"));
 

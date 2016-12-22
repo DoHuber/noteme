@@ -15,6 +15,9 @@
 
 	<!-- NUR EIN TEST DIE FOLGENDE ZEILE -->
 	<inherits name='com.google.gwt.user.theme.clean.Clean'/>
+	
+	<!-- Kein Test die folgende Zeile -->
+	<inherits name="com.google.gwt.logging.Logging"/>
 
   <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->

@@ -1,6 +1,9 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import java.util.Arrays;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -56,7 +59,9 @@ public class ShowAllNotes extends BasicView {
 		    FlowPanel fPanel2 = new FlowPanel();
 		  
 		    fPanel2.add(contentPanel);
-		    editorVerwaltung.getAllNotes(callback);
+		    
+		    editorVerwaltung.getAllNotesForCurrentUser(callback);
+		    
 		    NoteTable nt = new NoteTable(notes);
 		    nt.addClickNote();
 		    RootPanel.get("main").add(contentPanel);
@@ -65,13 +70,22 @@ public class ShowAllNotes extends BasicView {
 	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
     @Override
     public void onSuccess(Vector<Note> result) {
+    	
+    	Logger logger = Logger.getLogger("test");
+    	logger.log(Level.INFO, Arrays.toString(result.toArray()));
+    	
       addNotesToTable(result);
     }
 
     @Override
-    public void onFailure(Throwable caught) {}
+    public void onFailure(Throwable caught) {
+    	
+    	Logger logger = Logger.getLogger("test");
+    	logger.log(Level.SEVERE, caught.toString());
+    	
+    }
 
-	
+		
   }
 
 

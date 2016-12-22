@@ -81,7 +81,7 @@ public class NoteMapper extends DataMapper {
                             rs.getString("content"),
                             rs.getString("title"),
                             rs.getString("subtitle"),
-                            NoteUserMapper.getNoteUserMapper().findById(rs.getInt("author_id")),
+                            UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")),
                             NoteBookMapper.getNoteBookMapper().findById(rs.getInt("notebook_id")),
                             rs.getDate("creation_date"),
                             rs.getDate("due_date"),
@@ -154,14 +154,13 @@ public class NoteMapper extends DataMapper {
 
     public Vector<Note> getAllNotes() throws ClassNotFoundException, SQLException {
 
-        Connection connection = DBConnection.getConnection();
         Vector<Note> v = new Vector<>();
 
         try {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.note");
-            NoteUserMapper noteUserMapper = NoteUserMapper.getNoteUserMapper();
+            UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
             NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
 
             while (rs.next()) {
@@ -181,6 +180,44 @@ public class NoteMapper extends DataMapper {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return v;
+
+    }
+    
+    public Vector<Note> getAllNotesForUserId(int userId) {
+
+        Vector<Note> v = new Vector<>();
+
+        try {
+
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE author_id = ?");
+            stmt.setInt(1, userId);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
+            NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
+
+            while (rs.next()) {
+
+                Note note = new Note(rs.getInt("id"),
+                        rs.getString("content"),
+                        rs.getString("title"),
+                        rs.getString("subtitle"),
+                        noteUserMapper.findById(userId),
+                        noteBookMapper.findById(rs.getInt("notebook_id")),
+                        rs.getDate("creation_date"),
+                        rs.getDate("modification_date"),
+                        rs.getDate("due_date"));
+
+                v.add(note);
+
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 

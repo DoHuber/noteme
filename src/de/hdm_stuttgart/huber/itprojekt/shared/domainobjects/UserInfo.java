@@ -11,7 +11,6 @@ public class UserInfo extends DomainObject {
 	private static final long serialVersionUID = 1L;
 
 	private String firstName;
-	
 	private String surName;
 	private String googleId;
 	
@@ -45,20 +44,18 @@ public class UserInfo extends DomainObject {
 	public UserInfo() {
 		
 	}
-
-    @Override
-    public String toString() {
-        return "NoteUser{" +
-                "firstName='" + firstName + '\'' +
-                ", userName='" + nickname + '\'' +
-                ", surName='" + surName + '\'' +
-                ", email='" + emailAddress + '\'' +
-                '}';
-    }
-
-    public static long getSerialversionuid() {
+    
+	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+    
+	@Override
+	public String toString() {
+		return "UserInfo [firstName=" + firstName + ", surName=" + surName + ", googleId=" + googleId + ", loggedIn="
+				+ loggedIn + ", loginUrl=" + loginUrl + ", logoutUrl=" + logoutUrl + ", emailAddress=" + emailAddress
+				+ ", nickname=" + nickname + "]";
+	}
+
 	public int getId() {
 	    return this.id;
     }

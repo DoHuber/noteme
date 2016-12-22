@@ -6,14 +6,19 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Vector;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
+import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class EditorImpl extends RemoteServiceServlet implements Editor {
 	
@@ -21,26 +26,30 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	 * AUTO-GENERATED
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
 	private NoteMapper noteMapper;
 	private NoteBookMapper notebookmapper;
-
+	private UserInfoMapper userInfoMapper;
+	
 	@Override
 	public void init() throws IllegalArgumentException {
 		
 		try {
 			this.noteMapper = NoteMapper.getNoteMapper();
-			this.notebookmapper =NoteBookMapper.getNoteBookMapper();
+			this.notebookmapper = NoteBookMapper.getNoteBookMapper();
+			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
+			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
 	@Override
+	@Deprecated
 	public String getHelloWorld() {
 		// Sinnlose Methode, gibt einen zufälligen String zurück
 		// Zu Testzwecken, wird dann bezeiten rausgeworfen
@@ -161,14 +170,33 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	public void createNote(String title, String subtitle, String content, String source, Date due_date, int notebook_id,
 			int author_id) {
 		
-		
-		
-		
-		
-		
+		// TODO
 		
 	}
 	
+	@Override
+	public Vector<Note> getAllNotesForCurrentUser() {
+		
+		UserInfo currentUser = getCurrentUser();
+		return noteMapper.getAllNotesForUserId(currentUser.getId());
+		
+	}
+	
+	private UserInfo getCurrentUser() {
+		
+		UserService userService = UserServiceFactory.getUserService();
+		if (!userService.isUserLoggedIn()) {
+			throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
+		}
+		
+		User currentGoogleUser = userService.getCurrentUser();
+		
+		// Da durch die Logik sichergestellt ist, dass jeder eingeloggte User registriert ist,
+		// ist das hier problemlos möglich
+		
+		return userInfoMapper.findUserByGoogleId(currentGoogleUser.getUserId());
+		
+	}
 	
 
 }

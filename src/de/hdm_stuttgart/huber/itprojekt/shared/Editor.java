@@ -36,11 +36,15 @@ public interface Editor extends RemoteService {
 	public Note getNoteById(Note note) throws Exception;
 	public void deleteNote(Note note);
 	
+	// CRUD-Methoden nach User, nur nach Login verwendbar!
+	public Vector<Note> getAllNotesForCurrentUser();
+	
 	// Ohne Objekte zu verwenden, noch weniger Logik im Client
 	public void createNote(String title, String subtitle, String content, String source, Date due_date, int notebook_id, int author_id);
 	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;
+	
 	public Vector<Note> getAllNotes() throws BullshitException;
 	
 }

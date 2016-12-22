@@ -37,4 +37,6 @@ public interface EditorAsync {
 	void createNote(String title, String subtitle, String content, String source, Date due_date, int notebook_id,
 			int author_id, AsyncCallback<Void> callback);
 
+	void getAllNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
+
 }

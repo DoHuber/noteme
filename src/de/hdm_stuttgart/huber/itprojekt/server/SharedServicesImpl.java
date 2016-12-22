@@ -4,6 +4,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
@@ -13,9 +15,11 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
  *
  */
 public class SharedServicesImpl extends RemoteServiceServlet implements SharedServices {
+	
+	UserInfoMapper userInfoMapper = UserInfoMapper.getUserInfoMapper();
 
     /**
-	 * 
+	 * Automatisch von eclipse generiert damit es Ruhe gibt
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -38,6 +42,11 @@ public class SharedServicesImpl extends RemoteServiceServlet implements SharedSe
     		userInfo.setNickname(user.getNickname());
     		userInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
     		userInfo.setGoogleId(user.getUserId());
+    		
+    		// Registration aktuell noch etwas unzeremoniell
+    		if (!userInfoMapper.isUserRegistered(userInfo.getGoogleId())) {
+    			userInfoMapper.registerUser(userInfo);
+    		}
     		
     	} else {
     		
