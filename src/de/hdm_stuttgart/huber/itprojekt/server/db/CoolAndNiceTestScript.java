@@ -20,8 +20,12 @@ public class CoolAndNiceTestScript {
 
     public static void main(String[] args) throws Throwable {
     	
-    	Vector<Note> vector = NoteMapper.getNoteMapper().getAllNotesForUserId(503);
-    	System.out.println(Arrays.toString(vector.toArray()));
+    	Vector<Note> vector = NoteMapper.getNoteMapper().getAllNotesForNoteBookId(57);
+    	
+    	
+    	for (Note row : vector) {
+    		System.out.println(row.toString());
+    	}
     	
 	
     }

@@ -138,8 +138,6 @@ public class CreateNote extends BasicView {
 			RootPanel.get().add(mw);
 			RootPanel.get().add(lb);
 			
-		
-			
 		}
 		
 	}

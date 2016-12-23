@@ -41,6 +41,8 @@ public interface Editor extends RemoteService {
 	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;
+	public Vector<Note> getAllFrom(NoteBook nb);
+	
 	
 	public Vector<Note> getAllNotes() throws BullshitException;
 	
