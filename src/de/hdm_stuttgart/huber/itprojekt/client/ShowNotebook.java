@@ -29,7 +29,7 @@ public class ShowNotebook extends BasicView{
 	private HorizontalPanel vp = new HorizontalPanel();
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
-	private Button releseBtn = new Button("Relese");
+	private Button releseBtn = new Button("Release");
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	NoteBook nb = null;
 	AllNotesCallback callback = new AllNotesCallback();
@@ -64,6 +64,7 @@ public class ShowNotebook extends BasicView{
 	    NoteTable nt = new NoteTable(notes);
 	    nt.addClickNote();
 	    RootPanel.get("main").clear();
+	    //RootPanel.get("table").clear();
 	   
 		contentPanel.add(vp);
 		contentPanel.add(nt.start());
@@ -88,6 +89,8 @@ public class ShowNotebook extends BasicView{
 	nt.addClickNote();
 	RootPanel.get("main").clear();
 	RootPanel.get("main").add(nt.start());
+	//RootPanel.get("table").clear();
+	//RootPanel.get("table").add(nt.start());
 }
 
 }
