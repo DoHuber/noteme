@@ -32,7 +32,10 @@ public class ShowNotebook extends BasicView{
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
 	private Button releseBtn = new Button("Release");
+<<<<<<< HEAD
+=======
 	private Button createBtn = new Button ("Create Note");
+>>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	NoteBook nb = null;
 	private TextBox title = new TextBox();
@@ -66,6 +69,13 @@ public class ShowNotebook extends BasicView{
 		deleteBtn.addClickHandler(new DeleteClickHandler());
 		vp.add(editBtn);
 		vp.add(releseBtn);
+<<<<<<< HEAD
+		editorVerwaltung.getAllNotes(callback);
+	    NoteTable nt = new NoteTable(notes);
+	    nt.addClickNote();
+	    RootPanel.get("main").clear();
+	    //RootPanel.get("table").clear();
+=======
 		vp.add(createBtn);
 		createBtn.addClickHandler(new CreateNoteClickHandler());
 		nb.getId();
@@ -76,6 +86,7 @@ public class ShowNotebook extends BasicView{
 	    NoteTable nt = new NoteTable(notes);
 	    nt.addClickNote();
 	   
+>>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
 	   
 		contentPanel.add(vp);
 		contentPanel.add(title);
@@ -115,8 +126,21 @@ public class ShowNotebook extends BasicView{
 			
 		}}
 		
+<<<<<<< HEAD
+	  }
+	public void addNotesToTable(Vector<Note> result) {
+	notes = result;
+	NoteTable nt = new NoteTable(notes);
+	nt.addClickNote();
+	RootPanel.get("main").clear();
+	RootPanel.get("main").add(nt.start());
+	//RootPanel.get("table").clear();
+	//RootPanel.get("table").add(nt.start());
+}
+=======
 	
 	private class DeleteCallback implements AsyncCallback<Void>{
+>>>>>>> branch 'Gui2.0' of https://github.com/DoHuber/it-projekt.git
 
 		@Override
 		public void onFailure(Throwable caught) {
