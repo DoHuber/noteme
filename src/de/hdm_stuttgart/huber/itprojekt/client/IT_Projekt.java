@@ -29,7 +29,8 @@ public class IT_Projekt implements EntryPoint {
 	      "Please sign in to your Google Account to access the cool and nice application.");
 	private Anchor signInLink = new Anchor("Sign In");
 	
-	private Audio adminSound;
+	private Audio bootSound;
+	private Audio bootAdminSound;
 	
 	public void onModuleLoad() {
 		
@@ -47,9 +48,16 @@ public class IT_Projekt implements EntryPoint {
 				
 				if (userInfo.isLoggedIn()) {
 					
-					if (userInfo.isAdmin()) {
-						initializeAudio();
-						IT_Projekt.this.adminSound.play();
+					initializeAudio();
+					
+					if (!userInfo.isAdmin()) {
+						
+						IT_Projekt.this.bootSound.play();
+						
+					} else {
+						
+						IT_Projekt.this.bootAdminSound.play();
+						
 					}
 					
 					loadMenu();
@@ -88,8 +96,11 @@ public class IT_Projekt implements EntryPoint {
 	
 	private void initializeAudio() {
 		
-		adminSound = Audio.createIfSupported();
-		adminSound.setSrc("style/startup.mp3");
+		bootSound = Audio.createIfSupported();
+		bootSound.setSrc("style/audiores/startup.mp3");
+		
+		bootAdminSound = Audio.createIfSupported();
+		bootAdminSound.setSrc("style/audiores/startupadmin.mp3");
 		
 	}
 	

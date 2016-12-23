@@ -4,6 +4,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -172,12 +173,14 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			
 			Label lb = new Label("Ich melde mich ab");
 			RootPanel.get("menu").clear();
-			RootPanel.get().add(lb);
-			
+			RootPanel.get().add(lb);		
 		
 		}
+
+		
 	}
 	public static void setLogOutUrl(String logOutUrl) {
 		MenuView.logOutUrl = logOutUrl;
