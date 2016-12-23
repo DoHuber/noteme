@@ -89,7 +89,13 @@ public class ShowNote extends BasicView {
 		if(	Window.confirm("Möchten Sie die Notiz "+ n.getTitle()+ " wirklich löschen?")){
 			editorVerwaltung.deleteNote(n, new DeleteCallback());
 		}
-			
+		MenuView navigation = new MenuView();
+		RootPanel.get("menu").clear();
+		RootPanel.get("menu").add(navigation);	
+		
+		ShowAllNotes san =  new ShowAllNotes();
+		RootPanel.get("main").clear();
+		RootPanel.get("main").add(san);
 			
 		}
 		
@@ -105,13 +111,7 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onSuccess(Void result) {
-			MenuView navigation = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(navigation);	
-			
-			ShowAllNotes san =  new ShowAllNotes();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
+		
 			
 			
 		}
