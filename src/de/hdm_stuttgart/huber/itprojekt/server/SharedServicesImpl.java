@@ -48,6 +48,8 @@ public class SharedServicesImpl extends RemoteServiceServlet implements SharedSe
     			userInfoMapper.registerUser(userInfo);
     		}
     		
+    		userInfo.setAdminStatus(userService.isUserAdmin());
+    		
     	} else {
     		
     		userInfo.setLoggedIn(false);
