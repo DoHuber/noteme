@@ -42,7 +42,6 @@ public class CreateNote extends BasicView {
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
 	private Grid grid = new Grid(2,1);
-
 	@Override
 	public void run() {
 		/*
@@ -113,6 +112,7 @@ public class CreateNote extends BasicView {
 		note.setSubtitle(SubtitleTextBox.getText());
 		note.setContent(noteArea.getText());
 		editorVerwaltung.createNote(note, new CreateNoteCallback());
+
 	}
 	/**
 	 * Klasse die den callback zum Notiz anlegen implementiert. Die angelegte Notiz wird
@@ -134,9 +134,10 @@ public class CreateNote extends BasicView {
 			MenuView mw = new MenuView();
 			String test ="Erfolgreich";
 			Label lb=new Label(test);	
-			RootPanel.get().clear();
-			RootPanel.get().add(mw);
-			RootPanel.get().add(lb);
+			RootPanel.get("main").clear();
+			RootPanel.get("menu").clear();
+			RootPanel.get("main").add(mw);
+			RootPanel.get("main").add(lb);
 			
 		
 			
