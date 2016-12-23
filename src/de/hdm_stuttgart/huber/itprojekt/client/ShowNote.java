@@ -45,8 +45,13 @@ public class ShowNote extends BasicView {
 
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
-		return "Notizbuch:"+ n.getNoteBook().getTitle();
+		if (n.getNoteBook()==null){
+			return "Für die Notiz wurde kein Notizbuch ausgewählt";
+		}
+		else{
+			return "Notizbuch:"+ n.getNoteBook().getTitle();
+		}
+		
 	}
 
 	@Override

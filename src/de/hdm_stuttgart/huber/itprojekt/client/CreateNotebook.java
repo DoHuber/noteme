@@ -66,6 +66,9 @@ public class CreateNotebook extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 			createNotebook();
+			ShowAllNotebooks san = new ShowAllNotebooks();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 			
 		}
 	}
@@ -99,6 +102,8 @@ public class CreateNotebook extends BasicView {
 		public void onSuccess(NoteBook result) {
 			
 			Window.alert("This worked");
+			
+		
 			
 		}
 		

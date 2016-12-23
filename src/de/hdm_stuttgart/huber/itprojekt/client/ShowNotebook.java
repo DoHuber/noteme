@@ -48,14 +48,14 @@ public class ShowNotebook extends BasicView{
 
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
-		return "Notizbuch: "+ nb.getTitle();
+	
+	return "Notizbuch: "+ nb.getTitle();
 	}
 
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Subtitle: "+ nb.getSubtitle();
+		return "Subtitle: "	+ nb.getSubtitle();
 	}
 
 	@Override
@@ -72,8 +72,9 @@ public class ShowNotebook extends BasicView{
 		title.setText(nb.getTitle());
 		subtitle.setText(nb.getSubtitle());
 		//editorVerwaltung.getAllNotes(callback);
-	   // NoteTable nt = new NoteTable(notes);
-	   // nt.addClickNote();
+	//	editorVerwaltung.getAllFrom(nb, callback);
+	    NoteTable nt = new NoteTable(notes);
+	    nt.addClickNote();
 	   
 	   
 		contentPanel.add(vp);
@@ -85,24 +86,24 @@ public class ShowNotebook extends BasicView{
 
 
 	}
-//	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
-//	    @Override
-//	    public void onSuccess(Vector<Note> result) {
-//	      addNotesToTable(result);
-//	    }
-//
-//	    @Override
-//	    public void onFailure(Throwable caught) {}
-//
-//		
-//	  }
-//	public void addNotesToTable(Vector<Note> result) {
-//	notes = result;
-//	NoteTable nt = new NoteTable(notes);
-//	nt.addClickNote();
-////	RootPanel.get("main").clear();
-////	RootPanel.get("main").add(nt.start());
-//}
+	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
+	    @Override
+	    public void onSuccess(Vector<Note> result) {
+	      addNotesToTable(result);
+	    }
+
+	    @Override
+	    public void onFailure(Throwable caught) {}
+
+		
+	  }
+	public void addNotesToTable(Vector<Note> result) {
+	notes = result;
+	NoteTable nt = new NoteTable(notes);
+	nt.addClickNote();
+	RootPanel.get("main").clear();
+	RootPanel.get("main").add(nt.start());
+}
 	private class DeleteClickHandler implements ClickHandler {
 
 		@Override
@@ -126,13 +127,13 @@ public class ShowNotebook extends BasicView{
 
 		@Override
 		public void onSuccess(Void result) {
-//			MenuView navigation = new MenuView();
-//			RootPanel.get("menu").clear();
-//			RootPanel.get("menu").add(navigation);	
-//			
-//			ShowAllNotebooks san =  new ShowAllNotebooks();
-//			RootPanel.get("main").clear();
-//			RootPanel.get("main").add(san);
+			MenuView navigation = new MenuView();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(navigation);	
+			
+			ShowAllNotebooks san =  new ShowAllNotebooks();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 			
 		}
 	}
@@ -144,7 +145,7 @@ public class ShowNotebook extends BasicView{
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(mView);
 			
-			CreateNote cN = new CreateNote();
+			CreateNote cN = new CreateNote(nb);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(cN);
 			

@@ -17,6 +17,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
 /**
  * Notiz anlegen! 
@@ -42,6 +43,14 @@ public class CreateNote extends BasicView {
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
 	private Grid grid = new Grid(2,1);
+	private NoteBook nb = null; 
+	public CreateNote (){
+		
+	}
+	public CreateNote (NoteBook nb ){
+		this.nb = nb;
+		
+	}
 	@Override
 	public void run() {
 		/*
@@ -98,7 +107,9 @@ public class CreateNote extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 			createNote();
-			
+			ShowAllNotes san = new ShowAllNotes();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 		}
 		
 	}
@@ -111,9 +122,11 @@ public class CreateNote extends BasicView {
 		note.setTitle(titleTextBox.getText());
 		note.setSubtitle(SubtitleTextBox.getText());
 		note.setContent(noteArea.getText());
+		note.setNoteBook(nb);
 		editorVerwaltung.createNote(note, new CreateNoteCallback());
 
 	}
+
 	/**
 	 * Klasse die den callback zum Notiz anlegen implementiert. Die angelegte Notiz wird
 	 * an die EditorImpl übergeben. Später soll die angelegte Notiz noch dem Nutzer angezeigt werden  
