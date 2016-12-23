@@ -9,6 +9,9 @@ public class NoteMapper extends DataMapper {
 
     // Statisches Attribut, welches den Singleton-NoteMapper enthält.
     private static NoteMapper noteMapper = null;
+    private UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
+    private NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
+
 
     // Nichtöffentlicher Konstruktor, um "unauthorisiertes" Instanziieren dieser Klasse zu verhindern.
     protected NoteMapper() throws ClassNotFoundException, SQLException {
@@ -161,42 +164,22 @@ public class NoteMapper extends DataMapper {
 
     public Vector<Note> getAllNotes() throws ClassNotFoundException, SQLException {
 
-        Vector<Note> v = new Vector<>();
-
         try {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.note");
-            UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
-            NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
-
-            while (rs.next()) {
-
-                Note note = new Note(rs.getInt("id"),
-                        rs.getString("content"),
-                        rs.getString("title"),
-                        rs.getString("subtitle"),
-                        noteUserMapper.findById(rs.getInt("author_id")),
-                        noteBookMapper.findById(rs.getInt("notebook_id")),
-                        rs.getDate("creation_date"),
-                        rs.getDate("modification_date"),
-                        rs.getDate("due_date"));
-
-                v.add(note);
-
-            }
+            
+            return makeNotesFromResultSet(rs);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return v;
+        return new Vector<Note>();
 
     }
     
     public Vector<Note> getAllNotesForUserId(int userId) {
-
-        Vector<Note> v = new Vector<>();
 
         try {
 
@@ -205,35 +188,63 @@ public class NoteMapper extends DataMapper {
             
             ResultSet rs = stmt.executeQuery();
             
-            UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
-            NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
-
-            while (rs.next()) {
-            	
-            	Note note = new Note(rs.getInt("id"));
-            	
-            	note.setContent(rs.getString("content"));
-            	note.setTitle(rs.getString("title"));
-            	note.setSubtitle(rs.getString("subtitle"));
-            	
-            	note.setOwner(noteUserMapper.findById(userId));
-            	note.setNoteBook(noteBookMapper.findById(rs.getInt("notebook_id")));
-            	
-            	note.setCreationDate(rs.getDate("creation_date"));
-            	note.setDueDate(rs.getDate("due_date"));
-            	note.setModificationDate(rs.getDate("modification_date"));
-
-                v.add(note);
-
-            }
+            return makeNotesFromResultSet(rs);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return v;
+        return new Vector<Note>();
 
     }
+    
+    public Vector<Note> getAllNotesForNoteBookId(int id) {
+    	
+    	try {
+    		
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE notebook_id = ?");
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			return makeNotesFromResultSet(rs);
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+    	
+    	return new Vector<Note>();
+    	
+    }
+    
+    private Vector<Note> makeNotesFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+    	
+    	Vector<Note> v = new Vector<>();
+    	
+    	while (rs.next()) {
+        	
+        	Note note = new Note(rs.getInt("id"));
+        	
+        	note.setContent(rs.getString("content"));
+        	note.setTitle(rs.getString("title"));
+        	note.setSubtitle(rs.getString("subtitle"));
+        	
+        	note.setOwner(noteUserMapper.findById(rs.getInt("author_id")));
+        	note.setNoteBook(noteBookMapper.findById(rs.getInt("notebook_id")));
+        	
+        	note.setCreationDate(rs.getDate("creation_date"));
+        	note.setDueDate(rs.getDate("due_date"));
+        	note.setModificationDate(rs.getDate("modification_date"));
+
+            v.add(note);
+
+        }
+    	
+    	return v;
+    }
+    
+    
 
 }
 

@@ -104,6 +104,11 @@ public class ShowNote extends BasicView {
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(navigation);	
 			
+			ShowAllNotes san =  new ShowAllNotes();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
+			
+			
 		}
 		
 	}
