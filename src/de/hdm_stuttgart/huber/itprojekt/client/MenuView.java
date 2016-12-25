@@ -45,16 +45,25 @@ public class MenuView extends VerticalPanel {
 		
 		//Home "Button"
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
-		//RootPanel.get("home").getElement().getStyle().setColor("#660033");
+		home.setStyleName("pure-menu-heading");
+		home.getElement().getStyle().setColor("#ffffff");
+		
 		//Weitere Button Definitions
-		Anchor showNotes = new Anchor("Notes ");
+		Anchor showNotes = new Anchor("Notes");
+		Anchor createNote = new Anchor("New Note");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		Anchor createNotebook = new Anchor("New Notebook");
-		Anchor createNote = new Anchor("New Note");
 		Anchor reportAnchor = new Anchor("Report");
 		
 		logoutAnchor = new Anchor("Log out");
 		logoutAnchor.setHref(logOutUrl);
+		
+		showNotes.getElement().getStyle().setColor("#660033");
+		showNotebooks.getElement().getStyle().setColor("#660033");
+		createNotebook.getElement().getStyle().setColor("#660033");
+		createNote.getElement().getStyle().setColor("#660033");
+		reportAnchor.getElement().getStyle().setColor("#660033");
+		logoutAnchor.getElement().getStyle().setColor("#660033");
 
 		//Test
 		//Anchor hello = new Anchor("Say Hello");
@@ -63,15 +72,15 @@ public class MenuView extends VerticalPanel {
 		showNotes.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotes));
 		
+		createNote.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(createNote));
+		
 		showNotebooks.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotebooks));
 		
 		createNotebook.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNotebook));
-		
-		createNote.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(createNote));
-		
+			
 		reportAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(reportAnchor));
 		
@@ -90,9 +99,9 @@ public class MenuView extends VerticalPanel {
 	    */
 
 		showNotes.addClickHandler(new ShowAllNotesHandler());
+		createNote.addClickHandler(new CreateNoteHandler());
 		showNotebooks.addClickHandler(new ShowAllNotebooksHandler());
 		createNotebook.addClickHandler(new CreateNotebookHandler());
-		createNote.addClickHandler(new CreateNoteHandler());
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
 		

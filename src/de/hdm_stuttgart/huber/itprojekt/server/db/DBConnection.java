@@ -8,9 +8,9 @@ public class DBConnection {
 
    // 2 Datenbank Zugangsdaten anlegen
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost/Notizbuch";
+	static final String DB_URL = "jdbc:mysql://localhost/notizbuch";
 	static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "ITProjekt321";
 
     // Sicherstellen dass nur EINE! Datenbankverbindung existiert.
     // localhost-mySQL frisst 3-4 Verbindungen

@@ -67,6 +67,8 @@ public class ShowAllNotes extends BasicView {
 		    RootPanel.get("main").add(contentPanel);
 		    RootPanel.get("main").add(nt.start());
 	}
+	
+	
 	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
     @Override
     public void onSuccess(Vector<Note> result) {
@@ -151,7 +153,7 @@ public class ShowAllNotes extends BasicView {
 	@Override
 	public String getHeadlineText() {
 
-		return "Überschrift";
+		return "My Notes";
 	}
 
 }

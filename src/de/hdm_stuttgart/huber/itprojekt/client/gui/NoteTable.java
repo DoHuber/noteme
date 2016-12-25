@@ -130,8 +130,7 @@ public class NoteTable {
 		panel.setSize("50em", "40em");
 		panel.add(table);
 		
-		table.setStyleName("googleTable");
-		
+		table.setStyleName("googleTable");	
 	
 		fPanel.add(panel);
 

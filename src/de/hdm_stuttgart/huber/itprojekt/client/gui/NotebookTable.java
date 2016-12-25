@@ -103,7 +103,7 @@ public class NotebookTable {
 		panel.setSize("50em", "40em");
 		panel.add(table);
 	
-	
+		table.setStyleName("googleTable");
 		
 		fPanel.add(buttonPanel);
 		fPanel.add(panel);
