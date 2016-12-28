@@ -254,6 +254,30 @@ private static NoteBookMapper noteBookMapper = null;
 			
 			return v;
 		}
+		
+		public Vector<NoteBook> getAllNoteBooksSharedBy(UserInfo u) {
+	    	
+	    	String sql = "SELECT DISTINCT notebook.id AS id FROM notebook JOIN permission ON notebook.id = permission.notebook_id WHERE author_id = ?";
+	    	Vector<NoteBook> v = new Vector<>();
+	    	
+	    	try {
+	    	
+	    	PreparedStatement ps = connection.prepareStatement(sql);
+	    	ps.setInt(1, u.getId());
+	    	
+	    	ResultSet rs = ps.executeQuery();
+	    	while (rs.next()) {
+	    		v.add(findById(rs.getInt("id")));
+	    	}
+	    	
+	    	return v;
+	    	
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+	    		return v;
+	    	}
+	    
+	    }
 	 
 	
 	

@@ -2,10 +2,12 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Vector;
 
 /**
@@ -18,13 +20,17 @@ public class CoolAndNiceTestScript {
 
     public static void main(String[] args) throws Throwable {
     	
-    	Vector<Note> vector = NoteMapper.getNoteMapper().getAllNotesForNoteBookId(57);
-
-
-    	for (Note row : vector) {
-    		System.out.println(row.toString());
-    	}
+    	NoteMapper nm = NoteMapper.getNoteMapper();
+    	NoteBookMapper nbm = NoteBookMapper.getNoteBookMapper();
+    	PermissionMapper pm = PermissionMapper.getPermissionMapper();
     	
+    	Vector<Permission> vnp = pm.getAllPermissionsFor(new NoteBook(6));
+    	
+    	for (Object o : vnp) {
+    	
+    		System.out.println(o.toString());
+    		
+    	}
 	
     }
 
