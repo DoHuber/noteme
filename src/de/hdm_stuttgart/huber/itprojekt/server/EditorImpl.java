@@ -235,14 +235,6 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	}
 
-	@Override
-	public Vector<Note> getAllFrom(NoteBook nb) {
-
-		int noteBookId = nb.getId();
-		return noteMapper.getAllNotesForNoteBookId(noteBookId);
-
-	}
-
 	/**
 	 * Erläuterungen zu den beiden folgenden Methoden:
 	 * Mit den Objekten von Note oder NoteBook wird jeweils noch

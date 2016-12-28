@@ -17,6 +17,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
 /**
  * Notiz anlegen! 
@@ -42,6 +43,14 @@ public class CreateNote extends BasicView {
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
 	private Grid grid = new Grid(2,1);
+
+	public CreateNote(NoteBook nb) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public CreateNote() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void run() {
