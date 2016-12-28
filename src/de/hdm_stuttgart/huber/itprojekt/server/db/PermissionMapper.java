@@ -211,6 +211,40 @@ public class PermissionMapper extends DataMapper {
 		return v;
 		
 	}
+	
+	public void savePermission(Permission p) {
+		
+		try {
+		
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO notizbuch.permission(permission_level) VALUES (?) WHERE id = ?");
+		ps.setInt(1, p.getLevelAsInt());
+		ps.setInt(2, p.getId());
+		
+		ps.executeUpdate();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void deletePermission(Permission p) {
+		
+		String sql = "DELETE FROM notizbuch.permission WHERE id = ?";
+		try {
+			
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, p.getId());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 
 	
 	

@@ -19,5 +19,7 @@ public interface PermissionService extends RemoteService {
 	
 	public Vector<Permission> getAllPermissionsFor(Shareable s);
 	
+	public void deletePermission(Permission p);
+	
 
 }
