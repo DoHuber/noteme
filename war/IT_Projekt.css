@@ -5,7 +5,18 @@ h1 {
   font-weight: bold;
   color: #660033;
   /*margin: 10% 0% 25%;*/
-  margin: 40px 0px 70px;
+  margin: 40px 0px 10px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+.headline {
+  font-size: 16px;
+  font-weight: bold;
+  color: #660033;
+  /*margin: 10% 0% 25%;
+  margin: 40px 0px 70px;*/
+  margin-left: 50px;
+  /*margin-down: 50px;*/
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
@@ -63,13 +74,17 @@ h1 {
 	width: 475px;
 }
 
-.googleTable {
+/* .googleTable {
 	margin-left: 50px;
 	margin-top: 200px;
-}
+}*/
 
-.table {
-	
+div#table {
+	margin-left: 300px;
+	margin-top: 150px;
+	background-color: #7777777;
+	height: 300px;
+	width: 520px;
 }
 
 div#layout {
@@ -95,7 +110,8 @@ div#menu {
 	margin-left: 40px;
 	position: absolute;
 	/* overflow: scroll; */
-	height: 300px;
+	/* height: 300px;*/
+	height: 330px;
 	width: 185px;
 	/*padding: 10px;*/
 	float: left;
@@ -108,11 +124,13 @@ div#main {
 	margin-left: 250px;
 	margin-right: 30px;
 	padding: 10px;
-	height: 540px;
+	/*height: 540px;*/
+	height: 1000px;
 	width: 720px;
 	position: absolute;
 	background: #FFFFFF;
 	/* background: #a2a2f9 oder #FFE5F2; */
+	
 	}
 	
 .testName{

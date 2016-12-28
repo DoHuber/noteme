@@ -4,7 +4,6 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -53,6 +52,7 @@ public class MenuView extends VerticalPanel {
 		Anchor createNote = new Anchor("New Note");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		Anchor createNotebook = new Anchor("New Notebook");
+		Anchor showPermission = new Anchor("Permission");
 		Anchor reportAnchor = new Anchor("Report");
 		
 		logoutAnchor = new Anchor("Log out");
@@ -62,6 +62,7 @@ public class MenuView extends VerticalPanel {
 		showNotebooks.getElement().getStyle().setColor("#660033");
 		createNotebook.getElement().getStyle().setColor("#660033");
 		createNote.getElement().getStyle().setColor("#660033");
+		showPermission.getElement().getStyle().setColor("#660033");
 		reportAnchor.getElement().getStyle().setColor("#660033");
 		logoutAnchor.getElement().getStyle().setColor("#660033");
 
@@ -80,6 +81,9 @@ public class MenuView extends VerticalPanel {
 		
 		createNotebook.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNotebook));
+		
+		showPermission.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showPermission));
 			
 		reportAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(reportAnchor));
@@ -102,6 +106,7 @@ public class MenuView extends VerticalPanel {
 		createNote.addClickHandler(new CreateNoteHandler());
 		showNotebooks.addClickHandler(new ShowAllNotebooksHandler());
 		createNotebook.addClickHandler(new CreateNotebookHandler());
+		showPermission.addClickHandler(new ShowPermissionHandler());
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
 		
@@ -122,7 +127,7 @@ public class MenuView extends VerticalPanel {
 			ShowAllNotes san = new ShowAllNotes();
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(san);
-			
+			new ShowAllNotes().getHeadlineText();
 		}
 	}
 
@@ -137,6 +142,22 @@ public class MenuView extends VerticalPanel {
 			ShowAllNotebooks san = new ShowAllNotebooks();
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(san);
+			new ShowAllNotes().getHeadlineText();
+		}
+	}
+	
+	private class ShowPermissionHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+//			MenuView mView = new MenuView();
+//			RootPanel.get("menu").clear();
+//			RootPanel.get().add(mView);
+
+			ShowPermission san = new ShowPermission();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
+			new ShowAllNotes().getHeadlineText();
 		}
 	}
 	private class CreateNotebookHandler implements ClickHandler {
