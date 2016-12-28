@@ -52,4 +52,6 @@ public interface Editor extends RemoteService {
 	
 	public Vector<UserInfo> create(UserInfo u) throws BullshitException;
 	
+	public UserInfo getUserById(int id) throws IllegalArgumentException;
+	
 }

@@ -206,6 +206,30 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		return noteBookMapper.getAllNoteBooksForUserId(currentUser.getId());
 				
 	}
+
+	@Override
+	public String getTitle(NoteBook nB) throws BullshitException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<UserInfo> getAllNoteUser() throws BullshitException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<UserInfo> create(UserInfo u) throws BullshitException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserInfo getUserById(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

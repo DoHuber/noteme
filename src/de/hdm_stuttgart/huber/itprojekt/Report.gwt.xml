@@ -3,7 +3,7 @@
   "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module rename-to='ReportGenerator'>
 	<inherits name="com.google.gwt.user.User" />
-	<entry-point class='de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportGenerator'/>
+	<entry-point class='de.hdm_stuttgart.huber.itprojekt.client.ShowReportDemo'/>
 	<source path="client"/>
   	<source path='shared'/>
   	

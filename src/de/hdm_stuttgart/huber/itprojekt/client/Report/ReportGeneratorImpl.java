@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import de.hdm_stuttgart.huber.itprojekt.server.BankAdministrationImpl;
+import de.hdm_stuttgart.huber.itprojekt.server.EditorImpl;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
@@ -69,7 +69,7 @@ public void init() throws IllegalArgumentException {
      * Ein ReportGeneratorImpl-Objekt instantiiert für seinen Eigenbedarf eine
      * BankVerwaltungImpl-Instanz.
      */
-    BankAdministrationImpl a = new BankAdministrationImpl();
+    EditorImpl a = new EditorImpl();
     a.init();
     this.administration = a;
   }
@@ -197,7 +197,13 @@ public void create(UserInfo uI) {
      * Nun werden sämtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
      * Kontostand sukzessive in die Tabelle eingetragen.
      */
-    Vector<NoteBook> notebooks = this.administration.getAllNoteBooks();
+    Vector<NoteBook> notebooks = null;
+	try {
+		notebooks = this.administration.getAllNoteBooks();
+	} catch (BullshitException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 
     for (NoteBook a : notebooks) {
       // Eine leere Zeile anlegen.
@@ -227,10 +233,11 @@ public void create(UserInfo uI) {
 
   /**
    * Erstellen von <code>AllAccountsOfAllCustomersReport</code>-Objekten.
+ * @param uI2 
    * 
    * @return der fertige Report
    */
-  public AllNoteBooksOfUserReport createAllNoteBooksOfUserReport()
+  public AllNoteBooksOfAllUsers createAllNoteBooksOfUsersReport(UserInfo uI2)
       throws IllegalArgumentException {
 
     if (this.getNoteBookVerwaltung() == null)
@@ -242,7 +249,7 @@ public void create(UserInfo uI) {
     AllNoteBooksOfAllUsers result = new AllNoteBooksOfAllUsers();
 
     // Jeder Report hat einen Titel (Bezeichnung / überschrift).
-    result.setTitle("Alle Konten aller Kunden");
+    result.setTitle("all notebooks of all user");
 
     // Imressum hinzufügen
    // this.addImprint(result);
@@ -268,13 +275,20 @@ public void create(UserInfo uI) {
      * AllAccountsOfAllCustomersReport, welches eine Subklasse von
      * CompositeReport ist.
      */
-    Vector<UserInfo> allCustomers = this.administration.getAllNoteUser();
+    Vector<UserInfo> user = null;
+	try {
+		user = this.administration.getAllNoteUser();
+	} catch (BullshitException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
-    for (UserInfo uI : allCustomers) {
+    for (UserInfo uI : user) {
       /*
        * Anlegen des jew. Teil-Reports und Hinzufügen zum Gesamt-Report.
        */
-      result.addSubReport(this.createAllAccountsOfCustomerReport(uI));
+      result.addSubReport(this.createAllNoteBooksOfUsersReport(uI));
+      
     }
 
     /*
@@ -283,18 +297,24 @@ public void create(UserInfo uI) {
     return result;
   }
 
-@Override
-public void create(UserInfo uI) throws IllegalArgumentException {
-	// TODO Auto-generated method stub
-	
-}
-
-public AllNoteBooksOfUserReport createAllAccountsOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
+public AllNoteBooksOfUserReport createAllNoteBooksOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
 
-public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport() throws IllegalArgumentException {
+public AllNoteBooksOfAllUsers createAllNoteBooksOfAllCustomersReport() throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public AllNoteBooksOfUserReport createAllNoteBooksOfUserReport(UserInfo u) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public AllNoteBooksOfAllUsers createAllNoteBooksOfAllUsersReport() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }

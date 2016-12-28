@@ -6,11 +6,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.Report.AuthentificationAdmin.ReportCheckAdmin;
+
 import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 
@@ -98,6 +99,8 @@ public class MenuView extends VerticalPanel {
 
 	}
 	
+	
+	
 	/*Einfache ClickHandler werden implementiert 
 	 * 
 	 */
@@ -159,9 +162,9 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			ReportCheckAdmin rpChA = new ReportCheckAdmin();
+			ShowReportDemo rep = new ShowReportDemo();
 			RootPanel.get("menu").clear();
-			RootPanel.get().add(rpChA);
+			RootPanel.get().add(rep);
 			
 
 	
@@ -184,6 +187,14 @@ public class MenuView extends VerticalPanel {
 	}
 
 	
+	protected void run() {
+	}
+	
+	  protected void append(String text) {
+		    HTML content = new HTML(text);
+		    content.setStylePrimaryName("bankproject-simpletext");
+		    this.add(content);
+		  }
 }
 
 
