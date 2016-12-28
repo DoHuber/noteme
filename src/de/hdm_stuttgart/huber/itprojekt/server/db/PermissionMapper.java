@@ -1,6 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
+import java.util.Vector;
+
 import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
@@ -120,6 +122,96 @@ public class PermissionMapper extends DataMapper {
 		
 		
 	}
+	
+	public Vector<Permission> getAllPermissionsFor(Shareable s) {
+		
+		Vector<Permission> v = new Vector<>();
+		String sql = "SELECT * FROM notizbuch.permission WHERE :targetTable = ?";
+		String replaceString;
+		
+		switch(s.getType()) {
+		case 'b':
+			replaceString = "notebook_id";
+			break;
+		case 'n':
+			replaceString = "note_id";
+			break;
+		default:
+			throw new RuntimeException("Invalid Shareable");
+		}
+		
+		sql = sql.replaceAll(":targetTable", replaceString);
+		
+		try {
+		
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setInt(1, s.getId());
+		ResultSet rs = ps.executeQuery();
+		
+		return makeFromResultSet(rs);
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return v;
+	}
+	
+	public Vector<Permission> makeFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+		
+		Vector<Permission> v = new Vector<>();
+		
+		while (rs.next()) {
+			
+			Level l;
+			switch(rs.getInt("permission_level")) {
+			case 10:
+				l = Level.READ;
+				break;
+			case 20:
+				l = Level.EDIT;
+				break;
+			case 30:
+				l = Level.DELETE;
+				break;
+			default:
+				l = Level.NONE;				
+			}
+			
+			Permission p = new Permission(rs.getInt("id"), l);
+			UserInfoMapper uim = UserInfoMapper.getUserInfoMapper();
+			NoteMapper nm = NoteMapper.getNoteMapper();
+			NoteBookMapper nbm = NoteBookMapper.getNoteBookMapper();
+			
+			p.setUser(uim.findById(rs.getInt("beneficiary_id")));
+			
+			Shareable sharedObject;
+			char type = rs.getString("type").charAt(0);
+			int id;
+			switch(type) {
+			case 'b':
+				id = rs.getInt("notebook_id");
+				sharedObject = nbm.findById(id);
+				break;
+			case 'n':
+				id = rs.getInt("note_id");
+				sharedObject = nm.findById(id);
+				break;
+			default:
+				throw new RuntimeException();
+			}		
+			
+			p.setSharedObject(sharedObject);
+			
+			v.add(p);
+			
+		}
+		
+		return v;
+		
+	}
+
 	
 	
 

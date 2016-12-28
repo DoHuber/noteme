@@ -264,6 +264,30 @@ public class NoteMapper extends DataMapper {
     	return v;
     }
     
+    public Vector<Note> getAllNotesSharedBy(UserInfo u) {
+    	
+    	String sql = "SELECT DISTINCT note.id AS id FROM note JOIN permission ON note.id = permission.note_id WHERE author_id = ?";
+    	Vector<Note> v = new Vector<>();
+    	
+    	try {
+    	
+    	PreparedStatement ps = connection.prepareStatement(sql);
+    	ps.setInt(1, u.getId());
+    	
+    	ResultSet rs = ps.executeQuery();
+    	while (rs.next()) {
+    		v.add(findById(rs.getInt("id")));
+    	}
+    	
+    	return v;
+    	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return v;
+    	}
+    
+    }
+    
     
     
     

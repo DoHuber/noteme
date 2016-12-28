@@ -1,5 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -14,6 +16,8 @@ public interface PermissionService extends RemoteService {
 	public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l);
 	
 	public Permission getRunTimePermissionFor(UserInfo u, Shareable sharedObject);
+	
+	public Vector<Permission> getAllPermissionsFor(Shareable s);
 	
 
 }

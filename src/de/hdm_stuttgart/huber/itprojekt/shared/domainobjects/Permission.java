@@ -37,7 +37,13 @@ public class Permission extends DomainObject {
     	this.level = Level.NONE;
     }
     
-    public boolean isUserAllowedTo(Level action) {
+       
+    @Override
+	public String toString() {
+		return "Permission [level=" + level + ", user=" + user + ", sharedObject=" + sharedObject + ", id=" + id + "]";
+	}
+
+	public boolean isUserAllowedTo(Level action) {
     	
     	if (this.level.value >= action.value) {
     		return true;

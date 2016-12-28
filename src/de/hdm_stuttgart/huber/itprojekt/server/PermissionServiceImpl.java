@@ -1,5 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
+import java.util.Vector;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
@@ -44,6 +46,14 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 				
 		return p;
 	}
+
+	@Override
+	public Vector<Permission> getAllPermissionsFor(Shareable s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 	
 
