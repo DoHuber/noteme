@@ -5,12 +5,19 @@ import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import de.hdm.thies.bankProjekt.server.BankAdministrationImpl;
-import de.hdm.thies.bankProjekt.shared.BankAdministration;
-import de.hdm.thies.bankProjekt.shared.ReportGenerator;
-import de.hdm.thies.bankProjekt.shared.bo.*;
-import de.hdm.thies.bankProjekt.shared.report.*;
+import de.hdm_stuttgart.huber.itprojekt.server.BankAdministrationImpl;
+import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
+import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfAllCustomersReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfCustomerReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.Column;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.CompositeParagraph;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.Report;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.Row;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.SimpleParagraph;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
+
+
 
 /**
  * Implementierung des <code>ReportGenerator</code>-Interface. Die technische
@@ -29,7 +36,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet
    * essentiellen Methoden für die Koexistenz von Datenobjekten (vgl.
    * bo-Package) bietet.
    */
-  private BankAdministration administration = null;
+  private Editor administration = null;
 
   /**
    * <p>
@@ -70,7 +77,7 @@ public void init() throws IllegalArgumentException {
    * 
    * @return das BankVerwaltungsobjekt
    */
-  protected BankAdministration getBankVerwaltung() {
+  protected Editor getBankVerwaltung() {
     return this.administration;
   }
 
@@ -89,28 +96,33 @@ public void setBank(Bank b) {
    * <code>create...</code>-Methoden diese Methode auf.
    * 
    * @param r der um das Impressum zu erweiternde Report.
+   * 
    */
-  protected void addImprint(Report r) {
-    /*
-     * Das Impressum soll wesentliche Informationen über die Bank enthalten.
-     */
-    Bank bank = this.administration.getBank();
+  
+  
+//  protected void addImprint(Report r) {
+//    /*
+//     * Das Impressum soll wesentliche Informationen über die Bank enthalten.
+//     */
+//    Bank bank = this.administration.getBank();
+//
+//    /*
+//     * Das Imressum soll mehrzeilig sein.
+//     */
+//    CompositeParagraph imprint = new CompositeParagraph();
+//
+//    imprint.addSubParagraph(new SimpleParagraph(bank.getName()));
+//    imprint.addSubParagraph(new SimpleParagraph(bank.getStreet()));
+//    imprint.addSubParagraph(new SimpleParagraph(bank.getZip() + " "
+//        + bank.getCity()));
+//
+//    // Das eigentliche Hinzufügen des Impressums zum Report.
+//    r.setImprint(imprint);
+//
+//  }
 
-    /*
-     * Das Imressum soll mehrzeilig sein.
-     */
-    CompositeParagraph imprint = new CompositeParagraph();
-
-    imprint.addSubParagraph(new SimpleParagraph(bank.getName()));
-    imprint.addSubParagraph(new SimpleParagraph(bank.getStreet()));
-    imprint.addSubParagraph(new SimpleParagraph(bank.getZip() + " "
-        + bank.getCity()));
-
-    // Das eigentliche Hinzufügen des Impressums zum Report.
-    r.setImprint(imprint);
-
-  }
-
+  
+  
   /**
    * Erstellen von <code>AllAccountsOfCustomerReport</code>-Objekten.
    * 
@@ -183,7 +195,7 @@ public AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(
      * Nun werden sämtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
      * Kontostand sukzessive in die Tabelle eingetragen.
      */
-    Vector<Account> accounts = this.administration.getAccountsOf(c);
+    Vector<UserInfo> accounts = this.administration.getAccountsOf(c);
 
     for (Account a : accounts) {
       // Eine leere Zeile anlegen.
@@ -250,9 +262,9 @@ public AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport()
      * AllAccountsOfAllCustomersReport, welches eine Subklasse von
      * CompositeReport ist.
      */
-    Vector<Customer> allCustomers = this.administration.getAllCustomers();
+    Vector<UserInfo> allCustomers = this.administration.getAllCustomers();
 
-    for (Customer c : allCustomers) {
+    for (UserInfo c : allCustomers) {
       /*
        * Anlegen des jew. Teil-Reports und Hinzufügen zum Gesamt-Report.
        */
@@ -264,5 +276,23 @@ public AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport()
      */
     return result;
   }
+
+@Override
+public void setUser(UserInfo b) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(UserInfo u) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport() throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }
