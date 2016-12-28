@@ -2,7 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
 import java.sql.Date;
 
-public class Note extends DomainObject {
+public class Note extends DomainObject implements Shareable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -14,6 +14,8 @@ public class Note extends DomainObject {
 	private Date dueDate = null;
 	private Date creationDate = null;
 	private Date modificationDate = null;
+	
+	private Permission runTimePermission;
 	
 	public Note() {
 		
@@ -118,6 +120,19 @@ public class Note extends DomainObject {
 	}
 	public void setModificationDate(Date modificationDate) {
 		this.modificationDate = modificationDate;
+	}
+
+	public Permission getRunTimePermission() {
+		return runTimePermission;
+	}
+
+	public void setRunTimePermission(Permission runTimePermission) {
+		this.runTimePermission = runTimePermission;
+	}
+
+	@Override
+	public char getType() {
+		return 'n';
 	}
 	
 	
