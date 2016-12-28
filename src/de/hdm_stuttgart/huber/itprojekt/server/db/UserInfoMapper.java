@@ -100,17 +100,19 @@ public class UserInfoMapper extends DataMapper {
 
 
     //save-Methode: NoteUser-Objekt wird wiederholt in die DB geschrieben
-    public UserInfo save(UserInfo noteUser) throws ClassNotFoundException, SQLException {
-        Connection con = DBConnection.getConnection();
+    public UserInfo save(UserInfo userToSave) throws ClassNotFoundException, SQLException {
+      
 
         try {
-            PreparedStatement stmt = con.prepareStatement("UPDATE userinfo SET username=?, firstname=?, lastname=?, email=?, google_Id=? WHERE id=?");
-            stmt.setLong(1, noteUser.getId());
-            stmt.setString(2, noteUser.getNickname());
-            stmt.setString(3, noteUser.getFirstName());
-            stmt.setString(4, noteUser.getSurName());
-            stmt.setString(5, noteUser.getEmailAddress());
-            stmt.setString(6, noteUser.getGoogleId());
+        	
+        	String sql = "UPDATE notizbuch.userinfo SET username = ?, firstname = ?, lastname = ?, email = ? WHERE google_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, userToSave.getNickname());
+            stmt.setString(2, userToSave.getFirstName());
+            stmt.setString(3, userToSave.getSurName());
+            stmt.setString(4, userToSave.getEmailAddress());
+            stmt.setString(5, userToSave.getGoogleId());
 
             stmt.executeUpdate();
 
@@ -118,7 +120,9 @@ public class UserInfoMapper extends DataMapper {
             sqlExp.printStackTrace();
             throw new IllegalArgumentException();
         }
-        return findById(noteUser.getId());
+        
+        return findById(userToSave.getId());
+ 
     }
 
 

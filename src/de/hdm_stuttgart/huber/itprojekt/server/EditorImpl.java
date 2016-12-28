@@ -217,16 +217,18 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public UserInfo saveUser(UserInfo user) {
-		UserInfo newuser = user;
+		
+		
 		try {
-			userInfoMapper.save(newuser);
-			newuser = userInfoMapper.findById(newuser.getId());
+			
+			return userInfoMapper.save(user);
+			
 		}
 		catch (Exception e){
 			e.printStackTrace();
+			return null;
 		}
 		
-		return newuser;
 	}
 	
 
