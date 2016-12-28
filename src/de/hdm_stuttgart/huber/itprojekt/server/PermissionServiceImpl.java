@@ -79,9 +79,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 	@Override
 	public void deletePermission(Permission p) {
 		
-		
-		
-		
+		permissionMapper.deletePermission(p);
 		
 	}
 	
