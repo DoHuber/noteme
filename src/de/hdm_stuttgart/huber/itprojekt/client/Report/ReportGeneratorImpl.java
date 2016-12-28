@@ -6,10 +6,11 @@ import java.util.Vector;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.BankAdministrationImpl;
+import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfAllCustomersReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfCustomerReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfAllUsers;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfUserReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.Report.Column;
 import de.hdm_stuttgart.huber.itprojekt.shared.Report.CompositeParagraph;
 import de.hdm_stuttgart.huber.itprojekt.shared.Report.Report;
@@ -86,7 +87,12 @@ public void init() throws IllegalArgumentException {
    */
   @Override
 public void create(UserInfo uI) {
-    this.administration.create(uI);
+    try {
+		this.administration.create(uI);
+	} catch (BullshitException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
 
   /**
@@ -130,7 +136,7 @@ public void create(UserInfo uI) {
    * @return der fertige Report
    */
   @Override
-public AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(
+public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
       Customer c) throws IllegalArgumentException {
 
     if (this.getBankVerwaltung() == null)
@@ -139,7 +145,7 @@ public AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(
     /*
      * Zunächst legen wir uns einen leeren Report an.
      */
-    AllAccountsOfCustomerReport result = new AllAccountsOfCustomerReport();
+    AllNoteBooksOfUserReport result = new AllNoteBooksOfUserReport();
 
     // Jeder Report hat einen Titel (Bezeichnung / Überschrift).
     result.setTitle("Alle Konten des Kunden");
@@ -224,7 +230,7 @@ public AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(
    * @return der fertige Report
    */
   @Override
-public AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport()
+public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport()
       throws IllegalArgumentException {
 
     if (this.getBankVerwaltung() == null)
@@ -233,7 +239,7 @@ public AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport()
     /*
      * Zunächst legen wir uns einen leeren Report an.
      */
-    AllAccountsOfAllCustomersReport result = new AllAccountsOfAllCustomersReport();
+    AllNoteBooksOfAllUsers result = new AllNoteBooksOfAllUsers();
 
     // Jeder Report hat einen Titel (Bezeichnung / überschrift).
     result.setTitle("Alle Konten aller Kunden");
@@ -284,13 +290,13 @@ public void setUser(UserInfo b) throws IllegalArgumentException {
 }
 
 @Override
-public AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(UserInfo u) throws IllegalArgumentException {
+public AllNoteBooksOfUserReport createAllAccountsOfCustomerReport(UserInfo u) throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
 
 @Override
-public AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport() throws IllegalArgumentException {
+public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
