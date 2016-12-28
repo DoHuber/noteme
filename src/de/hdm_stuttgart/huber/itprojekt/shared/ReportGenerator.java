@@ -66,7 +66,7 @@ public interface ReportGenerator extends RemoteService {
    * @throws IllegalArgumentException
    * @see AllNoteBooksOfUserReport
    */
-  public abstract AllNoteBooksOfUserReport createAllAccountsOfCustomerReport(
+  public abstract AllNoteBooksOfUserReport createAllNoteBooksOfUserReport(
       UserInfo u) throws IllegalArgumentException;
 
   /**
@@ -77,6 +77,6 @@ public interface ReportGenerator extends RemoteService {
    * @throws IllegalArgumentException
    * @see AllNoteBooksOfAllUsers
    */
-  public abstract AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport()
+  public abstract AllNoteBooksOfAllUsers createAllNoteBooksOfAllUsersReport()
       throws IllegalArgumentException;
 }

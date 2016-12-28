@@ -19,10 +19,10 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
  */
 public interface ReportGeneratorAsync {
 
-  void createAllAccountsOfAllCustomersReport(
+  void createAllNoteBooksOfAllUsersReport(
       AsyncCallback<AllNoteBooksOfAllUsers> callback);
 
-  void createAllAccountsOfCustomerReport(UserInfo u,
+  void createAllNoteBooksOfUserReport(UserInfo u,
       AsyncCallback<AllNoteBooksOfUserReport> callback);
 
   void init(AsyncCallback<Void> callback);

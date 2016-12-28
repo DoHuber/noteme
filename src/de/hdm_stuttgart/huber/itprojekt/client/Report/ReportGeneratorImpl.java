@@ -16,6 +16,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.Report.CompositeParagraph;
 import de.hdm_stuttgart.huber.itprojekt.shared.Report.Report;
 import de.hdm_stuttgart.huber.itprojekt.shared.Report.Row;
 import de.hdm_stuttgart.huber.itprojekt.shared.Report.SimpleParagraph;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 
@@ -78,7 +79,7 @@ public void init() throws IllegalArgumentException {
    * 
    * @return das BankVerwaltungsobjekt
    */
-  protected Editor getNoteVerwaltung() {
+  protected Editor getNoteBookVerwaltung() {
     return this.administration;
   }
 
@@ -129,17 +130,10 @@ public void create(UserInfo uI) {
 
   
   
-  /**
-   * Erstellen von <code>AllAccountsOfCustomerReport</code>-Objekten.
-   * 
-   * @param c das Kundenobjekt bzgl. dessen der Report erstellt werden soll.
-   * @return der fertige Report
-   */
-  @Override
-public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
-      Customer c) throws IllegalArgumentException {
+  public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
+      UserInfo u) throws IllegalArgumentException {
 
-    if (this.getBankVerwaltung() == null)
+    if (this.getNoteBookVerwaltung() == null)
       return null;
 
     /*
@@ -148,10 +142,10 @@ public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
     AllNoteBooksOfUserReport result = new AllNoteBooksOfUserReport();
 
     // Jeder Report hat einen Titel (Bezeichnung / Überschrift).
-    result.setTitle("Alle Konten des Kunden");
+    result.setTitle("All notebooks of current user");
 
     // Imressum hinzufügen
-    this.addImprint(result);
+    //this.addImprint(result);
 
     /*
      * Datum der Erstellung hinzufügen. new Date() erzeugt autom. einen
@@ -165,13 +159,14 @@ public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
      * die Verwendung von CompositeParagraph.
      */
     CompositeParagraph header = new CompositeParagraph();
-
-    // Name und Vorname des Kunden aufnehmen
-    header.addSubParagraph(new SimpleParagraph(c.getLastName() + ", "
-        + c.getFirstName()));
+    
+    NoteBook nB = new NoteBook();
+    // ID, Titel und Untertitel des Notizbuchs
+    header.addSubParagraph(new SimpleParagraph(nB.getId() + ", "
+        + nB.getTitle() +", " + nB.getSubtitle()));
 
     // Kundennummer aufnehmen
-    header.addSubParagraph(new SimpleParagraph("Kd.-Nr.: " + c.getId()));
+    //header.addSubParagraph(new SimpleParagraph("Kd.-Nr.: " + c.getId()));
 
     // Hinzufügen der zusammengestellten Kopfdaten zu dem Report
     result.setHeaderData(header);
@@ -191,8 +186,9 @@ public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
      * aktuellen Kontostand. In der Kopfzeile legen wir also entsprechende
      * Überschriften ab.
      */
-    headline.addColumn(new Column("Kto.-Nr."));
-    headline.addColumn(new Column("Kto.-Stand"));
+    headline.addColumn(new Column("ID"));
+    headline.addColumn(new Column("Titel"));
+    headline.addColumn(new Column("Untertitel"));
 
     // Hinzufügen der Kopfzeile
     result.addRow(headline);
@@ -201,9 +197,9 @@ public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
      * Nun werden sämtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
      * Kontostand sukzessive in die Tabelle eingetragen.
      */
-    Vector<UserInfo> accounts = this.administration.getAccountsOf(c);
+    Vector<NoteBook> notebooks = this.administration.getAllNoteBooks();
 
-    for (Account a : accounts) {
+    for (NoteBook a : notebooks) {
       // Eine leere Zeile anlegen.
       Row accountRow = new Row();
 
@@ -211,8 +207,13 @@ public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
       accountRow.addColumn(new Column(String.valueOf(a.getId())));
 
       // Zweite Spalte: Kontostand hinzufügen
-      accountRow.addColumn(new Column(String.valueOf(this.administration
-          .getBalanceOf(a))));
+      try {
+		accountRow.addColumn(new Column(this.administration
+		      .getTitle(a)));
+	} catch (BullshitException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
       // und schließlich die Zeile dem Report hinzufügen.
       result.addRow(accountRow);
@@ -229,11 +230,10 @@ public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
    * 
    * @return der fertige Report
    */
-  @Override
-public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport()
+  public AllNoteBooksOfUserReport createAllNoteBooksOfUserReport()
       throws IllegalArgumentException {
 
-    if (this.getBankVerwaltung() == null)
+    if (this.getNoteBookVerwaltung() == null)
       return null;
 
     /*
@@ -245,7 +245,7 @@ public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport()
     result.setTitle("Alle Konten aller Kunden");
 
     // Imressum hinzufügen
-    this.addImprint(result);
+   // this.addImprint(result);
 
     /*
      * Datum der Erstellung hinzufügen. new Date() erzeugt autom. einen
@@ -268,13 +268,13 @@ public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport()
      * AllAccountsOfAllCustomersReport, welches eine Subklasse von
      * CompositeReport ist.
      */
-    Vector<UserInfo> allCustomers = this.administration.getAllCustomers();
+    Vector<UserInfo> allCustomers = this.administration.getAllNoteUser();
 
-    for (UserInfo c : allCustomers) {
+    for (UserInfo uI : allCustomers) {
       /*
        * Anlegen des jew. Teil-Reports und Hinzufügen zum Gesamt-Report.
        */
-      result.addSubReport(this.createAllAccountsOfCustomerReport(c));
+      result.addSubReport(this.createAllAccountsOfCustomerReport(uI));
     }
 
     /*
@@ -284,18 +284,16 @@ public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport()
   }
 
 @Override
-public void setUser(UserInfo b) throws IllegalArgumentException {
+public void create(UserInfo uI) throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	
 }
 
-@Override
-public AllNoteBooksOfUserReport createAllAccountsOfCustomerReport(UserInfo u) throws IllegalArgumentException {
+public AllNoteBooksOfUserReport createAllAccountsOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
 
-@Override
 public AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;

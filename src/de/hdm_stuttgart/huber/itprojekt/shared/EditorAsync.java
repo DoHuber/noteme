@@ -41,5 +41,7 @@ public interface EditorAsync {
 	void getAllNoteUser(AsyncCallback<Vector<UserInfo>> callback);
 	
 	void create(UserInfo u,AsyncCallback<Vector<UserInfo>> callback);
+	
+	void getTitle(NoteBook nb, AsyncCallback<String> callback);
 
 }
