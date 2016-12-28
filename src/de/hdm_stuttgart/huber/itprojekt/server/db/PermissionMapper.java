@@ -1,13 +1,13 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
-import java.util.Vector;
-import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable;
 
 
 public class PermissionMapper extends DataMapper {
@@ -16,118 +16,111 @@ public class PermissionMapper extends DataMapper {
 	private static PermissionMapper permissionMapper = null;
 
 	// Konstruktor (protected, um unauthorisiertes Instanziieren der Klasse zu verhindern)
-	protected PermissionMapper() throws ClassNotFoundException, SQLException {
+	protected PermissionMapper() throws ClassNotFoundException, SQLException  {
 		super();
 	}
 
 	// Öffentliche statische Methode, um den Singleton-PermissionMapper zu erhalten
-	public static PermissionMapper getPermissionMapper() throws ClassNotFoundException, SQLException {
+	public static PermissionMapper getPermissionMapper()  {
+		
 		if (permissionMapper == null) {
-			permissionMapper = new PermissionMapper();
+			try {
+				permissionMapper = new PermissionMapper();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return permissionMapper;
 	}
-
-	//create Methode
-	public Permission create(Permission permission) throws ClassNotFoundException, SQLException {
-		Connection con = DBConnection.getConnection();
-
-		try {
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO permission(Content, User, Level, noteUserId, noteId, notebookId)"
-					+ "VALUES ( ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-
-			stmt.setObject(1, permission);
-			stmt.setInt(2, permission.getUser().getId());
-			stmt.setInt(3, permission.getLevel());
-			stmt.setInt(4, 1);
-			stmt.setInt(5, 1);
-			stmt.setInt(6, 1);
-
-			stmt.executeUpdate();
-			ResultSet rs = stmt.getGeneratedKeys();
-
-			if (rs.next()) {
-				return findById(rs.getInt(1));
-			}    // else {
-			// throw new SQLException("Sorry");
-			// }
-		} catch (SQLException sqlExp) {
-			sqlExp.printStackTrace();
+	
+	public Permission getPermissionFor(UserInfo u, Shareable sharedObject) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT id, permission_level FROM notizbuch.permission WHERE beneficiary_id = ? AND ");
+		
+		if (sharedObject instanceof Note) {
+			sql.append("note_id = ?;");
+		} else if (sharedObject instanceof NoteBook) {
+			sql.append("notebook_id = ?;");
+		} else {
+			throw new RuntimeException("Das war der falsche Datentyp");
 		}
-		return permission;
-
-	}
-
-	//findById Methode:
-	public Permission findById(long id) throws ClassNotFoundException, SQLException {
-		Connection con = DBConnection.getConnection();
-
+		
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Permission WHERE Id = ?");
-			stmt.setLong(1, id);
-
-			//Ergebnis holen
-			ResultSet results = stmt.executeQuery();
-			if (results.next()) {
-				return new Permission(results.getObject("Content"),
-						results.getInt("Level"),
-						new UserInfo(),
-						new NoteBook(),
-						new Note());
+			
+			PreparedStatement ps = connection.prepareStatement(sql.toString());
+			ps.setInt(1, u.getId());
+			ps.setInt(2, sharedObject.getId());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			char level = rs.getString("permission_level").charAt(0);
+			Level l;
+			
+			switch(level) {
+			case 'r':
+				l = Level.READ;
+				break;
+			case 'w':
+				l = Level.EDIT;
+				break;
+			case 'd':
+				l = Level.DELETE;
+				break;
+			default:
+				l = Level.NONE;
+				break;
+								
 			}
-		} catch (SQLException sqlExp) {
-			sqlExp.printStackTrace();
-			return null;
+			
+			return new Permission(rs.getInt("id"), l);
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return null;
+		
+		return new Permission();
+		
 	}
-
-
-	//save-Methode
-	public Permission save(Permission permission) throws ClassNotFoundException, SQLException {
-		Connection con = DBConnection.getConnection();
-
-		try {
-			PreparedStatement stmt = con.prepareStatement("UPDATE Permission SET content=?, user=?, level=?, noteUserId=?, noteBookId=?, noteId=? WHERE Id=?");
-
-			stmt.setObject(1, permission);
-			// stmt.setNoteUser(2, permission.getUser());
-			stmt.setInt(3, permission.getLevel());
-			stmt.setInt(4, 1);
-			stmt.setInt(5, 1);
-			stmt.setInt(6, 1);
-
-			stmt.executeUpdate();
-		} catch (SQLException sqlExp) {
-			sqlExp.printStackTrace();
+	
+	public void createPermission(Permission p) {
+		
+		String sql = "INSERT INTO notizbuch.permission(permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?)";
+		String replaceString;
+		
+		switch (p.getSharedObject().getType()) {
+		case 'b':
+			replaceString = "notebook_id";
+			break;
+		case 'n':
+			replaceString = "note_id";
+			break;
+		default:
+			throw new RuntimeException("Invalid Type for current database configuration!");
 		}
-		//aktualisierte Berechtigung zurückgeben
-		return permission;
-	}
-
-
-	//delete-Methode
-	public void delete(Permission permission) throws ClassNotFoundException, SQLException {
-		Connection con = DBConnection.getConnection();
-
-		try {
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM Permission WHERE Id=?");
-			stmt.setLong(1, permission.getPermissionId());
-			stmt.executeUpdate();
-		} catch (SQLException sqlExp) {
-			sqlExp.printStackTrace();
+		
+		sql = sql.replaceAll(":targetid", replaceString);
+		
+		try { 
+			
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setInt(1, p.getLevelAsInt());
+		ps.setString(2, Character.toString(p.getSharedObject().getType()));
+		ps.setInt(3, p.getSharedObject().getId());
+		ps.setInt(4, p.getUser().getId());
+		
+		ps.executeUpdate();
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		
 	}
+	
+	
 
-	public Vector<Permission> getAllPermission() throws Exception {
-		Vector<Permission> result = new Vector<Permission>();
-
-		Connection con = DBConnection.getConnection();
-		PreparedStatement stmt = con.prepareStatement("SELECT Id FROM Permission");
-		ResultSet rs = stmt.executeQuery();
-		while (rs.next()) {
-			result.add(this.findById(rs.getLong("NoteUserId")));
-		}
-		return result;
-	}
 }
