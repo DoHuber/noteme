@@ -87,6 +87,7 @@ public class ShowAllNotes extends BasicView {
 //		    nt.addClickNote();
 		    RootPanel.get("main").add(contentPanel);
 //		    RootPanel.get("main").add(nt.start());
+		    RootPanel.get("tableNotebook").clear();
 		    
 		   // freigabeButton.addClickHandler(new freigabeButtonClickHandler());
 		   // BUTTONS !!

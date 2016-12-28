@@ -72,6 +72,7 @@ public class ShowAllNotebooks extends BasicView {
 		    RootPanel.get("main").add(contentPanel);
 		   // RootPanel.get("main").add(nbt.start());
 		   RootPanel.get("table").clear();
+		   RootPanel.get("tableNotebook").clear();
 	}
 	private class AllNotebooksCallback implements AsyncCallback<Vector<NoteBook>> {
     @Override

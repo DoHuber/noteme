@@ -79,6 +79,7 @@ public class ShowNote extends BasicView {
 		
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
 		
 	}
 	private class DeleteClickHandler implements ClickHandler {

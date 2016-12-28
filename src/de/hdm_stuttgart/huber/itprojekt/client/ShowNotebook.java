@@ -2,6 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -53,12 +54,15 @@ public class ShowNotebook extends BasicView{
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Subtitle: "	+ nb.getSubtitle();
+		//return "Subtitle: "	+ nb.getSubtitle();
+		return null;
 	}
 
 	@Override
 	public void run() {
 
+		//RootPanel.get("table").getElement().getStyle().setMarginBottom(600,Unit.PX);
+		
 		FlowPanel contentPanel = new FlowPanel();
 		vp.add(deleteBtn);
 		deleteBtn.addClickHandler(new DeleteClickHandler());
@@ -82,6 +86,7 @@ public class ShowNotebook extends BasicView{
 		
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
 	}
 	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
 	    @Override
@@ -113,7 +118,7 @@ public class ShowNotebook extends BasicView{
 	NoteTable nt = new NoteTable(notes);
 	nt.addClickNote();
 	// RootPanel.get("main").clear();
-	RootPanel.get("table").add(nt.start());
+	RootPanel.get("tableNotebook").add(nt.start());
 	//RootPanel.get("table").clear();
 	//RootPanel.get("table").add(nt.start());
 }
