@@ -46,6 +46,12 @@ public class SharedServicesImpl extends RemoteServiceServlet implements SharedSe
     		// Registration aktuell noch etwas unzeremoniell
     		if (!userInfoMapper.isUserRegistered(userInfo.getGoogleId())) {
     			userInfoMapper.registerUser(userInfo);
+    		} else {
+    			
+    			UserInfo someUser = userInfoMapper.findUserByGoogleId(userInfo.getGoogleId());
+    			userInfo.setFirstName(someUser.getFirstName());
+    			userInfo.setSurName(someUser.getSurName());
+    			
     		}
     		
     		userInfo.setAdminStatus(userService.isUserAdmin());
