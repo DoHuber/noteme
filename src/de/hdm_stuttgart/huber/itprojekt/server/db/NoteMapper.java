@@ -1,6 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.*;
 import java.util.Vector;
@@ -214,7 +215,26 @@ public class NoteMapper extends DataMapper {
 			e.printStackTrace();
 		}
     	
-    	return new Vector<Note>();
+    	return new Vector<>();
+    	
+    }
+    
+    public Vector<Note> getAllNotesSharedWith(UserInfo u) {
+    	
+    	try {
+    		
+    		String sql = "SELECT note.id AS id, title, subtitle, content, note_source, creation_date, due_date, modification_date, note.notebook_id AS notebook_id, author_id FROM note "
+    				+ "JOIN permission ON note.id = permission.note_id WHERE beneficiary_id = ?";
+    		PreparedStatement ps = connection.prepareStatement(sql);
+    		ps.setInt(1, u.getId());
+    		ResultSet rs = ps.executeQuery();   
+    		
+    		return makeNotesFromResultSet(rs);
+    	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return new Vector<>();
+    	}
     	
     }
     
@@ -243,6 +263,8 @@ public class NoteMapper extends DataMapper {
     	
     	return v;
     }
+    
+    
     
     
 
