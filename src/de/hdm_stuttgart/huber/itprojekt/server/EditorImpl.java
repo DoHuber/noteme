@@ -274,5 +274,20 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		return v;
 	}
 
+	@Override
+	public Vector<Note> getAllNotesSharedByCurrentUser() {
+		
+		UserInfo u = getCurrentUser();
+		return noteMapper.getAllNotesSharedBy(u);
+		
+	}
+
+	@Override
+	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser() {
+		
+		return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
+		
+	}
+
 
 }

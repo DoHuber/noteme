@@ -1,5 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
@@ -12,5 +14,7 @@ public interface PermissionServiceAsync {
 	void getRunTimePermissionFor(UserInfo u, Shareable sharedObject, AsyncCallback<Permission> callback);
 
 	void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l, AsyncCallback<Void> callback);
+
+	void getAllPermissionsFor(Shareable s, AsyncCallback<Vector<Permission>> callback);
 
 }

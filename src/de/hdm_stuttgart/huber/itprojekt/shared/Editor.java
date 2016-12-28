@@ -44,6 +44,9 @@ public interface Editor extends RemoteService {
 	public Vector<Note> getAllSharedNotesForCurrentUser();
 	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser();
 	
+	public Vector<Note> getAllNotesSharedByCurrentUser();
+	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser();
+	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;
 	public Vector<Note> getAllFrom(NoteBook nb);

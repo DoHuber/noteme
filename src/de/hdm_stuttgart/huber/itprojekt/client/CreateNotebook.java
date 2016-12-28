@@ -46,17 +46,17 @@ public class CreateNotebook extends BasicView {
 		createButton.addClickHandler(new CreateClickHandler());
 		
 		RootPanel.get("main").add(vPanel);
-
+		RootPanel.get("table").clear();
 	}
 	@Override
 	public String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Create New NoteBook";
+		return "CREATE A NOTEBOOK";
 	}
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Text";
+		return "Give your notebook a title and subtitle to complete!";
 	}
 
 	
