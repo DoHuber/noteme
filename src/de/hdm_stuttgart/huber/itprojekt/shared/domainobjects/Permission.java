@@ -1,73 +1,62 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
 public class Permission extends DomainObject {
-	
-	// Hat eclipse mal automatisch generiert
-	private static final long serialVersionUID = 1L;
-    
-    // Enumerator, hier besser geeignet
-    public enum Level {
-    	
-    	NONE(0), READ(10), EDIT(20), DELETE(30);
-    	
-    	private int value;
-    	private Level(int i) {
-    		value = i;
-    	}
-    	
-    		
-    }
-   
-    private Level level;
+
+    public static final int LEVEL_READ = 0;
+    public static final int LEVEL_EDIT = 0;
+    public static final int LEVEL_ROOT = 0;
+    private static final long serialVersionUID = 1L;
+    public int level = 0;
+    private int permissionId = 0;
     private UserInfo user = null;
-    private Shareable sharedObject;
-    
 
-    // Konstruktoren
-    public Permission(int id, Level l) {
-    	this.id = id;
-    	this.level = l;
+    public Permission(Object object, int int1, UserInfo noteUser, NoteBook noteBook, Note note) {
+        // TODO Auto-generated constructor stub
     }
-    
-    public Permission(Level l) {
-    	this.level = l;
-    }
-    
+
     public Permission() {
-    	this.level = Level.NONE;
+
     }
-    
-    public boolean isUserAllowedTo(Level action) {
-    	
-    	if (this.level.value >= action.value) {
-    		return true;
-    	} else {
-    		return false;
-    	}
-    	
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
     }
-    
-    
-    // Getter und Setter
-	public UserInfo getUser() {
-		return user;
-	}
 
-	public void setUser(UserInfo user) {
-		this.user = user;
-	}
+    public static int getLevelRead() {
+        return LEVEL_READ;
+    }
 
-	public Shareable getSharedObject() {
-		return sharedObject;
-	}
+    public static int getLevelEdit() {
+        return LEVEL_EDIT;
+    }
 
-	public void setSharedObject(Shareable sharedObject) {
-		this.sharedObject = sharedObject;
-	}
-	
-	public int getLevelAsInt() {
-		return this.level.value;
-	}
-	
+    public static int getLevelRoot() {
+        return LEVEL_ROOT;
+    }
+
+    public int getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(int permissionId) {
+        this.permissionId = permissionId;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public UserInfo getUser() {
+        return user;
+    }
+
+    public void setUser(UserInfo user) {
+        this.user = user;
+    }
+
 
 }

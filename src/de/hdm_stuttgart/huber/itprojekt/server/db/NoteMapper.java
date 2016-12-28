@@ -1,7 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.*;
 import java.util.Vector;
@@ -169,7 +168,7 @@ public class NoteMapper extends DataMapper {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.note");
-
+            
             return makeNotesFromResultSet(rs);
 
         } catch (SQLException e) {
@@ -198,61 +197,42 @@ public class NoteMapper extends DataMapper {
         return new Vector<Note>();
 
     }
-
+    
     public Vector<Note> getAllNotesForNoteBookId(int id) {
-
+    	
     	try {
-
+    		
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE notebook_id = ?");
 			ps.setInt(1, id);
-
+			
 			ResultSet rs = ps.executeQuery();
-
+			
 			return makeNotesFromResultSet(rs);
-
+			
 		} catch (SQLException | ClassNotFoundException e) {
-
+			
 			e.printStackTrace();
 		}
-
+    	
     	return new Vector<Note>();
-
+    	
     }
     
-public Vector<Note> getAllNotesSharedWith(UserInfo u) {
-    	
-    	try {
-    		
-    		String sql = "SELECT note.id AS id, title, subtitle, content, note_source, creation_date, due_date, modification_date, note.notebook_id AS notebook_id, author_id FROM note "
-    				+ "JOIN permission ON note.id = permission.note_id WHERE beneficiary_id = ?";
-    		PreparedStatement ps = connection.prepareStatement(sql);
-    		ps.setInt(1, u.getId());
-    		ResultSet rs = ps.executeQuery();   
-    		
-    		return makeNotesFromResultSet(rs);
-    	
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return new Vector<>();
-    	}
-    	
-    }
-
     private Vector<Note> makeNotesFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
-
+    	
     	Vector<Note> v = new Vector<>();
-
+    	
     	while (rs.next()) {
-
+        	
         	Note note = new Note(rs.getInt("id"));
-
+        	
         	note.setContent(rs.getString("content"));
         	note.setTitle(rs.getString("title"));
         	note.setSubtitle(rs.getString("subtitle"));
-
+        	
         	note.setOwner(noteUserMapper.findById(rs.getInt("author_id")));
         	note.setNoteBook(noteBookMapper.findById(rs.getInt("notebook_id")));
-
+        	
         	note.setCreationDate(rs.getDate("creation_date"));
         	note.setDueDate(rs.getDate("due_date"));
         	note.setModificationDate(rs.getDate("modification_date"));
@@ -260,11 +240,11 @@ public Vector<Note> getAllNotesSharedWith(UserInfo u) {
             v.add(note);
 
         }
-
+    	
     	return v;
     }
-
-
+    
+    
 
 }
 

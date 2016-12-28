@@ -43,15 +43,14 @@ public class CreateNote extends BasicView {
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
 	private Grid grid = new Grid(2,1);
-
-	public CreateNote(NoteBook nb) {
-		// TODO Auto-generated constructor stub
+	private NoteBook nb = null; 
+	public CreateNote (){
+		
 	}
-
-	public CreateNote() {
-		// TODO Auto-generated constructor stub
+	public CreateNote (NoteBook nb ){
+		this.nb = nb;
+		
 	}
-
 	@Override
 	public void run() {
 		/*
@@ -108,7 +107,9 @@ public class CreateNote extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 			createNote();
-			
+			ShowAllNotes san = new ShowAllNotes();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 		}
 		
 	}
@@ -121,8 +122,11 @@ public class CreateNote extends BasicView {
 		note.setTitle(titleTextBox.getText());
 		note.setSubtitle(SubtitleTextBox.getText());
 		note.setContent(noteArea.getText());
+		note.setNoteBook(nb);
 		editorVerwaltung.createNote(note, new CreateNoteCallback());
+
 	}
+
 	/**
 	 * Klasse die den callback zum Notiz anlegen implementiert. Die angelegte Notiz wird
 	 * an die EditorImpl übergeben. Später soll die angelegte Notiz noch dem Nutzer angezeigt werden  
@@ -143,9 +147,10 @@ public class CreateNote extends BasicView {
 			MenuView mw = new MenuView();
 			String test ="Erfolgreich";
 			Label lb=new Label(test);	
-			RootPanel.get().clear();
-			RootPanel.get().add(mw);
-			RootPanel.get().add(lb);
+			RootPanel.get("main").clear();
+			RootPanel.get("menu").clear();
+			RootPanel.get("main").add(mw);
+			RootPanel.get("main").add(lb);
 			
 		}
 		

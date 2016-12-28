@@ -3,9 +3,6 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 import de.hdm_stuttgart.huber.itprojekt.server.EditorImpl;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.Date;
@@ -23,33 +20,12 @@ public class CoolAndNiceTestScript {
 
     public static void main(String[] args) throws Throwable {
     	
-    	PermissionMapper pm = PermissionMapper.getPermissionMapper();
-    	Permission p = new Permission(Level.DELETE);
-    	p.setSharedObject(new Shareable(){
-
-			@Override
-			public int getId() {
-				return 282;
-			}
-
-			@Override
-			public char getType() {
-				// TODO Auto-generated method stub
-				return 'n';
-			}
-
-			@Override
-			public Permission getRuntimePermission() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-    		
-    	});
+    	Vector<Note> vector = NoteMapper.getNoteMapper().getAllNotesForNoteBookId(57);
     	
-    	p.setUser(new UserInfo(506));
     	
-    	pm.createPermission(p);
-    	System.out.println("Fertig");
+    	for (Note row : vector) {
+    		System.out.println(row.toString());
+    	}
     	
 	
     }

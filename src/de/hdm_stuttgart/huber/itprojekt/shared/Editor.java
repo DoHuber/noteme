@@ -40,10 +40,6 @@ public interface Editor extends RemoteService {
 	public Vector<Note> getAllNotesForCurrentUser();
 	public Vector<NoteBook> getAllNoteBooksForCurrentUser();
 	
-	// Methoden mit Freigabe dabei
-	public Vector<Note> getAllSharedNotesForCurrentUser();
-	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser();
-	
 	// Zusätzliche Methoden zu NoteBook
 	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;
 	public Vector<Note> getAllFrom(NoteBook nb);
