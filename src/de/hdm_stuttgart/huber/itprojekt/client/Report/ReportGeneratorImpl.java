@@ -77,7 +77,7 @@ public void init() throws IllegalArgumentException {
    * 
    * @return das BankVerwaltungsobjekt
    */
-  protected Editor getBankVerwaltung() {
+  protected Editor getNoteVerwaltung() {
     return this.administration;
   }
 
@@ -85,8 +85,8 @@ public void init() throws IllegalArgumentException {
    * Setzen des zugehörigen Bank-Objekts.
    */
   @Override
-public void setBank(Bank b) {
-    this.administration.setBank(b);
+public void create(UserInfo uI) {
+    this.administration.create(uI);
   }
 
   /**

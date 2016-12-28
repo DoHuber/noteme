@@ -51,7 +51,7 @@ public class PlainTextReportWriter extends ReportWriter {
    * 
    * @param r der zu prozessierende Report
    */
-  public void process(AllAccountsOfCustomerReport r) {
+  public void process(AllNoteBooksOfUserReport r) {
 
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
@@ -96,7 +96,7 @@ public class PlainTextReportWriter extends ReportWriter {
    * 
    * @param r der zu prozessierende Report
    */
-  public void process(AllAccountsOfAllCustomersReport r) {
+  public void process(AllNoteBooksOfAllUsers r) {
 
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
@@ -130,7 +130,7 @@ public class PlainTextReportWriter extends ReportWriter {
        * Sollte dies in einer erweiterten Form des Projekts nicht mehr gelten,
        * so müsste hier eine detailliertere Implementierung erfolgen.
        */
-      AllAccountsOfCustomerReport subReport = (AllAccountsOfCustomerReport) r
+      AllNoteBooksOfUserReport subReport = (AllNoteBooksOfUserReport) r
           .getSubReportAt(i);
 
       this.process(subReport);

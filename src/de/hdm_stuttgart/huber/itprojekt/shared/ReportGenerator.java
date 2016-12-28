@@ -3,8 +3,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfAllCustomersReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfCustomerReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfAllUsers;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfUserReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 /**
@@ -54,7 +54,7 @@ public interface ReportGenerator extends RemoteService {
    * @para Bank-Objekt
    * @throws IllegalArgumentException
    */
-  public void setUser(UserInfo b) throws IllegalArgumentException;
+  public void create(UserInfo uI) throws IllegalArgumentException;
 
   /**
    * Erstellen eines <code>AllAccountsOfCustomerReport</code>-Reports. Dieser
@@ -64,9 +64,9 @@ public interface ReportGenerator extends RemoteService {
    *          erstellt werden soll.
    * @return das fertige Reportobjekt
    * @throws IllegalArgumentException
-   * @see AllAccountsOfCustomerReport
+   * @see AllNoteBooksOfUserReport
    */
-  public abstract AllAccountsOfCustomerReport createAllAccountsOfCustomerReport(
+  public abstract AllNoteBooksOfUserReport createAllAccountsOfCustomerReport(
       UserInfo u) throws IllegalArgumentException;
 
   /**
@@ -75,8 +75,8 @@ public interface ReportGenerator extends RemoteService {
    * 
    * @return das fertige Reportobjekt
    * @throws IllegalArgumentException
-   * @see AllAccountsOfAllCustomersReport
+   * @see AllNoteBooksOfAllUsers
    */
-  public abstract AllAccountsOfAllCustomersReport createAllAccountsOfAllCustomersReport()
+  public abstract AllNoteBooksOfAllUsers createAllAccountsOfAllCustomersReport()
       throws IllegalArgumentException;
 }

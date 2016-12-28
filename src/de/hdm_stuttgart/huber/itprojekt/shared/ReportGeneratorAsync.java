@@ -2,8 +2,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfAllCustomersReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllAccountsOfCustomerReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfAllUsers;
+import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfUserReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 
@@ -20,14 +20,14 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 public interface ReportGeneratorAsync {
 
   void createAllAccountsOfAllCustomersReport(
-      AsyncCallback<AllAccountsOfAllCustomersReport> callback);
+      AsyncCallback<AllNoteBooksOfAllUsers> callback);
 
   void createAllAccountsOfCustomerReport(UserInfo u,
-      AsyncCallback<AllAccountsOfCustomerReport> callback);
+      AsyncCallback<AllNoteBooksOfUserReport> callback);
 
   void init(AsyncCallback<Void> callback);
 
-  void setUser(UserInfo u, AsyncCallback<Void> callback);
+  void create(UserInfo uI, AsyncCallback<Void> callback);
 
 }
 

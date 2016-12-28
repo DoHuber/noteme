@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public interface EditorAsync {
 
@@ -36,5 +37,9 @@ public interface EditorAsync {
 	void getAllNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
 
 	void getAllNoteBooksForCurrentUser(AsyncCallback<Vector<NoteBook>> callback);
+	
+	void getAllNoteUser(AsyncCallback<Vector<UserInfo>> callback);
+	
+	void create(UserInfo u,AsyncCallback<Vector<UserInfo>> callback);
 
 }
