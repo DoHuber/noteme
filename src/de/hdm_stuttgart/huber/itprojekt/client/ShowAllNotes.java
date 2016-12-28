@@ -168,13 +168,12 @@ public class ShowAllNotes extends BasicView {
 	
 
 	public void addNotesToTable(Vector<Note> result) {
-	
 	notes = result;
 	NoteTable nt = new NoteTable(notes);
 	nt.addClickNote();
 	RootPanel.get("table").clear();
 	RootPanel.get("table").add(nt.start());
-	
+
 }
 
 	

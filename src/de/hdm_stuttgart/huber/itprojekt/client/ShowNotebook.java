@@ -78,20 +78,15 @@ public class ShowNotebook extends BasicView{
 		subtitle.setText(nb.getSubtitle());
 		//editorVerwaltung.getAllNotes(callback);
 		editorVerwaltung.getAllFrom(nb, callback);
-	    NoteTable nt = new NoteTable(notes);
-	    nt.addClickNote();
-	    RootPanel.get("main").clear();
-	    //RootPanel.get("table").clear();
-
-	   
+//	    NoteTable nt = new NoteTable(notes);
+//	    nt.addClickNote();
+	    RootPanel.get("table").clear();  
 		contentPanel.add(vp);
 		contentPanel.add(title);
 		contentPanel.add(subtitle);
 		//contentPanel.add(nt.start());
 		RootPanel.get("main").clear();
 		RootPanel.get("main").add(contentPanel);
-
-
 	}
 	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
 	    @Override
@@ -122,8 +117,8 @@ public class ShowNotebook extends BasicView{
 	notes = result;
 	NoteTable nt = new NoteTable(notes);
 	nt.addClickNote();
-	RootPanel.get("main").clear();
-	RootPanel.get("main").add(nt.start());
+	// RootPanel.get("main").clear();
+	RootPanel.get("table").add(nt.start());
 	//RootPanel.get("table").clear();
 	//RootPanel.get("table").add(nt.start());
 }

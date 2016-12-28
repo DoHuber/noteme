@@ -71,7 +71,8 @@ public class CreateNote extends BasicView {
 		createButton.addClickHandler(new CreateClickHandler());
 		grid.setWidget(0, 0, richTextToolbar);
 	
-		noteArea.setSize("475px", "100px");
+		// noteArea.setSize("475px", "100px");
+		noteArea.setSize("500px", "100px");
 
 		noteArea.setSize("445px", "100px");
 		grid.setWidget(1, 0, noteArea);
@@ -83,7 +84,7 @@ public class CreateNote extends BasicView {
 		RootPanel.get("main").add(contentPanel);
 		
 		noteArea.setStyleName("noteArea");
-
+		RootPanel.get("table").clear();
 	}
 
 	@Override
