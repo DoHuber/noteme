@@ -49,8 +49,9 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 
 	@Override
 	public Vector<Permission> getAllPermissionsFor(Shareable s) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return permissionMapper.getAllPermissionsFor(s);
+		
 	}
 	
 	
