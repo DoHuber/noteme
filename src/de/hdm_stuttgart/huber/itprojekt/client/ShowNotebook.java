@@ -65,9 +65,6 @@ public class ShowNotebook extends BasicView{
 		vp.add(editBtn);
 		vp.add(releseBtn);
 
-		
-	    
-
 		vp.add(createBtn);
 		createBtn.addClickHandler(new CreateNoteClickHandler());
 		nb.getId();
@@ -77,13 +74,14 @@ public class ShowNotebook extends BasicView{
 		editorVerwaltung.getAllFrom(nb, callback);
 //	    NoteTable nt = new NoteTable(notes);
 //	    nt.addClickNote();
-	    RootPanel.get("table").clear();  
+	    
 		contentPanel.add(vp);
 		contentPanel.add(title);
 		contentPanel.add(subtitle);
 		//contentPanel.add(nt.start());
-		RootPanel.get("main").clear();
+		
 		RootPanel.get("main").add(contentPanel);
+		RootPanel.get("table").clear();
 	}
 	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
 	    @Override

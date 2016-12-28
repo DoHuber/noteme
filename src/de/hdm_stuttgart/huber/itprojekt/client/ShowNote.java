@@ -42,20 +42,20 @@ public class ShowNote extends BasicView {
 	}
 
 	@Override
-	public String getHeadlineText() {
+	public String getSubHeadlineText() {
 		if (n.getNoteBook()==null){
-			return "Für die Notiz wurde kein Notizbuch ausgewählt";
+			return "There is no notebook deposited for the note.";
 		}
 		else{
-			return "Notizbuch:"+ n.getNoteBook().getTitle();
+			return "Notebook:"+ n.getNoteBook().getTitle();
 		}
 		
 	}
 
 	@Override
-	public String getSubHeadlineText() {
+	public String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Notiz: "+n.getTitle();
+		return "Note: "+n.getTitle();
 	}
 	
 
