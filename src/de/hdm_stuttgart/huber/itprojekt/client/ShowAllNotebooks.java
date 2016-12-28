@@ -46,17 +46,32 @@ public class ShowAllNotebooks extends BasicView {
 		this.notebook = liste;
 
 	}
+	
+	@Override
+	public String getHeadlineText() {
+
+		return "MY NOTEBOOKS";
+	}
+	
+	@Override
+	public String getSubHeadlineText() {
+		return "Select a notebook to have a look on your belonging notes";
+	}
+	
 	@Override
 	public void run(){
 		  	FlowPanel contentPanel = new FlowPanel();
 		    FlowPanel fPanel2 = new FlowPanel();
 		   
 		    fPanel2.add(contentPanel);
+		    
 		    editorVerwaltung.getAllNoteBooksForCurrentUser(callback);
-		    NotebookTable nbt = new NotebookTable(notebook);
-		    nbt.addClickNote();
+		    
+		  // NotebookTable nbt = new NotebookTable(notebook);
+		  //  nbt.addClickNote();
 		    RootPanel.get("main").add(contentPanel);
-		    RootPanel.get("main").add(nbt.start());
+		   // RootPanel.get("main").add(nbt.start());
+		   RootPanel.get("table").clear();
 	}
 	private class AllNotebooksCallback implements AsyncCallback<Vector<NoteBook>> {
     @Override
@@ -69,24 +84,16 @@ public class ShowAllNotebooks extends BasicView {
 
 	
   }
-
-	@Override
-	public String getSubHeadlineText() {
-		return "Notizbuch xy";
-	}
+	
 
 	public void addNoteBooksToTable(Vector<NoteBook> result) {
 	notebook = result;
 	NotebookTable ntB = new NotebookTable(notebook);
 	ntB.addClickNote();
-	RootPanel.get("main").clear();
-	RootPanel.get("main").add(ntB.start());
+	RootPanel.get("table").clear();
+	RootPanel.get("table").add(ntB.start());
 }
 
-	@Override
-	public String getHeadlineText() {
-
-		return "My Notebooks";
-	}
+	
 
 }

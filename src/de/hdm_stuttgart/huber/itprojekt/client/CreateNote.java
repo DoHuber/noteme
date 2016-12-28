@@ -70,9 +70,8 @@ public class CreateNote extends BasicView {
 		createButton.addClickHandler(new CreateClickHandler());
 		grid.setWidget(0, 0, richTextToolbar);
 	
-		noteArea.setSize("475px", "100px");
-
-		noteArea.setSize("445px", "100px");
+		// noteArea.setSize("475px", "100px");
+		noteArea.setSize("30%", "10%px");
 		grid.setWidget(1, 0, noteArea);
 		
 		//contentPanel.add(richTextToolbar);
@@ -82,19 +81,19 @@ public class CreateNote extends BasicView {
 		RootPanel.get("main").add(contentPanel);
 		
 		noteArea.setStyleName("noteArea");
-
+		RootPanel.get("table").clear();
 	}
 
 	@Override
 	public String getHeadlineText() {
 
-		return "Create New Note";
+		return "CREATE A NOTE";
 	}
 
 	@Override
 	public String getSubHeadlineText() {
 
-		return "Sinnvoller Text!";
+		return "Give your note a title and subtitle to complete!";
 	}
 	/**
 	 * 

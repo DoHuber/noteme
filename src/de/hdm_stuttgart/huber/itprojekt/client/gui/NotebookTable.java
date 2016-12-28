@@ -99,7 +99,7 @@ public class NotebookTable {
 		table.setVisibleRange(0, noteB.size());
 		table.setRowData(0, noteB);
 		LayoutPanel panel = new LayoutPanel();
-		panel.setSize("50em", "40em");
+		panel.setSize("60em", "40em");
 		panel.add(table);
 	
 		table.setStyleName("googleTable");

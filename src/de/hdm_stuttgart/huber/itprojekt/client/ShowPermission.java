@@ -55,7 +55,7 @@ public class ShowPermission extends BasicView {
 	@Override
 	public String getHeadlineText() {
 
-		return "MY NOTES";
+		return "MY PERMISSIONS";
 	}
 
 	@Override
@@ -87,6 +87,7 @@ public class ShowPermission extends BasicView {
 //		    nt.addClickNote();
 		    RootPanel.get("main").add(contentPanel);
 //		    RootPanel.get("main").add(nt.start());
+		    RootPanel.get("table").clear();
 		    
 		   // freigabeButton.addClickHandler(new freigabeButtonClickHandler());
 		   // BUTTONS !!
