@@ -34,7 +34,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	private NoteBookMapper noteBookMapper;
 	private UserInfoMapper userInfoMapper;
 	private PermissionMapper permissionMapper;
-	
+
 	@Override
 	public void init() throws IllegalArgumentException {
 		
@@ -43,7 +43,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 			this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
 			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
 			this.permissionMapper = PermissionMapper.getPermissionMapper();
-			
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -219,44 +219,60 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	
 	}
 
+	@Override
+	public UserInfo saveUser(UserInfo user) {
+
+
+		try {
+
+			return userInfoMapper.save(user);
+
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
 	/**
 	 * Erläuterungen zu den beiden folgenden Methoden:
 	 * Mit den Objekten von Note oder NoteBook wird jeweils noch
 	 * ein Permission-Objekt, dass die aktuellen Berechtigungen des
 	 * eingeloggten Users beschreibt, mitgegeben.
-	 * 
+	 *
 	 * Somit ist dem Client ermöglicht, komfortabel zu prüfen,
 	 * ob der aktuelle User gewisse Operationen für bestimmte Objekte
 	 * durchführen darf.
 	 */
-	
+
 	@Override
 	public Vector<Note> getAllSharedNotesForCurrentUser() {
 
 		Vector<Note> v = noteMapper.getAllNotesSharedWith(getCurrentUser());
 		for(Note row : v) {
-			
+
 			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
 			row.setRunTimePermission(p);
-			
+
 		}
-		
+
 		return v;
 	}
 
 	@Override
 	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser() {
-		
+
 		Vector<NoteBook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());
 		for (NoteBook row : v) {
-			
+
 			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
 			row.setRunTimePermission(p);
-			
+
 		}
-		
+
 		return v;
 	}
-	
+
 
 }

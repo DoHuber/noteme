@@ -86,7 +86,7 @@ public class ShowAllNotebooks extends BasicView {
 	@Override
 	public String getHeadlineText() {
 
-		return "Überschrift";
+		return "My Notebooks";
 	}
 
 }

@@ -6,7 +6,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
-import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
@@ -46,6 +45,12 @@ public class SharedServicesImpl extends RemoteServiceServlet implements SharedSe
     		// Registration aktuell noch etwas unzeremoniell   
     		if (!userInfoMapper.isUserRegistered(userInfo.getGoogleId())) {
     			userInfoMapper.registerUser(userInfo);
+    		} else {
+    			
+    			UserInfo someUser = userInfoMapper.findUserByGoogleId(userInfo.getGoogleId());
+    			userInfo.setFirstName(someUser.getFirstName());
+    			userInfo.setSurName(someUser.getSurName());
+    			
     		}
     		
     		userInfo.setAdminStatus(userService.isUserAdmin());

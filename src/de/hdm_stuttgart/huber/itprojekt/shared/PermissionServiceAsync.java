@@ -9,8 +9,8 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public interface PermissionServiceAsync {
 
+	void getRunTimePermissionFor(UserInfo u, Shareable sharedObject, AsyncCallback<Permission> callback);
+
 	void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l, AsyncCallback<Void> callback);
 
-	public void getRunTimePermissionFor(UserInfo u, Shareable sharedObject, AsyncCallback<Permission> callback);
-	
 }

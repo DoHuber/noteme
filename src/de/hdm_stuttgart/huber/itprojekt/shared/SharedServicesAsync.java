@@ -1,8 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.RemoteService;
-
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public interface SharedServicesAsync {

@@ -9,10 +9,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-
-
+import com.google.gwt.user.client.ui.TextBox;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
@@ -29,9 +28,13 @@ public class ShowNotebook extends BasicView{
 	private HorizontalPanel vp = new HorizontalPanel();
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
-	private Button releseBtn = new Button("Relese");
+	private Button releseBtn = new Button("Release");
+
+	private Button createBtn = new Button ("Create Note");
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	NoteBook nb = null;
+	private TextBox title = new TextBox();
+	private TextBox subtitle = new TextBox();
 	AllNotesCallback callback = new AllNotesCallback();
 	
 	
@@ -43,14 +46,14 @@ public class ShowNotebook extends BasicView{
 
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
-		return "Notizbuch: "+ nb.getTitle();
+	
+	return "Notizbuch: "+ nb.getTitle();
 	}
 
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Subtitle: "+ nb.getSubtitle();
+		return "Subtitle: "	+ nb.getSubtitle();
 	}
 
 	@Override
@@ -58,15 +61,31 @@ public class ShowNotebook extends BasicView{
 
 		FlowPanel contentPanel = new FlowPanel();
 		vp.add(deleteBtn);
+		deleteBtn.addClickHandler(new DeleteClickHandler());
 		vp.add(editBtn);
 		vp.add(releseBtn);
-		editorVerwaltung.getAllNotes(callback);
+
+		
+	    
+
+		vp.add(createBtn);
+		createBtn.addClickHandler(new CreateNoteClickHandler());
+		nb.getId();
+		title.setText(nb.getTitle());
+		subtitle.setText(nb.getSubtitle());
+		//editorVerwaltung.getAllNotes(callback);
+		editorVerwaltung.getAllFrom(nb, callback);
 	    NoteTable nt = new NoteTable(notes);
 	    nt.addClickNote();
 	    RootPanel.get("main").clear();
+	    //RootPanel.get("table").clear();
+
 	   
 		contentPanel.add(vp);
-		contentPanel.add(nt.start());
+		contentPanel.add(title);
+		contentPanel.add(subtitle);
+		//contentPanel.add(nt.start());
+		RootPanel.get("main").clear();
 		RootPanel.get("main").add(contentPanel);
 
 
@@ -82,15 +101,67 @@ public class ShowNotebook extends BasicView{
 
 		
 	  }
+
+	private class DeleteClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+		if(	Window.confirm("Möchten Sie das Notizbuch "+ nb.getTitle()+ " wirklich löschen?")){
+			editorVerwaltung.deleteNoteBook(nb, new DeleteCallback());
+		}
+			
+			
+		}}
+		
+
+	  
 	public void addNotesToTable(Vector<Note> result) {
 	notes = result;
 	NoteTable nt = new NoteTable(notes);
 	nt.addClickNote();
 	RootPanel.get("main").clear();
 	RootPanel.get("main").add(nt.start());
+	//RootPanel.get("table").clear();
+	//RootPanel.get("table").add(nt.start());
 }
 
-}
+	
+	private class DeleteCallback implements AsyncCallback<Void>{
 
+
+		@Override
+		public void onFailure(Throwable caught) {
+			caught.printStackTrace();
+			vp.add(new Label(caught.toString()));
+			
+		}
+
+		@Override
+		public void onSuccess(Void result) {
+			MenuView navigation = new MenuView();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(navigation);	
+			
+			ShowAllNotebooks san =  new ShowAllNotebooks();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
+			
+		}
+	}
+	private class CreateNoteClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			MenuView mView = new MenuView();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(mView);
+			
+			CreateNote cN = new CreateNote(nb);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(cN);
+			
+		}
+}
+}
 
 

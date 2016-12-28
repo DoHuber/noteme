@@ -1,8 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import java.sql.*;
-import java.util.Vector;
-import de.hdm_stuttgart.huber.itprojekt.server.db.DBConnection;
 import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;

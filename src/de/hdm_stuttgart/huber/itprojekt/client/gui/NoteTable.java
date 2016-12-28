@@ -2,14 +2,9 @@ package de.hdm_stuttgart.huber.itprojekt.client.gui;
 
 import java.util.Vector;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -127,12 +122,8 @@ public class NoteTable {
 		table.setVisibleRange(0, notes.size());
 		table.setRowData(0, notes);
 		LayoutPanel panel = new LayoutPanel();
-		panel.setSize("50em", "40em");
+		panel.setSize("60em", "40em");
 		panel.add(table);
-		
-		table.setStyleName("googleTable");
-		
-	
 		fPanel.add(panel);
 
 		return fPanel;

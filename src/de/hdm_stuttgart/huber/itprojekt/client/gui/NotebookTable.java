@@ -7,7 +7,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -103,7 +102,7 @@ public class NotebookTable {
 		panel.setSize("50em", "40em");
 		panel.add(table);
 	
-	
+		table.setStyleName("googleTable");
 		
 		fPanel.add(buttonPanel);
 		fPanel.add(panel);

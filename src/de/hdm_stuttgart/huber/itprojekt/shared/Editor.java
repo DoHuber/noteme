@@ -10,6 +10,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 /**
  * @author elcpt
@@ -49,5 +50,6 @@ public interface Editor extends RemoteService {
 	
 	
 	public Vector<Note> getAllNotes() throws BullshitException;
+	public UserInfo saveUser(UserInfo user);
 	
 }

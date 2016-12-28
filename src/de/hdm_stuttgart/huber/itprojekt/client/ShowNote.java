@@ -11,10 +11,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
@@ -45,8 +43,13 @@ public class ShowNote extends BasicView {
 
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
-		return "Notizbuch:"+ n.getNoteBook().getTitle();
+		if (n.getNoteBook()==null){
+			return "Für die Notiz wurde kein Notizbuch ausgewählt";
+		}
+		else{
+			return "Notizbuch:"+ n.getNoteBook().getTitle();
+		}
+		
 	}
 
 	@Override
@@ -84,7 +87,13 @@ public class ShowNote extends BasicView {
 		if(	Window.confirm("Möchten Sie die Notiz "+ n.getTitle()+ " wirklich löschen?")){
 			editorVerwaltung.deleteNote(n, new DeleteCallback());
 		}
-			
+		MenuView navigation = new MenuView();
+		RootPanel.get("menu").clear();
+		RootPanel.get("menu").add(navigation);	
+		
+		ShowAllNotes san =  new ShowAllNotes();
+		RootPanel.get("main").clear();
+		RootPanel.get("main").add(san);
 			
 		}
 		
@@ -100,9 +109,8 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onSuccess(Void result) {
-			MenuView navigation = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(navigation);	
+		
+			
 			
 		}
 		
