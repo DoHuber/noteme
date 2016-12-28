@@ -18,7 +18,7 @@ public class Permission extends DomainObject {
     		
     }
    
-    private final Level level;
+    private Level level;
     private UserInfo user = null;
     private Shareable sharedObject;
     

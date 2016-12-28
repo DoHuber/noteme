@@ -4,6 +4,7 @@ public interface Shareable {
 	
 	public int getId();
 	public char getType();
+	public Permission getRuntimePermission();
 	
 
 }

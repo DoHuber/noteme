@@ -39,4 +39,8 @@ public interface EditorAsync {
 
 	void getAllFrom(NoteBook nb, AsyncCallback<Vector<Note>> callback);
 
+	void getAllSharedNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
+
+	void getAllSharedNoteBooksForCurrentUser(AsyncCallback<Vector<NoteBook>> callback);
+
 }

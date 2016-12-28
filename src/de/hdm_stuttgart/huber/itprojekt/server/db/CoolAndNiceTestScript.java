@@ -37,6 +37,12 @@ public class CoolAndNiceTestScript {
 				// TODO Auto-generated method stub
 				return 'n';
 			}
+
+			@Override
+			public Permission getRuntimePermission() {
+				// TODO Auto-generated method stub
+				return null;
+			}
     		
     	});
     	

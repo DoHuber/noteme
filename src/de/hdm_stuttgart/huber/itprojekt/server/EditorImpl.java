@@ -13,11 +13,13 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
+import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class EditorImpl extends RemoteServiceServlet implements Editor {
@@ -31,6 +33,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	private NoteMapper noteMapper;
 	private NoteBookMapper noteBookMapper;
 	private UserInfoMapper userInfoMapper;
+	private PermissionMapper permissionMapper;
 	
 	@Override
 	public void init() throws IllegalArgumentException {
@@ -39,6 +42,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 			this.noteMapper = NoteMapper.getNoteMapper();
 			this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
 			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
+			this.permissionMapper = PermissionMapper.getPermissionMapper();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -213,6 +217,45 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		int noteBookId = nb.getId();
 		return noteMapper.getAllNotesForNoteBookId(noteBookId);		
 	
+	}
+
+	/**
+	 * Erläuterungen zu den beiden folgenden Methoden:
+	 * Mit den Objekten von Note oder NoteBook wird jeweils noch
+	 * ein Permission-Objekt, dass die aktuellen Berechtigungen des
+	 * eingeloggten Users beschreibt, mitgegeben.
+	 * 
+	 * Somit ist dem Client ermöglicht, komfortabel zu prüfen,
+	 * ob der aktuelle User gewisse Operationen für bestimmte Objekte
+	 * durchführen darf.
+	 */
+	
+	@Override
+	public Vector<Note> getAllSharedNotesForCurrentUser() {
+
+		Vector<Note> v = noteMapper.getAllNotesSharedWith(getCurrentUser());
+		for(Note row : v) {
+			
+			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
+			row.setRunTimePermission(p);
+			
+		}
+		
+		return v;
+	}
+
+	@Override
+	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser() {
+		
+		Vector<NoteBook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());
+		for (NoteBook row : v) {
+			
+			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
+			row.setRunTimePermission(p);
+			
+		}
+		
+		return v;
 	}
 	
 

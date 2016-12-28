@@ -35,6 +35,16 @@
         <servlet-name>sharedServices</servlet-name>
         <url-pattern>/it_projekt/login</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+    	<servlet-name>PermissionService</servlet-name>
+    	<servlet-class>de.hdm_stuttgart.huber.itprojekt.server.PermissionServiceImpl</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>PermissionService</servlet-name>
+    	<url-pattern>/itprojekt/permsvc</url-pattern>
+    </servlet-mapping>
 
     <!-- Default page to serve -->
     <welcome-file-list>

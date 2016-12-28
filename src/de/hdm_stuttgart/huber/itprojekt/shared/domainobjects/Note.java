@@ -122,7 +122,7 @@ public class Note extends DomainObject implements Shareable {
 		this.modificationDate = modificationDate;
 	}
 
-	public Permission getRunTimePermission() {
+	public Permission getRuntimePermission() {
 		return runTimePermission;
 	}
 
