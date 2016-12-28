@@ -4,6 +4,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -162,9 +163,7 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			ShowReportDemo rep = new ShowReportDemo();
-			RootPanel.get("menu").clear();
-			RootPanel.get().add(rep);
+		        Window.Location.replace(GWT.getHostPageBaseURL() + "Report.html");
 			
 
 	

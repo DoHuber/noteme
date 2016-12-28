@@ -1,6 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
@@ -48,6 +49,7 @@ public class ShowReportDemo extends MenuView {
     EditorAsync administration = ClientsideSettings.getEditorVerwaltung();
 
     administration.getUserById(1, new GetUserCallback(this));
+    RootPanel.get("menu").clear();
   }
 
   /**
@@ -85,7 +87,7 @@ public class ShowReportDemo extends MenuView {
       if (user != null) {
         ReportGeneratorAsync reportGenerator = ClientsideSettings
             .getReportGenerator();
-
+        
         reportGenerator.createAllNoteBooksOfUserReport(user,
             new AllAccountsOfCustomerReportCallback(this.mView));
       }
