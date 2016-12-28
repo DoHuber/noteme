@@ -104,13 +104,13 @@ public class UserInfoMapper extends DataMapper {
         Connection con = DBConnection.getConnection();
 
         try {
-            PreparedStatement stmt = con.prepareStatement("UPDATE userinfo SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE id=?");
-
-            stmt.setString(1, noteUser.getFirstName());
+            PreparedStatement stmt = con.prepareStatement("UPDATE userinfo SET username=?, firstname=?, lastname=?, email=?, google_Id=? WHERE id=?");
+            stmt.setLong(1, noteUser.getId());
             stmt.setString(2, noteUser.getNickname());
-            stmt.setString(3, noteUser.getSurName());
-            stmt.setString(4, noteUser.getEmailAddress());
-            stmt.setString(5, noteUser.getGoogleId());
+            stmt.setString(3, noteUser.getFirstName());
+            stmt.setString(4, noteUser.getSurName());
+            stmt.setString(5, noteUser.getEmailAddress());
+            stmt.setString(6, noteUser.getGoogleId());
 
             stmt.executeUpdate();
 

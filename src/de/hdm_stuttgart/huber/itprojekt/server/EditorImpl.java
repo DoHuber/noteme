@@ -214,6 +214,20 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		return noteMapper.getAllNotesForNoteBookId(noteBookId);		
 	
 	}
+
+	@Override
+	public UserInfo saveUser(UserInfo user) {
+		UserInfo newuser = user;
+		try {
+			userInfoMapper.save(newuser);
+			newuser = userInfoMapper.findById(newuser.getId());
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return newuser;
+	}
 	
 
 }
