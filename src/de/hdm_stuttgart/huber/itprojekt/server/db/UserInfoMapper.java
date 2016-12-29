@@ -241,4 +241,31 @@ public class UserInfoMapper extends DataMapper {
     	return null;
     }
     
+    public UserInfo findByEmailAdress(String email) {
+    	
+    		try {
+    		
+			PreparedStatement ps = connection.prepareCall("SELECT id FROM notizbuch.userinfo WHERE email = ?");
+			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+				return findById(rs.getInt("id"));
+				
+			} else {
+				
+				throw new IllegalArgumentException("Logikfehler: Kein User gefunden");
+				
+			}
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	return null;
+    	
+    }
+    
 }

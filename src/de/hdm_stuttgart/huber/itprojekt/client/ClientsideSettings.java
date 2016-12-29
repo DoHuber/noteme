@@ -4,6 +4,8 @@ import com.google.gwt.core.shared.GWT;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.PermissionService;
+import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
 
@@ -16,7 +18,7 @@ public class ClientsideSettings {
 	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitigen Dienst
 	 */
 	private static EditorAsync editorVerwaltung = null; 
-	
+	private static PermissionServiceAsync permissionVerwaltung=null;
 /**
    *
    * Der Aufruf dieser Methode erfolgt im Client z.B. durch
@@ -37,6 +39,12 @@ public class ClientsideSettings {
 			
 		}
 		return editorVerwaltung;
+	}
+	public static PermissionServiceAsync getPermissionVerwaltung(){
+		if (permissionVerwaltung==null)
+			permissionVerwaltung = GWT.create(PermissionService.class);
+		return permissionVerwaltung;
+		
 	}
 
 	public static SharedServicesAsync getSharedService() {

@@ -79,7 +79,23 @@ h1 {
 	margin-top: 200px;
 }*/
 
-.pure-button {
+/*.pure-button {
+	background-color: #FFE5F2;
+    text-decoration: none;
+    border-radius: 2px;
+    width: 5em;
+   /* font-family: 'Roboto', sans-serif; */
+  /* font-color: #660033;
+    color:  #660033;
+    /* display: inline-block;
+    zoom: 1; 
+    box-sizing: border-box; */
+   /* margin-right: 10px;
+    /*padding-bottom: 1em;
+    padding-down: 1em;
+} */
+
+.psbutton {
 	color: white;
     border-radius: 4px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -115,7 +131,7 @@ h1 {
 
 div#table {
 	margin-left: 300px;
-	margin-top: 130px;
+	margin-top: 230px;
 	height: 300px;
 	width: 520px;
 }

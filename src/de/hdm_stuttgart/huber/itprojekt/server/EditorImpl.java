@@ -74,8 +74,16 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public NoteBook saveNoteBook(NoteBook noteBook) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try {
+			
+			return noteBookMapper.save(noteBook);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -85,8 +93,19 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 	@Override
 	public void deleteNoteBook(NoteBook noteBook) {
-		// TODO Auto-generated method stub
-
+		/**
+		 * Delete Notebook muss zuerst alle Notizen im Notizbuch löschen, das ist wichtig
+		 * und Aufgabe der Applikationslogik, wäre zwar theoretisch auch mit CASCADE
+		 * in mySQL implementierbar, ggf. nachfragen?
+		 */
+		
+		Vector<Note> notesToDelete = getAllFrom(noteBook);
+		for (Note row : notesToDelete) {
+			noteMapper.delete(row);
+		}
+		
+		noteBookMapper.delete(noteBook);
+		
 	}
 
 	@Override
@@ -140,16 +159,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public void deleteNote(Note note) {
 		
-		try {
 			noteMapper.delete(note);
-		} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-
+	
 	}
 
 	@Override
