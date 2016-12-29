@@ -81,7 +81,6 @@ public class ShowNote extends BasicView {
 	public void run() {
 		
 		//ButtonPanel buttonPanel = new ButtonPanel();
-		FlowPanel gesamtPanel = new FlowPanel();
 		HorizontalPanel buttonPanel = new HorizontalPanel();
 		buttonPanel.add(releseBtn);
 		buttonPanel.add(deleteBtn);
@@ -103,21 +102,14 @@ public class ShowNote extends BasicView {
 		alignPanel.add(editBtn);
 		editBtn.addClickHandler(new UpdateClickHandler());
 		
-		
 		contentPanel.add(alignPanel);
-		//alignPanel.add(buttonPanel);
-//		contentPanel.add(titleTextBox);
-//		contentPanel.add(subtitleTextBox);
-//		contentPanel.add(dueDateBox);
 		contentPanel.add(grid);
-//		contentPanel.add(noteArea);
 		noteArea.setStyleName("noteArea");
 		
-//		gesamtPanel.add(contentPanel);
-//		gesamtPanel.add(alignPanel);
-//		gesamtPanel.setStyleName("gesamtPanel");
-//		
-//		RootPanel.get("main").add(gesamtPanel);
+		releseBtn.setStyleName("pure-button");	
+		deleteBtn.setStyleName("pure-button");
+		editBtn.setStyleName("pure-button");
+
 		RootPanel.get("main").add(buttonPanel);
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
