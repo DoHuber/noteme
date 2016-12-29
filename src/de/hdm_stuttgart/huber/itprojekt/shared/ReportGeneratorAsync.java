@@ -2,9 +2,9 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfAllUsers;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfUserReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
 
 
 
@@ -20,7 +20,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 public interface ReportGeneratorAsync {
 
   void createAllNoteBooksOfAllUsersReport(
-      AsyncCallback<AllNoteBooksOfAllUsers> callback);
+      AsyncCallback<AllNoteBooksOfAllUsersReport> callback);
 
   void createAllNoteBooksOfUserReport(UserInfo u,
       AsyncCallback<AllNoteBooksOfUserReport> callback);

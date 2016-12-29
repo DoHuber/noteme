@@ -1,6 +1,8 @@
-package de.hdm_stuttgart.huber.itprojekt.client.gui;
+package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -8,17 +10,17 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.HTMLReportWriter;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
 /**
  * Entry-Point-Klasse des Projekts <b>BankProjekt</b>.
  */
 public class NoteMeReport implements EntryPoint {
 
-	ReportGeneratorAsync reportGenerator = null;
-	Button showReportButton = new Button("Alle Konten von allen Kunden");
+	ReportGeneratorAsync reportGenerator;
+	Button showReportButton;
 	
 	/**
 	 * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
@@ -29,40 +31,37 @@ public class NoteMeReport implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
+		
+		reportGenerator = ClientsideSettings.getReportGenerator();
+		showReportButton = new Button("Irgendwas anziegen ahh!!");
+		
+		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler(){
 
-		/*
-		 * Zunächst weisen wir dem Report-Generator eine Bank-Instanz zu, die
-		 * für die Darstellung der Adressdaten des Kreditinstituts benötigt
-		 * wird.
-		 */
+			@Override
+			public void onUncaughtException(Throwable e) {
+				GWT.log(e.toString());
+			}
+			
+		});
+
 		if (reportGenerator == null) {
 			reportGenerator = ClientsideSettings.getReportGenerator();
 		}
-
-//		Bank bank = new Bank();
-//		bank.setName("HdM Bank");
-//		bank.setStreet("Nobelstr. 10");
-//		bank.setZip(70569);
-//		bank.setCity("Stuttgart");
-//		reportGenerator.setBank(bank, new SetBankCallback());
-
-		/*
-		 * Die Reportanwendung besteht aus einem "Navigationsteil" mit der
-		 * Schaltfläche zum Auslösen der Reportgenerierung und einem "Datenteil"
-		 * für die HTML-Version des Reports.
-		 */
-
 	
 		showReportButton.setStylePrimaryName("bankproject-menubutton");
 		showReportButton.addClickHandler(new ClickHandler() {
+			
 			@Override
 			public void onClick(ClickEvent event) {
-				reportGenerator
-						.createAllNoteBooksOfAllUsersReport(new createAllNoteBooksOfAllUsersReportCallback());
+				
+				reportGenerator.createAllNoteBooksOfAllUsersReport(new createAllNoteBooksOfAllUsersReportCallback());
 
 			}
 		});
+		
 		RootPanel.get("Navigator").add(showReportButton);
+		
+		
 	}
 
 	/**
@@ -103,6 +102,7 @@ public class NoteMeReport implements EntryPoint {
 	 */
 	class createAllNoteBooksOfAllUsersReportCallback implements
 			AsyncCallback<AllNoteBooksOfAllUsersReport> {
+		
 		@Override
 		public void onFailure(Throwable caught) {
 			/*
@@ -123,9 +123,7 @@ public class NoteMeReport implements EntryPoint {
 				RootPanel.get("Details").add(new HTML(writer.getReportText()));
 			}
 		}
-
-
-
+		
 	}
 
 }

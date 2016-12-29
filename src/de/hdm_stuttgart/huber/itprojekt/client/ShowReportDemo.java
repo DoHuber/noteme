@@ -5,9 +5,9 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfUserReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.HTMLReportWriter;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
 /**
  * <p>

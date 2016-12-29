@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.shared.Report;
+package de.hdm_stuttgart.huber.itprojekt.shared.report;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 
  * @author Thies
  */
-public class AllNoteBooksOfAllUsers 
+public class AllNoteBooksOfAllUsersReport 
 	extends CompositeReport 
 	implements Serializable {
 

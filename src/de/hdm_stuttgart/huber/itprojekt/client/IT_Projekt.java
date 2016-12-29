@@ -1,12 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Label;
@@ -30,8 +26,10 @@ public class IT_Projekt implements EntryPoint {
 	
 	public void onModuleLoad() {
 		
-		Logger l = Logger.getLogger("test");
-		l.log(Level.INFO, "Servus i bims");
+	//	Logger l = Logger.getLogger("test");
+	//	l.log(Level.INFO, "Servus i bims");
+		
+		GWT.log("Servus i bims");
 		
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
 		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {

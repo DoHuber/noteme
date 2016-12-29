@@ -1,23 +1,21 @@
-package de.hdm_stuttgart.huber.itprojekt.client.Report;
+package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import de.hdm_stuttgart.huber.itprojekt.server.EditorImpl;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfAllUsers;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfUserReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.Column;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.CompositeParagraph;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.Report;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.Row;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.SimpleParagraph;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.Column;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeParagraph;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.Row;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleParagraph;
 
 
 
@@ -237,7 +235,7 @@ public void create(UserInfo uI) {
    * 
    * @return der fertige Report
    */
-  public AllNoteBooksOfAllUsers createAllNoteBooksOfUsersReport(UserInfo uI2)
+  public AllNoteBooksOfAllUsersReport createAllNoteBooksOfUsersReport(UserInfo uI2)
       throws IllegalArgumentException {
 
     if (this.getNoteBookVerwaltung() == null)
@@ -246,7 +244,7 @@ public void create(UserInfo uI) {
     /*
      * Zunächst legen wir uns einen leeren Report an.
      */
-    AllNoteBooksOfAllUsers result = new AllNoteBooksOfAllUsers();
+    AllNoteBooksOfAllUsersReport result = new AllNoteBooksOfAllUsersReport();
 
     // Jeder Report hat einen Titel (Bezeichnung / überschrift).
     result.setTitle("all notebooks of all user");
@@ -302,7 +300,7 @@ public AllNoteBooksOfUserReport createAllNoteBooksOfCustomerReport(UserInfo uI) 
 	return null;
 }
 
-public AllNoteBooksOfAllUsers createAllNoteBooksOfAllCustomersReport() throws IllegalArgumentException {
+public AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllCustomersReport() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
@@ -314,7 +312,7 @@ public AllNoteBooksOfUserReport createAllNoteBooksOfUserReport(UserInfo u) throw
 }
 
 @Override
-public AllNoteBooksOfAllUsers createAllNoteBooksOfAllUsersReport() throws IllegalArgumentException {
+public AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllUsersReport() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }

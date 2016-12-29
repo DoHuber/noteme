@@ -3,9 +3,9 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfAllUsers;
-import de.hdm_stuttgart.huber.itprojekt.shared.Report.AllNoteBooksOfUserReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
 
 /**
  * <p>
@@ -75,8 +75,8 @@ public interface ReportGenerator extends RemoteService {
    * 
    * @return das fertige Reportobjekt
    * @throws IllegalArgumentException
-   * @see AllNoteBooksOfAllUsers
+   * @see AllNoteBooksOfAllUsersReport
    */
-  public abstract AllNoteBooksOfAllUsers createAllNoteBooksOfAllUsersReport()
+  public abstract AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllUsersReport()
       throws IllegalArgumentException;
 }

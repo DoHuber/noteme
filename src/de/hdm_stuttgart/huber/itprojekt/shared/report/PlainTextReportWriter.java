@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.shared.Report;
+package de.hdm_stuttgart.huber.itprojekt.shared.report;
 
 import java.util.Vector;
 
@@ -96,7 +96,7 @@ public class PlainTextReportWriter extends ReportWriter {
    * 
    * @param r der zu prozessierende Report
    */
-  public void process(AllNoteBooksOfAllUsers r) {
+  public void process(AllNoteBooksOfAllUsersReport r) {
 
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();

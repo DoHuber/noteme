@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.shared.Report;
+package de.hdm_stuttgart.huber.itprojekt.shared.report;
 
 /**
  * Report, der alle Konten eines Kunden darstellt.

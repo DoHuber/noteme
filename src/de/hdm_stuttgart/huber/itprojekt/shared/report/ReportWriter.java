@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.shared.Report;
+package de.hdm_stuttgart.huber.itprojekt.shared.report;
 
 /**
  * <p>
@@ -31,6 +31,6 @@ public abstract class ReportWriter {
    * 
    * @param r der zu übersetzende Report
    */
-  public abstract void process(AllNoteBooksOfAllUsers r);
+  public abstract void process(AllNoteBooksOfAllUsersReport r);
 
 }
