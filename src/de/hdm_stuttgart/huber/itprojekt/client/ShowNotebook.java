@@ -78,7 +78,7 @@ public class ShowNotebook extends BasicView{
 		title.setText(nb.getTitle());
 		subtitle.setText(nb.getSubtitle());
 		//editorVerwaltung.getAllNotes(callback);
-	//	editorVerwaltung.getAllFrom(nb, callback);
+		editorVerwaltung.getAllFrom(nb, callback);
 //	    NoteTable nt = new NoteTable(notes);
 //	    nt.addClickNote();
 	    

@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
 public class ShareNote extends BasicView{
 	private EditorAsync editorVerwaltung  = ClientsideSettings.getEditorVerwaltung();
@@ -28,6 +29,10 @@ public class ShareNote extends BasicView{
 	private Label objectt = new Label("Object");
 	private Label level = new Label("Level");
 	private Note note = null;
+	private String userEmail = null;
+	private String levelP = null;
+	private Level l = null;
+  
 	public ShareNote(){
 		
 	}
@@ -74,13 +79,25 @@ public class ShareNote extends BasicView{
 
 		@Override
 		public void onClick(ClickEvent event) {
-		//permissionVerwaltung.shareWith(beneficiary, sharedObject, l, callback);
-			
+	
+		userEmail = user.getValue();
+		levelP = lb.getSelectedItemText();
+		switch (levelP){
+		case "Level 1": l = Level.READ;
+		break;
+		case "Level 2": l = Level.EDIT;
+		break;
+		case "Level 3": l = Level.DELETE;
+		break;
+		
+		}
+		
+		permissionVerwaltung.shareWith(userEmail, note, l, new PermissionCallback());	
 		}
 		
 	}
 	
-	private class PermissionCallback implements AsyncCallback{
+	private class PermissionCallback implements AsyncCallback<Void>{
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -88,8 +105,9 @@ public class ShareNote extends BasicView{
 			
 		}
 
+
 		@Override
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			
 		}

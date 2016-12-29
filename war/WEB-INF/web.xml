@@ -43,7 +43,7 @@
     
     <servlet-mapping>
     	<servlet-name>PermissionService</servlet-name>
-    	<url-pattern>/itprojekt/permsvc</url-pattern>
+    	<url-pattern>/it_projekt/PermissionService</url-pattern>
     </servlet-mapping>
 
     <!-- Default page to serve -->

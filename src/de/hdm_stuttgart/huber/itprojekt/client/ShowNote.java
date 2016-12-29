@@ -85,16 +85,18 @@ public class ShowNote extends BasicView {
 		buttonPanel.add(releseBtn);
 		buttonPanel.add(deleteBtn);
 		deleteBtn.addClickHandler(new DeleteClickHandler());
-		
+		releseBtn.addClickHandler(new ShareClickHandler());
 		alignPanel.add(empty);
 		alignPanel.add(title);
 		alignPanel.add(titleTextBox);
-
+		titleTextBox.setText(n.getTitle());
 		alignPanel.add(subtitle);
 		alignPanel.add(subtitleTextBox);
-
+		subtitleTextBox.setText(n.getSubtitle());
 		alignPanel.add(dueDate);
 		alignPanel.add(dueDateBox);
+		dueDateBox.setValue(n.getDueDate());
+		noteArea.setText(n.getContent());
 		grid.setWidget(0, 0, richTextToolbar);
 		noteArea.setSize("100%", "100%px");
 		grid.setWidget(1, 0, noteArea);
@@ -114,6 +116,21 @@ public class ShowNote extends BasicView {
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		
+	}
+	private class ShareClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			MenuView mView = new MenuView();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(mView);
+
+			ShareNote sN = new ShareNote(n);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(sN);
+			
+		}
 		
 	}
 	private class DeleteClickHandler implements ClickHandler {
