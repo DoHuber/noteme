@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -156,14 +157,15 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			caught.printStackTrace();
-			vp.add(new Label(caught.toString()));
+			
+			GWT.log("Update failed because of:");
+			GWT.log(caught.toString());
 			
 		}
 
 		@Override
 		public void onSuccess(Note result) {
-		Window.alert("Saved");	
+			Window.alert("Saved");	
 			
 		}
 
