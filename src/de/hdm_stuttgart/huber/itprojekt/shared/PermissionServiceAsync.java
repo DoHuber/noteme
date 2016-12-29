@@ -17,4 +17,6 @@ public interface PermissionServiceAsync {
 
 	void getAllPermissionsFor(Shareable s, AsyncCallback<Vector<Permission>> callback);
 
+	void shareWith(String userEmail, Shareable sharedObject, Level l, AsyncCallback<Void> callback);
+
 }

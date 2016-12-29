@@ -122,15 +122,19 @@ public class NoteMapper extends DataMapper {
             stmt.setString(1, note.getTitle());
             stmt.setString(2, note.getSubtitle());
             stmt.setString(3, note.getContent());
-            stmt.setString(4, "PLATZHALTER SORUCE"); // TODO
+            stmt.setString(4, "Platzhalter Source"); // TODO
 
             // Daten
             stmt.setDate(5, note.getCreationDate());
             stmt.setDate(6, note.getDueDate());
             stmt.setDate(7, new Date(System.currentTimeMillis()));
 
-            // IDs
+            // IDs, gesonderte Nullbehandlung 
+            if (note.getNoteBook() == null) {
+            	stmt.setObject(8, null);
+            } else {
             stmt.setInt(8, note.getNoteBook().getId());
+            }
             stmt.setInt(9, note.getOwner().getId());
 
             // Id der zu speichernden Notiz
@@ -147,7 +151,7 @@ public class NoteMapper extends DataMapper {
         return findById(note.getId());
     }
 
-    public void delete(Note note) throws ClassNotFoundException, SQLException {
+    public void delete(Note note) {
 
         try {
 
