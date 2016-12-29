@@ -74,8 +74,16 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public NoteBook saveNoteBook(NoteBook noteBook) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try {
+			
+			return noteBookMapper.save(noteBook);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 	@Override

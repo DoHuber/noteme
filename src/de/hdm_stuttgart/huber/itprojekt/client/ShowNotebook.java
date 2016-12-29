@@ -159,7 +159,7 @@ public class ShowNotebook extends BasicView{
 		
 		}
 		nb.setTitle(title.getText());
-		nb.setTitle(subtitle.getText());
+		nb.setSubtitle(subtitle.getText());
 		editorVerwaltung.saveNoteBook(nb, new UpdateCallback());
 			
 		}

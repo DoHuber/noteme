@@ -128,9 +128,9 @@ private static NoteBookMapper noteBookMapper = null;
 	      
 	      	stmt.setString(1, notebook.getTitle());
 	    	stmt.setString(2, notebook.getSubtitle());
-	    	stmt.setString(3, "Owner");
-	    	stmt.setDate(4, new Date(7777));
-	    	stmt.setDate(5, new Date(7777));
+	    	stmt.setDate(3, notebook.getCreationDate());
+	    	stmt.setDate(4, new Date(System.currentTimeMillis()));
+	    	stmt.setInt(5, notebook.getOwner().getId());
 	    	
 	    	stmt.setInt(6, notebook.getId());
 	    	
