@@ -6,6 +6,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
@@ -13,6 +14,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 
+import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
@@ -24,16 +26,18 @@ public class ShowNote extends BasicView {
 	 * Funktionen: Löschen, Editieren, Freigeben, Fähligkeitsdatum setzen -
 	 * Ebene: einzelne Notizen
 	 */
-	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	Note n = null;
+	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+	private Note n = null;
 	private HorizontalPanel vp = new HorizontalPanel();
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
 	private Button releseBtn = new Button("Release");
-	
+	private TextBox titleTextBox = new TextBox();
 	private RichTextArea noteArea = new RichTextArea();
+	private RichTextToolbar richTextToolbar=new RichTextToolbar(noteArea);
 	private DateBox dueDateBox = new DateBox();
 	private TextBox subtitleTextBox = new TextBox();
+	private Grid grid = new Grid(2,1);
 	
 
 	public ShowNote(Note note) {
@@ -71,11 +75,19 @@ public class ShowNote extends BasicView {
 		
 		noteArea.setText(n.getContent());
 		dueDateBox.setValue(n.getDueDate());
+		titleTextBox.setText(n.getTitle());
 		subtitleTextBox.setText(n.getSubtitle());
+		
+		grid.setWidget(0, 0, richTextToolbar);
+		noteArea.setSize("30%", "10%px");
+		grid.setWidget(1, 0, noteArea);
 		contentPanel.add(vp);
+		contentPanel.add(titleTextBox);
 		contentPanel.add(subtitleTextBox);
 		contentPanel.add(dueDateBox);
-		contentPanel.add(noteArea);
+		contentPanel.add(grid);
+		//contentPanel.add(noteArea);
+		noteArea.setStyleName("noteArea");
 		
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
@@ -121,14 +133,25 @@ public class ShowNote extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 		if(Window.confirm("Möchten Sie die Änderungen speichern?")){
-			
-			editorVerwaltung.saveNote(n, new UpdateCallback());
+		updateNote();	
 		}
+		
 			
 		}
 		
 	}
-	private class UpdateCallback implements AsyncCallback{
+	public void updateNote(){
+		n.setTitle(titleTextBox.getText());
+		n.setSubtitle(subtitleTextBox.getText());
+		n.setContent(noteArea.getText());
+		java.util.Date utilDate = dueDateBox.getValue();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	    n.setDueDate(sqlDate);
+		//n.setNoteBook(nb);	
+		editorVerwaltung.saveNote(n, new UpdateCallback());
+		
+	}
+	private class UpdateCallback implements AsyncCallback<Note>{
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -138,10 +161,11 @@ public class ShowNote extends BasicView {
 		}
 
 		@Override
-		public void onSuccess(Object result) {
-			
+		public void onSuccess(Note result) {
+		Window.alert("Saved");	
 			
 		}
+
 		
 	}
 	

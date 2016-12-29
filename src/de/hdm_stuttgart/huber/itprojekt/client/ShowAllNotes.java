@@ -63,22 +63,20 @@ public class ShowAllNotes extends BasicView {
 		return "Select a note for more information!";
 	}
 	
-	final Button freigabeButton = new Button("Freigegebene Notizen");
-	final Button nichtFreigabeButton = new Button("Nicht freigegebene Notizen");
-	final Button notizenAnzeigenButton = new Button("Alle");
+	final Button sharedByBtn = new Button("Freigegebene Notizen");
+	final Button sharedWithBtn = new Button("Nicht freigegebene Notizen");
+	final Button allNotesBtn = new Button("Alle");
 	
 	@Override
 	public void run(){
-		  	freigabeButton.setStyleName("pure-button");
-		  	nichtFreigabeButton.setStyleName("pure-button");
-		  	notizenAnzeigenButton.setStyleName("pure-button");
-		  	// notizenAnzeigenButton.setPushed(true);
-		  	
 		  			
 			FlowPanel contentPanel = new FlowPanel();
 		    FlowPanel fPanel2 = new FlowPanel();
 		    FlowPanel buttonsPanel = new FlowPanel();
-		  
+		    buttonsPanel.add(sharedByBtn);
+		    buttonsPanel.add(sharedWithBtn);
+		    buttonsPanel.add(allNotesBtn);
+		    fPanel2.add(buttonsPanel);
 		    fPanel2.add(contentPanel);
 		    
 		    editorVerwaltung.getAllNotesForCurrentUser(callback);
