@@ -35,7 +35,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
  * 
  * @author thies
  */
-@RemoteServiceRelativePath("reportgenerator")
+@RemoteServiceRelativePath("generator")
 public interface ReportGenerator extends RemoteService {
 
   /**

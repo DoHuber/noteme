@@ -104,29 +104,7 @@ public void create(UserInfo uI) {
    * 
    */
   
-  
-//  protected void addImprint(Report r) {
-//    /*
-//     * Das Impressum soll wesentliche Informationen über die Bank enthalten.
-//     */
-//    Bank bank = this.administration.getBank();
-//
-//    /*
-//     * Das Imressum soll mehrzeilig sein.
-//     */
-//    CompositeParagraph imprint = new CompositeParagraph();
-//
-//    imprint.addSubParagraph(new SimpleParagraph(bank.getName()));
-//    imprint.addSubParagraph(new SimpleParagraph(bank.getStreet()));
-//    imprint.addSubParagraph(new SimpleParagraph(bank.getZip() + " "
-//        + bank.getCity()));
-//
-//    // Das eigentliche Hinzufügen des Impressums zum Report.
-//    r.setImprint(imprint);
-//
-//  }
-
-  
+ 
   
   public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
       UserInfo u) throws IllegalArgumentException {
@@ -229,70 +207,15 @@ public void create(UserInfo uI) {
     return result;
   }
 
-  /**
-   * Erstellen von <code>AllAccountsOfAllCustomersReport</code>-Objekten.
- * @param uI2 
-   * 
-   * @return der fertige Report
-   */
-  public AllNoteBooksOfAllUsersReport createAllNoteBooksOfUsersReport(UserInfo uI2)
+public AllNoteBooksOfAllUsersReport createAllNoteBooksOfUsersReport(UserInfo uI2)
       throws IllegalArgumentException {
 
-    if (this.getNoteBookVerwaltung() == null)
-      return null;
-
-    /*
-     * Zunächst legen wir uns einen leeren Report an.
-     */
     AllNoteBooksOfAllUsersReport result = new AllNoteBooksOfAllUsersReport();
 
-    // Jeder Report hat einen Titel (Bezeichnung / überschrift).
-    result.setTitle("all notebooks of all user");
-
-    // Imressum hinzufügen
-   // this.addImprint(result);
-
-    /*
-     * Datum der Erstellung hinzufügen. new Date() erzeugt autom. einen
-     * "Timestamp" des Zeitpunkts der Instantiierung des Date-Objekts.
-     */
+    result.setTitle("all notebooks of all user #todo");
     result.setCreated(new Date());
-
-    /*
-     * Da AllAccountsOfAllCustomersReport-Objekte aus einer Sammlung von
-     * AllAccountsOfCustomerReport-Objekten besteht, benötigen wir keine
-     * Kopfdaten für diesen Report-Typ. Wir geben einfach keine Kopfdaten an...
-     */
-
-    /*
-     * Nun müssen sämtliche Kunden-Objekte ausgelesen werden. Anschließend wir
-     * für jedes Kundenobjekt c ein Aufruf von
-     * createAllAccountsOfCustomerReport(c) durchgeführt und somit jeweils ein
-     * AllAccountsOfCustomerReport-Objekt erzeugt. Diese Objekte werden
-     * sukzessive der result-Variable hinzugefügt. Sie ist vom Typ
-     * AllAccountsOfAllCustomersReport, welches eine Subklasse von
-     * CompositeReport ist.
-     */
-    Vector<UserInfo> user = null;
-	try {
-		user = this.administration.getAllNoteUser();
-	} catch (BullshitException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-
-    for (UserInfo uI : user) {
-      /*
-       * Anlegen des jew. Teil-Reports und Hinzufügen zum Gesamt-Report.
-       */
-      result.addSubReport(this.createAllNoteBooksOfUsersReport(uI));
-      
-    }
-
-    /*
-     * Zu guter Letzt müssen wir noch den fertigen Report zurückgeben.
-     */
-    return result;
+    
+     return result;
   }
 
 public AllNoteBooksOfUserReport createAllNoteBooksOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
@@ -313,8 +236,13 @@ public AllNoteBooksOfUserReport createAllNoteBooksOfUserReport(UserInfo u) throw
 
 @Override
 public AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllUsersReport() throws IllegalArgumentException {
-	// TODO Auto-generated method stub
-	return null;
+	
+	AllNoteBooksOfAllUsersReport retVal = new AllNoteBooksOfAllUsersReport();
+	retVal.setTitle("Servus i bims der Server");
+	retVal.setCreated(new Date());
+	
+	return retVal;
+	
 }
 
 }

@@ -76,12 +76,15 @@ public class ClientsideSettings {
 				public void onFailure(Throwable caught) {
 		          ClientsideSettings.getLogger().severe(
 		              "Der ReportGenerator konnte nicht initialisiert werden!");
+		          GWT.log(caught.toString());
+		          GWT.log(caught.getMessage());
 		        }
 
 		        @Override
 				public void onSuccess(Void result) {
 		          ClientsideSettings.getLogger().info(
 		              "Der ReportGenerator wurde initialisiert.");
+		          GWT.log("RG initialisiert.");
 		        }
 		      };
 

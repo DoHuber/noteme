@@ -32,9 +32,6 @@ public class NoteMeReport implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		
-		reportGenerator = ClientsideSettings.getReportGenerator();
-		showReportButton = new Button("Irgendwas anziegen ahh!!");
-		
 		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler(){
 
 			@Override
@@ -47,6 +44,11 @@ public class NoteMeReport implements EntryPoint {
 		if (reportGenerator == null) {
 			reportGenerator = ClientsideSettings.getReportGenerator();
 		}
+		
+		showReportButton = new Button("Irgendwas anziegen ahh!!");
+		
+		GWT.log(reportGenerator.toString());
+		GWT.log(showReportButton.toString());
 	
 		showReportButton.setStylePrimaryName("bankproject-menubutton");
 		showReportButton.addClickHandler(new ClickHandler() {
@@ -54,12 +56,13 @@ public class NoteMeReport implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				
+				GWT.log("Onclick fired!");
 				reportGenerator.createAllNoteBooksOfAllUsersReport(new createAllNoteBooksOfAllUsersReportCallback());
 
 			}
 		});
 		
-		RootPanel.get("Navigator").add(showReportButton);
+		RootPanel.get("menu").add(showReportButton);
 		
 		
 	}
@@ -109,18 +112,22 @@ public class NoteMeReport implements EntryPoint {
 			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
 			 * aus.
 			 */
-			ClientsideSettings.getLogger().severe(
-					"Erzeugen des Reports fehlgeschlagen!");
-
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
 		}
 
 		@Override
 		public void onSuccess(AllNoteBooksOfAllUsersReport report) {
+			
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+			
 			if (report != null) {
-				HTMLReportWriter writer = new HTMLReportWriter();
-				writer.process(report);
-				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(new HTML(writer.getReportText()));
+				
+				// HTMLReportWriter writer = new HTMLReportWriter();
+				// writer.process(report);
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(report.getTitle() + report.getCreated().toString()));
 			}
 		}
 		
