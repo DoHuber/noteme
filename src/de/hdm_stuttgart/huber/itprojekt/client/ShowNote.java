@@ -39,6 +39,7 @@ public class ShowNote extends BasicView {
 	private TextBox subtitleTextBox = new TextBox();
 	private Grid grid = new Grid(2,1);
 	
+	
 
 	public ShowNote(Note note) {
 		this.n = note;
@@ -72,6 +73,7 @@ public class ShowNote extends BasicView {
 		vp.add(editBtn);
 		editBtn.addClickHandler(new UpdateClickHandler());
 		vp.add(releseBtn);
+		releseBtn.addClickHandler(new ShareClickHandler());
 		
 		noteArea.setText(n.getContent());
 		dueDateBox.setValue(n.getDueDate());
@@ -167,6 +169,22 @@ public class ShowNote extends BasicView {
 			
 		}
 
+		
+	}
+	
+	private class ShareClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			MenuView mView = new MenuView();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(mView);
+
+			ShareNote sN = new ShareNote(n);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(sN);
+			
+		}
 		
 	}
 	

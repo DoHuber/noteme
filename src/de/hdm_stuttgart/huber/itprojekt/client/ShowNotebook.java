@@ -71,7 +71,7 @@ public class ShowNotebook extends BasicView{
 		vp.add(editBtn);
 		editBtn.addClickHandler(new UpdateClickHandler());
 		vp.add(releseBtn);
-
+		releseBtn.addClickHandler(new ShareNotebookClickHndler());
 		vp.add(createBtn);
 		createBtn.addClickHandler(new CreateNoteClickHandler());
 		nb.getId();
@@ -196,6 +196,21 @@ public class ShowNotebook extends BasicView{
 			
 		}
 }
+	private class ShareNotebookClickHndler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			MenuView mView = new MenuView();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(mView);
+			
+			ShareNotebook sNb = new ShareNotebook(nb);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(sNb);
+			
+		}
+		
+	}
 }
 
 
