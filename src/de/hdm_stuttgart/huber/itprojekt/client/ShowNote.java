@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
@@ -26,20 +27,32 @@ public class ShowNote extends BasicView {
 	 * Funktionen: Löschen, Editieren, Freigeben, Fähligkeitsdatum setzen -
 	 * Ebene: einzelne Notizen
 	 */
-	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	private Note n = null;
-	private HorizontalPanel vp = new HorizontalPanel();
+	
+	
+	private HorizontalPanel contentPanel = new HorizontalPanel();
+	private VerticalPanel alignPanel = new VerticalPanel();
 	private Button deleteBtn = new Button("Delete");
 	private Button editBtn = new Button("Update");
 	private Button releseBtn = new Button("Release");
-	private TextBox titleTextBox = new TextBox();
-	private RichTextArea noteArea = new RichTextArea();
-	private RichTextToolbar richTextToolbar=new RichTextToolbar(noteArea);
-	private DateBox dueDateBox = new DateBox();
-	private TextBox subtitleTextBox = new TextBox();
-	private Grid grid = new Grid(2,1);
 	
+	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+	private RichTextArea noteArea = new RichTextArea();
+	
+	private TextBox titleTextBox = new TextBox();
+	private TextBox subtitleTextBox = new TextBox();
+	private RichTextToolbar richTextToolbar = new RichTextToolbar(noteArea);
+	private DateBox dueDateBox = new DateBox();
+	private Label empty = new Label ("-    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -");
+	private Label title = new Label("Title");
+	private Label subtitle = new Label("Subtitle");
+	private Label dueDate = new Label("Due Date");
+	private Grid grid = new Grid(2,1);
+	private Note n = null;
 
+	public ShowNote () {
+		
+	}
+	
 	public ShowNote(Note note) {
 		this.n = note;
 		
@@ -66,29 +79,45 @@ public class ShowNote extends BasicView {
 	@Override
 	public void run() {
 		
-		FlowPanel contentPanel = new FlowPanel();
-		vp.add(deleteBtn);
+		//ButtonPanel buttonPanel = new ButtonPanel();
+		FlowPanel gesamtPanel = new FlowPanel();
+		HorizontalPanel buttonPanel = new HorizontalPanel();
+		buttonPanel.add(releseBtn);
+		buttonPanel.add(deleteBtn);
 		deleteBtn.addClickHandler(new DeleteClickHandler());
-		vp.add(editBtn);
-		editBtn.addClickHandler(new UpdateClickHandler());
-		vp.add(releseBtn);
 		
-		noteArea.setText(n.getContent());
-		dueDateBox.setValue(n.getDueDate());
-		titleTextBox.setText(n.getTitle());
-		subtitleTextBox.setText(n.getSubtitle());
-		
+		alignPanel.add(empty);
+		alignPanel.add(title);
+		alignPanel.add(titleTextBox);
+
+		alignPanel.add(subtitle);
+		alignPanel.add(subtitleTextBox);
+
+		alignPanel.add(dueDate);
+		alignPanel.add(dueDateBox);
 		grid.setWidget(0, 0, richTextToolbar);
-		noteArea.setSize("30%", "10%px");
+		noteArea.setSize("100%", "100%px");
 		grid.setWidget(1, 0, noteArea);
-		contentPanel.add(vp);
-		contentPanel.add(titleTextBox);
-		contentPanel.add(subtitleTextBox);
-		contentPanel.add(dueDateBox);
+		
+		alignPanel.add(editBtn);
+		editBtn.addClickHandler(new UpdateClickHandler());
+		
+		
+		contentPanel.add(alignPanel);
+		//alignPanel.add(buttonPanel);
+//		contentPanel.add(titleTextBox);
+//		contentPanel.add(subtitleTextBox);
+//		contentPanel.add(dueDateBox);
 		contentPanel.add(grid);
-		//contentPanel.add(noteArea);
+//		contentPanel.add(noteArea);
 		noteArea.setStyleName("noteArea");
 		
+//		gesamtPanel.add(contentPanel);
+//		gesamtPanel.add(alignPanel);
+//		gesamtPanel.setStyleName("gesamtPanel");
+//		
+//		RootPanel.get("main").add(gesamtPanel);
+		RootPanel.get("main").add(buttonPanel);
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
@@ -117,7 +146,7 @@ public class ShowNote extends BasicView {
 		@Override
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
-			vp.add(new Label(caught.toString()));
+			contentPanel.add(new Label(caught.toString()));
 			
 		}
 
@@ -157,7 +186,7 @@ public class ShowNote extends BasicView {
 		@Override
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
-			vp.add(new Label(caught.toString()));
+			contentPanel.add(new Label(caught.toString()));
 			
 		}
 
