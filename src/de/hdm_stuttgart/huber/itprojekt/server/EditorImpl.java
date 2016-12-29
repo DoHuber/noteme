@@ -306,7 +306,16 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	public String getSource() {
 		
 		HttpSession session = this.getThreadLocalRequest().getSession();
-		return (String) session.getAttribute("source");
+		String source = (String) session.getAttribute("source");
+		
+		if (source == null) {
+			source = "none";
+		}
+		
+		// Attribut entfernen, damit der Client nicht verwirrt wird
+		session.removeAttribute("source");
+		
+		return source;
 		
 	}
 	

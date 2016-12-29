@@ -14,6 +14,7 @@ public class Note extends DomainObject implements Shareable {
 	private Date dueDate = null;
 	private Date creationDate = null;
 	private Date modificationDate = null;
+	private String source;
 	
 	private Permission runTimePermission;
 	
@@ -134,6 +135,16 @@ public class Note extends DomainObject implements Shareable {
 	public char getType() {
 		return 'n';
 	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+	
+	
 	
 	
 }

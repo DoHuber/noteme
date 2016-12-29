@@ -5,7 +5,6 @@ import java.sql.Date;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -39,12 +38,14 @@ public class CreateNote extends BasicView {
 
 	private TextBox titleTextBox = new TextBox();
 	private TextBox SubtitleTextBox = new TextBox();
-	private RichTextToolbar richTextToolbar=new RichTextToolbar(noteArea);
+	private RichTextToolbar richTextToolbar = new RichTextToolbar(noteArea);
 	private DateBox dueDateBox = new DateBox();
 	private Label title = new Label("Title");
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
+	private String source;
+	private boolean sourceProvided = false;
 	private Grid grid = new Grid(2,1);
 	private NoteBook nb = null; 
 	
@@ -55,6 +56,14 @@ public class CreateNote extends BasicView {
 		this.nb = nb;
 		
 	}
+	
+	public CreateNote(String source) {
+		
+		this.source = source;
+		sourceProvided = true;
+		
+	}
+	
 	@Override
 	public void run() {
 		/*
@@ -66,6 +75,11 @@ public class CreateNote extends BasicView {
 
 		alignPanel.add(subtitle);
 		alignPanel.add(SubtitleTextBox);
+		
+		if (sourceProvided) {
+			Label sourceLabel = new Label("Source: " + source);
+			alignPanel.add(sourceLabel);
+		}
 
 		alignPanel.add(dueDate);
 		alignPanel.add(dueDateBox);
@@ -130,37 +144,13 @@ public class CreateNote extends BasicView {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 	    note.setDueDate(sqlDate);
 		note.setNoteBook(nb);
-		editorVerwaltung.createNote(note, new CreateNoteCallback());
-
-	}
-
-	/**
-	 * Klasse die den callback zum Notiz anlegen implementiert. Die angelegte Notiz wird
-	 * an die EditorImpl übergeben. Später soll die angelegte Notiz noch dem Nutzer angezeigt werden  
-	 * 
-	 *
-	 */
-	private class CreateNoteCallback implements AsyncCallback<Note>{
-
-		@Override
-		public void onFailure(Throwable caught) {
-			
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onSuccess(Note result) {
-			MenuView mw = new MenuView();
-			String test ="Erfolgreich";
-			Label lb=new Label(test);	
-			RootPanel.get("main").clear();
-			RootPanel.get("menu").clear();
-			RootPanel.get("main").add(mw);
-			RootPanel.get("main").add(lb);
-			
+		
+		if (sourceProvided) {
+			note.setSource(source);
 		}
 		
+		editorVerwaltung.createNote(note, new CreateNoteCallback());
+
 	}
 
 	

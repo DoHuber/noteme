@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import de.hdm_stuttgart.huber.itprojekt.client.Report.ReportFilter;
 
 /**
- * Entry Point für den Report Generator
+ * Entry Point fï¿½r den Report Generator
  * @author dominik erdmann
  *
  */
