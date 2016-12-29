@@ -6,6 +6,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.media.client.Audio;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -39,6 +40,24 @@ public class IT_Projekt implements EntryPoint {
 	private TextBox nameBox2 = new TextBox();
 	private Button btn = new Button("Save");
 	public void onModuleLoad() {
+		
+		// funny shit
+		editorVerwaltung.getSource(new AsyncCallback<String>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				GWT.log(caught.toString());
+				GWT.log("Das hat nicht funktioniert, getSource");
+				
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				Window.alert(result);
+				GWT.log(result);
+			}
+			
+		});
 		
 		
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
@@ -79,6 +98,7 @@ public class IT_Projekt implements EntryPoint {
 			}
 		
 		});
+		
 		
 
 	}

@@ -20,6 +20,16 @@
         <servlet-name>sharedServices</servlet-name>
         <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.SharedServicesImpl</servlet-class>
     </servlet>
+    
+    <servlet>
+    	<servlet-name>ExternalButtonListener</servlet-name>
+    	<servlet-class>de.hdm_stuttgart.huber.itprojekt.server.ExternalButtonListener</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>ExternalButtonListener</servlet-name>
+    	<url-pattern>/it_projekt/listener</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
