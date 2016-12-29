@@ -43,6 +43,7 @@
     
     <servlet-mapping>
         <servlet-name>sharedServices</servlet-name>
+        <url-pattern>/ReportGenerator/login</url-pattern>
         <url-pattern>/it_projekt/login</url-pattern>
     </servlet-mapping>
 
