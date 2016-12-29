@@ -6,11 +6,15 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
@@ -21,6 +25,11 @@ public class NoteMeReport implements EntryPoint {
 
 	ReportGeneratorAsync reportGenerator;
 	Button showReportButton;
+	private UserInfo userInfo = null;
+	private VerticalPanel loginPanel = new VerticalPanel();
+	private Label loginLabel = new Label(
+	      "Please sign in to your Google Account to access the cool and nice application.");
+	private Anchor signInLink = new Anchor("Sign In");
 	
 	/**
 	 * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
@@ -58,14 +67,42 @@ public class NoteMeReport implements EntryPoint {
 				
 				GWT.log("Onclick fired!");
 				reportGenerator.createAllNoteBooksOfAllUsersReport(new createAllNoteBooksOfAllUsersReportCallback());
-
+				
 			}
+			
+			
+			
+			public void onFailure(Throwable e) {
+				
+			}
+			
+			public void onSuccess(UserInfo result) {
+				
+				userInfo = result;
+				
+				if (userInfo.isLoggedIn()) {
+					
+					loadMenu();
+					
+				}
+				
+			}
+			
 		});
 		
 		RootPanel.get("menu").add(showReportButton);
 		
 		
 	}
+	
+private void loadMenu() {
+		
+		ShowReportDemo navigation = new ShowReportDemo();
+		ShowReportDemo.setLogOutUrl(userInfo.getLogoutUrl());
+		RootPanel.get("menu").add(navigation);
+	 	
+	}
+	
 
 	/**
 	 * Diese Nested Class wird als Callback für das Setzen des Bank-Objekts bei

@@ -1,8 +1,14 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootPanel;
-
+import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
+import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
@@ -26,7 +32,43 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
  * 
  */
 public class ShowReportDemo extends MenuView {
+	
+	private static String logOutUrl;
+	private Anchor logoutAnchor;
 
+	protected void onLoad() {
+		
+		FlowPanel menu  = new FlowPanel();
+		FlowPanel pureMenu  = new FlowPanel();
+		UnorderedListWidget menuList = new UnorderedListWidget();
+		
+		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		Anchor showNotebooks = new Anchor("Notebooks");
+
+		showNotebooks.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showNotebooks));
+		
+			pureMenu.add(home);
+			pureMenu.add(menuList);
+			menu.add(pureMenu);
+			RootPanel.get("menu").add(menu);
+			
+//			showNotebooks.addClickHandler(new ShowAllNotebooksHandler());
+//	}
+//
+//	private class CreateNotebookHandler implements ClickHandler {
+//
+//		@Override
+//		public void onClick(ClickEvent event) {
+//			MenuView mView = new MenuView();
+//			RootPanel.get("menu").clear();
+//			RootPanel.get("menu").add(mView);
+//
+//			CreateNotebook cN = new CreateNotebook();
+//			RootPanel.get("main").clear();
+//			RootPanel.get("main").add(cN);
+//		}
+	}
   /**
    * Jeder Showcase besitzt eine einleitende Überschrift, die durch diese
    * Methode zu erstellen ist.
