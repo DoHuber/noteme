@@ -76,7 +76,7 @@ public class CreateNote extends BasicView {
 		grid.setWidget(0, 0, richTextToolbar);
 	
 		// noteArea.setSize("475px", "100px");
-		noteArea.setSize("100%", "10%px");
+		noteArea.setSize("100%", "100%");
 		grid.setWidget(1, 0, noteArea);
 		
 		//contentPanel.add(richTextToolbar);
