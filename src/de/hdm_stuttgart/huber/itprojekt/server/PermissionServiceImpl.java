@@ -5,6 +5,7 @@ import java.util.Vector;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
+import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionService;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
@@ -19,12 +20,12 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 	
 
 	public PermissionServiceImpl() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public PermissionServiceImpl(Object delegate) {
 		super(delegate);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -37,6 +38,16 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 		
 		permissionMapper.createPermission(p);
 
+	}
+	
+	
+
+	@Override
+	public void shareWith(String userEmail, Shareable sharedObject, Level l) {
+		
+		UserInfo userToShareWith = UserInfoMapper.getUserInfoMapper().findByEmailAdress(userEmail);
+		shareWith(userToShareWith, sharedObject, l);
+		
 	}
 
 	@Override
