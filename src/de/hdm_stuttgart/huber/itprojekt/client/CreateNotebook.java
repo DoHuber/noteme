@@ -47,6 +47,7 @@ public class CreateNotebook extends BasicView {
 		
 		RootPanel.get("main").add(vPanel);
 		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
 	}
 	@Override
 	public String getHeadlineText() {
