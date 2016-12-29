@@ -198,7 +198,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		
 	}
 	
-	private UserInfo getCurrentUser() {
+	@Override
+	public UserInfo getCurrentUser() {
 		
 		UserService userService = UserServiceFactory.getUserService();
 		if (!userService.isUserLoggedIn()) {

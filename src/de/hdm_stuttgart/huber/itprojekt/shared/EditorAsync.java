@@ -49,4 +49,6 @@ public interface EditorAsync {
 
 	void getAllNotesSharedByCurrentUser(AsyncCallback<Vector<Note>> callback);
 
+	void getCurrentUser(AsyncCallback<UserInfo> callback);
+
 }
