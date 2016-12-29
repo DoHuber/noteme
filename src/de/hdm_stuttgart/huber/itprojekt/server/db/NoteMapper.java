@@ -151,7 +151,7 @@ public class NoteMapper extends DataMapper {
         return findById(note.getId());
     }
 
-    public void delete(Note note) throws ClassNotFoundException, SQLException {
+    public void delete(Note note) {
 
         try {
 

@@ -147,23 +147,13 @@ private static NoteBookMapper noteBookMapper = null;
 	    return findById(notebook.getId());
 	  }
 		  
-	
-	
-	
-	/**
-	 * Daten eines bestimmten Notebook-Objekts werden aus der Datenbank gelöscht
-	 * 
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
-	 public void delete(NoteBook notebook) throws ClassNotFoundException, SQLException {
+	 public void delete(NoteBook notebook) {
 			
-		 Connection connection = DBConnection.getConnection();
 
 		 try {
 
 	            PreparedStatement stmt = connection.prepareStatement("DELETE FROM Notebook WHERE id = ?");
-	            stmt.setLong(1, notebook.getId());
+	            stmt.setInt(1, notebook.getId());
 	            stmt.executeUpdate();
 
 	        } catch (SQLException e) {
