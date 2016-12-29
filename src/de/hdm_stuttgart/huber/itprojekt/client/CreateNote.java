@@ -1,5 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import java.sql.Date;
+
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -12,6 +15,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
+
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
@@ -43,6 +47,7 @@ public class CreateNote extends BasicView {
 	private Label test = new Label();
 	private Grid grid = new Grid(2,1);
 	private NoteBook nb = null; 
+	
 	public CreateNote (){
 		
 	}
@@ -71,7 +76,7 @@ public class CreateNote extends BasicView {
 		grid.setWidget(0, 0, richTextToolbar);
 	
 		// noteArea.setSize("475px", "100px");
-		noteArea.setSize("30%", "10%px");
+		noteArea.setSize("100%", "100%");
 		grid.setWidget(1, 0, noteArea);
 		
 		//contentPanel.add(richTextToolbar);
@@ -82,6 +87,7 @@ public class CreateNote extends BasicView {
 		
 		noteArea.setStyleName("noteArea");
 		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
 	}
 
 	@Override
@@ -120,6 +126,9 @@ public class CreateNote extends BasicView {
 		note.setTitle(titleTextBox.getText());
 		note.setSubtitle(SubtitleTextBox.getText());
 		note.setContent(noteArea.getText());
+		java.util.Date utilDate = dueDateBox.getValue();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	    note.setDueDate(sqlDate);
 		note.setNoteBook(nb);
 		editorVerwaltung.createNote(note, new CreateNoteCallback());
 

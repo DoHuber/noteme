@@ -1,6 +1,9 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
+
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -63,35 +66,46 @@ public class ShowAllNotes extends BasicView {
 		return "Select a note for more information!";
 	}
 	
-	final Button freigabeButton = new Button("Freigegebene Notizen");
-	final Button nichtFreigabeButton = new Button("Nicht freigegebene Notizen");
-	final Button notizenAnzeigenButton = new Button("Alle");
+	final Button sharedByBtn = new Button("Shared By ");
+	final Button sharedWithBtn = new Button("Shared With");
+	final Button allNotesBtn = new Button("All Notes");
 	
 	@Override
 	public void run(){
-		  	freigabeButton.setStyleName("pure-button");
-		  	nichtFreigabeButton.setStyleName("pure-button");
-		  	notizenAnzeigenButton.setStyleName("pure-button");
-		  	// notizenAnzeigenButton.setPushed(true);
-		  	
 		  			
 			FlowPanel contentPanel = new FlowPanel();
 		    FlowPanel fPanel2 = new FlowPanel();
 		    FlowPanel buttonsPanel = new FlowPanel();
-		  
+		    sharedWithBtn.addClickHandler(new SharedWithClickHandler());
+		    allNotesBtn.addClickHandler(new AllNotesClickHandler());
+		    sharedByBtn.addClickHandler(new SharedByClickHandler());
+		    buttonsPanel.add(sharedByBtn);
+		    buttonsPanel.add(sharedWithBtn);
+		    buttonsPanel.add(allNotesBtn);
+		    
+		    fPanel2.add(buttonsPanel);
 		    fPanel2.add(contentPanel);
 		    
 		    editorVerwaltung.getAllNotesForCurrentUser(callback);
 		    
 //		    NoteTable nt = new NoteTable(notes);
 //		    nt.addClickNote();
-		    RootPanel.get("main").add(contentPanel);
+		    RootPanel.get("main").add(fPanel2);
 //		    RootPanel.get("main").add(nt.start());
+		    RootPanel.get("tableNotebook").clear();
 		    
 		   // freigabeButton.addClickHandler(new freigabeButtonClickHandler());
 		   // BUTTONS !!
 	}
-	
+	private class AllNotesClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			editorVerwaltung.getAllNotesForCurrentUser(callback);
+			
+		}
+		
+	}
 	
 	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
     @Override
@@ -113,7 +127,56 @@ public class ShowAllNotes extends BasicView {
 
 		
   }
+	private class SharedWithClickHandler implements ClickHandler {
 
+		@Override
+		public void onClick(ClickEvent event) {
+			SharedWithCallback callback = new SharedWithCallback();
+			editorVerwaltung.getAllSharedNotesForCurrentUser(callback);
+			
+		}
+		
+	}
+	private class SharedWithCallback implements AsyncCallback <Vector<Note>>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Vector<Note> result) {
+			addNotesToTable(result);
+			
+		}
+		
+	}
+	private class SharedByClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			SharedByCallback callback = new SharedByCallback();
+			editorVerwaltung.getAllNotesSharedByCurrentUser(callback);
+			
+		}
+		
+	}
+	private class SharedByCallback implements AsyncCallback <Vector<Note>>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Vector<Note> result) {
+			addNotesToTable(result);
+			
+		}
+		
+	}
 
 //	@Override
 //	public void run() {

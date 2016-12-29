@@ -79,9 +79,66 @@ h1 {
 	margin-top: 200px;
 }*/
 
+/*.pure-button {
+	background-color: #FFE5F2;
+    text-decoration: none;
+    border-radius: 2px;
+    width: 5em;
+   /* font-family: 'Roboto', sans-serif; */
+  /* font-color: #660033;
+    color:  #660033;
+    /* display: inline-block;
+    zoom: 1; 
+    box-sizing: border-box; */
+   /* margin-right: 10px;
+    /*padding-bottom: 1em;
+    padding-down: 1em;
+} */
+
+.psbutton {
+	color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    width: 12em;
+    background: #660033;
+    display: inline-block;
+    zoom: 1;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 100%;
+    padding: 0.5em 1em;
+    color: #444; /* rgba not supported (IE 8) */
+    color: rgba(0, 0, 0, 0.80); /* rgba supported */
+    border: 1px solid #999;  /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+    margin-right: 10px;
+ }
+
 div#table {
 	margin-left: 300px;
-	margin-top: 150px;
+	margin-top: 230px;
+	height: 300px;
+	width: 520px;
+}
+
+div#tableNotebook {
+	margin-left: -520px;
+	margin-top: 250px;
 	height: 300px;
 	width: 520px;
 }

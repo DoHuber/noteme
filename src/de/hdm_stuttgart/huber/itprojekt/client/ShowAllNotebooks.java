@@ -2,13 +2,18 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 import com.google.gwt.user.client.ui.RootPanel;
 
+
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 /**
  * Klasse zur Darstellung von Notizb�chern, gleiche Funktionsweise wie "ShowAllNotes"
@@ -18,7 +23,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 public class ShowAllNotebooks extends BasicView {
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	AllNotebooksCallback callback = new AllNotebooksCallback();
-	
+	final Button sharedByBtn = new Button("Shared By ");
+	final Button sharedWithBtn = new Button("Shared With");
+	final Button allNoteBooksBtn = new Button("All Notebooks");
 	private Vector<NoteBook> notebook = new Vector<NoteBook>();
 	
 	public ShowAllNotebooks(Vector<NoteBook> nList){
@@ -62,17 +69,35 @@ public class ShowAllNotebooks extends BasicView {
 	public void run(){
 		  	FlowPanel contentPanel = new FlowPanel();
 		    FlowPanel fPanel2 = new FlowPanel();
-		   
+		    FlowPanel buttonsPanel = new FlowPanel();
+		    sharedWithBtn.addClickHandler(new SharedWithClickHandler());
+		    allNoteBooksBtn.addClickHandler(new AllNoteBooksClickHandler());
+		    sharedByBtn.addClickHandler(new SharedByClickHandler());
+		    buttonsPanel.add(sharedByBtn);
+		    buttonsPanel.add(sharedWithBtn);
+		    buttonsPanel.add(allNoteBooksBtn);
+		    fPanel2.add(buttonsPanel);
 		    fPanel2.add(contentPanel);
 		    
 		    editorVerwaltung.getAllNoteBooksForCurrentUser(callback);
 		    
 		  // NotebookTable nbt = new NotebookTable(notebook);
 		  //  nbt.addClickNote();
-		    RootPanel.get("main").add(contentPanel);
+		    RootPanel.get("main").add(fPanel2);
 		   // RootPanel.get("main").add(nbt.start());
-		   RootPanel.get("table").clear();
+		//   RootPanel.get("table").clear();
+		   RootPanel.get("tableNotebook").clear();
 	}
+	private class AllNoteBooksClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			editorVerwaltung.getAllNoteBooksForCurrentUser(callback);
+			
+		}
+		
+	}
+	
 	private class AllNotebooksCallback implements AsyncCallback<Vector<NoteBook>> {
     @Override
     public void onSuccess(Vector<NoteBook> result) {
@@ -84,6 +109,56 @@ public class ShowAllNotebooks extends BasicView {
 
 	
   }
+	private class SharedWithClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			SharedWithCallback callback = new SharedWithCallback();
+			editorVerwaltung.getAllSharedNoteBooksForCurrentUser(callback);
+			
+		}
+		
+	}
+	private class SharedWithCallback implements AsyncCallback <Vector<NoteBook>>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Vector<NoteBook> result) {
+			addNoteBooksToTable(result);
+			
+		}
+		
+	}
+	private class SharedByClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			SharedByCallback callback = new SharedByCallback();
+			editorVerwaltung.getAllNoteBooksSharedByCurrentUser(callback);
+			
+		}
+		
+	}
+	private class SharedByCallback implements AsyncCallback <Vector<NoteBook>>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Vector<NoteBook> result) {
+			addNoteBooksToTable(result);
+			
+		}
+		
+	}
 	
 
 	public void addNoteBooksToTable(Vector<NoteBook> result) {

@@ -2,6 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -12,6 +13,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+
+
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
@@ -53,25 +56,29 @@ public class ShowNotebook extends BasicView{
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Subtitle: "	+ nb.getSubtitle();
+		//return "Subtitle: "	+ nb.getSubtitle();
+		return null;
 	}
 
 	@Override
 	public void run() {
 
+		//RootPanel.get("table").getElement().getStyle().setMarginBottom(600,Unit.PX);
+		
 		FlowPanel contentPanel = new FlowPanel();
 		vp.add(deleteBtn);
 		deleteBtn.addClickHandler(new DeleteClickHandler());
 		vp.add(editBtn);
+		editBtn.addClickHandler(new UpdateClickHandler());
 		vp.add(releseBtn);
-
+		releseBtn.addClickHandler(new ShareNotebookClickHndler());
 		vp.add(createBtn);
 		createBtn.addClickHandler(new CreateNoteClickHandler());
 		nb.getId();
 		title.setText(nb.getTitle());
 		subtitle.setText(nb.getSubtitle());
 		//editorVerwaltung.getAllNotes(callback);
-		editorVerwaltung.getAllFrom(nb, callback);
+	//	editorVerwaltung.getAllFrom(nb, callback);
 //	    NoteTable nt = new NoteTable(notes);
 //	    nt.addClickNote();
 	    
@@ -82,6 +89,7 @@ public class ShowNotebook extends BasicView{
 		
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
 	}
 	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
 	    @Override
@@ -102,9 +110,17 @@ public class ShowNotebook extends BasicView{
 		if(	Window.confirm("Möchten Sie das Notizbuch "+ nb.getTitle()+ " wirklich löschen?")){
 			editorVerwaltung.deleteNoteBook(nb, new DeleteCallback());
 		}
+		MenuView navigation = new MenuView();
+		RootPanel.get("menu").clear();
+		RootPanel.get("menu").add(navigation);	
+		
+		ShowAllNotebooks san =  new ShowAllNotebooks();
+		RootPanel.get("main").clear();
+		RootPanel.get("main").add(san);
 			
 			
 		}}
+
 		
 
 	  
@@ -113,7 +129,7 @@ public class ShowNotebook extends BasicView{
 	NoteTable nt = new NoteTable(notes);
 	nt.addClickNote();
 	// RootPanel.get("main").clear();
-	RootPanel.get("table").add(nt.start());
+	RootPanel.get("tableNotebook").add(nt.start());
 	//RootPanel.get("table").clear();
 	//RootPanel.get("table").add(nt.start());
 }
@@ -131,15 +147,40 @@ public class ShowNotebook extends BasicView{
 
 		@Override
 		public void onSuccess(Void result) {
-			MenuView navigation = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(navigation);	
-			
-			ShowAllNotebooks san =  new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
+		
 			
 		}
+	}
+	private class UpdateClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+		if(Window.confirm("Möchten Sie die Änderungen speichern?")){
+		
+		}
+		nb.setTitle(title.getText());
+		nb.setSubtitle(subtitle.getText());
+		editorVerwaltung.saveNoteBook(nb, new UpdateCallback());
+			
+		}
+		
+	}
+	private class UpdateCallback implements AsyncCallback<NoteBook>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			caught.printStackTrace();
+			vp.add(new Label(caught.toString()));
+			
+		}
+
+		@Override
+		public void onSuccess(NoteBook result) {
+		Window.alert("Saved");	
+			
+		}
+
+		
 	}
 	private class CreateNoteClickHandler implements ClickHandler{
 
@@ -155,6 +196,21 @@ public class ShowNotebook extends BasicView{
 			
 		}
 }
+	private class ShareNotebookClickHndler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			MenuView mView = new MenuView();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(mView);
+			
+			ShareNotebook sNb = new ShareNotebook(nb);
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(sNb);
+			
+		}
+		
+	}
 }
 
 

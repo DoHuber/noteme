@@ -88,6 +88,7 @@ public class ShowPermission extends BasicView {
 		    RootPanel.get("main").add(contentPanel);
 //		    RootPanel.get("main").add(nt.start());
 		    RootPanel.get("table").clear();
+		    RootPanel.get("tableNotebook").clear();
 		    
 		   // freigabeButton.addClickHandler(new freigabeButtonClickHandler());
 		   // BUTTONS !!
