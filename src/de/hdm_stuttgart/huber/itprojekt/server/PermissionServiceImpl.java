@@ -34,6 +34,10 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 		// Muss eine Permission erstellen die das Objekt für den User beneficiary freigibt
 		Permission p = new Permission(l);
 		p.setBeneficiary(beneficiary);
+		
+		UserInfo author = new EditorImpl().getCurrentUser();
+		p.setAuthor(author);
+		
 		p.setSharedObject(sharedObject);
 		
 		permissionMapper.createPermission(p);
