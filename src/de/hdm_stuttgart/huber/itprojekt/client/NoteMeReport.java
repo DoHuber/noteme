@@ -118,41 +118,6 @@ public class NoteMeReport implements EntryPoint {
 
 	}
 
-	/**
-	 * Diese Nested Class wird als Callback für das Setzen des Bank-Objekts bei
-	 * dem ReportGenerator benötigt.
-	 * 
-	 * @author thies
-	 * @version 1.0
-	 */
-	class SetBankCallback implements AsyncCallback<Void> {
-
-		@Override
-		public void onFailure(Throwable caught) {
-			/*
-			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
-			 * aus.
-			 */
-			ClientsideSettings.getLogger().severe("Setzen der Bank fehlgeschlagen!");
-		}
-
-		@Override
-		public void onSuccess(Void result) {
-			/*
-			 * Wir erwarten diesen Ausgang, wollen aber keine Notifikation
-			 * ausgeben.
-			 */
-		}
-
-	}
-
-	/**
-	 * Diese Nested Class wird als Callback für das Erzeugen des
-	 * AllAccountOfAllCustomersReport benötigt.
-	 * 
-	 * @author rathke
-	 * @version 1.0
-	 */
 	class createAllNotebooksRCallback implements AsyncCallback<AllNotebooksR> {
 
 		@Override
