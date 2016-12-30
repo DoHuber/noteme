@@ -16,12 +16,14 @@ public interface PermissionService extends RemoteService {
 	public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l);
 	
 	public void shareWith(String userEmail, Shareable sharedObject, Level l);
-	
+
 	public Permission getRunTimePermissionFor(UserInfo u, Shareable sharedObject);
 	
 	public Vector<Permission> getAllPermissionsFor(Shareable s);
 	
 	public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u);
-	
+
+	public void deletePermission(Permission p);
+
 
 }

@@ -87,5 +87,15 @@ public class Permission extends DomainObject {
 	
 	
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+	
+	
+	
 
 }
