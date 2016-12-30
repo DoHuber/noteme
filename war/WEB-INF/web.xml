@@ -20,6 +20,16 @@
         <servlet-name>sharedServices</servlet-name>
         <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.SharedServicesImpl</servlet-class>
     </servlet>
+    
+    <servlet>
+    	<servlet-name>ReportGenerator</servlet-name>
+    	<servlet-class>de.hdm_stuttgart.huber.itprojekt.server.ReportGeneratorImpl</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>ReportGenerator</servlet-name>
+    	<url-pattern>ReportGenerator/generator</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
@@ -33,6 +43,7 @@
     
     <servlet-mapping>
         <servlet-name>sharedServices</servlet-name>
+        <url-pattern>/ReportGenerator/login</url-pattern>
         <url-pattern>/it_projekt/login</url-pattern>
     </servlet-mapping>
     
@@ -43,7 +54,7 @@
     
     <servlet-mapping>
     	<servlet-name>PermissionService</servlet-name>
-    	<url-pattern>/itprojekt/permsvc</url-pattern>
+    	<url-pattern>/it_projekt/PermissionService</url-pattern>
     </servlet-mapping>
 
     <!-- Default page to serve -->

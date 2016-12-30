@@ -19,8 +19,10 @@ public class Permission extends DomainObject {
     }
    
     private Level level;
-    private UserInfo user = null;
+    private UserInfo author;
+    private UserInfo beneficiary;
     private Shareable sharedObject;
+    
     
 
     // Konstruktoren
@@ -40,7 +42,7 @@ public class Permission extends DomainObject {
        
     @Override
 	public String toString() {
-		return "Permission [level=" + level + ", user=" + user + ", sharedObject=" + sharedObject + ", id=" + id + "]";
+		return "Permission [level=" + level + ", user=" + beneficiary + ", sharedObject=" + sharedObject + ", id=" + id + "]";
 	}
 
 	public boolean isUserAllowedTo(Level action) {
@@ -55,12 +57,12 @@ public class Permission extends DomainObject {
     
     
     // Getter und Setter
-	public UserInfo getUser() {
-		return user;
+	public UserInfo getBeneficiary() {
+		return beneficiary;
 	}
 
-	public void setUser(UserInfo user) {
-		this.user = user;
+	public void setBeneficiary(UserInfo user) {
+		this.beneficiary = user;
 	}
 
 	public Shareable getSharedObject() {
@@ -74,6 +76,26 @@ public class Permission extends DomainObject {
 	public int getLevelAsInt() {
 		return this.level.value;
 	}
+
+	public UserInfo getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(UserInfo author) {
+		this.author = author;
+	}
+	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+	
+	
 	
 
 }

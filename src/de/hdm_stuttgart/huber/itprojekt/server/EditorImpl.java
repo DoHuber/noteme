@@ -74,16 +74,16 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public NoteBook saveNoteBook(NoteBook noteBook) {
-		
+
 		try {
-			
+
 			return noteBookMapper.save(noteBook);
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 
 	@Override
@@ -98,14 +98,14 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		 * und Aufgabe der Applikationslogik, wäre zwar theoretisch auch mit CASCADE
 		 * in mySQL implementierbar, ggf. nachfragen?
 		 */
-		
+
 		Vector<Note> notesToDelete = getAllFrom(noteBook);
 		for (Note row : notesToDelete) {
 			noteMapper.delete(row);
 		}
-		
+
 		noteBookMapper.delete(noteBook);
-		
+
 	}
 
 	@Override
@@ -158,9 +158,9 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public void deleteNote(Note note) {
-		
+
 			noteMapper.delete(note);
-	
+
 	}
 
 	@Override
@@ -198,7 +198,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		
 	}
 	
-	private UserInfo getCurrentUser() {
+	@Override
+	public UserInfo getCurrentUser() {
 		
 		UserService userService = UserServiceFactory.getUserService();
 		if (!userService.isUserLoggedIn()) {
@@ -224,10 +225,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public Vector<Note> getAllFrom(NoteBook nb) {
-		
+
 		int noteBookId = nb.getId();
-		return noteMapper.getAllNotesForNoteBookId(noteBookId);		
-	
+		return noteMapper.getAllNotesForNoteBookId(noteBookId);
+
 	}
 
 	@Override
@@ -287,17 +288,17 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public Vector<Note> getAllNotesSharedByCurrentUser() {
-		
+
 		UserInfo u = getCurrentUser();
 		return noteMapper.getAllNotesSharedBy(u);
-		
+
 	}
 
 	@Override
 	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser() {
-		
+
 		return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
-		
+
 	}
 
 

@@ -227,7 +227,7 @@ public class NoteMapper extends DataMapper {
     	
     	try {
     		
-    		String sql = "SELECT note.id AS id, title, subtitle, content, note_source, creation_date, due_date, modification_date, note.notebook_id AS notebook_id, author_id FROM note "
+    		String sql = "SELECT note.id AS id, title, subtitle, content, note_source, creation_date, due_date, modification_date, note.notebook_id AS notebook_id, note.author_id AS author_id FROM note "
     				+ "JOIN permission ON note.id = permission.note_id WHERE beneficiary_id = ?";
     		PreparedStatement ps = connection.prepareStatement(sql);
     		ps.setInt(1, u.getId());
@@ -270,7 +270,7 @@ public class NoteMapper extends DataMapper {
     
     public Vector<Note> getAllNotesSharedBy(UserInfo u) {
     	
-    	String sql = "SELECT DISTINCT note.id AS id FROM note JOIN permission ON note.id = permission.note_id WHERE author_id = ?";
+    	String sql = "SELECT DISTINCT note.id AS id FROM note JOIN permission ON note.id = permission.note_id WHERE note.author_id = ?";
     	Vector<Note> v = new Vector<>();
     	
     	try {

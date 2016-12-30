@@ -45,11 +45,11 @@ public class NoteBook extends DomainObject implements Shareable {
     @Override
 	public String toString() {
 		return "NoteBook{" +
-				"title='" + title + '\'' +
-				", subtitle='" + subtitle + '\'' +
-				", owner=" + owner +
-				", creationDate=" + creationDate +
-				", modificationDate=" + modificationDate +
+				"Titel='" + title + '\'' +
+				", Untertitel='" + subtitle + '\'' +
+				", Autor=" + owner +
+				", Erstellt am:" + creationDate +
+				", Zuletzt modifiziert am:" + modificationDate +
 				'}';
 	}
     

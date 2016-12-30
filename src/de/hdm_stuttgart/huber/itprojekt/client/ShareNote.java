@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -14,6 +15,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
 public class ShareNote extends BasicView{
 	private EditorAsync editorVerwaltung  = ClientsideSettings.getEditorVerwaltung();
@@ -28,6 +30,10 @@ public class ShareNote extends BasicView{
 	private Label objectt = new Label("Object");
 	private Label level = new Label("Level");
 	private Note note = null;
+	private String userEmail = null;
+	private String levelP = null;
+	private Level l = null;
+  
 	public ShareNote(){
 		
 	}
@@ -50,9 +56,9 @@ public class ShareNote extends BasicView{
 	@Override
 	public void run() {
 		
-		lb.addItem("Level 1");
-		lb.addItem("Level 2");
-		lb.addItem("Level 3");
+		lb.addItem("Read");
+		lb.addItem("Edit");
+		lb.addItem("Delete");
 		object.setText(note.getTitle());
 		lb.setVisibleItemCount(1);
 		vPanel.add(usert);
@@ -74,13 +80,27 @@ public class ShareNote extends BasicView{
 
 		@Override
 		public void onClick(ClickEvent event) {
-		//permissionVerwaltung.shareWith(beneficiary, sharedObject, l, callback);
-			
+	
+		userEmail = user.getValue();
+		levelP = lb.getSelectedItemText();
+		switch (levelP){
+		case "Read": l = Level.READ;
+		break;
+		case "Edit": l = Level.EDIT;
+		break;
+		case "Delete": l = Level.DELETE;
+		break;
+		
+		}
+		
+		GWT.log("Selected Level:" + l);
+		
+		permissionVerwaltung.shareWith(userEmail, note, l, new PermissionCallback());	
 		}
 		
 	}
 	
-	private class PermissionCallback implements AsyncCallback{
+	private class PermissionCallback implements AsyncCallback<Void>{
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -88,8 +108,9 @@ public class ShareNote extends BasicView{
 			
 		}
 
+
 		@Override
-		public void onSuccess(Object result) {
+		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			
 		}

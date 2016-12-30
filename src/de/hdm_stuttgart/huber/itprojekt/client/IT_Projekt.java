@@ -40,6 +40,10 @@ public class IT_Projekt implements EntryPoint {
 	private Button btn = new Button("Save");
 	public void onModuleLoad() {
 		
+	//	Logger l = Logger.getLogger("test");
+	//	l.log(Level.INFO, "Servus i bims");
+
+		GWT.log("Servus i bims");
 		
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
 		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
@@ -55,21 +59,21 @@ public class IT_Projekt implements EntryPoint {
 				if (userInfo.isLoggedIn()) {
 					
 					initializeAudio();
-					
+
 					if (!userInfo.isAdmin()) {
-						
+
 						IT_Projekt.this.bootSound.play();
-						
+
 					} else {
-						
+
 						IT_Projekt.this.bootAdminSound.play();
-						
+
 					}
-				
+
 				if (userInfo.getFirstName()==null && userInfo.getSurName()==null){
 					createUser();
 				}
-					
+
 				else	loadMenu();
 					
 				} else {
@@ -104,11 +108,12 @@ public class IT_Projekt implements EntryPoint {
 		RootPanel.get("menu").add(loginPanel);
 		
 	}
+	
 	public void createUser(){
 		user.add(name);
 		user.add(nameBox);
 		user.add(name2);
-		
+
 		user.add(nameBox2);
 		user.add(btn);
 		btn.addClickHandler(new SaveClickHandler());
@@ -116,13 +121,13 @@ public class IT_Projekt implements EntryPoint {
 		RootPanel.get("menu").add(user);
 	}
 	private void initializeAudio() {
-		
+
 		bootSound = Audio.createIfSupported();
 		bootSound.setSrc("style/audiores/startup.mp3");
-		
+
 		bootAdminSound = Audio.createIfSupported();
 		bootAdminSound.setSrc("style/audiores/startupadmin.mp3");
-		
+
 	}
 	private class SaveClickHandler implements ClickHandler{
 
@@ -132,24 +137,24 @@ public class IT_Projekt implements EntryPoint {
 			userInfo.setSurName(nameBox2.getText());
 			editorVerwaltung.saveUser(userInfo, new SaveCallBack());
 		//	Window.alert("Yes");
-			
+
 		}
 	private class SaveCallBack implements AsyncCallback<UserInfo>{
 
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onSuccess(UserInfo result) {
 			loadMenu();
-			
+
 		}
-		
+
 	}
-		
+
 	}
 
 

@@ -40,7 +40,7 @@ public class PermissionMapper extends DataMapper {
 	public Permission getPermissionFor(UserInfo u, Shareable sharedObject) {
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT id, permission_level FROM notizbuch.permission WHERE beneficiary_id = ? AND ");
+		sql.append("SELECT * FROM notizbuch.permission WHERE beneficiary_id = ? AND ");
 		
 		if (sharedObject instanceof Note) {
 			sql.append("note_id = ?;");
@@ -58,38 +58,26 @@ public class PermissionMapper extends DataMapper {
 			
 			ResultSet rs = ps.executeQuery();
 			
-			char level = rs.getString("permission_level").charAt(0);
-			Level l;
+			// Workaround, eventuelle makeFrom-Methode refactoren?
+			Vector<Permission> v = makeFromResultSet(rs);
 			
-			switch(level) {
-			case 'r':
-				l = Level.READ;
-				break;
-			case 'w':
-				l = Level.EDIT;
-				break;
-			case 'd':
-				l = Level.DELETE;
-				break;
-			default:
-				l = Level.NONE;
-				break;
-								
+			if (v.size() != 0) {
+				return v.firstElement();
+			} else {
+				return null;
 			}
 			
-			return new Permission(rs.getInt("id"), l);
 						
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		}
-		
-		return new Permission();
 		
 	}
 	
 	public void createPermission(Permission p) {
 		
-		String sql = "INSERT INTO notizbuch.permission(permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO notizbuch.permission(author_id, permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?, ?)";
 		String replaceString;
 		
 		switch (p.getSharedObject().getType()) {
@@ -108,10 +96,11 @@ public class PermissionMapper extends DataMapper {
 		try { 
 			
 		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setInt(1, p.getLevelAsInt());
-		ps.setString(2, Character.toString(p.getSharedObject().getType()));
-		ps.setInt(3, p.getSharedObject().getId());
-		ps.setInt(4, p.getUser().getId());
+		ps.setInt(1, p.getAuthor().getId());
+		ps.setInt(2, p.getLevelAsInt());
+		ps.setString(3, Character.toString(p.getSharedObject().getType()));
+		ps.setInt(4, p.getSharedObject().getId());
+		ps.setInt(5, p.getBeneficiary().getId());
 		
 		ps.executeUpdate();
 		
@@ -184,7 +173,10 @@ public class PermissionMapper extends DataMapper {
 			NoteMapper nm = NoteMapper.getNoteMapper();
 			NoteBookMapper nbm = NoteBookMapper.getNoteBookMapper();
 			
-			p.setUser(uim.findById(rs.getInt("beneficiary_id")));
+
+			p.setBeneficiary(uim.findById(rs.getInt("beneficiary_id")));
+					
+			p.setAuthor(uim.findById(rs.getInt("author_id")));
 			
 			Shareable sharedObject;
 			char type = rs.getString("type").charAt(0);
@@ -210,6 +202,58 @@ public class PermissionMapper extends DataMapper {
 		
 		return v;
 		
+	}
+
+	public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u) {
+
+		try {
+
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM notizbuch.permission "
+					+ "WHERE author_id = ?");
+			ps.setInt(1, u.getId());
+
+			return makeFromResultSet(ps.executeQuery());
+
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
+	public void savePermission(Permission p) {
+
+		try {
+
+		PreparedStatement ps = connection.prepareStatement("UPDATE notizbuch.permission SET permission_level = ? WHERE id = ?");
+		ps.setInt(1, p.getLevelAsInt());
+		ps.setInt(2, p.getId());
+
+		ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void deletePermission(Permission p) {
+
+		String sql = "DELETE FROM notizbuch.permission WHERE id = ?";
+		try {
+
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, p.getId());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+
+
 	}
 
 	
