@@ -97,6 +97,42 @@ public class ShowReportDemo extends MenuView {
 			}
 
 		});
+		showUserNotes.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+			reportGenerator.createAllUserNotesR(new GenericReportCallback<AllUserNotesR>());
+				
+			}
+			
+		});
+		showAllNotes.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				reportGenerator.createAllNotesR(new GenericReportCallback<AllNotesR>());
+				
+			}
+			
+		});
+		showUserPermissions.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				reportGenerator.createAllUserPermissionsR(new GenericReportCallback<AllUserPermissionsR>());;
+				
+			}
+			
+		});
+		showAllPermissions.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				reportGenerator.createAllPermissionsR(new GenericReportCallback<AllPermissionsR>());
+				
+			}
+			
+		});
 
 		/**
 		 * showUserNotes.addClickHandler(new ShowAllUserNotesHandler());
