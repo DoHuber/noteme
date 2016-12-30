@@ -26,10 +26,9 @@ public interface ReportGeneratorAsync {
   void createAllNotebooksR(
       AsyncCallback<AllNotebooksR> callback);
 
-  void createAllUserNotebooksR(UserInfo u,
-      AsyncCallback<AllUserNotebooksR> callback);
+  void createAllUserNotebooksR(AsyncCallback<AllUserNotebooksR> callback);
   
-  void createAllUserNotesR(UserInfo u, AsyncCallback<AllUserNotesR> callback);
+  void createAllUserNotesR(AsyncCallback<AllUserNotesR> callback);
   
   void createAllNotesR(
 		  AsyncCallback<AllNotesR> callback);
@@ -39,7 +38,7 @@ public interface ReportGeneratorAsync {
   
   void init(AsyncCallback<Void> callback);
 
-  void createAllUserPermissionsR(UserInfo u, AsyncCallback<AllUserPermissionsR> callback);
+  void createAllUserPermissionsR(AsyncCallback<AllUserPermissionsR> callback);
 
 }
 

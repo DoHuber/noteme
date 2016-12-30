@@ -25,9 +25,7 @@ public class DBConnection {
 		   
 	   if (singleton == null) {
 		   
-		   String googleUrl = System.getProperty("ae-cloudsql.cloudsql-database-url");
-		   Class.forName("com.mysql.jdbc.GoogleDriver");
-           singleton = DriverManager.getConnection(googleUrl);
+           singleton = DriverManager.getConnection(DB_URL, USER, PASS);
 
        }
 

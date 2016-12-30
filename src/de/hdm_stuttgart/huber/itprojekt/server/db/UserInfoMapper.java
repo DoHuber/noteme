@@ -26,8 +26,7 @@ public class UserInfoMapper extends DataMapper {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException(e.toString());
 			}
             
         }
