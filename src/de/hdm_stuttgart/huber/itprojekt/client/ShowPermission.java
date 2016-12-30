@@ -187,7 +187,7 @@ public class ShowPermission extends BasicView {
 	
 	permissions = result;
 	PermissionTable nt = new PermissionTable(permissions);
-	//nt.addClickNote();
+	nt.addClickNote();
 	RootPanel.get("table").clear();
 	RootPanel.get("table").add(nt.start());
 	

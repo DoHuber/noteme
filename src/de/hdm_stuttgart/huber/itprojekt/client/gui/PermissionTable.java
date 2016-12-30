@@ -16,8 +16,8 @@ package de.hdm_stuttgart.huber.itprojekt.client.gui;
 
 	import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
 	import de.hdm_stuttgart.huber.itprojekt.client.ShowNote;
-
-	import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.client.ShowThisPermission;
+import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 	import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 	import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
@@ -39,7 +39,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 		 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 		 */
 
-		
+		private Note note = null ;
 		private NoteBook notebook = null;
 		private Permission selected = null;
 		private Vector<Permission> permission;
@@ -71,8 +71,17 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 
 				@Override
 				public String getValue(Permission permission) {
-					
-					return  Integer.toString(permission.getLevelAsInt());
+					String string = null;
+					if(permission.getLevelAsInt()==10){
+						string="Read";
+					}
+					else if(permission.getLevelAsInt()==20){
+						string="Edit";
+					}
+					else if(permission.getLevelAsInt()==20){
+						string=	"Delete";
+						}
+					return string ;
 				}
 			};
 			table.addColumn(level, "Level");
@@ -93,7 +102,17 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 				public String getValue(Permission permission) {
 					// !!!! Könnte Fehler verursachen
 					// RICHITGGG Veursacht auch Fehler 
-					return permission.getSharedObject().toString();
+					String noteB = String.valueOf(permission.getSharedObject().getType());
+					String string =null;
+					if(noteB == "b"){
+						 notebook = (NoteBook) permission.getSharedObject();
+						 string= "Notebook: "+ notebook.getTitle();
+					}
+					else{
+						note = (Note) permission.getSharedObject();
+						 string= "Note: "+ note.getTitle();
+				}
+				return string;
 				}
 			};
 			table.addColumn(sharedObject, " Object");
@@ -122,29 +141,29 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 		/**
 		 * Eine Angeklickte Notiz wird angezeigt 
 		 */
-//
-//		public void addClickNote() {
-//			final SingleSelectionModel<Note> selection = new SingleSelectionModel<Note>();
-//			table.setSelectionModel(selection);
-//			selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
-//		}
-//
-//		private class SelectionChangeHandler implements Handler{
-//			private final SingleSelectionModel<Note> selection;
-//			private SelectionChangeHandler(SingleSelectionModel<Note> selection){
-//				this.selection=selection;
-//			}
-//
-//			@Override
-//			public void onSelectionChange(SelectionChangeEvent event) {
-//				selected=selection.getSelectedObject();
-//				ShowNote sn = new ShowNote(selected);
-//				
-//				RootPanel.get("main").clear();
-//				RootPanel.get("main").add(sn);
-//				
-//				
-//			}}
+
+		public void addClickNote() {
+			final SingleSelectionModel<Permission> selection = new SingleSelectionModel<Permission>();
+			table.setSelectionModel(selection);
+			selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
+		}
+
+		private class SelectionChangeHandler implements Handler{
+			private final SingleSelectionModel<Permission> selection;
+			private SelectionChangeHandler(SingleSelectionModel<Permission> selection){
+				this.selection=selection;
+			}
+
+			@Override
+			public void onSelectionChange(SelectionChangeEvent event) {
+				selected=selection.getSelectedObject();
+				ShowThisPermission sn = new ShowThisPermission(selected);
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(sn);
+				
+				
+			}}
 
 
 }
