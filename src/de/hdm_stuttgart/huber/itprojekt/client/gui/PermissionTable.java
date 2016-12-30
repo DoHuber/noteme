@@ -78,7 +78,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 					else if(permission.getLevelAsInt()==20){
 						string="Edit";
 					}
-					else if(permission.getLevelAsInt()==20){
+					else if(permission.getLevelAsInt()==30){
 						string=	"Delete";
 						}
 					return string ;

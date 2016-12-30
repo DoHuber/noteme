@@ -84,7 +84,7 @@ public class ShowThisPermission extends BasicView {
 		lb.setItemSelected(1, selected);
 		
 	}
-	else if(p.getLevelAsInt()==20){
+	else if(p.getLevelAsInt()==30){
 		string=	"Delete";
 		lb.setItemSelected(2, selected);
 		}
