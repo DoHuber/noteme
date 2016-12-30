@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
@@ -28,8 +27,8 @@ public class ShowNote extends BasicView {
 	 * Funktionen: Löschen, Editieren, Freigeben, Fähligkeitsdatum setzen -
 	 * Ebene: einzelne Notizen
 	 */
-	
-	
+
+
 	private HorizontalPanel contentPanel = new HorizontalPanel();
 	private VerticalPanel alignPanel = new VerticalPanel();
 	private Button deleteBtn = new Button("Delete");
@@ -38,7 +37,7 @@ public class ShowNote extends BasicView {
 	
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private RichTextArea noteArea = new RichTextArea();
-	
+
 	private TextBox titleTextBox = new TextBox();
 	private TextBox subtitleTextBox = new TextBox();
 	private RichTextToolbar richTextToolbar = new RichTextToolbar(noteArea);
@@ -51,9 +50,9 @@ public class ShowNote extends BasicView {
 	private Note n = null;
 
 	public ShowNote () {
-		
+
 	}
-	
+
 	public ShowNote(Note note) {
 		this.n = note;
 		
@@ -67,7 +66,7 @@ public class ShowNote extends BasicView {
 		else{
 			return "Notebook:"+ n.getNoteBook().getTitle();
 		}
-		
+
 	}
 
 	@Override
@@ -104,12 +103,12 @@ public class ShowNote extends BasicView {
 		
 		alignPanel.add(editBtn);
 		editBtn.addClickHandler(new UpdateClickHandler());
-		
+
 		contentPanel.add(alignPanel);
 		contentPanel.add(grid);
 		noteArea.setStyleName("noteArea");
-		
-		releseBtn.setStyleName("pure-button");	
+
+		releseBtn.setStyleName("pure-button");
 		deleteBtn.setStyleName("pure-button");
 		editBtn.setStyleName("pure-button");
 		
@@ -119,7 +118,7 @@ public class ShowNote extends BasicView {
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
-		
+
 	}
 	private class ShareClickHandler implements ClickHandler{
 
@@ -132,9 +131,9 @@ public class ShowNote extends BasicView {
 			ShareNote sN = new ShareNote(n);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sN);
-			
+
 		}
-		
+
 	}
 	private class DeleteClickHandler implements ClickHandler {
 
@@ -145,8 +144,8 @@ public class ShowNote extends BasicView {
 		}
 		MenuView navigation = new MenuView();
 		RootPanel.get("menu").clear();
-		RootPanel.get("menu").add(navigation);	
-		
+		RootPanel.get("menu").add(navigation);
+
 		ShowAllNotes san =  new ShowAllNotes();
 		RootPanel.get("main").clear();
 		RootPanel.get("main").add(san);
@@ -165,8 +164,8 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onSuccess(Void result) {
-		
-			
+
+
 			
 		}
 		
@@ -176,12 +175,12 @@ public class ShowNote extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 		if(Window.confirm("Möchten Sie die Änderungen speichern?")){
-		updateNote();	
+		updateNote();
 		}
-		
-			
+
+
 		}
-		
+
 	}
 	public void updateNote(){
 		n.setTitle(titleTextBox.getText());
@@ -190,7 +189,7 @@ public class ShowNote extends BasicView {
 		java.util.Date utilDate = dueDateBox.getValue();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 	    n.setDueDate(sqlDate);
-		//n.setNoteBook(nb);	
+		//n.setNoteBook(nb);
 		editorVerwaltung.saveNote(n, new UpdateCallback());
 		
 	}
@@ -198,7 +197,7 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			
+
 			GWT.log("Update failed because of:");
 			GWT.log(caught.toString());
 			
@@ -206,11 +205,11 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onSuccess(Note result) {
-			Window.alert("Saved");	
+			Window.alert("Saved");
 			
 		}
 
-		
+
 	}
 	
 	

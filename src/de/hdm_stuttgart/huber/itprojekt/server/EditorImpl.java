@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.util.Vector;
 
+import javax.servlet.http.HttpSession;
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -74,16 +76,16 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public NoteBook saveNoteBook(NoteBook noteBook) {
-		
+
 		try {
-			
+
 			return noteBookMapper.save(noteBook);
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 
 	@Override
@@ -98,14 +100,14 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		 * und Aufgabe der Applikationslogik, wäre zwar theoretisch auch mit CASCADE
 		 * in mySQL implementierbar, ggf. nachfragen?
 		 */
-		
+
 		Vector<Note> notesToDelete = getAllFrom(noteBook);
 		for (Note row : notesToDelete) {
 			noteMapper.delete(row);
 		}
-		
+
 		noteBookMapper.delete(noteBook);
-		
+
 	}
 
 	@Override
@@ -158,9 +160,9 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public void deleteNote(Note note) {
-		
+
 			noteMapper.delete(note);
-	
+
 	}
 
 	@Override
@@ -225,10 +227,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public Vector<Note> getAllFrom(NoteBook nb) {
-		
+
 		int noteBookId = nb.getId();
-		return noteMapper.getAllNotesForNoteBookId(noteBookId);		
-	
+		return noteMapper.getAllNotesForNoteBookId(noteBookId);
+
 	}
 
 	@Override
@@ -288,18 +290,37 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public Vector<Note> getAllNotesSharedByCurrentUser() {
-		
+
 		UserInfo u = getCurrentUser();
 		return noteMapper.getAllNotesSharedBy(u);
-		
+
 	}
 
 	@Override
 	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser() {
-		
+
 		return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
+
+	}
+
+	@Override
+	public String getSource() {
+		
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		String source = (String) session.getAttribute("source");
+		
+		if (source == null) {
+			source = "none";
+		}
+		
+		// Attribut entfernen, damit der Client nicht verwirrt wird
+		session.removeAttribute("source");
+		
+		return source;
 		
 	}
+	
+	
 
 
 }

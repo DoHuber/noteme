@@ -49,7 +49,7 @@ public class ShowNotebook extends BasicView{
 
 	@Override
 	public String getHeadlineText() {
-	
+
 	return "Notizbuch: "+ nb.getTitle();
 	}
 
@@ -64,7 +64,7 @@ public class ShowNotebook extends BasicView{
 	public void run() {
 
 		//RootPanel.get("table").getElement().getStyle().setMarginBottom(600,Unit.PX);
-		
+
 		FlowPanel contentPanel = new FlowPanel();
 		vp.add(deleteBtn);
 		deleteBtn.addClickHandler(new DeleteClickHandler());
@@ -81,12 +81,12 @@ public class ShowNotebook extends BasicView{
 		editorVerwaltung.getAllFrom(nb, callback);
 //	    NoteTable nt = new NoteTable(notes);
 //	    nt.addClickNote();
-	    
+
 		contentPanel.add(vp);
 		contentPanel.add(title);
 		contentPanel.add(subtitle);
 		//contentPanel.add(nt.start());
-		
+
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
@@ -112,18 +112,18 @@ public class ShowNotebook extends BasicView{
 		}
 		MenuView navigation = new MenuView();
 		RootPanel.get("menu").clear();
-		RootPanel.get("menu").add(navigation);	
-		
+		RootPanel.get("menu").add(navigation);
+
 		ShowAllNotebooks san =  new ShowAllNotebooks();
 		RootPanel.get("main").clear();
 		RootPanel.get("main").add(san);
-			
-			
+
+
 		}}
 
-		
 
-	  
+
+
 	public void addNotesToTable(Vector<Note> result) {
 	notes = result;
 	NoteTable nt = new NoteTable(notes);
@@ -134,7 +134,7 @@ public class ShowNotebook extends BasicView{
 	//RootPanel.get("table").add(nt.start());
 }
 
-	
+
 	private class DeleteCallback implements AsyncCallback<Void>{
 
 
@@ -142,13 +142,13 @@ public class ShowNotebook extends BasicView{
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
 			vp.add(new Label(caught.toString()));
-			
+
 		}
 
 		@Override
 		public void onSuccess(Void result) {
-		
-			
+
+
 		}
 	}
 	private class UpdateClickHandler implements ClickHandler {
@@ -156,14 +156,14 @@ public class ShowNotebook extends BasicView{
 		@Override
 		public void onClick(ClickEvent event) {
 		if(Window.confirm("Möchten Sie die Änderungen speichern?")){
-		
+
 		}
 		nb.setTitle(title.getText());
 		nb.setSubtitle(subtitle.getText());
 		editorVerwaltung.saveNoteBook(nb, new UpdateCallback());
-			
+
 		}
-		
+
 	}
 	private class UpdateCallback implements AsyncCallback<NoteBook>{
 
@@ -171,16 +171,16 @@ public class ShowNotebook extends BasicView{
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
 			vp.add(new Label(caught.toString()));
-			
+
 		}
 
 		@Override
 		public void onSuccess(NoteBook result) {
-		Window.alert("Saved");	
-			
+		Window.alert("Saved");
+
 		}
 
-		
+
 	}
 	private class CreateNoteClickHandler implements ClickHandler{
 
@@ -189,11 +189,11 @@ public class ShowNotebook extends BasicView{
 			MenuView mView = new MenuView();
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(mView);
-			
+
 			CreateNote cN = new CreateNote(nb);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(cN);
-			
+
 		}
 }
 	private class ShareNotebookClickHndler implements ClickHandler{
@@ -203,13 +203,13 @@ public class ShowNotebook extends BasicView{
 			MenuView mView = new MenuView();
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(mView);
-			
+
 			ShareNotebook sNb = new ShareNotebook(nb);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sNb);
-			
+
 		}
-		
+
 	}
 }
 

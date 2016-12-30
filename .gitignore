@@ -41,5 +41,6 @@ www-test/
 .classpath
 .project
 /.dbeaver-data-sources.xml
+.settings/
 
 *.gwt.rpc
