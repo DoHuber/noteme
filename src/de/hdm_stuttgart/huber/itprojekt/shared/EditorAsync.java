@@ -37,13 +37,13 @@ public interface EditorAsync {
 	void getAllNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
 
 	void getAllNoteBooksForCurrentUser(AsyncCallback<Vector<NoteBook>> callback);
-	
+
 	void getAllNoteUser(AsyncCallback<Vector<UserInfo>> callback);
-	
+
 	void create(UserInfo u,AsyncCallback<Vector<UserInfo>> callback);
-	
+
 	void getTitle(NoteBook nb, AsyncCallback<String> callback);
-	
+
 	void getUserById(int id, AsyncCallback<UserInfo> callback);
 
 	void getAllFrom(NoteBook nb, AsyncCallback<Vector<Note>> callback);
@@ -56,6 +56,8 @@ public interface EditorAsync {
 	void getAllNoteBooksSharedByCurrentUser(AsyncCallback<Vector<NoteBook>> callback);
 
 	void getAllNotesSharedByCurrentUser(AsyncCallback<Vector<Note>> callback);
+
+	void getSource(AsyncCallback<String> callback);
 
 	void getCurrentUser(AsyncCallback<UserInfo> callback);
 

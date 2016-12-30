@@ -42,8 +42,13 @@ public class NoteMapper extends DataMapper {
             stmt.setString(1, note.getTitle());
             stmt.setString(2, note.getSubtitle());
             stmt.setString(3, note.getContent());
-            stmt.setString(4, "https://Platzhalter");
-
+            
+            if(!(note.getSource() == null)) {
+            	stmt.setString(4, note.getSource());
+            } else {
+            	stmt.setString(4, null);
+            }
+            
             stmt.setDate(5, note.getCreationDate());
             stmt.setDate(6, note.getDueDate());
             stmt.setDate(7, note.getModificationDate());

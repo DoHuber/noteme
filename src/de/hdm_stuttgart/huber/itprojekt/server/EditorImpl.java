@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.util.Vector;
 
+import javax.servlet.http.HttpSession;
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -300,6 +302,25 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
 
 	}
+
+	@Override
+	public String getSource() {
+		
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		String source = (String) session.getAttribute("source");
+		
+		if (source == null) {
+			source = "none";
+		}
+		
+		// Attribut entfernen, damit der Client nicht verwirrt wird
+		session.removeAttribute("source");
+		
+		return source;
+		
+	}
+	
+	
 
 
 }

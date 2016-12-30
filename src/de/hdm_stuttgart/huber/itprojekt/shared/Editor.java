@@ -55,15 +55,18 @@ public interface Editor extends RemoteService {
 	public Vector<Note> getAllNotes() throws BullshitException;
 	public UserInfo saveUser(UserInfo user);
 	
+	// Nur zum Testen
+	public String getSource();
+
 	public UserInfo getCurrentUser();
-	
-	public String getTitle(NoteBook nB) throws BullshitException; 
-	
+
+	public String getTitle(NoteBook nB) throws BullshitException;
+
 	// Zusätzliche Methoden zu UserInfo
 	public Vector<UserInfo> getAllNoteUser() throws BullshitException;
-	
+
 	public Vector<UserInfo> create(UserInfo u) throws BullshitException;
-	
+
 	public UserInfo getUserById(int id) throws IllegalArgumentException;
-	
+
 }
