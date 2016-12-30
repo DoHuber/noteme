@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -27,12 +28,12 @@ public class ShowThisPermission extends BasicView {
 	private TextBox levelTextBox = new TextBox();
 	private TextBox userTextBox = new TextBox();
 	private TextBox objectTextBox = new TextBox();
-	
+	private ListBox lb = new ListBox();
 	PermissionServiceAsync permissionVerwaltung = ClientsideSettings.getPermissionVerwaltung();
 	private Permission p = null;
 	private Note note = null;
 	private NoteBook notebook = null;
-	
+	private boolean selected = true;
 	public ShowThisPermission (){
 		
 	}
@@ -57,25 +58,37 @@ public class ShowThisPermission extends BasicView {
 	@Override
 	public void run() {
 	alignPanel.add(level);
-	alignPanel.add(levelTextBox);
+	//alignPanel.add(levelTextBox);
+	alignPanel.add(lb);
+	lb.setWidth("100%");
 	alignPanel.add(user);
 	alignPanel.add(userTextBox);
 	alignPanel.add(object);
 	alignPanel.add(objectTextBox);
 	alignPanel.add(deleteBtn);
-	deleteBtn.addClickHandler(new DeleteClickHandler());
 	
+	deleteBtn.addClickHandler(new DeleteClickHandler());
+	lb.addItem("Read");
+	lb.addItem("Edit");
+	lb.addItem("Delete");
 	
 	String string = null;
 	if(p.getLevelAsInt()==10){
+		
 		string="Read";
+		lb.setItemSelected(0, selected);
 	}
 	else if(p.getLevelAsInt()==20){
+		
 		string="Edit";
+		lb.setItemSelected(1, selected);
+		
 	}
 	else if(p.getLevelAsInt()==20){
 		string=	"Delete";
+		lb.setItemSelected(2, selected);
 		}
+	
 	levelTextBox.setText(string);
 	userTextBox.setText(p.getBeneficiary().getNickname());
 	

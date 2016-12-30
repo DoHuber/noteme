@@ -56,9 +56,10 @@ public class ShareNotebook extends BasicView {
 
 	@Override
 	public void run() {
-		lb.addItem("Level 1");
-		lb.addItem("Level 2");
-		lb.addItem("Level 3");
+		lb.addItem("Read");
+		lb.addItem("Edit");
+		lb.addItem("Delete");
+		lb.setWidth("100%");
 		object.setText(nb.getTitle());
 		lb.setVisibleItemCount(1);
 		vPanel.add(usert);
@@ -83,11 +84,11 @@ public class ShareNotebook extends BasicView {
 		userEmail = user.getValue();
 		levelP = lb.getSelectedItemText();
 		switch(levelP){
-		case "Level 1" : l = Level.READ;
+		case "Read" : l = Level.READ;
 		break;
-		case "Level 2" : l = Level.EDIT;
+		case "Edit" : l = Level.EDIT;
 		break;
-		case "Level 3" : l = Level.DELETE;
+		case "Delete" : l = Level.DELETE;
 		break;
 		}
 		permissionVerwaltung.shareWith(userEmail, nb, l, new PermissionCallback());	
