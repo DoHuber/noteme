@@ -9,13 +9,11 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.NoteMeReport.createAllNotebooksRCallback;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
@@ -84,13 +82,22 @@ public class ShowReportDemo extends MenuView {
 			
 			
 			showUserNotebooks.addClickHandler(new ShowAllUserNotebooksHandler());
-			showAllNotebooks.addClickHandler(new ShowAllNotebooksHandler());
-			showUserNotes.addClickHandler(new ShowAllUserNotesHandler());
-			showAllNotes.addClickHandler(new ShowAllNotesHandler());
-			showUserPermissions.addClickHandler(new ShowAllUserPermissions());
-			showAllPermissions.addClickHandler(new ShowAllPermissionsHandler());
+			showAllNotebooks.addClickHandler(new DummyHandler());
+			showUserNotes.addClickHandler(new DummyHandler());
+			showAllNotes.addClickHandler(new DummyHandler());
+			showUserPermissions.addClickHandler(new DummyHandler());
+			showAllPermissions.addClickHandler(new DummyHandler());
 			
 
+	}
+	
+	private class DummyHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			GWT.log("Fröhlicher OnClick!");			
+		}
+		
 	}
 	
 	

@@ -160,12 +160,12 @@ public class UserInfoMapper extends DataMapper {
         return result;
     }
     
-    public boolean isUserRegistered(String googleId) {
+    public boolean isUserRegistered(String email) {
     	
     	try {
     	
-    	PreparedStatement ps = connection.prepareStatement("SELECT EXISTS(SELECT * FROM notizbuch.userinfo WHERE google_id = ?) AS does_exist");
-    	ps.setString(1, googleId);
+    	PreparedStatement ps = connection.prepareStatement("SELECT EXISTS(SELECT * FROM notizbuch.userinfo WHERE email = ?) AS does_exist");
+    	ps.setString(1, email);
     	
     	ResultSet rs = ps.executeQuery();
     	

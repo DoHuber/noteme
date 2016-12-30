@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.google.appengine.api.utils.SystemProperty;
+
 public class DBConnection {
 
    // 2 Datenbank Zugangsdaten anlegen
@@ -24,10 +26,25 @@ public class DBConnection {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		   
 	   if (singleton == null) {
+		 
+		   String url, user, pass;
+		
 		   
-		   String googleUrl = System.getProperty("ae-cloudsql.cloudsql-database-url");
-		   Class.forName("com.mysql.jdbc.GoogleDriver");
-           singleton = DriverManager.getConnection(googleUrl);
+		   if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
+			   
+			   url = "jdbc:google:mysql://it-projekt-149914:noizbuch2/notizbuch";
+			   user = "user";
+			   pass = "nm9000!";
+			   Class.forName("com.mysql.jdbc.GoogleDriver");
+			   
+		   } else {
+			   
+			   url = DB_URL;
+			   user = USER;
+			   pass = PASS;
+		   }
+		   
+           singleton = DriverManager.getConnection(url, user, pass);
 
        }
 

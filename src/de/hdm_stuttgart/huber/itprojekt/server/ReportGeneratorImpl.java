@@ -8,13 +8,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
-import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
-import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
@@ -23,11 +20,8 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Column;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeParagraph;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Row;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleParagraph;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
 
 
 
