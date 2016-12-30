@@ -65,6 +65,33 @@ public class HTMLReportWriter extends ReportWriter {
   public String paragraph2HTML(SimpleParagraph p) {
     return "<p>" + p.toString() + "</p>";
   }
+  
+  
+  public String simpleReport2HTML(SimpleReport r) {
+	  
+	  StringBuilder sb = new StringBuilder();
+	  sb.append("<table>");
+	  
+	  for (Row rowElement : r.getRows()) {
+		  
+		  sb.append("<tr>");
+		  
+		  for (Column c : rowElement.getColumns()) {
+			  
+			  sb.append("<td>");
+			  sb.append(c.toString());
+			  sb.append("</td>");
+			  
+		  }
+		  
+		  sb.append("</tr>"); 
+		  
+	  }
+	  
+	  sb.append("</table>");
+	  
+	  return sb.toString();
+  }
 
   /**
    * HTML-Header-Text produzieren.
@@ -156,7 +183,7 @@ public class HTMLReportWriter extends ReportWriter {
    * 
    * @param r der zu prozessierende Report
    */
-  public void process(AllNoteBooksOfAllUsersReport r) {
+  public void process(CompositeReport r) {
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
 

@@ -96,7 +96,7 @@ public class PlainTextReportWriter extends ReportWriter {
    * 
    * @param r der zu prozessierende Report
    */
-  public void process(AllNoteBooksOfAllUsersReport r) {
+  public void process(CompositeReport r) {
 
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();

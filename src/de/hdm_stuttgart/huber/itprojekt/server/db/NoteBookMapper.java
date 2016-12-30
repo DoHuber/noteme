@@ -176,9 +176,8 @@ private static NoteBookMapper noteBookMapper = null;
 
 
 
-	 public Vector<NoteBook> getAllNoteBooks() throws ClassNotFoundException, SQLException {
+	 public Vector<NoteBook> getAllNoteBooks() {
 		 	
-		 Connection connection = DBConnection.getConnection();
 	        Vector<NoteBook> v = new Vector<>();
 
 	        try {
@@ -200,7 +199,7 @@ private static NoteBookMapper noteBookMapper = null;
 
 	            }
 
-	        } catch (SQLException e) {
+	        } catch (SQLException | ClassNotFoundException e) {
 	            e.printStackTrace();
 	        }
 

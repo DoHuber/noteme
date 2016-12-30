@@ -55,4 +55,12 @@ public abstract class CompositeReport
 	public Report getSubReportAt(int i) {
 		return this.subReports.elementAt(i);
 	}
+
+	@Override
+	public String toString() {
+		return "CompositeReport [subReports=" + subReports + "]";
+	}
+	
+	
+	
 }

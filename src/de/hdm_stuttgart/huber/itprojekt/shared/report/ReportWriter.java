@@ -31,6 +31,6 @@ public abstract class ReportWriter {
    * 
    * @param r der zu übersetzende Report
    */
-  public abstract void process(AllNoteBooksOfAllUsersReport r);
+  public abstract void process(CompositeReport r);
 
 }

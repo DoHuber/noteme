@@ -57,4 +57,14 @@ public abstract class SimpleReport extends Report {
   public Vector<Row> getRows() {
     return this.table;
   }
+
+@Override
+public String toString() {
+	return "SimpleReport [table=" + table + "]";
+}
+  
+  
+  
+  
+  
 }

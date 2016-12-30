@@ -12,12 +12,14 @@ import java.io.Serializable;
  * @author Thies
  */
 public class AllNoteBooksOfAllUsersReport 
-	extends CompositeReport 
+	extends SimpleReport
 	implements Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = 1L;
+  
+  
 
 }

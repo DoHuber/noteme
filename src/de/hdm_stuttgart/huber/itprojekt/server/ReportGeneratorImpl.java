@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
@@ -14,8 +15,10 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersRepo
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Column;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeParagraph;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Row;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleParagraph;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
 
 
 
@@ -210,12 +213,11 @@ public void create(UserInfo uI) {
 public AllNoteBooksOfAllUsersReport createAllNoteBooksOfUsersReport(UserInfo uI2)
       throws IllegalArgumentException {
 
-    AllNoteBooksOfAllUsersReport result = new AllNoteBooksOfAllUsersReport();
-
-    result.setTitle("all notebooks of all user #todo");
-    result.setCreated(new Date());
+	AllNoteBooksOfAllUsersReport report = new AllNoteBooksOfAllUsersReport();
+	
+	
     
-     return result;
+     return report;
   }
 
 public AllNoteBooksOfUserReport createAllNoteBooksOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
@@ -237,12 +239,33 @@ public AllNoteBooksOfUserReport createAllNoteBooksOfUserReport(UserInfo u) throw
 @Override
 public AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllUsersReport() throws IllegalArgumentException {
 	
-	AllNoteBooksOfAllUsersReport retVal = new AllNoteBooksOfAllUsersReport();
-	retVal.setTitle("Servus i bims der Server");
-	retVal.setCreated(new Date());
+	Vector<NoteBook> allNoteBooks = NoteBookMapper.getNoteBookMapper().getAllNoteBooks();
 	
-	return retVal;
+	AllNoteBooksOfAllUsersReport report = new AllNoteBooksOfAllUsersReport();
+	report.setTitle("Alle Notebooks aller User, d.h. alle Notebooks.");
+	report.setCreated(new Date(System.currentTimeMillis()));
 	
+	StringBuilder sb = new StringBuilder();
+	sb.append("Anzahl der Notebooks:");
+	sb.append(allNoteBooks.size());
+	report.setHeaderData(new SimpleParagraph(sb.toString()));
+	
+	for (NoteBook element : allNoteBooks) {
+		
+		Row r = new Row();
+		r.addColumn(new Column(element.getTitle()));
+		r.addColumn(new Column(element.getSubtitle()));
+		r.addColumn(new Column(element.getOwner().getNickname()));
+		r.addColumn(new Column(element.getCreationDate().toString()));
+		r.addColumn(new Column(element.getModificationDate().toString()));
+		
+		report.addRow(r);
+		
+	}
+	
+	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
+	
+	return report;
 }
 
 }

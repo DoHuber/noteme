@@ -18,6 +18,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
 /**
  * Entry-Point-Klasse des Projekts <b>BankProjekt</b>.
@@ -172,10 +173,12 @@ public class NoteMeReport implements EntryPoint {
 
 			if (report != null) {
 
-				// HTMLReportWriter writer = new HTMLReportWriter();
-				// writer.process(report);
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+				
 				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new HTML(report.getTitle() + report.getCreated().toString()));
+				RootPanel.get("main").add(new HTML(html));
+				
 			}
 		}
 

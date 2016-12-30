@@ -69,4 +69,11 @@ public class Row implements Serializable {
   public Column getColumnAt(int i) {
     return this.columns.elementAt(i);
   }
+
+@Override
+public String toString() {
+	return "Row [columns=" + columns + "]";
+}
+  
+  
 }
