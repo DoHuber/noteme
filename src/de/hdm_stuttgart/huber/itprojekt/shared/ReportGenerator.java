@@ -46,10 +46,7 @@ public interface ReportGenerator extends RemoteService {
   public void init() throws IllegalArgumentException;
 
 
-  public void create(UserInfo uI) throws IllegalArgumentException;
-
-
-  public abstract AllUserNotebooksR createAllUserNotebooksR(
+ public abstract AllUserNotebooksR createAllUserNotebooksR(
       UserInfo u) throws IllegalArgumentException;
 
 
