@@ -2,6 +2,9 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.util.Vector;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
@@ -31,11 +34,23 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 	@Override
 	public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l) {
 		
+		Permission p = getRunTimePermissionFor(beneficiary, sharedObject);
+		if (p != null) {
+			
+		}
+		
 		// Muss eine Permission erstellen die das Objekt für den User beneficiary freigibt
-		Permission p = new Permission(l);
+		p = new Permission(l);
 		p.setBeneficiary(beneficiary);
 		
-		UserInfo author = new EditorImpl().getCurrentUser();
+		UserService userService = UserServiceFactory.getUserService();
+		if (!userService.isUserLoggedIn()) {
+			throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
+		}
+		
+		User currentGoogleUser = userService.getCurrentUser();
+		UserInfo author = UserInfoMapper.getUserInfoMapper().findUserByGoogleId(currentGoogleUser.getUserId());
+		
 		p.setAuthor(author);
 		
 		p.setSharedObject(sharedObject);

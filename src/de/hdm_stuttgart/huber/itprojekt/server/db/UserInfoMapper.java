@@ -64,15 +64,10 @@ public class UserInfoMapper extends DataMapper {
 
     // FINDBYID
     public UserInfo findById(int id) throws ClassNotFoundException, SQLException {
-        Connection con = DBConnection.getConnection();
-
-      //Was macht die isObjectLoaded Verzweigung hier?
-       if (isObjectLoaded(id, UserInfo.class)) {
-    	   return (UserInfo) loadedObjects.get(id);
-       }
        
        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM notizbuch.userinfo WHERE id = ?");
+    	   
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.userinfo WHERE id = ?");
             stmt.setInt(1, id);
 
             //Ergebnis holen
@@ -86,8 +81,8 @@ public class UserInfoMapper extends DataMapper {
                         results.getString("email"),
                         results.getString("google_id"));
                 
-                loadedObjects.put(results.getInt("id"), noteUser);
                 return noteUser;
+                
             }
 
         } catch (SQLException sqlExp) {

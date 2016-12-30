@@ -72,7 +72,7 @@ public class PermissionMapper extends DataMapper {
 	
 	public void createPermission(Permission p) {
 		
-		String sql = "INSERT INTO notizbuch.permission(author_id, permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO notizbuch.permission(author_id, permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?, ?)";
 		String replaceString;
 		
 		switch (p.getSharedObject().getType()) {
