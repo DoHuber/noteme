@@ -60,13 +60,18 @@ public class PermissionMapper extends DataMapper {
 			
 			// Workaround, eventuelle makeFrom-Methode refactoren?
 			Vector<Permission> v = makeFromResultSet(rs);
-			return v.firstElement();
+			
+			if (v.size() != 0) {
+				return v.firstElement();
+			} else {
+				return null;
+			}
+			
 						
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		}
-		
-		return new Permission();
 		
 	}
 	
