@@ -70,6 +70,9 @@ public class HTMLReportWriter extends ReportWriter {
   public String simpleReport2HTML(SimpleReport r) {
 	  
 	  StringBuilder sb = new StringBuilder();
+	  
+	  sb.append(paragraph2HTML(r.getHeaderData()));
+	  
 	  sb.append("<table>");
 	  
 	  for (Row rowElement : r.getRows()) {
@@ -89,6 +92,8 @@ public class HTMLReportWriter extends ReportWriter {
 	  }
 	  
 	  sb.append("</table>");
+	  
+	  sb.append(paragraph2HTML(r.getImprint()));
 	  
 	  return sb.toString();
   }
