@@ -104,6 +104,7 @@ public class IT_Projekt implements EntryPoint {
 		RootPanel.get("menu").add(loginPanel);
 		
 	}
+	
 	public void createUser(){
 		user.add(name);
 		user.add(nameBox);

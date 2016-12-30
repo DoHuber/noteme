@@ -58,28 +58,11 @@ public class PermissionMapper extends DataMapper {
 			
 			ResultSet rs = ps.executeQuery();
 			
-			char level = rs.getString("permission_level").charAt(0);
-			Level l;
-			
-			switch(level) {
-			case 'r':
-				l = Level.READ;
-				break;
-			case 'w':
-				l = Level.EDIT;
-				break;
-			case 'd':
-				l = Level.DELETE;
-				break;
-			default:
-				l = Level.NONE;
-				break;
-								
-			}
-			
-			return new Permission(rs.getInt("id"), l);
+			// Workaround, eventuelle makeFrom-Methode refactoren?
+			Vector<Permission> v = makeFromResultSet(rs);
+			return v.firstElement();
 						
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
@@ -89,7 +72,7 @@ public class PermissionMapper extends DataMapper {
 	
 	public void createPermission(Permission p) {
 		
-		String sql = "INSERT INTO notizbuch.permission(permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO notizbuch.permission(author_id, permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?)";
 		String replaceString;
 		
 		switch (p.getSharedObject().getType()) {
@@ -108,10 +91,11 @@ public class PermissionMapper extends DataMapper {
 		try { 
 			
 		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setInt(1, p.getLevelAsInt());
-		ps.setString(2, Character.toString(p.getSharedObject().getType()));
-		ps.setInt(3, p.getSharedObject().getId());
-		ps.setInt(4, p.getUser().getId());
+		ps.setInt(1, p.getAuthor().getId());
+		ps.setInt(2, p.getLevelAsInt());
+		ps.setString(3, Character.toString(p.getSharedObject().getType()));
+		ps.setInt(4, p.getSharedObject().getId());
+		ps.setInt(5, p.getBeneficiary().getId());
 		
 		ps.executeUpdate();
 		
@@ -184,7 +168,8 @@ public class PermissionMapper extends DataMapper {
 			NoteMapper nm = NoteMapper.getNoteMapper();
 			NoteBookMapper nbm = NoteBookMapper.getNoteBookMapper();
 			
-			p.setUser(uim.findById(rs.getInt("beneficiary_id")));
+			p.setBeneficiary(uim.findById(rs.getInt("beneficiary_id")));
+			p.setAuthor(uim.findById(rs.getInt("author_id")));
 			
 			Shareable sharedObject;
 			char type = rs.getString("type").charAt(0);
@@ -209,6 +194,24 @@ public class PermissionMapper extends DataMapper {
 		}
 		
 		return v;
+		
+	}
+	
+	public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u) {
+		
+		try {
+			
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM notizbuch.permission "
+					+ "WHERE author_id = ?");
+			ps.setInt(1, u.getId());
+			
+			return makeFromResultSet(ps.executeQuery());
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 		
 	}
 

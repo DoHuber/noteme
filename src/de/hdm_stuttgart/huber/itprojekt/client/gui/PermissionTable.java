@@ -82,7 +82,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 				@Override
 				public String getValue(Permission permission) {
 					// TODO Auto-generated method stub
-					return permission.getUser().getNickname();
+					return permission.getBeneficiary().getNickname();
 				}
 			};
 			table.addColumn(userInfo, "User");

@@ -33,7 +33,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 		
 		// Muss eine Permission erstellen die das Objekt für den User beneficiary freigibt
 		Permission p = new Permission(l);
-		p.setUser(beneficiary);
+		p.setBeneficiary(beneficiary);
 		p.setSharedObject(sharedObject);
 		
 		permissionMapper.createPermission(p);
@@ -62,6 +62,13 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 	public Vector<Permission> getAllPermissionsFor(Shareable s) {
 		
 		return permissionMapper.getAllPermissionsFor(s);
+		
+	}
+
+	@Override
+	public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u) {
+
+		return permissionMapper.getAllPermissionsCreatedBy(u);
 		
 	}
 	
