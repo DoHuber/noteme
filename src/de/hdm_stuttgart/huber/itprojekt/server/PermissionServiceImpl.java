@@ -49,6 +49,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 		if (p == null) {
 			
 			p = new Permission();
+			p.setLevel(l);
 			setCurrentUserAsAuthor(p);
 			createNewPermission(p, beneficiary, sharedObject);
 			

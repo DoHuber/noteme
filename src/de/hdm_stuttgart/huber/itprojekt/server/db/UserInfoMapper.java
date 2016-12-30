@@ -251,7 +251,7 @@ public class UserInfoMapper extends DataMapper {
 				
 			} else {
 				
-				throw new IllegalArgumentException("Logikfehler: Kein User gefunden");
+				return null;
 				
 			}
 			

@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -91,6 +92,8 @@ public class ShareNote extends BasicView{
 		break;
 		
 		}
+		
+		GWT.log("Selected Level:" + l);
 		
 		permissionVerwaltung.shareWith(userEmail, note, l, new PermissionCallback());	
 		}
