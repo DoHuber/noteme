@@ -40,7 +40,7 @@ public class PermissionMapper extends DataMapper {
 	public Permission getPermissionFor(UserInfo u, Shareable sharedObject) {
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT id, permission_level FROM notizbuch.permission WHERE beneficiary_id = ? AND ");
+		sql.append("SELECT * FROM notizbuch.permission WHERE beneficiary_id = ? AND ");
 		
 		if (sharedObject instanceof Note) {
 			sql.append("note_id = ?;");
@@ -173,7 +173,9 @@ public class PermissionMapper extends DataMapper {
 			NoteMapper nm = NoteMapper.getNoteMapper();
 			NoteBookMapper nbm = NoteBookMapper.getNoteBookMapper();
 			
+
 			p.setBeneficiary(uim.findById(rs.getInt("beneficiary_id")));
+					
 			p.setAuthor(uim.findById(rs.getInt("author_id")));
 			
 			Shareable sharedObject;
@@ -224,7 +226,7 @@ public class PermissionMapper extends DataMapper {
 
 		try {
 
-		PreparedStatement ps = connection.prepareStatement("INSERT INTO notizbuch.permission(permission_level) VALUES (?) WHERE id = ?");
+		PreparedStatement ps = connection.prepareStatement("UPDATE notizbuch.permission SET permission_level = ? WHERE id = ?");
 		ps.setInt(1, p.getLevelAsInt());
 		ps.setInt(2, p.getId());
 
