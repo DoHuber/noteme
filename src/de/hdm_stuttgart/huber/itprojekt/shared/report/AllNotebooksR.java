@@ -11,6 +11,8 @@ import java.io.Serializable;
  * 
  * @author Thies
  */
+
+// gibt alle Notizbücher aus
 public class AllNotebooksR 
 	extends SimpleReport
 	implements Serializable {
