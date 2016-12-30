@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.PermissionService;
+import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
@@ -20,23 +22,24 @@ public class ClientsideSettings {
 	 * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitigen Dienst
 	 */
 	private static EditorAsync editorVerwaltung = null; 
-	
+
 	  private static ReportGeneratorAsync reportGenerator = null;
-	  
+
 	  /**
 	   * Name des Client-seitigen Loggers.
 	   */
 	  private static final String LOGGER_NAME = "BankProjekt Web Client";
-	  
+
 	  /**
 	   * Instanz des Client-seitigen Loggers.
 	   */
 	  private static final Logger log = Logger.getLogger(LOGGER_NAME);
-	
-	  
+
+
 	  public static Logger getLogger() {
 		    return log;
 		  }
+	private static PermissionServiceAsync permissionVerwaltung=null;
 /**
    *
    * Der Aufruf dieser Methode erfolgt im Client z.B. durch
@@ -58,13 +61,19 @@ public class ClientsideSettings {
 		}
 		return editorVerwaltung;
 	}
+	public static PermissionServiceAsync getPermissionVerwaltung(){
+		if (permissionVerwaltung==null)
+			permissionVerwaltung = GWT.create(PermissionService.class);
+		return permissionVerwaltung;
+
+	}
 
 	public static SharedServicesAsync getSharedService() {
 
 	    return GWT.create(SharedServices.class);
 
     }
-	
+
 	  public static ReportGeneratorAsync getReportGenerator() {
 		    // Gab es bislang noch keine ReportGenerator-Instanz, dann...
 		    if (reportGenerator == null) {

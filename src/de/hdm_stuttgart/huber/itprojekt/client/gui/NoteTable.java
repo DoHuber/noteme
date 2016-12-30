@@ -122,12 +122,8 @@ public class NoteTable {
 		table.setVisibleRange(0, notes.size());
 		table.setRowData(0, notes);
 		LayoutPanel panel = new LayoutPanel();
-		panel.setSize("50em", "40em");
+		panel.setSize("60em", "40em");
 		panel.add(table);
-		
-		table.setStyleName("googleTable");
-		
-	
 		fPanel.add(panel);
 
 		return fPanel;

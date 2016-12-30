@@ -42,7 +42,7 @@ public abstract class BasicView extends FlowPanel {
 	 */
 	public HTML createHeadline(String header, String subHeader) {
 		HTML headline = new HTML();
-		headline.setStylePrimaryName("headline");
+		headline.setStyleName("headline");
 		headline.setHTML("<h1>" + header + "</h1><h2>" + subHeader + "</h2>");
 		return headline;
 	}

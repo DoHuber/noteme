@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class NoteBookMapper extends DataMapper {
 	
@@ -127,9 +128,9 @@ private static NoteBookMapper noteBookMapper = null;
 	      
 	      	stmt.setString(1, notebook.getTitle());
 	    	stmt.setString(2, notebook.getSubtitle());
-	    	stmt.setString(3, "Owner");
-	    	stmt.setDate(4, new Date(7777));
-	    	stmt.setDate(5, new Date(7777));
+	    	stmt.setDate(3, notebook.getCreationDate());
+	    	stmt.setDate(4, new Date(System.currentTimeMillis()));
+	    	stmt.setInt(5, notebook.getOwner().getId());
 	    	
 	    	stmt.setInt(6, notebook.getId());
 	    	
@@ -146,23 +147,13 @@ private static NoteBookMapper noteBookMapper = null;
 	    return findById(notebook.getId());
 	  }
 		  
-	
-	
-	
-	/**
-	 * Daten eines bestimmten Notebook-Objekts werden aus der Datenbank gelöscht
-	 * 
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
-	 public void delete(NoteBook notebook) throws ClassNotFoundException, SQLException {
-			
-		 Connection connection = DBConnection.getConnection();
+	 public void delete(NoteBook notebook) {
+
 
 		 try {
 
 	            PreparedStatement stmt = connection.prepareStatement("DELETE FROM Notebook WHERE id = ?");
-	            stmt.setLong(1, notebook.getId());
+	            stmt.setInt(1, notebook.getId());
 	            stmt.executeUpdate();
 
 	        } catch (SQLException e) {
@@ -176,34 +167,19 @@ private static NoteBookMapper noteBookMapper = null;
 
 
 
-	 public Vector<NoteBook> getAllNoteBooks() {
-		 	
-	        Vector<NoteBook> v = new Vector<>();
+	 public Vector<NoteBook> getAllNoteBooks() throws ClassNotFoundException, SQLException {
 
 	        try {
 
 	            Statement stmt = connection.createStatement();
 	            ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.notebook");
 
-	            while (rs.next()) {
-
-	                NoteBook resultRow = new NoteBook(rs.getInt("id"));
-	                
-	                resultRow.setTitle(rs.getString("title"));
-	                resultRow.setSubtitle(rs.getString("subtitle"));
-	                resultRow.setCreationDate(rs.getDate("creation_date"));
-	                resultRow.setModificationDate(rs.getDate("modification_date"));
-	                resultRow.setOwner(UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")));
-	                
-	                v.add(resultRow);
-
-	            }
+	            return makeNoteBooksFromResultSet(rs);
 
 	        } catch (SQLException | ClassNotFoundException e) {
 	            e.printStackTrace();
+	            return null;
 	        }
-
-	        return v;
 
 	    }
 	 
@@ -218,25 +194,79 @@ private static NoteBookMapper noteBookMapper = null;
 	            
 	            ResultSet rs = ps.executeQuery();
 	            
-	            while (rs.next()) {
-
-	                NoteBook resultRow = new NoteBook(rs.getInt("id"));
-	                
-	                resultRow.setTitle(rs.getString("title"));
-	                resultRow.setSubtitle(rs.getString("subtitle"));
-	                resultRow.setCreationDate(rs.getDate("creation_date"));
-	                resultRow.setModificationDate(rs.getDate("modification_date"));
-	                resultRow.setOwner(UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")));
-	                
-	                v.add(resultRow);
-
-	            }
+	            return makeNoteBooksFromResultSet(rs);
 
 	        } catch (SQLException | ClassNotFoundException e) {
 	            e.printStackTrace();
+		        return null;
 	        }
 
-	        return v;
+	    }
+
+	 	public Vector<NoteBook> getAllNoteBooksSharedWith(UserInfo u) {
+
+	 		try {
+
+	    		String sql = "SELECT notebook.id AS id, title, subtitle, creation_date, modification_date, author_id FROM notebook "
+	    				+ "JOIN permission ON notebook.id = permission.notebook_id WHERE beneficiary_id = ?";
+
+	    		PreparedStatement ps = connection.prepareStatement(sql);
+	    		ps.setInt(1, u.getId());
+	    		ResultSet rs = ps.executeQuery();
+
+	    		return makeNoteBooksFromResultSet(rs);
+
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+	    		return new Vector<>();
+	    	}
+
+	 	}
+
+
+		private Vector<NoteBook> makeNoteBooksFromResultSet(ResultSet rs)
+				throws SQLException, ClassNotFoundException {
+
+			Vector<NoteBook> v = new Vector<>();
+
+			while (rs.next()) {
+
+			    NoteBook resultRow = new NoteBook(rs.getInt("id"));
+
+			    resultRow.setTitle(rs.getString("title"));
+			    resultRow.setSubtitle(rs.getString("subtitle"));
+			    resultRow.setCreationDate(rs.getDate("creation_date"));
+			    resultRow.setModificationDate(rs.getDate("modification_date"));
+			    resultRow.setOwner(UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")));
+
+			    v.add(resultRow);
+
+			}
+
+			return v;
+		}
+
+		public Vector<NoteBook> getAllNoteBooksSharedBy(UserInfo u) {
+
+	    	String sql = "SELECT DISTINCT notebook.id AS id FROM notebook JOIN permission ON notebook.id = permission.notebook_id WHERE author_id = ?";
+	    	Vector<NoteBook> v = new Vector<>();
+
+	    	try {
+
+	    	PreparedStatement ps = connection.prepareStatement(sql);
+	    	ps.setInt(1, u.getId());
+
+	    	ResultSet rs = ps.executeQuery();
+	    	while (rs.next()) {
+	    		v.add(findById(rs.getInt("id")));
+	    	}
+
+	    	return v;
+
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+	    		return v;
+	    	}
 
 	    }
 	

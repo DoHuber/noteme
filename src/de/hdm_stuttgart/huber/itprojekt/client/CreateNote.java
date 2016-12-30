@@ -1,5 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import java.sql.Date;
+
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -13,9 +16,11 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
+
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
 /**
  * Notiz anlegen! 
@@ -41,6 +46,15 @@ public class CreateNote extends BasicView {
 	private Label dueDate = new Label("Due Date");
 	private Label test = new Label();
 	private Grid grid = new Grid(2,1);
+	private NoteBook nb = null; 
+	
+	public CreateNote (){
+		
+	}
+	public CreateNote (NoteBook nb ){
+		this.nb = nb;
+		
+	}
 	@Override
 	public void run() {
 		/*
@@ -61,9 +75,8 @@ public class CreateNote extends BasicView {
 		createButton.addClickHandler(new CreateClickHandler());
 		grid.setWidget(0, 0, richTextToolbar);
 	
-		noteArea.setSize("475px", "100px");
-
-		noteArea.setSize("445px", "100px");
+		// noteArea.setSize("475px", "100px");
+		noteArea.setSize("100%", "100%");
 		grid.setWidget(1, 0, noteArea);
 		
 		//contentPanel.add(richTextToolbar);
@@ -73,19 +86,20 @@ public class CreateNote extends BasicView {
 		RootPanel.get("main").add(contentPanel);
 		
 		noteArea.setStyleName("noteArea");
-
+		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
 	}
 
 	@Override
 	public String getHeadlineText() {
 
-		return "Create New Note";
+		return "CREATE A NOTE";
 	}
 
 	@Override
 	public String getSubHeadlineText() {
 
-		return "Sinnvoller Text!";
+		return "Give your note a title and subtitle to complete!";
 	}
 	/**
 	 * 
@@ -97,7 +111,9 @@ public class CreateNote extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 			createNote();
-			
+			ShowAllNotes san = new ShowAllNotes();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 		}
 		
 	}
@@ -110,9 +126,14 @@ public class CreateNote extends BasicView {
 		note.setTitle(titleTextBox.getText());
 		note.setSubtitle(SubtitleTextBox.getText());
 		note.setContent(noteArea.getText());
+		java.util.Date utilDate = dueDateBox.getValue();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	    note.setDueDate(sqlDate);
+		note.setNoteBook(nb);
 		editorVerwaltung.createNote(note, new CreateNoteCallback());
 
 	}
+
 	/**
 	 * Klasse die den callback zum Notiz anlegen implementiert. Die angelegte Notiz wird
 	 * an die EditorImpl übergeben. Später soll die angelegte Notiz noch dem Nutzer angezeigt werden  
@@ -137,8 +158,6 @@ public class CreateNote extends BasicView {
 			RootPanel.get("menu").clear();
 			RootPanel.get("main").add(mw);
 			RootPanel.get("main").add(lb);
-			
-		
 			
 		}
 		

@@ -1,6 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.*;
 import java.util.Vector;
@@ -9,6 +10,9 @@ public class NoteMapper extends DataMapper {
 
     // Statisches Attribut, welches den Singleton-NoteMapper enthält.
     private static NoteMapper noteMapper = null;
+    private UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
+    private NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
+
 
     // Nichtöffentlicher Konstruktor, um "unauthorisiertes" Instanziieren dieser Klasse zu verhindern.
     protected NoteMapper() throws ClassNotFoundException, SQLException {
@@ -118,15 +122,19 @@ public class NoteMapper extends DataMapper {
             stmt.setString(1, note.getTitle());
             stmt.setString(2, note.getSubtitle());
             stmt.setString(3, note.getContent());
-            stmt.setString(4, "PLATZHALTER SORUCE"); // TODO
+            stmt.setString(4, "Platzhalter Source"); // TODO
 
             // Daten
             stmt.setDate(5, note.getCreationDate());
             stmt.setDate(6, note.getDueDate());
             stmt.setDate(7, new Date(System.currentTimeMillis()));
 
-            // IDs
+            // IDs, gesonderte Nullbehandlung 
+            if (note.getNoteBook() == null) {
+            	stmt.setObject(8, null);
+            } else {
             stmt.setInt(8, note.getNoteBook().getId());
+            }
             stmt.setInt(9, note.getOwner().getId());
 
             // Id der zu speichernden Notiz
@@ -143,7 +151,7 @@ public class NoteMapper extends DataMapper {
         return findById(note.getId());
     }
 
-    public void delete(Note note) throws ClassNotFoundException, SQLException {
+    public void delete(Note note) {
 
         try {
 
@@ -161,42 +169,22 @@ public class NoteMapper extends DataMapper {
 
     public Vector<Note> getAllNotes() throws ClassNotFoundException, SQLException {
 
-        Vector<Note> v = new Vector<>();
-
         try {
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM notizbuch.note");
-            UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
-            NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
-
-            while (rs.next()) {
-
-                Note note = new Note(rs.getInt("id"),
-                        rs.getString("content"),
-                        rs.getString("title"),
-                        rs.getString("subtitle"),
-                        noteUserMapper.findById(rs.getInt("author_id")),
-                        noteBookMapper.findById(rs.getInt("notebook_id")),
-                        rs.getDate("creation_date"),
-                        rs.getDate("modification_date"),
-                        rs.getDate("due_date"));
-
-                v.add(note);
-
-            }
+            
+            return makeNotesFromResultSet(rs);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return v;
+        return new Vector<Note>();
 
     }
     
     public Vector<Note> getAllNotesForUserId(int userId) {
-
-        Vector<Note> v = new Vector<>();
 
         try {
 
@@ -205,35 +193,108 @@ public class NoteMapper extends DataMapper {
             
             ResultSet rs = stmt.executeQuery();
             
-            UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
-            NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
-
-            while (rs.next()) {
-            	
-            	Note note = new Note(rs.getInt("id"));
-            	
-            	note.setContent(rs.getString("content"));
-            	note.setTitle(rs.getString("title"));
-            	note.setSubtitle(rs.getString("subtitle"));
-            	
-            	note.setOwner(noteUserMapper.findById(userId));
-            	note.setNoteBook(noteBookMapper.findById(rs.getInt("notebook_id")));
-            	
-            	note.setCreationDate(rs.getDate("creation_date"));
-            	note.setDueDate(rs.getDate("due_date"));
-            	note.setModificationDate(rs.getDate("modification_date"));
-
-                v.add(note);
-
-            }
+            return makeNotesFromResultSet(rs);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return v;
+        return new Vector<Note>();
 
     }
+    
+    public Vector<Note> getAllNotesForNoteBookId(int id) {
+    	
+    	try {
+    		
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE notebook_id = ?");
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			return makeNotesFromResultSet(rs);
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+    	
+    	return new Vector<>();
+    	
+    }
+    
+    public Vector<Note> getAllNotesSharedWith(UserInfo u) {
+    	
+    	try {
+    		
+    		String sql = "SELECT note.id AS id, title, subtitle, content, note_source, creation_date, due_date, modification_date, note.notebook_id AS notebook_id, note.author_id AS author_id FROM note "
+    				+ "JOIN permission ON note.id = permission.note_id WHERE beneficiary_id = ?";
+    		PreparedStatement ps = connection.prepareStatement(sql);
+    		ps.setInt(1, u.getId());
+    		ResultSet rs = ps.executeQuery();   
+    		
+    		return makeNotesFromResultSet(rs);
+    	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return new Vector<>();
+    	}
+    	
+    }
+    
+    private Vector<Note> makeNotesFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+    	
+    	Vector<Note> v = new Vector<>();
+    	
+    	while (rs.next()) {
+        	
+        	Note note = new Note(rs.getInt("id"));
+        	
+        	note.setContent(rs.getString("content"));
+        	note.setTitle(rs.getString("title"));
+        	note.setSubtitle(rs.getString("subtitle"));
+        	
+        	note.setOwner(noteUserMapper.findById(rs.getInt("author_id")));
+        	note.setNoteBook(noteBookMapper.findById(rs.getInt("notebook_id")));
+        	
+        	note.setCreationDate(rs.getDate("creation_date"));
+        	note.setDueDate(rs.getDate("due_date"));
+        	note.setModificationDate(rs.getDate("modification_date"));
+
+            v.add(note);
+
+        }
+    	
+    	return v;
+    }
+    
+    public Vector<Note> getAllNotesSharedBy(UserInfo u) {
+    	
+    	String sql = "SELECT DISTINCT note.id AS id FROM note JOIN permission ON note.id = permission.note_id WHERE note.author_id = ?";
+    	Vector<Note> v = new Vector<>();
+    	
+    	try {
+    	
+    	PreparedStatement ps = connection.prepareStatement(sql);
+    	ps.setInt(1, u.getId());
+    	
+    	ResultSet rs = ps.executeQuery();
+    	while (rs.next()) {
+    		v.add(findById(rs.getInt("id")));
+    	}
+    	
+    	return v;
+    	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return v;
+    	}
+    
+    }
+    
+    
+    
+    
 
 }
 

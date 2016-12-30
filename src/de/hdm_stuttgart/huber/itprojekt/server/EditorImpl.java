@@ -13,11 +13,13 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
+import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class EditorImpl extends RemoteServiceServlet implements Editor {
@@ -31,7 +33,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	private NoteMapper noteMapper;
 	private NoteBookMapper noteBookMapper;
 	private UserInfoMapper userInfoMapper;
-	
+	private PermissionMapper permissionMapper;
+
 	@Override
 	public void init() throws IllegalArgumentException {
 		
@@ -39,7 +42,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 			this.noteMapper = NoteMapper.getNoteMapper();
 			this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
 			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
-			
+			this.permissionMapper = PermissionMapper.getPermissionMapper();
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -70,8 +74,16 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public NoteBook saveNoteBook(NoteBook noteBook) {
-		// TODO Auto-generated method stub
-		return null;
+
+		try {
+
+			return noteBookMapper.save(noteBook);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	@Override
@@ -81,7 +93,18 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 	@Override
 	public void deleteNoteBook(NoteBook noteBook) {
-		// TODO Auto-generated method stub
+		/**
+		 * Delete Notebook muss zuerst alle Notizen im Notizbuch löschen, das ist wichtig
+		 * und Aufgabe der Applikationslogik, wäre zwar theoretisch auch mit CASCADE
+		 * in mySQL implementierbar, ggf. nachfragen?
+		 */
+
+		Vector<Note> notesToDelete = getAllFrom(noteBook);
+		for (Note row : notesToDelete) {
+			noteMapper.delete(row);
+		}
+
+		noteBookMapper.delete(noteBook);
 
 	}
 
@@ -135,16 +158,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public void deleteNote(Note note) {
-		
-		try {
+
 			noteMapper.delete(note);
-		} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
 
 	}
 
@@ -183,7 +198,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		
 	}
 	
-	private UserInfo getCurrentUser() {
+	@Override
+	public UserInfo getCurrentUser() {
 		
 		UserService userService = UserServiceFactory.getUserService();
 		if (!userService.isUserLoggedIn()) {
@@ -208,28 +224,82 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public String getTitle(NoteBook nB) throws BullshitException {
-		// TODO Auto-generated method stub
-		return null;
+	public Vector<Note> getAllFrom(NoteBook nb) {
+
+		int noteBookId = nb.getId();
+		return noteMapper.getAllNotesForNoteBookId(noteBookId);
+
 	}
 
 	@Override
-	public Vector<UserInfo> getAllNoteUser() throws BullshitException {
-		// TODO Auto-generated method stub
-		return null;
+	public UserInfo saveUser(UserInfo user) {
+
+
+		try {
+
+			return userInfoMapper.save(user);
+
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	/**
+	 * Erläuterungen zu den beiden folgenden Methoden:
+	 * Mit den Objekten von Note oder NoteBook wird jeweils noch
+	 * ein Permission-Objekt, dass die aktuellen Berechtigungen des
+	 * eingeloggten Users beschreibt, mitgegeben.
+	 *
+	 * Somit ist dem Client ermöglicht, komfortabel zu prüfen,
+	 * ob der aktuelle User gewisse Operationen für bestimmte Objekte
+	 * durchführen darf.
+	 */
+
+	@Override
+	public Vector<Note> getAllSharedNotesForCurrentUser() {
+
+		Vector<Note> v = noteMapper.getAllNotesSharedWith(getCurrentUser());
+		for(Note row : v) {
+
+			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
+			row.setRunTimePermission(p);
+
+		}
+
+		return v;
 	}
 
 	@Override
-	public Vector<UserInfo> create(UserInfo u) throws BullshitException {
-		// TODO Auto-generated method stub
-		return null;
+	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser() {
+
+		Vector<NoteBook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());
+		for (NoteBook row : v) {
+
+			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
+			row.setRunTimePermission(p);
+
+		}
+
+		return v;
 	}
 
 	@Override
-	public UserInfo getUserById(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+	public Vector<Note> getAllNotesSharedByCurrentUser() {
+
+		UserInfo u = getCurrentUser();
+		return noteMapper.getAllNotesSharedBy(u);
+
 	}
-	
+
+	@Override
+	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser() {
+
+		return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
+
+	}
+
 
 }

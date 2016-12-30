@@ -64,15 +64,10 @@ public class UserInfoMapper extends DataMapper {
 
     // FINDBYID
     public UserInfo findById(int id) throws ClassNotFoundException, SQLException {
-        Connection con = DBConnection.getConnection();
-
-      //Was macht die isObjectLoaded Verzweigung hier?
-       if (isObjectLoaded(id, UserInfo.class)) {
-    	   return (UserInfo) loadedObjects.get(id);
-       }
        
        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM notizbuch.userinfo WHERE id = ?");
+    	   
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.userinfo WHERE id = ?");
             stmt.setInt(1, id);
 
             //Ergebnis holen
@@ -86,8 +81,8 @@ public class UserInfoMapper extends DataMapper {
                         results.getString("email"),
                         results.getString("google_id"));
                 
-                loadedObjects.put(results.getInt("id"), noteUser);
                 return noteUser;
+                
             }
 
         } catch (SQLException sqlExp) {
@@ -100,17 +95,19 @@ public class UserInfoMapper extends DataMapper {
 
 
     //save-Methode: NoteUser-Objekt wird wiederholt in die DB geschrieben
-    public UserInfo save(UserInfo noteUser) throws ClassNotFoundException, SQLException {
-        Connection con = DBConnection.getConnection();
+    public UserInfo save(UserInfo userToSave) throws ClassNotFoundException, SQLException {
+      
 
         try {
-            PreparedStatement stmt = con.prepareStatement("UPDATE userinfo SET firstName=?, userName=?, surName=?, email=?, googleId=? WHERE id=?");
-
-            stmt.setString(1, noteUser.getFirstName());
-            stmt.setString(2, noteUser.getNickname());
-            stmt.setString(3, noteUser.getSurName());
-            stmt.setString(4, noteUser.getEmailAddress());
-            stmt.setString(5, noteUser.getGoogleId());
+        	
+        	String sql = "UPDATE notizbuch.userinfo SET username = ?, firstname = ?, lastname = ?, email = ? WHERE google_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, userToSave.getNickname());
+            stmt.setString(2, userToSave.getFirstName());
+            stmt.setString(3, userToSave.getSurName());
+            stmt.setString(4, userToSave.getEmailAddress());
+            stmt.setString(5, userToSave.getGoogleId());
 
             stmt.executeUpdate();
 
@@ -118,7 +115,9 @@ public class UserInfoMapper extends DataMapper {
             sqlExp.printStackTrace();
             throw new IllegalArgumentException();
         }
-        return findById(noteUser.getId());
+        
+        return findById(userToSave.getId());
+ 
     }
 
 
@@ -235,6 +234,33 @@ public class UserInfoMapper extends DataMapper {
 		}
     	
     	return null;
+    }
+    
+    public UserInfo findByEmailAdress(String email) {
+    	
+    		try {
+    		
+			PreparedStatement ps = connection.prepareCall("SELECT id FROM notizbuch.userinfo WHERE email = ?");
+			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+				return findById(rs.getInt("id"));
+				
+			} else {
+				
+				return null;
+				
+			}
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	return null;
+    	
     }
     
 }
