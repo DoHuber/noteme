@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 
  * @author Thies
  */
-public class AllNoteBooksOfAllUsersReport 
+public class AllNotebooksR 
 	extends SimpleReport
 	implements Serializable {
 

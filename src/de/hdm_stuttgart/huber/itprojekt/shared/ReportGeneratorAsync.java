@@ -3,8 +3,12 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 
 
 
@@ -19,15 +23,25 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
  */
 public interface ReportGeneratorAsync {
 
-  void createAllNoteBooksOfAllUsersReport(
-      AsyncCallback<AllNoteBooksOfAllUsersReport> callback);
+  void createAllNotebooksR(
+      AsyncCallback<AllNotebooksR> callback);
 
-  void createAllNoteBooksOfUserReport(UserInfo u,
-      AsyncCallback<AllNoteBooksOfUserReport> callback);
+  void createAllUserNotebooksR(UserInfo u,
+      AsyncCallback<AllUserNotebooksR> callback);
+  
+  void createAllUserNotesR(UserInfo u, AsyncCallback<AllUserNotesR> callback);
+  
+  void createAllNotesR(
+		  AsyncCallback<AllNotesR> callback);
 
+  void createAllPermissionsR(
+		  AsyncCallback<AllPermissionsR> callback);
+  
   void init(AsyncCallback<Void> callback);
 
   void create(UserInfo uI, AsyncCallback<Void> callback);
+
+  void createAllUserPermissionsR(UserInfo u, AsyncCallback<AllUserPermissionsR> callback);
 
 }
 

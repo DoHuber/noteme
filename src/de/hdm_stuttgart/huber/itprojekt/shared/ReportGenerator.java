@@ -4,8 +4,12 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 
 /**
  * <p>
@@ -38,45 +42,29 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
 @RemoteServiceRelativePath("generator")
 public interface ReportGenerator extends RemoteService {
 
-  /**
-   * Initialisierung des Objekts. Diese Methode ist vor dem Hintergrund von GWT
-   * RPC zusätzlich zum No Argument Constructor der implementierenden Klasse
-   *BankAdministrationImpltungImpl} notwendig. Bitte diese Methode direkt nach der
-   * Instantiierung aufrufen.
-   * 
-   * @throws IllegalArgumentException
-   */
+
   public void init() throws IllegalArgumentException;
 
-  /**
-   * Setzen der zugeordneten Bank.
-   * 
-   * @para Bank-Objekt
-   * @throws IllegalArgumentException
-   */
+
   public void create(UserInfo uI) throws IllegalArgumentException;
 
-  /**
-   * Erstellen eines <code>AllAccountsOfCustomerReport</code>-Reports. Dieser
-   * Report-Typ stellt sämtliche Konten eines Kunden dar.
-   * 
-   * @param c eine Referenz auf das Kundenobjekt bzgl. dessen der Report
-   *          erstellt werden soll.
-   * @return das fertige Reportobjekt
-   * @throws IllegalArgumentException
-   * @see AllNoteBooksOfUserReport
-   */
-  public abstract AllNoteBooksOfUserReport createAllNoteBooksOfUserReport(
+
+  public abstract AllUserNotebooksR createAllUserNotebooksR(
       UserInfo u) throws IllegalArgumentException;
 
-  /**
-   * Erstellen eines <code>AllAccountsOfAllCustomersReport</code>-Reports.
-   * Dieser Report-Typ stellt sämtliche Konten aller Kunden dar.
-   * 
-   * @return das fertige Reportobjekt
-   * @throws IllegalArgumentException
-   * @see AllNoteBooksOfAllUsersReport
-   */
-  public abstract AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllUsersReport()
+
+  public abstract AllNotebooksR createAllNotebooksR()
       throws IllegalArgumentException;
+  
+  
+  public abstract AllUserNotesR createAllUserNotesR(
+  		UserInfo u) throws IllegalArgumentException;
+  
+  public abstract AllNotesR createAllNotesR() throws IllegalArgumentException;
+  
+  public abstract AllUserPermissionsR createAllUserPermissionsR(
+			UserInfo u) throws IllegalArgumentException;
+
+	public abstract AllPermissionsR createAllPermissionsR() throws IllegalArgumentException;
 }
+

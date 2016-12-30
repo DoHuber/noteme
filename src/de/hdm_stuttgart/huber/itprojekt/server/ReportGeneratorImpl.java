@@ -11,8 +11,12 @@ import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Column;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeParagraph;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeReport;
@@ -109,7 +113,7 @@ public void create(UserInfo uI) {
   
  
   
-  public AllNoteBooksOfUserReport createAllNoteBooksofUserReport(
+  public AllUserNotebooksR createAllNoteBooksofUserReport(
       UserInfo u) throws IllegalArgumentException {
 
     if (this.getNoteBookVerwaltung() == null)
@@ -118,7 +122,7 @@ public void create(UserInfo uI) {
     /*
      * Zunächst legen wir uns einen leeren Report an.
      */
-    AllNoteBooksOfUserReport result = new AllNoteBooksOfUserReport();
+    AllUserNotebooksR result = new AllUserNotebooksR();
 
     // Jeder Report hat einen Titel (Bezeichnung / Überschrift).
     result.setTitle("All notebooks of current user");
@@ -210,38 +214,38 @@ public void create(UserInfo uI) {
     return result;
   }
 
-public AllNoteBooksOfAllUsersReport createAllNoteBooksOfUsersReport(UserInfo uI2)
+public AllNotebooksR createAllNoteBooksOfUsersReport(UserInfo uI2)
       throws IllegalArgumentException {
 
-	AllNoteBooksOfAllUsersReport report = new AllNoteBooksOfAllUsersReport();
+	AllNotebooksR report = new AllNotebooksR();
 	
 	
     
      return report;
   }
 
-public AllNoteBooksOfUserReport createAllNoteBooksOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
+public AllUserNotebooksR createAllNoteBooksOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
 
-public AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllCustomersReport() throws IllegalArgumentException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public AllNoteBooksOfUserReport createAllNoteBooksOfUserReport(UserInfo u) throws IllegalArgumentException {
+public AllNotebooksR createAllNoteBooksOfAllCustomersReport() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
 
 @Override
-public AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllUsersReport() throws IllegalArgumentException {
+public AllUserNotebooksR createAllUserNotebooksR(UserInfo u) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public AllNotebooksR createAllNotebooksR() throws IllegalArgumentException {
 	
 	Vector<NoteBook> allNoteBooks = NoteBookMapper.getNoteBookMapper().getAllNoteBooks();
 	
-	AllNoteBooksOfAllUsersReport report = new AllNoteBooksOfAllUsersReport();
+	AllNotebooksR report = new AllNotebooksR();
 	report.setTitle("Alle Notebooks aller User, d.h. alle Notebooks.");
 	report.setCreated(new Date(System.currentTimeMillis()));
 	
@@ -266,6 +270,30 @@ public AllNoteBooksOfAllUsersReport createAllNoteBooksOfAllUsersReport() throws 
 	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
 	
 	return report;
+}
+
+@Override
+public AllUserNotesR createAllUserNotesR(UserInfo u) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public AllNotesR createAllNotesR() throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public AllUserPermissionsR createAllUserPermissionsR(UserInfo u) throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public AllPermissionsR createAllPermissionsR() throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 }

@@ -1,5 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.report;
 
+import java.io.Serializable;
+
 /**
  * Report, der alle Konten eines Kunden darstellt.
  * Die Klasse trägt keine weiteren Attribute- und Methoden-Implementierungen,
@@ -9,12 +11,15 @@ package de.hdm_stuttgart.huber.itprojekt.shared.report;
  * 
  * @author Thies
  */
-public class AllNoteBooksOfUserReport 
-	extends SimpleReport {
+public class AllUserNotebooksR 
+extends SimpleReport
+implements Serializable {
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
+/**
+* 
+*/
+private static final long serialVersionUID = 1L;
+
+
+
 }
-
