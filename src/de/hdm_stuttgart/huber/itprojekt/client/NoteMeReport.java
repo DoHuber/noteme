@@ -17,7 +17,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfAllUsersReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
 /**
@@ -95,7 +95,7 @@ public class NoteMeReport implements EntryPoint {
 			public void onClick(ClickEvent event) {
 
 				GWT.log("Onclick fired!");
-				reportGenerator.createAllNoteBooksOfAllUsersReport(new createAllNoteBooksOfAllUsersReportCallback());
+				reportGenerator.createAllNotebooksR(new createAllNotebooksRCallback());
 
 			}
 
@@ -153,7 +153,7 @@ public class NoteMeReport implements EntryPoint {
 	 * @author rathke
 	 * @version 1.0
 	 */
-	class createAllNoteBooksOfAllUsersReportCallback implements AsyncCallback<AllNoteBooksOfAllUsersReport> {
+	class createAllNotebooksRCallback implements AsyncCallback<AllNotebooksR> {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -166,7 +166,7 @@ public class NoteMeReport implements EntryPoint {
 		}
 
 		@Override
-		public void onSuccess(AllNoteBooksOfAllUsersReport report) {
+		public void onSuccess(AllNotebooksR report) {
 
 			GWT.log("onSuccess reached!");
 			GWT.log(report.toString());

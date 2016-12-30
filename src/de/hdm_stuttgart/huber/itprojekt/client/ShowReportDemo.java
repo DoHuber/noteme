@@ -12,7 +12,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNoteBooksOfUserReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
 /**
@@ -130,7 +130,7 @@ public class ShowReportDemo extends MenuView {
         ReportGeneratorAsync reportGenerator = ClientsideSettings
             .getReportGenerator();
         
-        reportGenerator.createAllNoteBooksOfUserReport(user,
+        reportGenerator.createAllUserNotebooksR(user,
             new AllAccountsOfCustomerReportCallback(this.mView));
       }
     }
@@ -167,7 +167,7 @@ public class ShowReportDemo extends MenuView {
      * 
      */
     class AllAccountsOfCustomerReportCallback
-        implements AsyncCallback<AllNoteBooksOfUserReport> {
+        implements AsyncCallback<AllUserNotebooksR> {
       private MenuView mView = null;
 
       public AllAccountsOfCustomerReportCallback(MenuView c) {
@@ -180,7 +180,7 @@ public class ShowReportDemo extends MenuView {
       }
 
       @Override
-      public void onSuccess(AllNoteBooksOfUserReport report) {
+      public void onSuccess(AllUserNotebooksR report) {
         if (report != null) {
           HTMLReportWriter writer = new HTMLReportWriter();
           writer.process(report);

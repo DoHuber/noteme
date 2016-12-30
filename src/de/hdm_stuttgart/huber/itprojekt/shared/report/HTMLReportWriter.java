@@ -125,7 +125,7 @@ public class HTMLReportWriter extends ReportWriter {
    * 
    * @param r der zu prozessierende Report
    */
-  public void process(AllNoteBooksOfUserReport r) {
+  public void process(AllUserNotebooksR r) {
     // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
     this.resetReportText();
 
@@ -225,7 +225,7 @@ public class HTMLReportWriter extends ReportWriter {
        * Sollte dies in einer erweiterten Form des Projekts nicht mehr gelten,
        * so müsste hier eine detailliertere Implementierung erfolgen.
        */
-      AllNoteBooksOfUserReport subReport = (AllNoteBooksOfUserReport) r
+      AllUserNotebooksR subReport = (AllUserNotebooksR) r
           .getSubReportAt(i);
 
       this.process(subReport);

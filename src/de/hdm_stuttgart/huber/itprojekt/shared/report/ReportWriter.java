@@ -23,7 +23,7 @@ public abstract class ReportWriter {
    * 
    * @param r der zu übersetzende Report
    */
-  public abstract void process(AllNoteBooksOfUserReport r);
+  public abstract void process(AllUserNotebooksR r);
 
   /**
    * Übersetzen eines <code>AllAccountsOfAllCustomersReport</code> in das
