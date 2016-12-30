@@ -84,7 +84,7 @@ public class ShowPermission extends BasicView {
 		  
 		    fPanel2.add(contentPanel);
 		    editorVerwaltung.getCurrentUser(cb);
-		    permissionVerwaltung.getAllPermissionsCreatedBy(ui, callback);
+		    
 		    
 //		    NoteTable nt = new NoteTable(notes);
 //		    nt.addClickNote();
@@ -107,8 +107,9 @@ public class ShowPermission extends BasicView {
 
 		@Override
 		public void onSuccess(UserInfo result) {
-			// TODO Auto-generated method stub
+			
 			ui = result;
+			permissionVerwaltung.getAllPermissionsCreatedBy(ui, callback);
 			
 		}
 		
