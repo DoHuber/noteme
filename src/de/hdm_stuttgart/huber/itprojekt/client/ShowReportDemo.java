@@ -16,7 +16,11 @@ import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
 /**
@@ -42,7 +46,7 @@ public class ShowReportDemo extends MenuView {
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	//private static String logOutUrl;
 	//private Anchor logoutAnchor;
-
+	private UserInfo u=null;
 	protected void onLoad() {
 		
 		FlowPanel menu  = new FlowPanel();
@@ -75,6 +79,7 @@ public class ShowReportDemo extends MenuView {
 		showAllPermissions.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showAllPermissions));
 		
+		editorVerwaltung.getCurrentUser(new UserCallback());
 			pureMenu.add(home);
 			pureMenu.add(menuList);
 			menu.add(pureMenu);
@@ -93,7 +98,23 @@ public class ShowReportDemo extends MenuView {
 
 	}
 	
+	private class UserCallback implements AsyncCallback<UserInfo>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
 	
+
+		@Override
+		public void onSuccess(UserInfo result) {
+			u=result;
+			
+		}
+		
+	}
 	
 	private class ShowAllUserNotebooksHandler implements ClickHandler {
 
@@ -103,8 +124,8 @@ public class ShowReportDemo extends MenuView {
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(sRd);
 
-			reportGenerator.createAllUserNotebooksR(null, new createAllUserNotebooksRCallback());
-			RootPanel.get("main").clear();
+			reportGenerator.createAllUserNotebooksR(u, new createAllUserNotebooksRCallback());
+			//RootPanel.get("main").clear();
 		}
 	}
 	class createAllUserNotebooksRCallback implements AsyncCallback<AllUserNotebooksR> {
@@ -121,6 +142,221 @@ public class ShowReportDemo extends MenuView {
 
 		@Override
 		public void onSuccess(AllUserNotebooksR report) {
+
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+				
+			}
+		}
+
+	}
+	
+	private class ShowAllNotebooksHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			ShowReportDemo sRd = new ShowReportDemo();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(sRd);
+
+			reportGenerator.createAllNotebooksR(new createAllNotebooksRCallback());
+			//RootPanel.get("main").clear();
+		}
+	}
+	class createAllNotebooksRCallback implements AsyncCallback<AllNotebooksR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllNotebooksR report) {
+
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+				
+			}
+		}
+
+	}
+	
+	private class ShowAllUserNotesHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			ShowReportDemo sRd = new ShowReportDemo();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(sRd);
+
+			reportGenerator.createAllUserNotesR(u, new createAllUserNotesRCallback());
+			//RootPanel.get("main").clear();
+		}
+	}
+	class createAllUserNotesRCallback implements AsyncCallback<AllUserNotesR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllUserNotesR report) {
+
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+				
+			}
+		}
+
+	}
+	
+	private class ShowAllNotesHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			ShowReportDemo sRd = new ShowReportDemo();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(sRd);
+
+			reportGenerator.createAllNotesR(new createAllNotesRCallback());
+			//RootPanel.get("main").clear();
+		}
+	}
+	class createAllNotesRCallback implements AsyncCallback<AllNotesR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllNotesR report) {
+
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+				
+			}
+		}
+
+	}
+	
+	private class ShowAllUserPermissions implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			ShowReportDemo sRd = new ShowReportDemo();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(sRd);
+
+			reportGenerator.createAllUserPermissionsR(u, new createAllUserPermissionsRCallback());
+			//RootPanel.get("main").clear();
+		}
+	}
+	class createAllUserPermissionsRCallback implements AsyncCallback<AllUserPermissionsR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllUserPermissionsR report) {
+
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+				
+			}
+		}
+
+	}
+	
+	private class ShowAllPermissionsHAndler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+			ShowReportDemo sRd = new ShowReportDemo();
+			RootPanel.get("menu").clear();
+			RootPanel.get("menu").add(sRd);
+
+			reportGenerator.createAllPermissionsR(new createAllPermissionsRCallback());
+			//RootPanel.get("main").clear();
+		}
+	}
+	class createAllPermissionsRCallback implements AsyncCallback<AllPermissionsR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllPermissionsR report) {
 
 			GWT.log("onSuccess reached!");
 			GWT.log(report.toString());
@@ -207,5 +443,7 @@ public class ShowReportDemo extends MenuView {
       }
     }
   }
+
+
 
 }
