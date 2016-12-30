@@ -93,15 +93,6 @@ public void init() throws IllegalArgumentException {
     return this.administration;
   }
 
-  /**
-   * Hinzufügen des Report-Impressums. Diese Methode ist aus den
-   * <code>create...</code>-Methoden ausgegliedert, da jede dieser Methoden
-   * diese Tätigkeiten redundant auszuführen hätte. Stattdessen rufen die
-   * <code>create...</code>-Methoden diese Methode auf.
-   * 
-   * @param r der um das Impressum zu erweiternde Report.
-   * 
-   */
 
 @Override
 public AllUserNotebooksR createAllUserNotebooksR(UserInfo u) throws IllegalArgumentException {
@@ -154,7 +145,7 @@ public AllNotebooksR createAllNotebooksR() throws IllegalArgumentException {
 	report2.setCreated(new Date(System.currentTimeMillis()));
 	
 	StringBuilder sb = new StringBuilder();
-	sb.append("Number of Notebooks:");
+	sb.append("Anzahl der Notebooks:");
 	sb.append(allNoteBooks.size());
 	report2.setHeaderData(new SimpleParagraph(sb.toString()));
 	
@@ -282,82 +273,84 @@ try {
 
 @Override
 public AllUserPermissionsR createAllUserPermissionsR(UserInfo u) throws IllegalArgumentException {
-
-Vector<Permission> allPermissionsCreatedBy = PermissionMapper.getPermissionMapper().getAllPermissionsCreatedBy(u);
-	
-	AllUserPermissionsR report = new AllUserPermissionsR();
-	report.setTitle("All Permission from User");
-	report.setCreated(new Date(System.currentTimeMillis()));
-
-	StringBuilder sb = new StringBuilder();
-	sb.append("Number of permissions:");
-	//sb.append(AllUserPermissionsR.size());
-	report.setHeaderData(new SimpleParagraph(sb.toString()));
-	
-	Row headline = new Row();
-	headline.addColumn((new Column("Autor")));
-	headline.addColumn((new Column("Shared Object")));
-	headline.addColumn((new Column("Level")));
-	headline.addColumn((new Column("Beneficiary")));
-	report.addRow(headline);
-	
-	for (Permission element : allPermissionsCreatedBy) {
-		
-		Row r = new Row();
-		r.addColumn(new Column(element.getAuthor().toString()));
-		r.addColumn(new Column(element.getSharedObject().toString()));
-		r.addColumn(new Column(Integer.toString(element.getLevelAsInt())));
-		r.addColumn(new Column(element.getBeneficiary().toString()));
-		
-		report.addRow(r);
-		
-	}
-	
-	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
-	
-	return report;
-	
+//
+//Vector<NoteBook> allPermissionCreatedBy(Userinfo u) = NoteBookMapper.getNoteBookMapper().allPermissionCreatedBy(Userinfo u);
+//	
+//	AllUserPermissionsR report = new AllUserPermissionsR();
+//	report.setTitle("All notebooks from User");
+//	report.setCreated(new Date(System.currentTimeMillis()));
+//	
+//	StringBuilder sb = new StringBuilder();
+//	sb.append("Number of notebooks:");
+//	sb.append(AllUserPermissionsR.size());
+//	report.setHeaderData(new SimpleParagraph(sb.toString()));
+//	
+//	Row headline = new Row();
+//	headline.addColumn((new Column("Title")));
+//	headline.addColumn((new Column("Subtitle")));
+//	headline.addColumn((new Column("Username")));
+//	headline.addColumn((new Column("Creation Date")));
+//	headline.addColumn((new Column("Modification Date")));
+//	report.addRow(headline);
+//	
+//	for (Permission element : AllUserPermissionsR) {
+//		
+//		Row r = new Row();
+//		r.addColumn(new Column(element.getTitle()));
+//		r.addColumn(new Column(element.getSubtitle()));
+//		r.addColumn(new Column(element.getOwner().getNickname()));
+//		r.addColumn(new Column(element.getCreationDate().toString()));
+//		r.addColumn(new Column(element.getModificationDate().toString()));
+//		
+//		report.addRow(r);
+//		
+//	}
+//	
+//	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
+//	
+//	return report;
+	return null;
 }
 
 @Override
 public AllPermissionsR createAllPermissionsR() throws IllegalArgumentException {
-
-Vector<Permission> allPermissions = PermissionMapper.getPermissionMapper().getAllPermission();
-	
-	AllPermissionsR report = new AllPermissionsR();
-	report.setTitle("All Permission of all User");
-	report.setCreated(new Date(System.currentTimeMillis()));
-	
-	StringBuilder sb = new StringBuilder();
-	sb.append("Number of Permission:");
-	sb.append(allPermissions.size());
-	report.setHeaderData(new SimpleParagraph(sb.toString()));
-	
-	Row headline = new Row();
-	headline.addColumn((new Column("Title")));
-	headline.addColumn((new Column("Subtitle")));
-	headline.addColumn((new Column("Username")));
-	headline.addColumn((new Column("Creation Date")));
-	headline.addColumn((new Column("Modification Date")));
-	report.addRow(headline);
-	
-	for (Permission element : allPermissions) {
-		
-		Row r = new Row();
-	//	r.addColumn(new Column(element.get())); --> da soll Autor hin!
-		r.addColumn(new Column(element.get()));
-		r.addColumn(new Column(element.getOwner().getNickname()));
-		r.addColumn(new Column(element.getCreationDate().toString()));
-		r.addColumn(new Column(element.getModificationDate().toString()));
-		
-		report.addRow(r);
-		
-	}
-	
-	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
-	
-	return report;
-	
+//
+//Vector<Permission> allPermissions = PermissionMapper.getPermissionMapper().getAllPermission();
+//	
+//	AllPermissionsR report = new AllPermissionsR();
+//	report.setTitle("All Permission of all User");
+//	report.setCreated(new Date(System.currentTimeMillis()));
+//	
+//	StringBuilder sb = new StringBuilder();
+//	sb.append("Number of Permission:");
+//	sb.append(allPermissions.size());
+//	report.setHeaderData(new SimpleParagraph(sb.toString()));
+//	
+//	Row headline = new Row();
+//	headline.addColumn((new Column("Title")));
+//	headline.addColumn((new Column("Subtitle")));
+//	headline.addColumn((new Column("Username")));
+//	headline.addColumn((new Column("Creation Date")));
+//	headline.addColumn((new Column("Modification Date")));
+//	report.addRow(headline);
+//	
+//	for (Permission element : allPermissions) {
+//		
+//		Row r = new Row();
+//	//	r.addColumn(new Column(element.get())); --> da soll Autor hin!
+//		r.addColumn(new Column(element.get()));
+//		r.addColumn(new Column(element.getOwner().getNickname()));
+//		r.addColumn(new Column(element.getCreationDate().toString()));
+//		r.addColumn(new Column(element.getModificationDate().toString()));
+//		
+//		report.addRow(r);
+//		
+//	}
+//	
+//	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
+//	
+//	return report;
+//	
 	return null;
 }
 

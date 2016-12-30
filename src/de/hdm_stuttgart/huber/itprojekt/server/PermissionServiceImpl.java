@@ -128,6 +128,13 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 
 	}
 
+	@Override
+	public Vector<Permission> getAllPermissions() {
+		
+		return permissionMapper.getAllPermissions();
+		
+	}
+
 	
 	
 	
