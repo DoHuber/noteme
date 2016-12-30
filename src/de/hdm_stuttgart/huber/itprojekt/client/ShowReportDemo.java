@@ -33,8 +33,8 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
  */
 public class ShowReportDemo extends MenuView {
 	
-	private static String logOutUrl;
-	private Anchor logoutAnchor;
+	//private static String logOutUrl;
+	//private Anchor logoutAnchor;
 
 	protected void onLoad() {
 		
@@ -43,10 +43,30 @@ public class ShowReportDemo extends MenuView {
 		UnorderedListWidget menuList = new UnorderedListWidget();
 		
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
-		Anchor showNotebooks = new Anchor("Notebooks");
+		Anchor showUserNotebooks = new Anchor("UserNotebooks");
+		Anchor showAllNotebooks = new Anchor ("AllNotebooks");
+		Anchor showUserNotes = new Anchor("UserNotes");
+		Anchor showAllNotes = new Anchor("AllNotes");
+		Anchor showUserPermissions = new Anchor("UserPermissions");
+		Anchor showAllPermissions = new Anchor("AllPermissions");
 
-		showNotebooks.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(showNotebooks));
+		showUserNotebooks.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showUserNotebooks));
+		
+		showAllNotebooks.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showAllNotebooks));
+		
+		showUserNotes.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showUserNotes));
+		
+		showAllNotes.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showAllNotes));
+		
+		showUserPermissions.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showUserPermissions));
+		
+		showAllPermissions.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(showAllPermissions));
 		
 			pureMenu.add(home);
 			pureMenu.add(menuList);

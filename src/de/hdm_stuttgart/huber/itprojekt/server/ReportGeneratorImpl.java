@@ -110,142 +110,13 @@ public void create(UserInfo uI) {
    * @param r der um das Impressum zu erweiternde Report.
    * 
    */
-  
- 
-  
-  public AllUserNotebooksR createAllNoteBooksofUserReport(
-      UserInfo u) throws IllegalArgumentException {
-
-    if (this.getNoteBookVerwaltung() == null)
-      return null;
-
-    /*
-     * Zunächst legen wir uns einen leeren Report an.
-     */
-    AllUserNotebooksR result = new AllUserNotebooksR();
-
-    // Jeder Report hat einen Titel (Bezeichnung / Überschrift).
-    result.setTitle("All notebooks of current user");
-
-    // Imressum hinzufügen
-    //this.addImprint(result);
-
-    /*
-     * Datum der Erstellung hinzufügen. new Date() erzeugt autom. einen
-     * "Timestamp" des Zeitpunkts der Instantiierung des Date-Objekts.
-     */
-    result.setCreated(new Date());
-
-    /*
-     * Ab hier erfolgt die Zusammenstellung der Kopfdaten (die Dinge, die oben
-     * auf dem Report stehen) des Reports. Die Kopfdaten sind mehrzeilig, daher
-     * die Verwendung von CompositeParagraph.
-     */
-    CompositeParagraph header = new CompositeParagraph();
-    
-    NoteBook nB = new NoteBook();
-    // ID, Titel und Untertitel des Notizbuchs
-    header.addSubParagraph(new SimpleParagraph(nB.getId() + ", "
-        + nB.getTitle() +", " + nB.getSubtitle()));
-
-    // Kundennummer aufnehmen
-    //header.addSubParagraph(new SimpleParagraph("Kd.-Nr.: " + c.getId()));
-
-    // Hinzufügen der zusammengestellten Kopfdaten zu dem Report
-    result.setHeaderData(header);
-
-    /*
-     * Ab hier erfolgt ein zeilenweises Hinzufügen von Konto-Informationen.
-     */
-    
-    /*
-     * Zunächst legen wir eine Kopfzeile für die Konto-Tabelle an.
-     */
-    Row headline = new Row();
-
-    /*
-     * Wir wollen Zeilen mit 2 Spalten in der Tabelle erzeugen. In die erste
-     * Spalte schreiben wir die jeweilige Kontonummer und in die zweite den
-     * aktuellen Kontostand. In der Kopfzeile legen wir also entsprechende
-     * Überschriften ab.
-     */
-    headline.addColumn(new Column("ID"));
-    headline.addColumn(new Column("Titel"));
-    headline.addColumn(new Column("Untertitel"));
-
-    // Hinzufügen der Kopfzeile
-    result.addRow(headline);
-
-    /*
-     * Nun werden sämtliche Konten des Kunden ausgelesen und deren Kto.-Nr. und
-     * Kontostand sukzessive in die Tabelle eingetragen.
-     */
-    Vector<NoteBook> notebooks = null;
-	try {
-		notebooks = this.administration.getAllNoteBooks();
-	} catch (BullshitException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}
-
-    for (NoteBook a : notebooks) {
-      // Eine leere Zeile anlegen.
-      Row accountRow = new Row();
-
-      // Erste Spalte: Kontonummer hinzufügen
-      accountRow.addColumn(new Column(String.valueOf(a.getId())));
-
-      // Zweite Spalte: Kontostand hinzufügen
-      try {
-		accountRow.addColumn(new Column(this.administration
-		      .getTitle(a)));
-	} catch (BullshitException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-
-      // und schließlich die Zeile dem Report hinzufügen.
-      result.addRow(accountRow);
-    }
-
-    /*
-     * Zum Schluss müssen wir noch den fertigen Report zurückgeben.
-     */
-    return result;
-  }
-
-public AllNotebooksR createAllNoteBooksOfUsersReport(UserInfo uI2)
-      throws IllegalArgumentException {
-
-	AllNotebooksR report = new AllNotebooksR();
-	
-	
-    
-     return report;
-  }
-
-public AllUserNotebooksR createAllNoteBooksOfCustomerReport(UserInfo uI) throws IllegalArgumentException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-public AllNotebooksR createAllNoteBooksOfAllCustomersReport() throws IllegalArgumentException {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 @Override
 public AllUserNotebooksR createAllUserNotebooksR(UserInfo u) throws IllegalArgumentException {
-	// TODO Auto-generated method stub
-	return null;
-}
 
-@Override
-public AllNotebooksR createAllNotebooksR() throws IllegalArgumentException {
+Vector<NoteBook> allNoteBooks = NoteBookMapper.getNoteBookMapper().getAllNoteBooks();
 	
-	Vector<NoteBook> allNoteBooks = NoteBookMapper.getNoteBookMapper().getAllNoteBooks();
-	
-	AllNotebooksR report = new AllNotebooksR();
+	AllUserNotebooksR report = new AllUserNotebooksR();
 	report.setTitle("Alle Notebooks aller User, d.h. alle Notebooks.");
 	report.setCreated(new Date(System.currentTimeMillis()));
 	
@@ -253,6 +124,14 @@ public AllNotebooksR createAllNotebooksR() throws IllegalArgumentException {
 	sb.append("Anzahl der Notebooks:");
 	sb.append(allNoteBooks.size());
 	report.setHeaderData(new SimpleParagraph(sb.toString()));
+	
+	Row headline = new Row();
+	headline.addColumn((new Column("Title")));
+	headline.addColumn((new Column("Subtitle")));
+	headline.addColumn((new Column("Username")));
+	headline.addColumn((new Column("Creation Date")));
+	headline.addColumn((new Column("Modification Date")));
+	report.addRow(headline);
 	
 	for (NoteBook element : allNoteBooks) {
 		
@@ -270,6 +149,47 @@ public AllNotebooksR createAllNotebooksR() throws IllegalArgumentException {
 	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
 	
 	return report;
+	
+}
+
+@Override
+public AllNotebooksR createAllNotebooksR() throws IllegalArgumentException {
+	
+	Vector<NoteBook> allNoteBooks = NoteBookMapper.getNoteBookMapper().getAllNoteBooks();
+	
+	AllNotebooksR report2 = new AllNotebooksR();
+	report2.setTitle("Alle Notebooks aller User, d.h. alle Notebooks.");
+	report2.setCreated(new Date(System.currentTimeMillis()));
+	
+	StringBuilder sb = new StringBuilder();
+	sb.append("Anzahl der Notebooks:");
+	sb.append(allNoteBooks.size());
+	report2.setHeaderData(new SimpleParagraph(sb.toString()));
+	
+	Row headline = new Row();
+	headline.addColumn((new Column("Title")));
+	headline.addColumn((new Column("Subtitle")));
+	headline.addColumn((new Column("Username")));
+	headline.addColumn((new Column("Creation Date")));
+	headline.addColumn((new Column("Modification Date")));
+	report2.addRow(headline);
+	
+	for (NoteBook element : allNoteBooks) {
+		
+		Row r = new Row();
+		r.addColumn(new Column(element.getTitle()));
+		r.addColumn(new Column(element.getSubtitle()));
+		r.addColumn(new Column(element.getOwner().getNickname()));
+		r.addColumn(new Column(element.getCreationDate().toString()));
+		r.addColumn(new Column(element.getModificationDate().toString()));
+		
+		report2.addRow(r);
+		
+	}
+	
+	report2.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
+	
+	return report2;
 }
 
 @Override
