@@ -93,7 +93,7 @@ public class ShowReportDemo extends MenuView {
 			showUserNotes.addClickHandler(new ShowAllUserNotesHandler());
 			showAllNotes.addClickHandler(new ShowAllNotesHandler());
 			showUserPermissions.addClickHandler(new ShowAllUserPermissions());
-			showAllPermissions.addClickHandler(new ShowAllPermissionsHAndler());
+			showAllPermissions.addClickHandler(new ShowAllPermissionsHandler());
 			
 
 	}
@@ -386,15 +386,6 @@ public class ShowReportDemo extends MenuView {
   }
 
 
-  @Override
-  protected void run() {
-    this.append("Auslesen des Kunden mit Kd.-Nr. 1.");
-
-    EditorAsync administration = ClientsideSettings.getEditorVerwaltung();
-
-    administration.getUserById(1, new GetUserCallback(this));
-    RootPanel.get("menu").clear();
-  }
 
 
   class GetUserCallback implements AsyncCallback<UserInfo> {

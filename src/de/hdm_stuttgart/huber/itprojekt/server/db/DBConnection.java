@@ -24,8 +24,10 @@ public class DBConnection {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		   
 	   if (singleton == null) {
-
-           singleton = DriverManager.getConnection(DB_URL,USER,PASS);
+		   
+		   String googleUrl = System.getProperty("ae-cloudsql.cloudsql-database-url");
+		   Class.forName("com.mysql.jdbc.GoogleDriver");
+           singleton = DriverManager.getConnection(googleUrl);
 
        }
 

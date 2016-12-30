@@ -24,6 +24,8 @@ public interface PermissionService extends RemoteService {
 	public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u);
 
 	public void deletePermission(Permission p);
+	
+	public Vector<Permission> getAllPermissions();
 
 
 }

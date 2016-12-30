@@ -93,28 +93,6 @@ public void init() throws IllegalArgumentException {
     return this.administration;
   }
 
-  /**
-   * Setzen des zugehörigen Bank-Objekts.
-   */
-  @Override
-public void create(UserInfo uI) {
-    try {
-		this.administration.create(uI);
-	} catch (BullshitException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-  }
-
-  /**
-   * Hinzufügen des Report-Impressums. Diese Methode ist aus den
-   * <code>create...</code>-Methoden ausgegliedert, da jede dieser Methoden
-   * diese Tätigkeiten redundant auszuführen hätte. Stattdessen rufen die
-   * <code>create...</code>-Methoden diese Methode auf.
-   * 
-   * @param r der um das Impressum zu erweiternde Report.
-   * 
-   */
 
 @Override
 public AllUserNotebooksR createAllUserNotebooksR(UserInfo u) throws IllegalArgumentException {
