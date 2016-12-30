@@ -21,4 +21,6 @@ public interface PermissionServiceAsync {
 
 	void getAllPermissionsCreatedBy(UserInfo u, AsyncCallback<Vector<Permission>> callback);
 
+	void deletePermission(Permission p, AsyncCallback<Void> callback);
+
 }

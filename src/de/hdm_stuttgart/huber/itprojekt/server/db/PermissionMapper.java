@@ -72,7 +72,7 @@ public class PermissionMapper extends DataMapper {
 	
 	public void createPermission(Permission p) {
 		
-		String sql = "INSERT INTO notizbuch.permission(author_id, permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO notizbuch.permission(author_id, permission_level, type, :targetid, beneficiary_id) VALUES (?, ?, ?, ?, ?)";
 		String replaceString;
 		
 		switch (p.getSharedObject().getType()) {
@@ -196,23 +196,57 @@ public class PermissionMapper extends DataMapper {
 		return v;
 		
 	}
-	
+
 	public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u) {
-		
+
 		try {
-			
+
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM notizbuch.permission "
 					+ "WHERE author_id = ?");
 			ps.setInt(1, u.getId());
-			
+
 			return makeFromResultSet(ps.executeQuery());
-			
+
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
-		
+
+	}
+
+	public void savePermission(Permission p) {
+
+		try {
+
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO notizbuch.permission(permission_level) VALUES (?) WHERE id = ?");
+		ps.setInt(1, p.getLevelAsInt());
+		ps.setInt(2, p.getId());
+
+		ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void deletePermission(Permission p) {
+
+		String sql = "DELETE FROM notizbuch.permission WHERE id = ?";
+		try {
+
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, p.getId());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+
+
 	}
 
 	
