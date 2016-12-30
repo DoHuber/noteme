@@ -167,7 +167,7 @@ private static NoteBookMapper noteBookMapper = null;
 
 
 
-	 public Vector<NoteBook> getAllNoteBooks() throws ClassNotFoundException, SQLException {
+	 public Vector<NoteBook> getAllNoteBooks(){
 
 	        try {
 
