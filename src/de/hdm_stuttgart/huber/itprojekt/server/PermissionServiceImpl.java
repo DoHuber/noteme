@@ -17,6 +17,11 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class PermissionServiceImpl extends RemoteServiceServlet implements PermissionService {
 	
+	/**
+	 *  Das war eclipse
+	 */
+	private static final long serialVersionUID = -1339547511763075795L;
+	
 	private PermissionMapper permissionMapper = PermissionMapper.getPermissionMapper();
 	
 
@@ -42,17 +47,37 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 		 */
 		Permission p = permissionMapper.getPermissionFor(beneficiary, sharedObject);
 		if (p == null) {
+			
+			p = new Permission();
+			setCurrentUserAsAuthor(p);
 			createNewPermission(p, beneficiary, sharedObject);
+			
 		} else {
+			
 			upgradeExistingPermissionTo(p, l);
+			
 		}
 
 
 	}
+	
+	private void setCurrentUserAsAuthor(Permission p) {
+		
+		UserService userService = UserServiceFactory.getUserService();
+		if (!userService.isUserLoggedIn()) {
+			throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
+		}
+		
+		User currentGoogleUser = userService.getCurrentUser();
+		UserInfo author = UserInfoMapper.getUserInfoMapper().findUserByGoogleId(currentGoogleUser.getUserId());
+	
+		p.setAuthor(author);
+		
+	}
 
 	private void createNewPermission(Permission p, UserInfo beneficiary, Shareable sharedObject) {
 
-		p.setUser(beneficiary);
+		p.setBeneficiary(beneficiary);
 		p.setSharedObject(sharedObject);
 		permissionMapper.createPermission(p);
 
