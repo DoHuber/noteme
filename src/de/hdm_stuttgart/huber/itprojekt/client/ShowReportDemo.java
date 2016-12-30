@@ -331,7 +331,7 @@ public class ShowReportDemo extends MenuView {
 
 	}
 	
-	private class ShowAllPermissionsHAndler implements ClickHandler {
+	private class ShowAllPermissionsHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
