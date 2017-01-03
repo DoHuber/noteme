@@ -26,24 +26,24 @@ public class DBConnection {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		   
 	   if (singleton == null) {
-		 
+
 		   String url, user, pass;
-		
-		   
+
+
 		   if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
-			   
+
 			   url = "jdbc:google:mysql://it-projekt-149914:noizbuch2/notizbuch";
 			   user = "root";
 			   pass = "nm9000!";
 			   Class.forName("com.mysql.jdbc.GoogleDriver");
-			   
+
 		   } else {
-			   
+
 			   url = DB_URL;
 			   user = USER;
 			   pass = PASS;
 		   }
-		   
+
            singleton = DriverManager.getConnection(url, user, pass);
 
        }

@@ -33,23 +33,23 @@ public class SharedServicesImpl extends RemoteServiceServlet implements SharedSe
     	UserService userService = UserServiceFactory.getUserService();
     	UserInfo userInfo = new UserInfo();
     	userInfoMapper = UserInfoMapper.getUserInfoMapper();
-    	
+
     	if (userService.isUserLoggedIn()) {
-    		
+
     		User user = userService.getCurrentUser();
-        	
+
     		userInfo.setLoggedIn(true);
     		userInfo.setEmailAddress(user.getEmail());
     		userInfo.setNickname(user.getNickname());
     		userInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
-    		userInfo.setGoogleId(user.getUserId());   		
+    		userInfo.setGoogleId(user.getUserId());
     		
     		// Registration aktuell noch etwas unzeremoniell   
     		if (!userInfoMapper.isUserRegistered(userInfo.getEmailAddress())) {
-    			
+
     			userInfoMapper.registerUser(userInfo);
-    			
-    			
+
+
     		} else {
     			
     			UserInfo someUser = userInfoMapper.findByEmailAdress(user.getEmail());
