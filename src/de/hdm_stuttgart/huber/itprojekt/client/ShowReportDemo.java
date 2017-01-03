@@ -81,22 +81,6 @@ public class ShowReportDemo extends MenuView {
 			menu.add(pureMenu);
 			RootPanel.get("menu").add(menu);
 			
-	
-			
-			
-			showUserNotebooks.addClickHandler(new ShowAllUserNotebooksHandler());
-			showAllNotebooks.addClickHandler(new DummyHandler());
-			showUserNotes.addClickHandler(new DummyHandler());
-			showAllNotes.addClickHandler(new DummyHandler());
-			showUserPermissions.addClickHandler(new DummyHandler());
-			showAllPermissions.addClickHandler(new DummyHandler());
-			
-
-		pureMenu.add(home);
-		pureMenu.add(menuList);
-		menu.add(pureMenu);
-		RootPanel.get("menu").add(menu);
-
 		showUserNotebooks.addClickHandler(new ClickHandler() {
 
 			@Override
