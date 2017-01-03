@@ -74,6 +74,22 @@ h1 {
 	width: 475px;
 }
 
+.button-save {
+	image: url('savebutton.png') no-repeat scroll;
+}
+.button-update {
+	image: url('updatebutton.png') no-repeat scroll;
+}
+.button-create {
+	image: url('createbutton.png') no-repeat scroll;
+}
+.button-delete {
+	image: url('deletebutton.png') no-repeat scroll;
+}
+.button-share {
+	image: url('sharebutton.png') no-repeat scroll;
+}
+
 /* .googleTable {
 	margin-left: 50px;
 	margin-top: 200px;

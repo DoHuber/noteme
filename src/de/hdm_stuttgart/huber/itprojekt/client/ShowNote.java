@@ -43,7 +43,7 @@ public class ShowNote extends BasicView {
 	private TextBox subtitleTextBox = new TextBox();
 	private RichTextToolbar richTextToolbar = new RichTextToolbar(noteArea);
 	private DateBox dueDateBox = new DateBox();
-	private Label empty = new Label ("-    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -");
+	private Label empty = new Label ("---                   ");
 	private Label title = new Label("Title");
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
@@ -87,6 +87,7 @@ public class ShowNote extends BasicView {
 		deleteBtn.addClickHandler(new DeleteClickHandler());
 		releseBtn.addClickHandler(new ShareClickHandler());
 		alignPanel.add(empty);
+		
 		alignPanel.add(title);
 		alignPanel.add(titleTextBox);
 		titleTextBox.setText(n.getTitle());
@@ -111,6 +112,8 @@ public class ShowNote extends BasicView {
 		releseBtn.setStyleName("pure-button");
 		deleteBtn.setStyleName("pure-button");
 		editBtn.setStyleName("pure-button");
+		
+		empty.getElement().getStyle().setColor("#660033");
 
 		RootPanel.get("main").add(buttonPanel);
 		RootPanel.get("main").add(contentPanel);
