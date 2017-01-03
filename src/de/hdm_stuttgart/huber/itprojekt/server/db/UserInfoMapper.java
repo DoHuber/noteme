@@ -23,11 +23,9 @@ public class UserInfoMapper extends DataMapper {
             try {
 				userInfoMapper = new UserInfoMapper();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException(e.toString());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException(e.toString());
 			}
             
         }
@@ -178,6 +176,7 @@ public class UserInfoMapper extends DataMapper {
     	} catch (SQLException e) {
     		
     		e.printStackTrace();
+    		throw new RuntimeException(e.toString());
     		
     	}
     	
@@ -205,6 +204,7 @@ public class UserInfoMapper extends DataMapper {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.toString());
 		}
     	
     }

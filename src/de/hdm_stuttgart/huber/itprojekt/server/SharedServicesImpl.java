@@ -42,9 +42,7 @@ public class SharedServicesImpl extends RemoteServiceServlet implements SharedSe
     		userInfo.setEmailAddress(user.getEmail());
     		userInfo.setNickname(user.getNickname());
     		userInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
-    		// userInfo.setGoogleId(user.getUserId());
-    		System.out.println(userInfo.getEmailAddress());
-    		
+    		userInfo.setGoogleId(user.getUserId());   		
     		
     		// Registration aktuell noch etwas unzeremoniell   
     		if (!userInfoMapper.isUserRegistered(userInfo.getEmailAddress())) {
