@@ -1,6 +1,5 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -11,7 +10,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
@@ -29,37 +27,37 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
  */
 
 public class MenuView extends VerticalPanel {
-	
+
 	private static String logOutUrl;
 	private Anchor logoutAnchor;
 
 	protected void onLoad() {
 
-		//MenuPanel
-		FlowPanel menu  = new FlowPanel();
-		FlowPanel pureMenu  = new FlowPanel();
+		// MenuPanel
+		FlowPanel menu = new FlowPanel();
+		FlowPanel pureMenu = new FlowPanel();
 		UnorderedListWidget menuList = new UnorderedListWidget();
 
-	//	VerticalPanel vPanel = new VerticalPanel();
+		// VerticalPanel vPanel = new VerticalPanel();
 
 		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#ffffff");
-		
-		//Home "Button"
+
+		// Home "Button"
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
 		home.setStyleName("pure-menu-heading");
 		home.getElement().getStyle().setColor("#ffffff");
-		
-		//Weitere Button Definitions
+
+		// Weitere Button Definitions
 		Anchor showNotes = new Anchor("Notes");
 		Anchor createNote = new Anchor("New Note");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		Anchor createNotebook = new Anchor("New Notebook");
 		Anchor showPermission = new Anchor("Permissions");
 		Anchor reportAnchor = new Anchor("Report");
-		
+
 		logoutAnchor = new Anchor("Log out");
 		logoutAnchor.setHref(logOutUrl);
-		
+
 		showNotes.getElement().getStyle().setColor("#660033");
 		showNotebooks.getElement().getStyle().setColor("#660033");
 		createNotebook.getElement().getStyle().setColor("#660033");
@@ -68,41 +66,41 @@ public class MenuView extends VerticalPanel {
 		reportAnchor.getElement().getStyle().setColor("#660033");
 		logoutAnchor.getElement().getStyle().setColor("#660033");
 
-		//Test
-		//Anchor hello = new Anchor("Say Hello");
-		
-		//Den Buttons werden Widgets hinzugef�gt
+		// Test
+		// Anchor hello = new Anchor("Say Hello");
+
+		// Den Buttons werden Widgets hinzugef�gt
 		showNotes.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotes));
-		
+
 		createNote.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNote));
-		
+
 		showNotebooks.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotebooks));
-		
+
 		createNotebook.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(createNotebook));
-		
+
 		showPermission.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showPermission));
-			
+
 		reportAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(reportAnchor));
-		
+
 		logoutAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(logoutAnchor));
 
+		pureMenu.add(home);
+		pureMenu.add(menuList);
+		menu.add(pureMenu);
 
-			pureMenu.add(home);
-			pureMenu.add(menuList);
-			menu.add(pureMenu);
-
-			RootPanel.get("menu").add(menu);
-	      /**
-	       * Die "Buttons"  werden mit dem ClickHandler verbunden. Die "Buttons reagieren auf den Mausklick."
-	       *
-	    */
+		RootPanel.get("menu").add(menu);
+		/**
+		 * Die "Buttons" werden mit dem ClickHandler verbunden. Die "Buttons
+		 * reagieren auf den Mausklick."
+		 *
+		 */
 
 		showNotes.addClickHandler(new ShowAllNotesHandler());
 		createNote.addClickHandler(new CreateNoteHandler());
@@ -111,22 +109,20 @@ public class MenuView extends VerticalPanel {
 		showPermission.addClickHandler(new ShowPermissionHandler());
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
-		
 
 	}
-	
-	
-	
-	/*Einfache ClickHandler werden implementiert 
+
+	/*
+	 * Einfache ClickHandler werden implementiert
 	 * 
 	 */
 	private class ShowAllNotesHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-//			MenuView mView = new MenuView();
-//			RootPanel.get("menu").clear();
-//			RootPanel.get("menu").add(mView);
+			// MenuView mView = new MenuView();
+			// RootPanel.get("menu").clear();
+			// RootPanel.get("menu").add(mView);
 
 			ShowAllNotes san = new ShowAllNotes();
 			RootPanel.get("main").clear();
@@ -139,9 +135,9 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-//			MenuView mView = new MenuView();
-//			RootPanel.get("menu").clear();
-//			RootPanel.get().add(mView);
+			// MenuView mView = new MenuView();
+			// RootPanel.get("menu").clear();
+			// RootPanel.get().add(mView);
 
 			ShowAllNotebooks san = new ShowAllNotebooks();
 			RootPanel.get("main").clear();
@@ -149,14 +145,14 @@ public class MenuView extends VerticalPanel {
 			new ShowAllNotes().getHeadlineText();
 		}
 	}
-	
+
 	private class ShowPermissionHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-//			MenuView mView = new MenuView();
-//			RootPanel.get("menu").clear();
-//			RootPanel.get().add(mView);
+			// MenuView mView = new MenuView();
+			// RootPanel.get("menu").clear();
+			// RootPanel.get().add(mView);
 
 			ShowPermission san = new ShowPermission();
 			RootPanel.get("main").clear();
@@ -164,6 +160,7 @@ public class MenuView extends VerticalPanel {
 			new ShowAllNotes().getHeadlineText();
 		}
 	}
+
 	private class CreateNotebookHandler implements ClickHandler {
 
 		@Override
@@ -177,6 +174,7 @@ public class MenuView extends VerticalPanel {
 			RootPanel.get("main").add(cN);
 		}
 	}
+
 	private class CreateNoteHandler implements ClickHandler {
 
 		@Override
@@ -190,44 +188,39 @@ public class MenuView extends VerticalPanel {
 			RootPanel.get("main").add(cN);
 		}
 	}
+
 	private class ReportHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-		        Window.Location.replace(GWT.getHostPageBaseURL() + "Report.html");
-			
+			Window.Location.replace(GWT.getHostPageBaseURL() + "Report.html");
 
-	
 		}
 	}
+
 	private class LogoutHandler implements ClickHandler {
-	
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
+
 			Label lb = new Label("Ich melde mich ab");
 			RootPanel.get("menu").clear();
-			RootPanel.get().add(lb);		
-		
+			RootPanel.get().add(lb);
+
 		}
 
-		
 	}
+
 	public static void setLogOutUrl(String logOutUrl) {
 		MenuView.logOutUrl = logOutUrl;
 	}
 
-	
 	protected void run() {
 	}
-	
-	  protected void append(String text) {
-		    HTML content = new HTML(text);
-		    content.setStylePrimaryName("bankproject-simpletext");
-		    this.add(content);
-		  }
+
+	protected void append(String text) {
+		HTML content = new HTML(text);
+		content.setStylePrimaryName("bankproject-simpletext");
+		this.add(content);
+	}
 }
-
-
-

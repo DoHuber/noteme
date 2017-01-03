@@ -3,7 +3,7 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 import java.sql.Date;
 
 public class Note extends DomainObject implements Shareable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private String content = null;
@@ -15,20 +15,18 @@ public class Note extends DomainObject implements Shareable {
 	private Date creationDate = null;
 	private Date modificationDate = null;
 	private String source;
-	
+
 	private Permission runTimePermission;
-	
+
 	public Note() {
-		
+
 	}
-	
+
 	// id wird von DomainObject geerbt
-	public Note (int id) {
+	public Note(int id) {
 		this.id = id;
 	}
 
-
-	
 	/**
 	 * @param noteId
 	 * @param content
@@ -56,69 +54,86 @@ public class Note extends DomainObject implements Shareable {
 
 	@Override
 	public String toString() {
-		return "Note [id=" + id + ", content=" + content + ", title=" + title + ", subtitle=" + subtitle
-				+ ", owner=" + owner + ", noteBook=" + noteBook + ", dueDate=" + dueDate + ", creationDate="
-				+ creationDate + ", modificationDate=" + modificationDate + "]";
+		return "Note [id=" + id + ", content=" + content + ", title=" + title + ", subtitle=" + subtitle + ", owner="
+				+ owner + ", noteBook=" + noteBook + ", dueDate=" + dueDate + ", creationDate=" + creationDate
+				+ ", modificationDate=" + modificationDate + "]";
 	}
-	
+
 	public String toHtmlString() {
-		return "<p> Note <br> [id=" + id + "<br>, content=" + content + "<br>, title=" + title + "<br>, subtitle=" + subtitle
-				+ "<br>, owner=" + owner.toString() + "<br>, noteBook=" + noteBook + "<br>, dueDate=" + dueDate + "<br>, creationDate="
-				+ creationDate + "<br>, modificationDate=" + modificationDate + "] </p>";
+		return "<p> Note <br> [id=" + id + "<br>, content=" + content + "<br>, title=" + title + "<br>, subtitle="
+				+ subtitle + "<br>, owner=" + owner.toString() + "<br>, noteBook=" + noteBook + "<br>, dueDate="
+				+ dueDate + "<br>, creationDate=" + creationDate + "<br>, modificationDate=" + modificationDate
+				+ "] </p>";
 	}
-	
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getSubtitle() {
 		return subtitle;
 	}
+
 	public void setSubtitle(String subtitle) {
 		this.subtitle = subtitle;
 	}
+
 	public UserInfo getOwner() {
 		return owner;
 	}
+
 	public void setOwner(UserInfo owner) {
 		this.owner = owner;
 	}
+
 	public NoteBook getNoteBook() {
 		return noteBook;
 	}
+
 	public void setNoteBook(NoteBook noteBook) {
 		this.noteBook = noteBook;
 	}
+
 	public Date getDueDate() {
 		return dueDate;
 	}
+
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
+
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
 	public Date getModificationDate() {
 		return modificationDate;
 	}
+
 	public void setModificationDate(Date modificationDate) {
 		this.modificationDate = modificationDate;
 	}
@@ -143,8 +158,5 @@ public class Note extends DomainObject implements Shareable {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	
-	
-	
-	
+
 }

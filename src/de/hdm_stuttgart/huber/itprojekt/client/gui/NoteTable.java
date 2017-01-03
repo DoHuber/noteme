@@ -16,10 +16,12 @@ import de.hdm_stuttgart.huber.itprojekt.client.ShowNote;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+
 /**
- * Die Klasse NoteTable wird alle Notizen eines bestimmten Notizbuchs in einer Tabelle darstellen 
- * @author Nikita Nalivayko 
+ * Die Klasse NoteTable wird alle Notizen eines bestimmten Notizbuchs in einer
+ * Tabelle darstellen
+ * 
+ * @author Nikita Nalivayko
  * 
  *
  */
@@ -28,13 +30,10 @@ public class NoteTable {
 
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private FlowPanel fPanel = new FlowPanel();
-	
+
 	/**
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 	 */
-
-	
-	private NoteBook notebook = null;
 	private Note selected = null;
 	private Vector<Note> notes;
 	DataGrid<Note> table = new DataGrid<Note>();
@@ -60,12 +59,12 @@ public class NoteTable {
 	}
 
 	public FlowPanel start() {
-		
+
 		TextColumn<Note> title = new TextColumn<Note>() {
 
 			@Override
 			public String getValue(Note note) {
-				
+
 				return note.getTitle();
 			}
 		};
@@ -86,7 +85,7 @@ public class NoteTable {
 			@Override
 			public String getValue(Note note) {
 				// !!!! Könnte Fehler verursachen
-				// RICHITGGG Veursacht auch Fehler 
+				// RICHITGGG Veursacht auch Fehler
 				return note.getCreationDate().toString();
 			}
 		};
@@ -101,22 +100,22 @@ public class NoteTable {
 			}
 		};
 		table.addColumn(modificationDate, "Modification Date");
-		
+
 		TextColumn<Note> dueDate = new TextColumn<Note>() {
 
 			@Override
 			public String getValue(Note note) {
-				
+
 				String resultValue = "Keines gesetzt";
 				if (!(note.getDueDate() == null)) {
 					resultValue = note.getDueDate().toString();
-				}		
-				
+				}
+
 				return resultValue;
 			}
 		};
 		table.addColumn(dueDate, "Due Date");
-		
+
 		table.setRowCount(notes.size(), false);
 		table.setWidth("80%");
 		table.setVisibleRange(0, notes.size());
@@ -129,9 +128,8 @@ public class NoteTable {
 		return fPanel;
 	}
 
-
 	/**
-	 * Eine Angeklickte Notiz wird angezeigt 
+	 * Eine Angeklickte Notiz wird angezeigt
 	 */
 
 	public void addClickNote() {
@@ -140,21 +138,22 @@ public class NoteTable {
 		selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
 	}
 
-	private class SelectionChangeHandler implements Handler{
+	private class SelectionChangeHandler implements Handler {
 		private final SingleSelectionModel<Note> selection;
-		private SelectionChangeHandler(SingleSelectionModel<Note> selection){
-			this.selection=selection;
+
+		private SelectionChangeHandler(SingleSelectionModel<Note> selection) {
+			this.selection = selection;
 		}
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
-			selected=selection.getSelectedObject();
+			selected = selection.getSelectedObject();
 			ShowNote sn = new ShowNote(selected);
-			
+
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sn);
-			
-			
-		}}
+
+		}
+	}
 
 }

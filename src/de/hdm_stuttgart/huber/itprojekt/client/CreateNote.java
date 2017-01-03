@@ -10,13 +10,11 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
@@ -24,17 +22,17 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 
 /**
- * Notiz anlegen! 
+ * Notiz anlegen!
  * 
  * @author Nikita Nalivayko
  *
  */
 public class CreateNote extends BasicView {
-	
+
 	HorizontalPanel contentPanel = new HorizontalPanel();
 	VerticalPanel alignPanel = new VerticalPanel();
 	Button createButton = new Button("Create");
-	
+
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private RichTextArea noteArea = new RichTextArea();
 
@@ -48,26 +46,27 @@ public class CreateNote extends BasicView {
 	private Label test = new Label();
 	private String source;
 	private boolean sourceProvided = false;
-	private Grid grid = new Grid(2,1);
-	private NoteBook nb = null; 
-	
+	private Grid grid = new Grid(2, 1);
+	private NoteBook nb = null;
+
 	private NoteBookListBox noteBookSelector = new NoteBookListBox();
-	
-	public CreateNote (){
-		
+
+	public CreateNote() {
+
 	}
-	public CreateNote (NoteBook nb ){
+
+	public CreateNote(NoteBook nb) {
 		this.nb = nb;
-		
+
 	}
-	
+
 	public CreateNote(String source) {
-		
+
 		this.source = source;
 		sourceProvided = true;
-		
+
 	}
-	
+
 	@Override
 	public void run() {
 		/*
@@ -79,7 +78,7 @@ public class CreateNote extends BasicView {
 
 		alignPanel.add(subtitle);
 		alignPanel.add(SubtitleTextBox);
-		
+
 		if (sourceProvided) {
 			Label sourceLabel = new Label("Source: " + source);
 			alignPanel.add(sourceLabel);
@@ -87,26 +86,26 @@ public class CreateNote extends BasicView {
 
 		alignPanel.add(dueDate);
 		alignPanel.add(dueDateBox);
-		
+
 		alignPanel.add(test);
 		alignPanel.add(createButton);
 		createButton.addClickHandler(new CreateClickHandler());
 		grid.setWidget(0, 0, richTextToolbar);
-		
+
 		// Listbox et al.
 		alignPanel.add(noteBookSelector);
 		addNoteBooksToListBox();
-	
+
 		// noteArea.setSize("475px", "100px");
 		noteArea.setSize("100%", "100%");
 		grid.setWidget(1, 0, noteArea);
-		
-		//contentPanel.add(richTextToolbar);
+
+		// contentPanel.add(richTextToolbar);
 		contentPanel.add(alignPanel);
-		//contentPanel.add(noteArea);
+		// contentPanel.add(noteArea);
 		contentPanel.add(grid);
 		RootPanel.get("main").add(contentPanel);
-		
+
 		noteArea.setStyleName("noteArea");
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
@@ -123,12 +122,13 @@ public class CreateNote extends BasicView {
 
 		return "Give your note a title and subtitle to complete!";
 	}
+
 	/**
 	 * 
-	 * ClickHandler zum anlegen einer Notiz 
+	 * ClickHandler zum anlegen einer Notiz
 	 *
 	 */
-	private class CreateClickHandler implements ClickHandler{
+	private class CreateClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
@@ -137,41 +137,40 @@ public class CreateNote extends BasicView {
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(san);
 		}
-		
+
 	}
-	
+
 	/**
-	 * Neue Notiz wird erstellt 
+	 * Neue Notiz wird erstellt
 	 */
-	public void createNote(){
-		
+	public void createNote() {
+
 		Note note = new Note();
 		note.setTitle(titleTextBox.getText());
 		note.setSubtitle(SubtitleTextBox.getText());
 		note.setContent(noteArea.getText());
 		java.util.Date utilDate = dueDateBox.getValue();
-	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-	    note.setDueDate(sqlDate);
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		note.setDueDate(sqlDate);
 		note.setNoteBook(nb);
-		
+
 		if (sourceProvided) {
 			note.setSource(source);
 		}
-		
+
 		editorVerwaltung.createNote(note, new CreateNoteCallback());
 
 	}
-	
+
 	private void addNoteBooksToListBox() {
-		
+
 		editorVerwaltung.getAllNoteBooksForCurrentUser(new AddToListBoxCallback());
 		editorVerwaltung.getAllSharedNoteBooksForCurrentUser(new AddToListBoxCallback());
-		
+
 	}
-	
-	
+
 	private class AddToListBoxCallback implements AsyncCallback<Vector<NoteBook>> {
-		
+
 		@Override
 		public void onFailure(Throwable caught) {
 			GWT.log("RPC failed, see reason below:");
@@ -182,13 +181,7 @@ public class CreateNote extends BasicView {
 		public void onSuccess(Vector<NoteBook> result) {
 			noteBookSelector.addAll(result);
 		}
-		
-	}
-		
-		
+
 	}
 
-	
-
-
-
+}

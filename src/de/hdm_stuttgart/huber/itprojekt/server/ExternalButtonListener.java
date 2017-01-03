@@ -16,20 +16,19 @@ public class ExternalButtonListener extends HttpServlet {
 	private static final long serialVersionUID = -5009924889428027427L;
 
 	public ExternalButtonListener() {
-		
+
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String remoteHost = request.getHeader("referer");
 		HttpSession session = request.getSession();
 		session.setAttribute("source", remoteHost);
-		
+
 		response.sendRedirect(response.encodeRedirectURL("/IT_Projekt.html"));
-		
+
 	}
-	
-	
 
 }

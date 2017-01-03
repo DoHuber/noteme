@@ -123,7 +123,6 @@ public class NoteMeReport implements EntryPoint {
 
 	}
 
-
 	/**
 	 * Diese Nested Class wird als Callback für das Erzeugen des
 	 * AllAccountOfAllCustomersReport benötigt.
@@ -153,21 +152,22 @@ public class NoteMeReport implements EntryPoint {
 
 				HTMLReportWriter writer = new HTMLReportWriter();
 				String html = writer.simpleReport2HTML(report);
-				
+
 				RootPanel.get("main").clear();
 				RootPanel.get("main").add(new HTML(html));
-				
+
 			}
 		}
 
 	}
-	
+
 	class createAllUserNotebooksRCallback implements AsyncCallback<AllUserNotebooksR> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			/*
-			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message aus.
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
 			 */
 			GWT.log("Erzeugen des Reports fehlgeschlagen!");
 			GWT.log(caught.toString());
@@ -181,21 +181,22 @@ public class NoteMeReport implements EntryPoint {
 
 				HTMLReportWriter writer = new HTMLReportWriter();
 				String html = writer.simpleReport2HTML(report);
-				
+
 				RootPanel.get("main").clear();
 				RootPanel.get("main").add(new HTML(html));
-				
+
 			}
 		}
 
 	}
-	
+
 	class createAllNotesRCallback implements AsyncCallback<AllNotesR> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			/*
-			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message aus.
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
 			 */
 			GWT.log("Erzeugen des Reports fehlgeschlagen!");
 			GWT.log(caught.toString());
@@ -209,23 +210,22 @@ public class NoteMeReport implements EntryPoint {
 
 				HTMLReportWriter writer = new HTMLReportWriter();
 				String html = writer.simpleReport2HTML(report);
-				
+
 				RootPanel.get("main").clear();
 				RootPanel.get("main").add(new HTML(html));
-				
+
 			}
 		}
 
 	}
-	
-	
-	
+
 	class createAllUserNotesRCallback implements AsyncCallback<AllUserNotesR> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			/*
-			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message aus.
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
 			 */
 			GWT.log("Erzeugen des Reports fehlgeschlagen!");
 			GWT.log(caught.toString());
@@ -239,23 +239,22 @@ public class NoteMeReport implements EntryPoint {
 
 				HTMLReportWriter writer = new HTMLReportWriter();
 				String html = writer.simpleReport2HTML(report);
-				
+
 				RootPanel.get("main").clear();
 				RootPanel.get("main").add(new HTML(html));
-				
+
 			}
 		}
 
 	}
-	
-	
-	
+
 	class createAllPermissionsRCallback implements AsyncCallback<AllPermissionsR> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			/*
-			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message aus.
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
 			 */
 			GWT.log("Erzeugen des Reports fehlgeschlagen!");
 			GWT.log(caught.toString());
@@ -269,24 +268,22 @@ public class NoteMeReport implements EntryPoint {
 
 				HTMLReportWriter writer = new HTMLReportWriter();
 				String html = writer.simpleReport2HTML(report);
-				
+
 				RootPanel.get("main").clear();
 				RootPanel.get("main").add(new HTML(html));
-				
+
 			}
 		}
 
 	}
-	
-	
-	
-	
+
 	class createAllUserPermissionsRCallback implements AsyncCallback<AllUserPermissionsR> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			/*
-			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message aus.
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
 			 */
 			GWT.log("Erzeugen des Reports fehlgeschlagen!");
 			GWT.log(caught.toString());
@@ -300,10 +297,10 @@ public class NoteMeReport implements EntryPoint {
 
 				HTMLReportWriter writer = new HTMLReportWriter();
 				String html = writer.simpleReport2HTML(report);
-				
+
 				RootPanel.get("main").clear();
 				RootPanel.get("main").add(new HTML(html));
-				
+
 			}
 		}
 

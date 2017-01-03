@@ -24,8 +24,6 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.Column;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Row;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleParagraph;
 
-
-
 /**
  * Implementierung des <code>ReportGenerator</code>-Interface. Die technische
  * Realisierung bzgl. <code>RemoteServiceServlet</code> bzw. GWT RPC erfolgt

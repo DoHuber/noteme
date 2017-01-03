@@ -22,81 +22,75 @@ public class NoteBook extends DomainObject implements Shareable {
 	private Date creationDate = null;
 	private Date modificationDate = null;
 
-	private Permission runTimePermission; 
-	
-    public NoteBook() {
-    }
+	private Permission runTimePermission;
 
-    public NoteBook(int id, String title, String subtitle, UserInfo owner, Date creationDate, Date modificationDate) {
-
-        this.id = id;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.owner = owner;
-        this.creationDate = creationDate;
-        this.modificationDate = modificationDate;
-    }
-
-    // REINE TESTMETHODE!!!
-    public NoteBook(int id) {
-        this.id = id;
-    }
-    
-    @Override
-	public String toString() {
-		return "NoteBook{" +
-				"Titel='" + title + '\'' +
-				", Untertitel='" + subtitle + '\'' +
-				", Autor=" + owner +
-				", Erstellt am:" + creationDate +
-				", Zuletzt modifiziert am:" + modificationDate +
-				'}';
+	public NoteBook() {
 	}
-    
-    
+
+	public NoteBook(int id, String title, String subtitle, UserInfo owner, Date creationDate, Date modificationDate) {
+
+		this.id = id;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.owner = owner;
+		this.creationDate = creationDate;
+		this.modificationDate = modificationDate;
+	}
+
+	// REINE TESTMETHODE!!!
+	public NoteBook(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "NoteBook{" + "Titel='" + title + '\'' + ", Untertitel='" + subtitle + '\'' + ", Autor=" + owner
+				+ ", Erstellt am:" + creationDate + ", Zuletzt modifiziert am:" + modificationDate + '}';
+	}
 
 	public int getId() {
-        return this.id;
-    }
-    public String getTitle() {
-        return title;
-    }
+		return this.id;
+	}
 
-    public String getSubtitle() {
-        return subtitle;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public UserInfo getOwner() {
-        return owner;
-    }
+	public String getSubtitle() {
+		return subtitle;
+	}
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+	public UserInfo getOwner() {
+		return owner;
+	}
 
-    public Date getModificationDate() {
-        return modificationDate;
-    }
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public Date getModificationDate() {
+		return modificationDate;
+	}
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setOwner(UserInfo owner) {
-        this.owner = owner;
-    }
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public void setOwner(UserInfo owner) {
+		this.owner = owner;
+	}
 
-    public void setModificationDate(Date modificationDate) {
-        this.modificationDate = modificationDate;
-    }
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public void setModificationDate(Date modificationDate) {
+		this.modificationDate = modificationDate;
+	}
 
 	public Permission getRuntimePermission() {
 		return runTimePermission;

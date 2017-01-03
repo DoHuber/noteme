@@ -3,7 +3,6 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;

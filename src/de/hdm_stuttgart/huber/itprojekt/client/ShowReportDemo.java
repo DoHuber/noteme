@@ -13,7 +13,6 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
@@ -75,12 +74,12 @@ public class ShowReportDemo extends MenuView {
 
 		showAllPermissions.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showAllPermissions));
-		
-			pureMenu.add(home);
-			pureMenu.add(menuList);
-			menu.add(pureMenu);
-			RootPanel.get("menu").add(menu);
-			
+
+		pureMenu.add(home);
+		pureMenu.add(menuList);
+		menu.add(pureMenu);
+		RootPanel.get("menu").add(menu);
+
 		showUserNotebooks.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -97,16 +96,16 @@ public class ShowReportDemo extends MenuView {
 			}
 
 		});
-		showUserNotes.addClickHandler(new ClickHandler(){
+		showUserNotes.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-			reportGenerator.createAllUserNotesR(new GenericReportCallback<AllUserNotesR>());
+				reportGenerator.createAllUserNotesR(new GenericReportCallback<AllUserNotesR>());
 
 			}
 
 		});
-		showAllNotes.addClickHandler(new ClickHandler(){
+		showAllNotes.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
@@ -115,16 +114,17 @@ public class ShowReportDemo extends MenuView {
 			}
 
 		});
-		showUserPermissions.addClickHandler(new ClickHandler(){
+		showUserPermissions.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				reportGenerator.createAllUserPermissionsR(new GenericReportCallback<AllUserPermissionsR>());;
+				reportGenerator.createAllUserPermissionsR(new GenericReportCallback<AllUserPermissionsR>());
+				;
 
 			}
 
 		});
-		showAllPermissions.addClickHandler(new ClickHandler(){
+		showAllPermissions.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {

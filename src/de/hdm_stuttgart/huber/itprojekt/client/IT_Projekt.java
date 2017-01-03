@@ -39,9 +39,9 @@ public class IT_Projekt implements EntryPoint {
 	private Button btn = new Button("Save");
 
 	public void onModuleLoad() {
-		
-		//	Logger l = Logger.getLogger("test");
-	//	l.log(Level.INFO, "Servus i bims");
+
+		// Logger l = Logger.getLogger("test");
+		// l.log(Level.INFO, "Servus i bims");
 
 		GWT.log("Servus i bims");
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
@@ -88,7 +88,7 @@ public class IT_Projekt implements EntryPoint {
 
 	private void checkIfNewNote() {
 
-		editorVerwaltung.getSource(new AsyncCallback<String>(){
+		editorVerwaltung.getSource(new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -136,7 +136,8 @@ public class IT_Projekt implements EntryPoint {
 		RootPanel.get("menu").add(loginPanel);
 
 	}
-	public void createUser(){
+
+	public void createUser() {
 		user.add(name);
 		user.add(nameBox);
 		user.add(name2);
