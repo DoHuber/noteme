@@ -5,8 +5,11 @@ import java.util.Vector;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -49,6 +52,7 @@ public class CreateNote extends BasicView {
 	private Grid grid = new Grid(2, 1);
 	private NoteBook nb = null;
 
+	private CheckBox intoNoteBook = new CheckBox("Put new note into notebook?");
 	private NoteBookListBox noteBookSelector = new NoteBookListBox();
 
 	public CreateNote() {
@@ -69,10 +73,27 @@ public class CreateNote extends BasicView {
 
 	@Override
 	public void run() {
-		/*
-		 * Widgets
-		 * 
-		 */
+	
+		setupAlignPanel();
+		
+		createButton.addClickHandler(new CreateClickHandler());
+		grid.setWidget(0, 0, richTextToolbar);
+
+		setUpNoteBookSelection();
+
+		noteArea.setSize("100%", "100%");
+		grid.setWidget(1, 0, noteArea);
+
+		contentPanel.add(alignPanel);
+		contentPanel.add(grid);
+		RootPanel.get("main").add(contentPanel);
+
+		noteArea.setStyleName("noteArea");
+		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
+	}
+
+	private void setupAlignPanel() {
 		alignPanel.add(title);
 		alignPanel.add(titleTextBox);
 
@@ -89,26 +110,29 @@ public class CreateNote extends BasicView {
 
 		alignPanel.add(test);
 		alignPanel.add(createButton);
-		createButton.addClickHandler(new CreateClickHandler());
-		grid.setWidget(0, 0, richTextToolbar);
+	}
 
-		// Listbox et al.
+	private void setUpNoteBookSelection() {
+		
+		noteBookSelector.setEnabled(false);
 		alignPanel.add(noteBookSelector);
 		addNoteBooksToListBox();
 
-		// noteArea.setSize("475px", "100px");
-		noteArea.setSize("100%", "100%");
-		grid.setWidget(1, 0, noteArea);
+		// Listbox et al.
+		intoNoteBook.setValue(false);
+		intoNoteBook.addValueChangeHandler(new ValueChangeHandler<Boolean>(){
 
-		// contentPanel.add(richTextToolbar);
-		contentPanel.add(alignPanel);
-		// contentPanel.add(noteArea);
-		contentPanel.add(grid);
-		RootPanel.get("main").add(contentPanel);
-
-		noteArea.setStyleName("noteArea");
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
+			@Override
+			public void onValueChange(ValueChangeEvent<Boolean> event) {
+				
+				noteBookSelector.setEnabled(event.getValue());
+				
+			}
+			
+		});
+	
+		alignPanel.add(intoNoteBook);
+		
 	}
 
 	@Override
