@@ -8,13 +8,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
-import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
-import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
@@ -23,11 +20,8 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Column;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeParagraph;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.CompositeReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Row;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleParagraph;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
 
 
 
@@ -93,28 +87,6 @@ public void init() throws IllegalArgumentException {
     return this.administration;
   }
 
-  /**
-   * Setzen des zugehörigen Bank-Objekts.
-   */
-  @Override
-public void create(UserInfo uI) {
-    try {
-		this.administration.create(uI);
-	} catch (BullshitException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-  }
-
-  /**
-   * Hinzufügen des Report-Impressums. Diese Methode ist aus den
-   * <code>create...</code>-Methoden ausgegliedert, da jede dieser Methoden
-   * diese Tätigkeiten redundant auszuführen hätte. Stattdessen rufen die
-   * <code>create...</code>-Methoden diese Methode auf.
-   * 
-   * @param r der um das Impressum zu erweiternde Report.
-   * 
-   */
 
 @Override
 public AllUserNotebooksR createAllUserNotebooksR(UserInfo u) throws IllegalArgumentException {
@@ -336,43 +308,7 @@ public AllUserPermissionsR createAllUserPermissionsR(UserInfo u) throws IllegalA
 
 @Override
 public AllPermissionsR createAllPermissionsR() throws IllegalArgumentException {
-//
-//Vector<Permission> allPermissions = PermissionMapper.getPermissionMapper().getAllPermission();
-//	
-//	AllPermissionsR report = new AllPermissionsR();
-//	report.setTitle("All Permission of all User");
-//	report.setCreated(new Date(System.currentTimeMillis()));
-//	
-//	StringBuilder sb = new StringBuilder();
-//	sb.append("Number of Permission:");
-//	sb.append(allPermissions.size());
-//	report.setHeaderData(new SimpleParagraph(sb.toString()));
-//	
-//	Row headline = new Row();
-//	headline.addColumn((new Column("Title")));
-//	headline.addColumn((new Column("Subtitle")));
-//	headline.addColumn((new Column("Username")));
-//	headline.addColumn((new Column("Creation Date")));
-//	headline.addColumn((new Column("Modification Date")));
-//	report.addRow(headline);
-//	
-//	for (Permission element : allPermissions) {
-//		
-//		Row r = new Row();
-//	//	r.addColumn(new Column(element.get())); --> da soll Autor hin!
-//		r.addColumn(new Column(element.get()));
-//		r.addColumn(new Column(element.getOwner().getNickname()));
-//		r.addColumn(new Column(element.getCreationDate().toString()));
-//		r.addColumn(new Column(element.getModificationDate().toString()));
-//		
-//		report.addRow(r);
-//		
-//	}
-//	
-//	report.setImprint(new SimpleParagraph("Lorem ipsum sit dolor amet"));
-//	
-//	return report;
-//	
+
 	return null;
 }
 

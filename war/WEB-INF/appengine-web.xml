@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-  <application></application>
-  <version>1</version>
+  <application>it-projekt-149914</application>
+  <version>a-1</version>
 
   <!--
     Allows App Engine to send multiple requests to one instance in parallel:
@@ -22,6 +22,8 @@
   <!-- Configure java.util.logging -->
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+    <property name="ae-cloudsql.cloudsql-database-url" value="jdbc:google:mysql://it-projekt-149914:noizbuch2/notizbuch?user=user&amp;password=nm9000!" />
+    <property name="ae-cloudsql.local-database-url" value="jdbc:mysql://google/notizbuch?cloudSqlInstance=it-projekt-149914:noizbuch2&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=user&amp;password=nm9000!&amp;useSSL=false" />
   </system-properties>
 
   <!--

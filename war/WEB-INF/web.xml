@@ -28,7 +28,7 @@
 
     <servlet-mapping>
     	<servlet-name>ReportGenerator</servlet-name>
-    	<url-pattern>ReportGenerator/generator</url-pattern>
+    	<url-pattern>/ReportGenerator/generator</url-pattern>
     </servlet-mapping>
 
     <servlet>

@@ -39,8 +39,6 @@ public interface ReportGeneratorAsync {
   
   void init(AsyncCallback<Void> callback);
 
-  void create(UserInfo uI, AsyncCallback<Void> callback);
-
   void createAllUserPermissionsR(UserInfo u, AsyncCallback<AllUserPermissionsR> callback);
 
 }

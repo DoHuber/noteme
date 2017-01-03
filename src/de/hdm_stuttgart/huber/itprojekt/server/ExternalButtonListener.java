@@ -22,7 +22,7 @@ public class ExternalButtonListener extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String remoteHost = request.getRemoteHost();
+		String remoteHost = request.getHeader("referer");
 		HttpSession session = request.getSession();
 		session.setAttribute("source", remoteHost);
 		

@@ -255,6 +255,25 @@ public class PermissionMapper extends DataMapper {
 
 
 	}
+	
+	public Vector<Permission> getAllPermissions() {
+		
+		Statement s;
+		try {
+			
+			
+			s = connection.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM notizbuch.permission");
+			return makeFromResultSet(rs);
+			
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+	}
 
 	
 	

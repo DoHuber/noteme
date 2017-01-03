@@ -6,7 +6,6 @@ package de.hdm_stuttgart.huber.itprojekt.client.gui;
 
 	import com.google.gwt.user.cellview.client.DataGrid;
 	import com.google.gwt.user.cellview.client.TextColumn;
-	import com.google.gwt.user.client.ui.Button;
 	import com.google.gwt.user.client.ui.FlowPanel;
 	import com.google.gwt.user.client.ui.LayoutPanel;
 	import com.google.gwt.user.client.ui.RootPanel;
@@ -15,8 +14,7 @@ package de.hdm_stuttgart.huber.itprojekt.client.gui;
 	import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 	import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
-	import de.hdm_stuttgart.huber.itprojekt.client.ShowNote;
-import de.hdm_stuttgart.huber.itprojekt.client.ShowThisPermission;
+	import de.hdm_stuttgart.huber.itprojekt.client.ShowThisPermission;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 	import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 	import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;

@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 /**
  * Klasse zur Darstellung von Notizb�chern, gleiche Funktionsweise wie "ShowAllNotes"

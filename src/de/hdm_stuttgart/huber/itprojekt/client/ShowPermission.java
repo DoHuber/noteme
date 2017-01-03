@@ -6,12 +6,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.PermissionTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
