@@ -1,11 +1,16 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import java.util.Vector;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -46,6 +51,8 @@ public class CreateNote extends BasicView {
 	private Grid grid = new Grid(2,1);
 	private NoteBook nb = null; 
 	
+	private NoteBookListBox noteBookSelector = new NoteBookListBox();
+	
 	public CreateNote (){
 		
 	}
@@ -85,6 +92,10 @@ public class CreateNote extends BasicView {
 		alignPanel.add(createButton);
 		createButton.addClickHandler(new CreateClickHandler());
 		grid.setWidget(0, 0, richTextToolbar);
+		
+		// Listbox et al.
+		alignPanel.add(noteBookSelector);
+		addNoteBooksToListBox();
 	
 		// noteArea.setSize("475px", "100px");
 		noteArea.setSize("100%", "100%");
@@ -128,6 +139,7 @@ public class CreateNote extends BasicView {
 		}
 		
 	}
+	
 	/**
 	 * Neue Notiz wird erstellt 
 	 */
@@ -149,8 +161,34 @@ public class CreateNote extends BasicView {
 		editorVerwaltung.createNote(note, new CreateNoteCallback());
 
 	}
+	
+	private void addNoteBooksToListBox() {
+		
+		editorVerwaltung.getAllNoteBooksForCurrentUser(new AddToListBoxCallback());
+		editorVerwaltung.getAllSharedNoteBooksForCurrentUser(new AddToListBoxCallback());
+		
+	}
+	
+	
+	private class AddToListBoxCallback implements AsyncCallback<Vector<NoteBook>> {
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			GWT.log("RPC failed, see reason below:");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(Vector<NoteBook> result) {
+			noteBookSelector.addAll(result);
+		}
+		
+	}
+		
+		
+	}
 
 	
 
 
-}
+

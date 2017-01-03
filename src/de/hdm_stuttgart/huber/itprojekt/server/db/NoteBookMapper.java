@@ -207,7 +207,7 @@ private static NoteBookMapper noteBookMapper = null;
 
 	 		try {
 
-	    		String sql = "SELECT notebook.id AS id, title, subtitle, creation_date, modification_date, author_id FROM notebook "
+	    		String sql = "SELECT notebook.id AS id, title, subtitle, creation_date, modification_date, notebook.author_id AS author_id FROM notebook "
 	    				+ "JOIN permission ON notebook.id = permission.notebook_id WHERE beneficiary_id = ?";
 
 	    		PreparedStatement ps = connection.prepareStatement(sql);

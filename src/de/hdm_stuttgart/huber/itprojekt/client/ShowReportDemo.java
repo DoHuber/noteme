@@ -134,13 +134,6 @@ public class ShowReportDemo extends MenuView {
 
 		});
 
-		/**
-		 * showUserNotes.addClickHandler(new ShowAllUserNotesHandler());
-		 * showAllNotes.addClickHandler(new ShowAllNotesHandler());
-		 * showUserPermissions.addClickHandler(new ShowAllUserPermissions());
-		 * showAllPermissions.addClickHandler(new ShowAllPermissionsHandler());
-		 **/
-
 	}
 
 	private void printSimpleReport(SimpleReport r) {
