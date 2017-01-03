@@ -65,6 +65,14 @@ public class Note extends DomainObject implements Shareable {
 				+ dueDate + "<br>, creationDate=" + creationDate + "<br>, modificationDate=" + modificationDate
 				+ "] </p>";
 	}
+	
+	public boolean hasRuntimePermission() {
+		if (this.runTimePermission == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	public int getId() {
 		return id;

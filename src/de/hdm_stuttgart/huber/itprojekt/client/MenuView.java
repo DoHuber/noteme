@@ -175,20 +175,6 @@ public class MenuView extends VerticalPanel {
 		}
 	}
 
-	private class CreateNoteHandler implements ClickHandler {
-
-		@Override
-		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(mView);
-
-			CreateNote cN = new CreateNote();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(cN);
-		}
-	}
-
 	private class ReportHandler implements ClickHandler {
 
 		@Override

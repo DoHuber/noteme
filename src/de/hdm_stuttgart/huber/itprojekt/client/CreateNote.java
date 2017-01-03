@@ -50,7 +50,6 @@ public class CreateNote extends BasicView {
 	private String source;
 	private boolean sourceProvided = false;
 	private Grid grid = new Grid(2, 1);
-	private NoteBook nb = null;
 
 	private CheckBox intoNoteBook = new CheckBox("Put new note into notebook?");
 	private NoteBookListBox noteBookSelector = new NoteBookListBox();
@@ -60,7 +59,10 @@ public class CreateNote extends BasicView {
 	}
 
 	public CreateNote(NoteBook nb) {
-		this.nb = nb;
+		
+		intoNoteBook.setValue(true);
+		noteBookSelector.addItem(nb);
+		noteBookSelector.setSelectedIndex(0);
 
 	}
 
@@ -91,6 +93,7 @@ public class CreateNote extends BasicView {
 		noteArea.setStyleName("noteArea");
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		
 	}
 
 	private void setupAlignPanel() {
@@ -118,7 +121,6 @@ public class CreateNote extends BasicView {
 		alignPanel.add(noteBookSelector);
 		addNoteBooksToListBox();
 
-		// Listbox et al.
 		intoNoteBook.setValue(false);
 		intoNoteBook.addValueChangeHandler(new ValueChangeHandler<Boolean>(){
 
@@ -176,7 +178,14 @@ public class CreateNote extends BasicView {
 		java.util.Date utilDate = dueDateBox.getValue();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		note.setDueDate(sqlDate);
-		note.setNoteBook(nb);
+		
+		if (intoNoteBook.getValue()) {
+			
+			NoteBook nb;
+			nb = noteBookSelector.getSelectedItem();
+			note.setNoteBook(nb);
+			
+		}
 
 		if (sourceProvided) {
 			note.setSource(source);

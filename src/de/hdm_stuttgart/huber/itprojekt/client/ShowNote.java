@@ -27,12 +27,12 @@ public class ShowNote extends BasicView {
 	 * Funktionen: Löschen, Editieren, Freigeben, Fähligkeitsdatum setzen -
 	 * Ebene: einzelne Notizen
 	 */
-
+	
 	private HorizontalPanel contentPanel = new HorizontalPanel();
 	private VerticalPanel alignPanel = new VerticalPanel();
-	private Button deleteBtn = new Button("Delete");
-	private Button editBtn = new Button("Update");
-	private Button releseBtn = new Button("Release");
+	private Button deleteButton = new Button(IconConstants.ICON_DELETE);
+	private Button updateConfirmButton = new Button("Update");
+	private Button shareButton = new Button(IconConstants.ICON_SHARE);
 
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private RichTextArea noteArea = new RichTextArea();
@@ -78,10 +78,10 @@ public class ShowNote extends BasicView {
 
 		// ButtonPanel buttonPanel = new ButtonPanel();
 		HorizontalPanel buttonPanel = new HorizontalPanel();
-		buttonPanel.add(releseBtn);
-		buttonPanel.add(deleteBtn);
-		deleteBtn.addClickHandler(new DeleteClickHandler());
-		releseBtn.addClickHandler(new ShareClickHandler());
+		buttonPanel.add(shareButton);
+		buttonPanel.add(deleteButton);
+		deleteButton.addClickHandler(new DeleteClickHandler());
+		shareButton.addClickHandler(new ShareClickHandler());
 		alignPanel.add(empty);
 
 		alignPanel.add(title);
@@ -98,16 +98,17 @@ public class ShowNote extends BasicView {
 		noteArea.setSize("100%", "100%px");
 		grid.setWidget(1, 0, noteArea);
 
-		alignPanel.add(editBtn);
-		editBtn.addClickHandler(new UpdateClickHandler());
+		alignPanel.add(updateConfirmButton);
+		updateConfirmButton.addClickHandler(new UpdateClickHandler());
 
 		contentPanel.add(alignPanel);
 		contentPanel.add(grid);
 		noteArea.setStyleName("noteArea");
+	
 
-		releseBtn.setStyleName("pure-button");
-		deleteBtn.setStyleName("pure-button");
-		editBtn.setStyleName("pure-button");
+		shareButton.setStyleName("pure-button");
+		deleteButton.setStyleName("pure-button");
+		updateConfirmButton.setStyleName("pure-button");
 
 		empty.getElement().getStyle().setColor("#660033");
 

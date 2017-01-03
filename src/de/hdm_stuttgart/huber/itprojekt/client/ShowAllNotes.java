@@ -22,10 +22,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  *
  */
 public class ShowAllNotes extends BasicView {
+	
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	AllNotesCallback callback = new AllNotesCallback();
-
-	// HorizontalPanel hPanel = new HorizontalPanel();
 	private Vector<Note> notes = new Vector<Note>();
 
 	public ShowAllNotes(Vector<Note> nList) {
@@ -69,6 +68,7 @@ public class ShowAllNotes extends BasicView {
 	final Button sharedByBtn = new Button("Shared By ");
 	final Button sharedWithBtn = new Button("Shared With");
 	final Button allNotesBtn = new Button("All Notes");
+	Button addNoteButton = new Button(IconConstants.ICON_ADD_NOTE);
 
 	@Override
 	public void run() {
@@ -76,26 +76,26 @@ public class ShowAllNotes extends BasicView {
 		FlowPanel contentPanel = new FlowPanel();
 		FlowPanel fPanel2 = new FlowPanel();
 		FlowPanel buttonsPanel = new FlowPanel();
+		
 		sharedWithBtn.addClickHandler(new SharedWithClickHandler());
 		allNotesBtn.addClickHandler(new AllNotesClickHandler());
 		sharedByBtn.addClickHandler(new SharedByClickHandler());
+		addNoteButton.addClickHandler(new CreateNoteHandler());
+		
 		buttonsPanel.add(sharedByBtn);
 		buttonsPanel.add(sharedWithBtn);
 		buttonsPanel.add(allNotesBtn);
-
+		buttonsPanel.add(addNoteButton);
+		
 		fPanel2.add(buttonsPanel);
 		fPanel2.add(contentPanel);
 
 		editorVerwaltung.getAllNotesForCurrentUser(callback);
 
-		// NoteTable nt = new NoteTable(notes);
-		// nt.addClickNote();
+	
 		RootPanel.get("main").add(fPanel2);
-		// RootPanel.get("main").add(nt.start());
 		RootPanel.get("tableNotebook").clear();
-
-		// freigabeButton.addClickHandler(new freigabeButtonClickHandler());
-		// BUTTONS !!
+		
 	}
 
 	private class AllNotesClickHandler implements ClickHandler {
