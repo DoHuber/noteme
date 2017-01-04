@@ -20,6 +20,8 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
 public class ShowNotebook extends BasicView {
 
@@ -37,21 +39,24 @@ public class ShowNotebook extends BasicView {
 	private Button createButton = new Button(IconConstants.ICON_ADD_NOTE);
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	
-	NoteBook nb = null;
+	NoteBook displayedNoteBook = new NoteBook();
 	private TextBox title = new TextBox();
 	private TextBox subtitle = new TextBox();
 	AllNotesCallback callback = new AllNotesCallback();
 
 	private Vector<Note> notes = new Vector<Note>();
+	private HorizontalPanel actionButtons = setupActionButtons();
+	private VerticalPanel titlesEditInterface = setupEditField();
+	private HorizontalPanel wrapper = new HorizontalPanel();
 
 	public ShowNotebook(NoteBook selected) {
-		this.nb = selected;
+		this.displayedNoteBook = selected;
 	}
 
 	@Override
 	public String getHeadlineText() {
 
-		return "Notizbuch: " + nb.getTitle();
+		return "Notizbuch: " + displayedNoteBook.getTitle();
 	}
 
 	@Override
@@ -65,26 +70,53 @@ public class ShowNotebook extends BasicView {
 	public void run() {
 		
 		setupButtonClickHandlers();
-		HorizontalPanel actionButtons = setupActionButtons();
-		VerticalPanel editField = setupEditField();
 		
-		HorizontalPanel wrapper = new HorizontalPanel();
-		wrapper.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		wrapper.add(actionButtons);
-		wrapper.add(editField);
-		wrapper.setWidth("100%");
+		setUpLayoutWithWrapperPanel();
 		
+		addEverythingToRootPanel();
+		
+		if (displayedNoteBook.hasRuntimePermission()) {
+			setUpForPermissions();
+		}
+		
+		editorVerwaltung.getAllFrom(displayedNoteBook, callback);
+	}
+	
+	private void setUpForPermissions() {
+		
+		shareButton.setEnabled(false);
+		Permission p = displayedNoteBook.getRuntimePermission();
+		
+		if (!p.isUserAllowedTo(Level.DELETE)) {
+			deleteButton.setEnabled(false);
+		}
+		
+		if (!p.isUserAllowedTo(Level.EDIT)) {
+			createButton.setEnabled(false);
+			title.setEnabled(false);
+			subtitle.setEnabled(false);
+			updateConfirmButton.setVisible(false);
+		}
+		
+	}
+
+	private void addEverythingToRootPanel() {
 		RootPanel.get("main").add(wrapper);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
-		
-		editorVerwaltung.getAllFrom(nb, callback);
+	}
+
+	private void setUpLayoutWithWrapperPanel() {
+		wrapper.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		wrapper.add(actionButtons);
+		wrapper.add(titlesEditInterface);
+		wrapper.setWidth("100%");
 	}
 	
 	private VerticalPanel setupEditField() {
 		
-		title.setText(nb.getTitle());
-		subtitle.setText(nb.getSubtitle());
+		title.setText(displayedNoteBook.getTitle());
+		subtitle.setText(displayedNoteBook.getSubtitle());
 		
 		VerticalPanel vp = new VerticalPanel();
 		vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
@@ -130,8 +162,8 @@ public class ShowNotebook extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			if (Window.confirm("Möchten Sie das Notizbuch " + nb.getTitle() + " wirklich löschen?")) {
-				editorVerwaltung.deleteNoteBook(nb, new DeleteCallback());
+			if (Window.confirm("Möchten Sie das Notizbuch " + displayedNoteBook.getTitle() + " wirklich löschen?")) {
+				editorVerwaltung.deleteNoteBook(displayedNoteBook, new DeleteCallback());
 			}
 			MenuView navigation = new MenuView();
 			RootPanel.get("menu").clear();
@@ -177,9 +209,9 @@ public class ShowNotebook extends BasicView {
 			if (Window.confirm("Möchten Sie die Änderungen speichern?")) {
 
 			}
-			nb.setTitle(title.getText());
-			nb.setSubtitle(subtitle.getText());
-			editorVerwaltung.saveNoteBook(nb, new UpdateCallback());
+			displayedNoteBook.setTitle(title.getText());
+			displayedNoteBook.setSubtitle(subtitle.getText());
+			editorVerwaltung.saveNoteBook(displayedNoteBook, new UpdateCallback());
 
 		}
 
@@ -209,7 +241,7 @@ public class ShowNotebook extends BasicView {
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(mView);
 
-			CreateNote cN = new CreateNote(nb);
+			CreateNote cN = new CreateNote(displayedNoteBook);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(cN);
 
@@ -224,7 +256,7 @@ public class ShowNotebook extends BasicView {
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(mView);
 
-			ShareNotebook sNb = new ShareNotebook(nb);
+			ShareNotebook sNb = new ShareNotebook(displayedNoteBook);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sNb);
 

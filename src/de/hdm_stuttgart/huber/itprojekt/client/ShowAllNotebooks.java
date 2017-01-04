@@ -24,8 +24,8 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 public class ShowAllNotebooks extends BasicView {
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	AllNotebooksCallback callback = new AllNotebooksCallback();
-	final Button sharedByBtn = new Button("Shared By ");
-	final Button sharedWithBtn = new Button("Shared With");
+	final Button sharedByBtn = new Button("Stuff I shared");
+	final Button sharedWithBtn = new Button("Stuff shared with me");
 	final Button allNoteBooksBtn = new Button("All Notebooks");
 	private Vector<NoteBook> notebook = new Vector<NoteBook>();
 

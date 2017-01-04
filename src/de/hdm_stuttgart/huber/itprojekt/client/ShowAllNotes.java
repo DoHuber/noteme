@@ -65,8 +65,8 @@ public class ShowAllNotes extends BasicView {
 		return "Select a note for more information!";
 	}
 
-	final Button sharedByBtn = new Button("Shared By ");
-	final Button sharedWithBtn = new Button("Shared With");
+	final Button sharedByBtn = new Button("Stuff I shared");
+	final Button sharedWithBtn = new Button("Stuff shared with me");
 	final Button allNotesBtn = new Button("All Notes");
 	Button addNoteButton = new Button(IconConstants.ICON_ADD_NOTE);
 

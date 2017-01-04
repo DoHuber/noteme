@@ -18,6 +18,8 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
 public class ShowNote extends BasicView {
 	/**
@@ -47,6 +49,8 @@ public class ShowNote extends BasicView {
 	private Label dueDate = new Label("Due Date");
 	private Grid grid = new Grid(2, 1);
 	private Note currentlyDisplayedNote = null;
+	
+	
 
 	public ShowNote() {
 
@@ -75,48 +79,110 @@ public class ShowNote extends BasicView {
 
 	@Override
 	public void run() {
+		
+		setUpButtons();
+		
+		setUpButtonPanel();
+		
+		setUpPanels();
 
-		// ButtonPanel buttonPanel = new ButtonPanel();
-		HorizontalPanel buttonPanel = new HorizontalPanel();
-		buttonPanel.add(shareButton);
-		buttonPanel.add(deleteButton);
-		deleteButton.addClickHandler(new DeleteClickHandler());
-		shareButton.addClickHandler(new ShareClickHandler());
+		empty.getElement().getStyle().setColor("#660033");
+
+		RootPanel.get("main").add(contentPanel);
+		RootPanel.get("table").clear();
+		RootPanel.get("tableNotebook").clear();
+		
+		if(currentlyDisplayedNote.hasRuntimePermission()) {
+			processNoteWithPermissions();
+		}
+		
+	}
+	
+	private void processNoteWithPermissions() {
+		
+		shareButton.setEnabled(false);
+		
+		Permission p = currentlyDisplayedNote.getRuntimePermission();
+		if (!p.isUserAllowedTo(Level.DELETE)) {
+			deleteButton.setEnabled(false);
+		}
+		
+		if (!p.isUserAllowedTo(Level.EDIT)) {
+			disableEditFields();
+		}
+		
+		// Fehlerkondition: User darf dann eigentlich gar nicht hier sein
+		if (!p.isUserAllowedTo(Level.READ)) {
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(new ShowAllNotes());
+		}
+		
+		
+	}
+	
+	private void disableEditFields() {
+		
+		titleTextBox.setEnabled(false);
+		subtitleTextBox.setEnabled(false);
+		dueDateBox.setEnabled(false);
+		updateConfirmButton.setVisible(false);
+		noteArea.setEnabled(false);
+		
+	}
+
+	private void setUpPanels() {
+	
+		populateAndDisplayTitles();
+		setUpAlignPanel();
+		setUpContentPanel();
+		
+	}
+
+	private void setUpAlignPanel() {
 		alignPanel.add(empty);
+		alignPanel.add(dueDate);
+		alignPanel.add(dueDateBox);
+		alignPanel.add(updateConfirmButton);
+		dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
+	}
 
+	private void setUpContentPanel() {
+		noteArea.setText(currentlyDisplayedNote.getContent());
+		noteArea.setSize("100%", "100%px");
+		noteArea.setStyleName("noteArea");
+		
+		grid.setWidget(1, 0, noteArea);
+		grid.setWidget(0, 0, richTextToolbar);
+		contentPanel.add(alignPanel);
+		contentPanel.add(grid);
+	}
+
+	private void populateAndDisplayTitles() {
 		alignPanel.add(title);
 		alignPanel.add(titleTextBox);
 		titleTextBox.setText(currentlyDisplayedNote.getTitle());
 		alignPanel.add(subtitle);
 		alignPanel.add(subtitleTextBox);
 		subtitleTextBox.setText(currentlyDisplayedNote.getSubtitle());
-		alignPanel.add(dueDate);
-		alignPanel.add(dueDateBox);
-		dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
-		noteArea.setText(currentlyDisplayedNote.getContent());
-		grid.setWidget(0, 0, richTextToolbar);
-		noteArea.setSize("100%", "100%px");
-		grid.setWidget(1, 0, noteArea);
+	}
 
-		alignPanel.add(updateConfirmButton);
+	private void setUpButtonPanel() {
+		// ButtonPanel
+		HorizontalPanel buttonPanel = new HorizontalPanel();
+		buttonPanel.add(shareButton);
+		buttonPanel.add(deleteButton);
+		RootPanel.get("main").add(buttonPanel);
+	}
+
+	private void setUpButtons() {
+		// Buttons
+		deleteButton.addClickHandler(new DeleteClickHandler());
+		shareButton.addClickHandler(new ShareClickHandler());
 		updateConfirmButton.addClickHandler(new UpdateClickHandler());
-
-		contentPanel.add(alignPanel);
-		contentPanel.add(grid);
-		noteArea.setStyleName("noteArea");
-	
-
+		
 		shareButton.setStyleName("pure-button");
 		deleteButton.setStyleName("pure-button");
 		updateConfirmButton.setStyleName("pure-button");
-
-		empty.getElement().getStyle().setColor("#660033");
-
-		RootPanel.get("main").add(buttonPanel);
-		RootPanel.get("main").add(contentPanel);
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
-
 	}
 
 	private class ShareClickHandler implements ClickHandler {
