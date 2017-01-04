@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -19,6 +20,7 @@ public class Account extends BasicView {
 	private Button deleteBtn = new Button("Delete");
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	UserCallback uc = new UserCallback();
+	private static String logOutUrl;
 	
 	public Account () {
 		
@@ -86,16 +88,17 @@ public class Account extends BasicView {
 		if(	Window.confirm("Möchten Sie Ihren Account "+ ui.getNickname()+ " wirklich löschen?")){
 			editorVerwaltung.deleteUserInfo(ui, new DeleteCallback());
 		}
-		MenuView navigation = new MenuView();
-		RootPanel.get("menu").clear();
-		RootPanel.get("menu").add(navigation);
-
-		Account san =  new Account();
-		RootPanel.get("main").clear();
-		RootPanel.get("main").add(san);
-			
+		//MenuView navigation = new MenuView();
+		//RootPanel.get("menu").clear();
+		//RootPanel.get("menu").add(navigation);
+		//Account san =  new Account();
+		//RootPanel.get("main").clear();
+		Window.Location.replace(GWT.getHostPageBaseURL() + "IT_Projekt.html");
 		}
-		
+	}
+	
+	public static void setLogOutUrl(String logOutUrl) {
+		Account.logOutUrl = logOutUrl;
 	}
 	
 	private class DeleteCallback implements AsyncCallback<Void>{
