@@ -202,16 +202,10 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			
 			if (Window.confirm("Möchten Sie die Notiz " + currentlyDisplayedNote.getTitle() + " wirklich löschen?")) {
 				editorVerwaltung.deleteNote(currentlyDisplayedNote, new DeleteCallback());
 			}
-			MenuView navigation = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(navigation);
-
-			ShowAllNotes san = new ShowAllNotes();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
 
 		}
 
@@ -219,16 +213,23 @@ public class ShowNote extends BasicView {
 
 	private class DeleteCallback implements AsyncCallback<Void> {
 
+		Notificator n = Notificator.getNotificator();
+		
 		@Override
 		public void onFailure(Throwable caught) {
-			caught.printStackTrace();
-			contentPanel.add(new Label(caught.toString()));
-
+			
+			n.showError("Fehler! Grund:" + caught.toString());
+			
 		}
 
 		@Override
 		public void onSuccess(Void result) {
-
+			
+			n.showSuccess("Notiz" + currentlyDisplayedNote.getTitle() + " wurde gelöscht");
+			
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(new ShowAllNotes());
+			
 		}
 
 	}
