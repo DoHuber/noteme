@@ -39,6 +39,7 @@ public class Notificator {
 		
 		text = "<p style=\"color:green\">" + text + "</p>";
 		NotificationPopup widget = new NotificationPopup(text, false, false);
+		widget.setTitle("Success");
 		positionAndShow(widget, 2);
 		
 	}
@@ -47,6 +48,7 @@ public class Notificator {
 		
 		text = "<p style=\"color:red\">" + text + "</p>";
 		NotificationPopup widget = new NotificationPopup(text, true, false);
+		widget.setTitle("Error");
 		positionAndShow(widget, 10);
 		
 	}

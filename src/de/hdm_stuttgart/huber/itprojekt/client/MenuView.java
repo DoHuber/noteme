@@ -30,7 +30,6 @@ public class MenuView extends VerticalPanel {
 
 	private static String logOutUrl;
 	private Anchor logoutAnchor;
-	private Anchor notificationTest;
 
 	protected void onLoad() {
 
@@ -58,8 +57,6 @@ public class MenuView extends VerticalPanel {
 
 		logoutAnchor = new Anchor("Log out");
 		logoutAnchor.setHref(logOutUrl);
-		
-		notificationTest = new Anchor("Test Notifications");
 
 		showNotes.getElement().getStyle().setColor("#660033");
 		showNotebooks.getElement().getStyle().setColor("#660033");
@@ -93,8 +90,6 @@ public class MenuView extends VerticalPanel {
 
 		logoutAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(logoutAnchor));
-		
-		menuList.add(new ListItemWidget(notificationTest));
 
 		pureMenu.add(home);
 		pureMenu.add(menuList);
@@ -115,17 +110,7 @@ public class MenuView extends VerticalPanel {
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
 		
-		notificationTest.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				Notificator n = Notificator.getNotificator();
-				n.showError("Fehlertest!!");
-				n.showSuccess("Hier war irgendetwas erfolgreich!");
-				n.showError("Dritter Schissel");
-			}
-			
-		});
+		
 
 	}
 

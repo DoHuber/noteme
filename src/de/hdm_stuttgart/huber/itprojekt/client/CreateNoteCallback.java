@@ -18,19 +18,16 @@ public class CreateNoteCallback implements AsyncCallback<Note> {
 	@Override
 	public void onFailure(Throwable caught) {
 
-		// TODO Auto-generated method stub
+		String message = "Fehler! Folgendes ging schief:";
+		message = message + caught.toString();
+		Notificator.getNotificator().showError(message);
 
 	}
 
 	@Override
 	public void onSuccess(Note result) {
-		MenuView mw = new MenuView();
-		String test = "Erfolgreich";
-		Label lb = new Label(test);
-		RootPanel.get("main").clear();
-		RootPanel.get("menu").clear();
-		RootPanel.get("main").add(mw);
-		RootPanel.get("main").add(lb);
+		
+		Notificator.getNotificator().showSuccess("Note was created and saved.");
 
 	}
 
