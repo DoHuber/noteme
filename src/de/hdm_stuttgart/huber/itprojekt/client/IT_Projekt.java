@@ -125,6 +125,11 @@ public class IT_Projekt implements EntryPoint {
 		MenuView.setLogOutUrl(userInfo.getLogoutUrl());
 		RootPanel.get("menu").clear();
 		RootPanel.get("menu").add(navigation);
+		
+		DueDateFromUser du = new DueDateFromUser(userInfo);
+		RootPanel.get("main").clear();
+		RootPanel.get("main").add(du);
+		
 
 	}
 

@@ -314,4 +314,11 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	}
 
+	@Override
+	public Vector<Note> getAllNotesForUser() {
+	
+		UserInfo currentUser = getCurrentUser();
+		return noteMapper.getAllNotesForUser(currentUser.getId());
+	}
+
 }
