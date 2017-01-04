@@ -46,23 +46,23 @@ public class ShowNote extends BasicView {
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
 	private Grid grid = new Grid(2, 1);
-	private Note n = null;
+	private Note currentlyDisplayedNote = null;
 
 	public ShowNote() {
 
 	}
 
 	public ShowNote(Note note) {
-		this.n = note;
+		this.currentlyDisplayedNote = note;
 
 	}
 
 	@Override
 	public String getSubHeadlineText() {
-		if (n.getNoteBook() == null) {
+		if (currentlyDisplayedNote.getNoteBook() == null) {
 			return "There is no notebook deposited for the note.";
 		} else {
-			return "Notebook:" + n.getNoteBook().getTitle();
+			return "Notebook:" + currentlyDisplayedNote.getNoteBook().getTitle();
 		}
 
 	}
@@ -70,7 +70,7 @@ public class ShowNote extends BasicView {
 	@Override
 	public String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Note: " + n.getTitle();
+		return "Note: " + currentlyDisplayedNote.getTitle();
 	}
 
 	@Override
@@ -86,14 +86,14 @@ public class ShowNote extends BasicView {
 
 		alignPanel.add(title);
 		alignPanel.add(titleTextBox);
-		titleTextBox.setText(n.getTitle());
+		titleTextBox.setText(currentlyDisplayedNote.getTitle());
 		alignPanel.add(subtitle);
 		alignPanel.add(subtitleTextBox);
-		subtitleTextBox.setText(n.getSubtitle());
+		subtitleTextBox.setText(currentlyDisplayedNote.getSubtitle());
 		alignPanel.add(dueDate);
 		alignPanel.add(dueDateBox);
-		dueDateBox.setValue(n.getDueDate());
-		noteArea.setText(n.getContent());
+		dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
+		noteArea.setText(currentlyDisplayedNote.getContent());
 		grid.setWidget(0, 0, richTextToolbar);
 		noteArea.setSize("100%", "100%px");
 		grid.setWidget(1, 0, noteArea);
@@ -123,13 +123,10 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(mView);
-
-			ShareNote sN = new ShareNote(n);
+		
+			ShareShareable shareStuff = new ShareShareable(currentlyDisplayedNote);
 			RootPanel.get("main").clear();
-			RootPanel.get("main").add(sN);
+			RootPanel.get("main").add(shareStuff);
 
 		}
 
@@ -139,8 +136,8 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			if (Window.confirm("Möchten Sie die Notiz " + n.getTitle() + " wirklich löschen?")) {
-				editorVerwaltung.deleteNote(n, new DeleteCallback());
+			if (Window.confirm("Möchten Sie die Notiz " + currentlyDisplayedNote.getTitle() + " wirklich löschen?")) {
+				editorVerwaltung.deleteNote(currentlyDisplayedNote, new DeleteCallback());
 			}
 			MenuView navigation = new MenuView();
 			RootPanel.get("menu").clear();
@@ -183,14 +180,14 @@ public class ShowNote extends BasicView {
 	}
 
 	public void updateNote() {
-		n.setTitle(titleTextBox.getText());
-		n.setSubtitle(subtitleTextBox.getText());
-		n.setContent(noteArea.getText());
+		currentlyDisplayedNote.setTitle(titleTextBox.getText());
+		currentlyDisplayedNote.setSubtitle(subtitleTextBox.getText());
+		currentlyDisplayedNote.setContent(noteArea.getText());
 		java.util.Date utilDate = dueDateBox.getValue();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		n.setDueDate(sqlDate);
+		currentlyDisplayedNote.setDueDate(sqlDate);
 		// n.setNoteBook(nb);
-		editorVerwaltung.saveNote(n, new UpdateCallback());
+		editorVerwaltung.saveNote(currentlyDisplayedNote, new UpdateCallback());
 
 	}
 

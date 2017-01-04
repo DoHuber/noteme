@@ -54,4 +54,6 @@ public interface EditorAsync {
 
 	void getCurrentUser(AsyncCallback<UserInfo> callback);
 
+	void getAllEmails(AsyncCallback<Vector<String>> callback);
+
 }

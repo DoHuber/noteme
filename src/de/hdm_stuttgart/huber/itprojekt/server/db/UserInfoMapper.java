@@ -260,5 +260,27 @@ public class UserInfoMapper extends DataMapper {
 		return null;
 
 	}
+	
+	public Vector<String> getAllEmailAdresses() {
+		
+		Vector<String> v = new Vector<>();
+		
+		try {
+			
+			Statement s = connection.createStatement();
+			ResultSet rs = s.executeQuery("SELECT email FROM notizbuch.userinfo");
+			
+			while (rs.next()) {
+				v.add(rs.getString("email"));
+			}
+			
+			return v;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return v;
+	}
 
 }

@@ -314,4 +314,9 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	}
 
+	@Override
+	public Vector<String> getAllEmails() {
+		return userInfoMapper.getAllEmailAdresses();
+	}
+
 }

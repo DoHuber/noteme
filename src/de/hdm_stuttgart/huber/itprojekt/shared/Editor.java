@@ -65,9 +65,10 @@ public interface Editor extends RemoteService {
 
 	public UserInfo saveUser(UserInfo user);
 
-	// Nur zum Testen
 	public String getSource();
 
 	public UserInfo getCurrentUser();
+	
+	public Vector<String> getAllEmails();
 
 }
