@@ -9,19 +9,17 @@ public class HubersSpielWiese {
 
 	public HubersSpielWiese() {
 
-
-
 	}
 
 	public static void huberTest() {
 
-        DockLayoutPanel dockLayoutPanel = new DockLayoutPanel(Style.Unit.EM);
-        dockLayoutPanel.addNorth(new HTML("<b> Hier </b> steht dann ganz viel cooles!"), 4);
-        dockLayoutPanel.addSouth(new HTML("FOOT"), 4);
-        dockLayoutPanel.addWest(new HTML("NAVIGATION"), 10);
-        dockLayoutPanel.add(new HTML("Liste mit allen posts oder sowas"));
+		DockLayoutPanel dockLayoutPanel = new DockLayoutPanel(Style.Unit.EM);
+		dockLayoutPanel.addNorth(new HTML("<b> Hier </b> steht dann ganz viel cooles!"), 4);
+		dockLayoutPanel.addSouth(new HTML("FOOT"), 4);
+		dockLayoutPanel.addWest(new HTML("NAVIGATION"), 10);
+		dockLayoutPanel.add(new HTML("Liste mit allen posts oder sowas"));
 
-        RootPanel.get().add(dockLayoutPanel);
-    }
+		RootPanel.get().add(dockLayoutPanel);
+	}
 
 }

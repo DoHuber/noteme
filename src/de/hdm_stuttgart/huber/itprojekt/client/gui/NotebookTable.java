@@ -33,12 +33,10 @@ public class NotebookTable {
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private FlowPanel fPanel = new FlowPanel();
 	private FlowPanel buttonPanel = new FlowPanel();
+
 	/**
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 	 */
-	
-	
-	private NoteBook notebook=null;
 	private NoteBook selected = null;
 	private Vector<NoteBook> noteB;
 	DataGrid<NoteBook> table = new DataGrid<NoteBook>();
@@ -68,7 +66,7 @@ public class NotebookTable {
 
 			@Override
 			public String getValue(NoteBook noteB) {
-				
+
 				return noteB.getTitle();
 			}
 		};
@@ -83,7 +81,7 @@ public class NotebookTable {
 			}
 		};
 		table.addColumn(subtitle, "Subtitle");
-		
+
 		TextColumn<NoteBook> creationDate = new TextColumn<NoteBook>() {
 
 			@Override
@@ -93,7 +91,7 @@ public class NotebookTable {
 			}
 		};
 		table.addColumn(creationDate, "Creation Date");
-		
+
 		table.setRowCount(noteB.size(), false);
 		table.setWidth("80%");
 		table.setVisibleRange(0, noteB.size());
@@ -101,29 +99,31 @@ public class NotebookTable {
 		LayoutPanel panel = new LayoutPanel();
 		panel.setSize("60em", "40em");
 		panel.add(table);
-	
+
 		table.setStyleName("googleTable");
-		
+
 		fPanel.add(buttonPanel);
 		fPanel.add(panel);
 
 		return fPanel;
 	}
 
-	private class DeleteClickHandler implements ClickHandler{
+	@SuppressWarnings("unused")
+	private class DeleteClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
 			/**
 			 * Sicherheitsfunktion. Soll das Notizbuch wirklich gelöscht werden?
 			 */
-		if (Window.confirm("Wollen Sie das notizbuch löschen?")){
-			fPanel.add(new HTML("<p> Das Notizbuch wurde gelöscht</p>"));
+			if (Window.confirm("Wollen Sie das notizbuch löschen?")) {
+				fPanel.add(new HTML("<p> Das Notizbuch wurde gelöscht</p>"));
+			}
+
 		}
-			
-		}
-		
+
 	}
+
 	/**
 	 * Ein angeklicktes Notizbuch wird angezeigt
 	 */
@@ -134,21 +134,22 @@ public class NotebookTable {
 		selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
 	}
 
-	private class SelectionChangeHandler implements Handler{
+	private class SelectionChangeHandler implements Handler {
 		private final SingleSelectionModel<NoteBook> selection;
-		private SelectionChangeHandler(SingleSelectionModel<NoteBook> selection){
-			this.selection=selection;
+
+		private SelectionChangeHandler(SingleSelectionModel<NoteBook> selection) {
+			this.selection = selection;
 		}
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
 			selected = selection.getSelectedObject();
 			ShowNotebook sn = new ShowNotebook(selected);
-			
+
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sn);
-			
-			
-		}}
+
+		}
+	}
 
 }

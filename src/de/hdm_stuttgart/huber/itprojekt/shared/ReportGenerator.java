@@ -3,7 +3,6 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
@@ -30,7 +29,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
  * dem Anwendungsfall entsprechende Parameterliste. Diese Parameter benötigt der
  * der Generator, um den Report erstellen zu können.
  * </p>
- * <p> 
+ * <p>
  * Bei neu hinzukommenden Bedarfen an Berichten, kann diese Klasse auf einfache
  * Weise erweitert werden. Hierzu können zusätzliche <code>create...</code>
  * -Methoden implementiert werden. Die bestehenden Methoden bleiben davon
@@ -42,29 +41,17 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 @RemoteServiceRelativePath("generator")
 public interface ReportGenerator extends RemoteService {
 
+	public void init() throws IllegalArgumentException;
 
-  public void init() throws IllegalArgumentException;
+	public abstract AllUserNotebooksR createAllUserNotebooksR() throws IllegalArgumentException;
 
+	public abstract AllNotebooksR createAllNotebooksR() throws IllegalArgumentException;
 
-  public void create(UserInfo uI) throws IllegalArgumentException;
+	public abstract AllUserNotesR createAllUserNotesR() throws IllegalArgumentException;
 
+	public abstract AllNotesR createAllNotesR() throws IllegalArgumentException;
 
-  public abstract AllUserNotebooksR createAllUserNotebooksR(
-      UserInfo u) throws IllegalArgumentException;
-
-
-  public abstract AllNotebooksR createAllNotebooksR()
-      throws IllegalArgumentException;
-  
-  
-  public abstract AllUserNotesR createAllUserNotesR(
-  		UserInfo u) throws IllegalArgumentException;
-  
-  public abstract AllNotesR createAllNotesR() throws IllegalArgumentException;
-  
-  public abstract AllUserPermissionsR createAllUserPermissionsR(
-			UserInfo u) throws IllegalArgumentException;
+	public abstract AllUserPermissionsR createAllUserPermissionsR() throws IllegalArgumentException;
 
 	public abstract AllPermissionsR createAllPermissionsR() throws IllegalArgumentException;
 }
-

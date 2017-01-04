@@ -4,7 +4,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
- * Basisklasse 
+ * Basisklasse
+ * 
  * @author Nikita Nalivayko
  *
  */
@@ -17,14 +18,12 @@ public abstract class BasicView extends FlowPanel {
 	@Override
 	public void onLoad() {
 		super.onLoad();
-	//	RootPanel.get("main").clear();
+		// RootPanel.get("main").clear();
 		this.add(createHeadline(getHeadlineText(), getSubHeadlineText()));
-		
+
 		run();
 
 	}
-
-	
 
 	/**
 	 * 
@@ -46,10 +45,11 @@ public abstract class BasicView extends FlowPanel {
 		headline.setHTML("<h1>" + header + "</h1><h2>" + subHeader + "</h2>");
 		return headline;
 	}
+
 	/**
-	 * Abstrakte Einschubmethoden, die in den Subklassen zu realisieren sind. 
+	 * Abstrakte Einschubmethoden, die in den Subklassen zu realisieren sind.
 	 */
-	
+
 	public abstract String getHeadlineText();
 
 	public abstract String getSubHeadlineText();

@@ -2,6 +2,11 @@ package de.hdm_stuttgart.huber.itprojekt.server;
 
 public class InvalidLoginStatusException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6623416840322170431L;
+
 	public InvalidLoginStatusException() {
 		// TODO Auto-generated constructor stub
 	}

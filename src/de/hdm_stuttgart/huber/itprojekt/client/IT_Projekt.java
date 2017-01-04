@@ -5,7 +5,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.media.client.Audio;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -17,7 +16,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 /**
@@ -41,9 +39,9 @@ public class IT_Projekt implements EntryPoint {
 	private Button btn = new Button("Save");
 
 	public void onModuleLoad() {
-		
-		//	Logger l = Logger.getLogger("test");
-	//	l.log(Level.INFO, "Servus i bims");
+
+		// Logger l = Logger.getLogger("test");
+		// l.log(Level.INFO, "Servus i bims");
 
 		GWT.log("Servus i bims");
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
@@ -90,7 +88,7 @@ public class IT_Projekt implements EntryPoint {
 
 	private void checkIfNewNote() {
 
-		editorVerwaltung.getSource(new AsyncCallback<String>(){
+		editorVerwaltung.getSource(new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -138,7 +136,8 @@ public class IT_Projekt implements EntryPoint {
 		RootPanel.get("menu").add(loginPanel);
 
 	}
-	public void createUser(){
+
+	public void createUser() {
 		user.add(name);
 		user.add(nameBox);
 		user.add(name2);

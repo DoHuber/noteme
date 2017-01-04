@@ -18,6 +18,11 @@ import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
 /**
@@ -118,6 +123,13 @@ public class NoteMeReport implements EntryPoint {
 
 	}
 
+	/**
+	 * Diese Nested Class wird als Callback für das Erzeugen des
+	 * AllAccountOfAllCustomersReport benötigt.
+	 * 
+	 * @author rathke
+	 * @version 1.0
+	 */
 	class createAllNotebooksRCallback implements AsyncCallback<AllNotebooksR> {
 
 		@Override
@@ -140,10 +152,155 @@ public class NoteMeReport implements EntryPoint {
 
 				HTMLReportWriter writer = new HTMLReportWriter();
 				String html = writer.simpleReport2HTML(report);
-				
+
 				RootPanel.get("main").clear();
 				RootPanel.get("main").add(new HTML(html));
-				
+
+			}
+		}
+
+	}
+
+	class createAllUserNotebooksRCallback implements AsyncCallback<AllUserNotebooksR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllUserNotebooksR report) {
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+
+			}
+		}
+
+	}
+
+	class createAllNotesRCallback implements AsyncCallback<AllNotesR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllNotesR report) {
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+
+			}
+		}
+
+	}
+
+	class createAllUserNotesRCallback implements AsyncCallback<AllUserNotesR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllUserNotesR report) {
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+
+			}
+		}
+
+	}
+
+	class createAllPermissionsRCallback implements AsyncCallback<AllPermissionsR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllPermissionsR report) {
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+
+			}
+		}
+
+	}
+
+	class createAllUserPermissionsRCallback implements AsyncCallback<AllUserPermissionsR> {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			/*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+			GWT.log("Erzeugen des Reports fehlgeschlagen!");
+			GWT.log(caught.toString());
+		}
+
+		@Override
+		public void onSuccess(AllUserPermissionsR report) {
+			GWT.log("onSuccess reached!");
+			GWT.log(report.toString());
+			if (report != null) {
+
+				HTMLReportWriter writer = new HTMLReportWriter();
+				String html = writer.simpleReport2HTML(report);
+
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new HTML(html));
+
 			}
 		}
 

@@ -17,6 +17,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 public class HelloWorld extends BasicView {
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	HorizontalPanel hPanel = new HorizontalPanel();
+
 	@Override
 	public String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -26,41 +27,37 @@ public class HelloWorld extends BasicView {
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "GetHelloWorld Methode der Klasse EditorImpl wird getestet" ;
+		return "GetHelloWorld Methode der Klasse EditorImpl wird getestet";
 	}
 
 	@Override
 	public void run() {
-		
-		
+
 		sayHello();
-		
-		
+
 	}
 
-
-	private void  sayHello() {
+	private void sayHello() {
 		editorVerwaltung.getHelloWorld(new HelloCallback());
-		
-		
+
 	}
-	
-	private class HelloCallback implements AsyncCallback<String>{
+
+	private class HelloCallback implements AsyncCallback<String> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			RootPanel.get().clear();
-			
+
 		}
 
 		@Override
 		public void onSuccess(String result) {
-			String hello =result;
+			String hello = result;
 			hPanel.add(new HTML(hello));
 			RootPanel.get().add(hPanel);
-			
+
 		}
-		
+
 	}
 
 }

@@ -38,16 +38,9 @@ public interface EditorAsync {
 
 	void getAllNoteBooksForCurrentUser(AsyncCallback<Vector<NoteBook>> callback);
 
-	void getAllNoteUser(AsyncCallback<Vector<UserInfo>> callback);
-
-	void create(UserInfo u,AsyncCallback<Vector<UserInfo>> callback);
-
-	void getTitle(NoteBook nb, AsyncCallback<String> callback);
-
-	void getUserById(int id, AsyncCallback<UserInfo> callback);
-
 	void getAllFrom(NoteBook nb, AsyncCallback<Vector<Note>> callback);
-	void saveUser (UserInfo user, AsyncCallback<UserInfo> callback);
+
+	void saveUser(UserInfo user, AsyncCallback<UserInfo> callback);
 
 	void getAllSharedNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
 
