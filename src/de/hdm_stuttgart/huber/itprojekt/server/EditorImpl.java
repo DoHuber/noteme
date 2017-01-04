@@ -321,4 +321,20 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		return noteMapper.getAllNotesForUser(currentUser.getId());
 	}
 
+	@Override
+	public void deleteUserInfo(UserInfo ui) {
+		// TODO Auto-generated method stub
+		Vector<NoteBook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());
+		for (NoteBook nb : vector) {
+			deleteNoteBook(nb);
+		}
+				
+	Vector<Note> vectorNotes = noteMapper.getAllNotesForUserId(ui.getId());
+		for (Note n : vectorNotes) {
+			deleteNote(n);
+	}
+
+	deleteUserInfo(ui);
+	}
+
 }
