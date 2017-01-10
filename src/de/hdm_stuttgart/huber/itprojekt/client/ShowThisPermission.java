@@ -9,9 +9,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
@@ -31,7 +29,6 @@ public class ShowThisPermission extends BasicView {
 	private Permission p;
 	private Note note;
 	private NoteBook notebook;
-	private boolean selected = true;
 
 	public ShowThisPermission() {
 

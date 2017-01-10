@@ -30,7 +30,6 @@ public class ShowNotebook extends BasicView {
 	/**
 	 * Funktionen: Löschen, Editieren, Freigeben,
 	 */
-	private HorizontalPanel horizontalPanel = new HorizontalPanel();
 	private Button deleteButton = new Button(IconConstants.ICON_DELETE);
 	private Button updateConfirmButton = new Button("Save");
 	private Button shareButton = new Button(IconConstants.ICON_SHARE);
