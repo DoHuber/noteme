@@ -31,7 +31,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 public class NoteMeReport implements EntryPoint {
 
 	ReportGeneratorAsync reportGenerator;
-	Button showReportButton;
+
 	private UserInfo userInfo = null;
 	private VerticalPanel loginPanel = new VerticalPanel();
 	private Label loginLabel = new Label(
@@ -88,25 +88,11 @@ public class NoteMeReport implements EntryPoint {
 			reportGenerator = ClientsideSettings.getReportGenerator();
 		}
 
-		showReportButton = new Button("Irgendwas anziegen ahh!!");
+	
 
-		GWT.log(reportGenerator.toString());
-		GWT.log(showReportButton.toString());
 
-		showReportButton.setStylePrimaryName("bankproject-menubutton");
-		showReportButton.addClickHandler(new ClickHandler() {
 
-			@Override
-			public void onClick(ClickEvent event) {
 
-				GWT.log("Onclick fired!");
-				reportGenerator.createAllNotebooksR(new createAllNotebooksRCallback());
-
-			}
-
-		});
-
-		RootPanel.get("menu").add(showReportButton);
 
 		ShowReportDemo navigation = new ShowReportDemo();
 		ShowReportDemo.setLogOutUrl(userInfo.getLogoutUrl());
