@@ -55,4 +55,5 @@ public interface EditorAsync {
 
 	void getCurrentUser(AsyncCallback<UserInfo> callback);
 
+	void deleteUserInfo(UserInfo ui, AsyncCallback<Void> callback);
 }

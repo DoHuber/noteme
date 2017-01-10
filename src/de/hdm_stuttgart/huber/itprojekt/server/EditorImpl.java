@@ -321,4 +321,40 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		return noteMapper.getAllNotesForUser(currentUser.getId());
 	}
 
+	@Override
+	public void deleteUserInfo(UserInfo ui) {
+		// TODO Auto-generated method stub
+		Vector<NoteBook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());
+		for (NoteBook nb : vector) {
+			deleteNoteBook(nb);
+		}
+				
+		Vector<Note> vectorNotes = noteMapper.getAllNotesForUserId(ui.getId());
+		for (Note n : vectorNotes) {
+			deleteNote(n);
+		}
+		
+		Vector<Permission> vectorPermissions = permissionMapper.getAllPermissionsCreatedBy(ui);
+		for (Permission p : vectorPermissions) {
+			permissionMapper.deletePermission(p);
+		}
+		
+		Vector<Permission> vectorPerm = permissionMapper.getAllPermissionsFor(ui);
+		for (Permission p : vectorPerm) {
+			permissionMapper.deletePermission(p);
+		}
+		
+		
+		
+		try {
+			userInfoMapper.delete(ui);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

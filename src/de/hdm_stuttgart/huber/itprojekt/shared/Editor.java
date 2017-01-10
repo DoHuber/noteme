@@ -70,4 +70,6 @@ public interface Editor extends RemoteService {
 
 	public UserInfo getCurrentUser();
 
+	void deleteUserInfo(UserInfo ui);
+
 }
