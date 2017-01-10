@@ -62,6 +62,7 @@ public class MenuView extends VerticalPanel {
 		Anchor showPermission = new Anchor("Shared stuff");
 		Anchor account = new Anchor("Account");
 		Anchor reportAnchor = new Anchor("ReportGenerator");
+		Anchor embedAnchor = new Anchor("Embed");
 
 		logoutAnchor = new Anchor("Log out");
 		logoutAnchor.setHref(logOutUrl);
@@ -74,6 +75,7 @@ public class MenuView extends VerticalPanel {
 		account.getElement().getStyle().setColor("#660033");
 		reportAnchor.getElement().getStyle().setColor("#660033");
 		logoutAnchor.getElement().getStyle().setColor("#660033");
+		embedAnchor.getElement().getStyle().setColor("#660033");
 
 		// Test
 		// Anchor hello = new Anchor("Say Hello");
@@ -99,6 +101,9 @@ public class MenuView extends VerticalPanel {
 
 		reportAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(reportAnchor));
+		
+		embedAnchor.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(embedAnchor));
 
 		logoutAnchor.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(logoutAnchor));
@@ -122,6 +127,18 @@ public class MenuView extends VerticalPanel {
 		account.addClickHandler(new AccountHandler());
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
+		
+		embedAnchor.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new EmbedCode());
+				
+			}
+		
+		});
 
 
 
