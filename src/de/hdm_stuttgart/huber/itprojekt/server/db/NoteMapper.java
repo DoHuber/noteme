@@ -20,11 +20,19 @@ public class NoteMapper extends DataMapper {
 	}
 
 	// Öffentliche Methode um den Singleton-NoteMapper zu erhalten
-	public static NoteMapper getNoteMapper() throws ClassNotFoundException, SQLException {
+	public static NoteMapper getNoteMapper() {
 
 		if (noteMapper == null) {
 
-			noteMapper = new NoteMapper();
+			try {
+				noteMapper = new NoteMapper();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 
@@ -199,6 +207,24 @@ public class NoteMapper extends DataMapper {
 
 		return new Vector<Note>();
 
+	}
+	public Vector<Note> getAllNotesForUser(int userId){
+		try {
+
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE author_id = ? AND due_date >=NOW() ORDER BY due_date LIMIT 5");
+			stmt.setInt(1, userId);
+
+			ResultSet rs = stmt.executeQuery();
+
+			return makeNotesFromResultSet(rs);
+
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return new Vector<Note>();
+	
+		
 	}
 
 	public Vector<Note> getAllNotesForNoteBookId(int id) {

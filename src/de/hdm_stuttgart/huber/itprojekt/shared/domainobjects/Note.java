@@ -66,6 +66,15 @@ public class Note extends DomainObject implements Shareable {
 				+ "] </p>";
 	}
 	
+	public boolean isThisDue() {
+		Date now = new Date(System.currentTimeMillis());
+		if (now.after(dueDate)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public boolean hasRuntimePermission() {
 		if (this.runTimePermission == null) {
 			return false;

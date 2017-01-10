@@ -1,8 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
@@ -67,9 +67,6 @@ public class CreateNotebook extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 			createNotebook();
-			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
 
 		}
 	}
@@ -93,18 +90,25 @@ public class CreateNotebook extends BasicView {
 	 *
 	 */
 	private class CreateNotebookCallback implements AsyncCallback<NoteBook> {
+		
+		private Notificator notificator = Notificator.getNotificator();
 
 		@Override
 		public void onFailure(Throwable caught) {
 
-			caught.printStackTrace();
-
+			notificator.showError("Erstellen fehlgeschlagen.");
+			GWT.log(caught.toString());
+			
 		}
 
 		@Override
 		public void onSuccess(NoteBook result) {
 
-			Window.alert("This worked");
+			notificator.showSuccess("NoteBook " + result.getTitle() + " created successfully.");
+			
+			ShowAllNotebooks san = new ShowAllNotebooks();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 
 		}
 

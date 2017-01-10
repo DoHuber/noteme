@@ -8,7 +8,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -20,6 +19,8 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
 public class ShowNotebook extends BasicView {
 
@@ -29,7 +30,6 @@ public class ShowNotebook extends BasicView {
 	/**
 	 * Funktionen: Löschen, Editieren, Freigeben,
 	 */
-	private HorizontalPanel horizontalPanel = new HorizontalPanel();
 	private Button deleteButton = new Button(IconConstants.ICON_DELETE);
 	private Button updateConfirmButton = new Button("Save");
 	private Button shareButton = new Button(IconConstants.ICON_SHARE);
@@ -37,54 +37,91 @@ public class ShowNotebook extends BasicView {
 	private Button createButton = new Button(IconConstants.ICON_ADD_NOTE);
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	
-	NoteBook nb = null;
+	NoteBook displayedNoteBook = new NoteBook();
 	private TextBox title = new TextBox();
 	private TextBox subtitle = new TextBox();
 	AllNotesCallback callback = new AllNotesCallback();
 
 	private Vector<Note> notes = new Vector<Note>();
+	private HorizontalPanel actionButtons;
+	private VerticalPanel titlesEditInterface;
+	private HorizontalPanel wrapper = new HorizontalPanel();
 
-	public ShowNotebook(NoteBook selected) {
-		this.nb = selected;
+	public ShowNotebook(NoteBook noteBookToDisplay) {
+		this.displayedNoteBook = noteBookToDisplay;
 	}
 
 	@Override
 	public String getHeadlineText() {
 
-		return "Notizbuch: " + nb.getTitle();
+		return "Notizbuch: " + displayedNoteBook.getTitle();
 	}
 
 	@Override
 	public String getSubHeadlineText() {
-		// TODO Auto-generated method stub
-		// return "Subtitle: " + nb.getSubtitle();
-		return null;
+		
+		return "Subtitle: " + displayedNoteBook.getSubtitle();
+	
 	}
 
 	@Override
 	public void run() {
 		
 		setupButtonClickHandlers();
-		HorizontalPanel actionButtons = setupActionButtons();
-		VerticalPanel editField = setupEditField();
 		
-		HorizontalPanel wrapper = new HorizontalPanel();
-		wrapper.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		wrapper.add(actionButtons);
-		wrapper.add(editField);
-		wrapper.setWidth("100%");
+		actionButtons = setupActionButtons();
+		titlesEditInterface = setupEditField();
 		
+		setUpLayoutWithWrapperPanel();
+		
+		addEverythingToRootPanel();
+	
+		
+		if (displayedNoteBook.hasRuntimePermission()) {
+			setUpForPermissions();
+		}
+		
+		editorVerwaltung.getAllFrom(displayedNoteBook, callback);
+	}
+	
+	private void setUpForPermissions() {
+		
+		shareButton.setEnabled(false);
+		Permission p = displayedNoteBook.getRuntimePermission();
+		
+		if (!p.isUserAllowedTo(Level.DELETE)) {
+			deleteButton.setEnabled(false);
+		}
+		
+		if (!p.isUserAllowedTo(Level.EDIT)) {
+			createButton.setEnabled(false);
+			title.setEnabled(false);
+			subtitle.setEnabled(false);
+			updateConfirmButton.setVisible(false);
+		}
+		
+	}
+
+	private void addEverythingToRootPanel() {
 		RootPanel.get("main").add(wrapper);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
-		
-		editorVerwaltung.getAllFrom(nb, callback);
+	}
+
+	private void setUpLayoutWithWrapperPanel() {
+		wrapper.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		wrapper.add(actionButtons);
+		wrapper.add(titlesEditInterface);
+		wrapper.setWidth("100%");
 	}
 	
 	private VerticalPanel setupEditField() {
 		
-		title.setText(nb.getTitle());
-		subtitle.setText(nb.getSubtitle());
+		title.setTitle("Title");
+		subtitle.setTitle("Subtitle");
+		
+		title.setValue(displayedNoteBook.getTitle());
+		subtitle.setValue(displayedNoteBook.getSubtitle());
 		
 		VerticalPanel vp = new VerticalPanel();
 		vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
@@ -98,7 +135,7 @@ public class ShowNotebook extends BasicView {
 
 	private void setupButtonClickHandlers() {
 		deleteButton.addClickHandler(new DeleteClickHandler());
-		shareButton.addClickHandler(new ShareNotebookClickHndler());
+		shareButton.addClickHandler(new ShareNotebookClickHandler());
 		createButton.addClickHandler(new CreateNoteClickHandler());
 		updateConfirmButton.addClickHandler(new UpdateClickHandler());
 	}
@@ -130,41 +167,46 @@ public class ShowNotebook extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			if (Window.confirm("Möchten Sie das Notizbuch " + nb.getTitle() + " wirklich löschen?")) {
-				editorVerwaltung.deleteNoteBook(nb, new DeleteCallback());
+			
+			// TODO AlertDialog statt Window. -> Bekannte GWT-Issue, friert alles ein im Super Dev Mode
+			// Wegen nichtkonformer JavaScript-Implementation in Firefox (Es ist 2017!!)
+			if (Window.confirm("Möchten Sie das Notizbuch " + displayedNoteBook.getTitle() + " wirklich löschen?")) {
+				editorVerwaltung.deleteNoteBook(displayedNoteBook, new DeleteCallback());
 			}
-			MenuView navigation = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(navigation);
-
-			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
-
+			
 		}
 	}
 
 	public void addNotesToTable(Vector<Note> result) {
+		
 		notes = result;
+		
 		NoteTable nt = new NoteTable(notes);
 		nt.addClickNote();
-		// RootPanel.get("main").clear();
 		RootPanel.get("tableNotebook").add(nt.start());
-		// RootPanel.get("table").clear();
-		// RootPanel.get("table").add(nt.start());
+	
 	}
 
 	private class DeleteCallback implements AsyncCallback<Void> {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			caught.printStackTrace();
-			horizontalPanel.add(new Label(caught.toString()));
-
+			Notificator.getNotificator().showError("Löschen des Notizbuches fehlgeschlagen!");
+			GWT.log(caught.toString());
 		}
 
 		@Override
 		public void onSuccess(Void result) {
+			Notificator.getNotificator().showSuccess("Notizbuch gelöscht.");
+			
+			// Das muss hier geschehen, da sonst eine Race Condition
+			// zwischen Delete-Callback und ShowAllNotes-Callback auftritt,
+			// die zu "Geisternotizbüchern" führen kann, d.h. es werden eigentlich gelöschte
+			// Notizbücher clientseitig noch angezeigt, da der ShowAllNotes-Callback schneller
+			// als der Delete-Callback war
+			ShowAllNotebooks san = new ShowAllNotebooks();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 
 		}
 	}
@@ -177,9 +219,9 @@ public class ShowNotebook extends BasicView {
 			if (Window.confirm("Möchten Sie die Änderungen speichern?")) {
 
 			}
-			nb.setTitle(title.getText());
-			nb.setSubtitle(subtitle.getText());
-			editorVerwaltung.saveNoteBook(nb, new UpdateCallback());
+			displayedNoteBook.setTitle(title.getText());
+			displayedNoteBook.setSubtitle(subtitle.getText());
+			editorVerwaltung.saveNoteBook(displayedNoteBook, new UpdateCallback());
 
 		}
 
@@ -195,7 +237,8 @@ public class ShowNotebook extends BasicView {
 
 		@Override
 		public void onSuccess(NoteBook result) {
-			Window.alert("Saved");
+			
+			Notificator.getNotificator().showSuccess("NoteBook " + result.getTitle() + " was saved.");
 
 		}
 
@@ -209,22 +252,19 @@ public class ShowNotebook extends BasicView {
 			RootPanel.get("menu").clear();
 			RootPanel.get("menu").add(mView);
 
-			CreateNote cN = new CreateNote(nb);
+			CreateNote cN = new CreateNote(displayedNoteBook);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(cN);
 
 		}
 	}
 
-	private class ShareNotebookClickHndler implements ClickHandler {
+	private class ShareNotebookClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(mView);
-
-			ShareNotebook sNb = new ShareNotebook(nb);
+			
+			ShareShareable sNb = new ShareShareable(displayedNoteBook);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sNb);
 

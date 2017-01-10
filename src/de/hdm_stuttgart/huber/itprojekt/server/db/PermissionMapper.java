@@ -218,6 +218,24 @@ public class PermissionMapper extends DataMapper {
 
 	}
 
+	public Vector<Permission> getAllPermissionsFor(UserInfo u) {
+
+		try {
+
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * FROM notizbuch.permission " + "WHERE beneficiary_id = ?");
+			ps.setInt(1, u.getId());
+
+			return makeFromResultSet(ps.executeQuery());
+
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+	
 	public void savePermission(Permission p) {
 
 		try {

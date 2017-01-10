@@ -11,7 +11,7 @@ public class IconConstants {
 	
 
 	private IconConstants() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

@@ -41,6 +41,14 @@ public class NoteBook extends DomainObject implements Shareable {
 	public NoteBook(int id) {
 		this.id = id;
 	}
+	
+	public boolean hasRuntimePermission() {
+		if (this.runTimePermission == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	@Override
 	public String toString() {

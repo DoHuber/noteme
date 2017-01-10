@@ -39,17 +39,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public void init() throws IllegalArgumentException {
 
-		try {
 			this.noteMapper = NoteMapper.getNoteMapper();
 			this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
 			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
 			this.permissionMapper = PermissionMapper.getPermissionMapper();
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
 	}
 
@@ -312,6 +305,74 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 		return source;
 
+	}
+
+	@Override
+	public Vector<String> getAllEmails() {
+		return userInfoMapper.getAllEmailAdresses();
+	}
+
+	@Override
+	public Vector<Note> getAllNotesForUser() {
+
+		UserInfo currentUser = getCurrentUser();
+		return noteMapper.getAllNotesForUser(currentUser.getId());
+	}
+
+	@Override
+	public void deleteUserInfo(UserInfo ui) {
+		// TODO Auto-generated method stub
+		Vector<NoteBook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());
+		for (NoteBook nb : vector) {
+			deleteNoteBook(nb);
+		}
+
+		Vector<Note> vectorNotes = noteMapper.getAllNotesForUserId(ui.getId());
+		for (Note n : vectorNotes) {
+			deleteNote(n);
+		}
+
+		Vector<Permission> vectorPermissions = permissionMapper.getAllPermissionsCreatedBy(ui);
+		for (Permission p : vectorPermissions) {
+			permissionMapper.deletePermission(p);
+		}
+
+		Vector<Permission> vectorPerm = permissionMapper.getAllPermissionsFor(ui);
+		for (Permission p : vectorPerm) {
+			permissionMapper.deletePermission(p);
+		}
+
+
+
+		try {
+			userInfoMapper.delete(ui);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public Vector<Note> getDueNotesForCurrentUser() {
+		
+		// TODO performanter implementieren mit eigener Mapper-Funktion
+		
+		Date today = new Date(System.currentTimeMillis());
+		Vector<Note> dueNotes = new Vector<>();
+		
+		for (Note n : getAllNotesForCurrentUser()) {
+			
+			if (n.getDueDate().before(today) || n.getDueDate().equals(today)) {
+				dueNotes.add(n);
+			}
+			
+		}
+		
+		return dueNotes;
+		
 	}
 
 }

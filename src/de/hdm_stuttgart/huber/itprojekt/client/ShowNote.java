@@ -18,6 +18,8 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
 public class ShowNote extends BasicView {
 	/**
@@ -46,23 +48,25 @@ public class ShowNote extends BasicView {
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
 	private Grid grid = new Grid(2, 1);
-	private Note n = null;
+	private Note currentlyDisplayedNote = null;
+	
+	
 
 	public ShowNote() {
 
 	}
 
 	public ShowNote(Note note) {
-		this.n = note;
+		this.currentlyDisplayedNote = note;
 
 	}
 
 	@Override
 	public String getSubHeadlineText() {
-		if (n.getNoteBook() == null) {
+		if (currentlyDisplayedNote.getNoteBook() == null) {
 			return "There is no notebook deposited for the note.";
 		} else {
-			return "Notebook:" + n.getNoteBook().getTitle();
+			return "Notebook:" + currentlyDisplayedNote.getNoteBook().getTitle();
 		}
 
 	}
@@ -70,66 +74,125 @@ public class ShowNote extends BasicView {
 	@Override
 	public String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Note: " + n.getTitle();
+		return "Note: " + currentlyDisplayedNote.getTitle();
 	}
 
 	@Override
 	public void run() {
-
-		// ButtonPanel buttonPanel = new ButtonPanel();
-		HorizontalPanel buttonPanel = new HorizontalPanel();
-		buttonPanel.add(shareButton);
-		buttonPanel.add(deleteButton);
-		deleteButton.addClickHandler(new DeleteClickHandler());
-		shareButton.addClickHandler(new ShareClickHandler());
-		alignPanel.add(empty);
-
-		alignPanel.add(title);
-		alignPanel.add(titleTextBox);
-		titleTextBox.setText(n.getTitle());
-		alignPanel.add(subtitle);
-		alignPanel.add(subtitleTextBox);
-		subtitleTextBox.setText(n.getSubtitle());
-		alignPanel.add(dueDate);
-		alignPanel.add(dueDateBox);
-		dueDateBox.setValue(n.getDueDate());
-		noteArea.setText(n.getContent());
-		grid.setWidget(0, 0, richTextToolbar);
-		noteArea.setSize("100%", "100%px");
-		grid.setWidget(1, 0, noteArea);
-
-		alignPanel.add(updateConfirmButton);
-		updateConfirmButton.addClickHandler(new UpdateClickHandler());
-
-		contentPanel.add(alignPanel);
-		contentPanel.add(grid);
-		noteArea.setStyleName("noteArea");
-	
-
-		shareButton.setStyleName("pure-button");
-		deleteButton.setStyleName("pure-button");
-		updateConfirmButton.setStyleName("pure-button");
+		
+		setUpButtons();
+		
+		setUpButtonPanel();
+		
+		setUpPanels();
 
 		empty.getElement().getStyle().setColor("#660033");
 
-		RootPanel.get("main").add(buttonPanel);
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		
+		if(currentlyDisplayedNote.hasRuntimePermission()) {
+			processNoteWithPermissions();
+		}
+		
+	}
+	
+	private void processNoteWithPermissions() {
+		
+		shareButton.setEnabled(false);
+		
+		Permission p = currentlyDisplayedNote.getRuntimePermission();
+		if (!p.isUserAllowedTo(Level.DELETE)) {
+			deleteButton.setEnabled(false);
+		}
+		
+		if (!p.isUserAllowedTo(Level.EDIT)) {
+			disableEditFields();
+		}
+		
+		// Fehlerkondition: User darf dann eigentlich gar nicht hier sein
+		if (!p.isUserAllowedTo(Level.READ)) {
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(new ShowAllNotes());
+		}
+		
+		
+	}
+	
+	private void disableEditFields() {
+		
+		titleTextBox.setEnabled(false);
+		subtitleTextBox.setEnabled(false);
+		dueDateBox.setEnabled(false);
+		updateConfirmButton.setVisible(false);
+		noteArea.setEnabled(false);
+		
+	}
 
+	private void setUpPanels() {
+	
+		populateAndDisplayTitles();
+		setUpAlignPanel();
+		setUpContentPanel();
+		
+	}
+
+	private void setUpAlignPanel() {
+		alignPanel.add(empty);
+		alignPanel.add(dueDate);
+		alignPanel.add(dueDateBox);
+		alignPanel.add(updateConfirmButton);
+		dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
+	}
+
+	private void setUpContentPanel() {
+		noteArea.setText(currentlyDisplayedNote.getContent());
+		noteArea.setSize("100%", "100%px");
+		noteArea.setStyleName("noteArea");
+		
+		grid.setWidget(1, 0, noteArea);
+		grid.setWidget(0, 0, richTextToolbar);
+		contentPanel.add(alignPanel);
+		contentPanel.add(grid);
+	}
+
+	private void populateAndDisplayTitles() {
+		alignPanel.add(title);
+		alignPanel.add(titleTextBox);
+		titleTextBox.setText(currentlyDisplayedNote.getTitle());
+		alignPanel.add(subtitle);
+		alignPanel.add(subtitleTextBox);
+		subtitleTextBox.setText(currentlyDisplayedNote.getSubtitle());
+	}
+
+	private void setUpButtonPanel() {
+		// ButtonPanel
+		HorizontalPanel buttonPanel = new HorizontalPanel();
+		buttonPanel.add(shareButton);
+		buttonPanel.add(deleteButton);
+		RootPanel.get("main").add(buttonPanel);
+	}
+
+	private void setUpButtons() {
+		// Buttons
+		deleteButton.addClickHandler(new DeleteClickHandler());
+		shareButton.addClickHandler(new ShareClickHandler());
+		updateConfirmButton.addClickHandler(new UpdateClickHandler());
+		
+		shareButton.setStyleName("pure-button");
+		deleteButton.setStyleName("pure-button");
+		updateConfirmButton.setStyleName("pure-button");
 	}
 
 	private class ShareClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(mView);
-
-			ShareNote sN = new ShareNote(n);
+		
+			ShareShareable shareStuff = new ShareShareable(currentlyDisplayedNote);
 			RootPanel.get("main").clear();
-			RootPanel.get("main").add(sN);
+			RootPanel.get("main").add(shareStuff);
 
 		}
 
@@ -139,16 +202,10 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			if (Window.confirm("Möchten Sie die Notiz " + n.getTitle() + " wirklich löschen?")) {
-				editorVerwaltung.deleteNote(n, new DeleteCallback());
+			
+			if (Window.confirm("Möchten Sie die Notiz " + currentlyDisplayedNote.getTitle() + " wirklich löschen?")) {
+				editorVerwaltung.deleteNote(currentlyDisplayedNote, new DeleteCallback());
 			}
-			MenuView navigation = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(navigation);
-
-			ShowAllNotes san = new ShowAllNotes();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
 
 		}
 
@@ -156,16 +213,23 @@ public class ShowNote extends BasicView {
 
 	private class DeleteCallback implements AsyncCallback<Void> {
 
+		Notificator n = Notificator.getNotificator();
+		
 		@Override
 		public void onFailure(Throwable caught) {
-			caught.printStackTrace();
-			contentPanel.add(new Label(caught.toString()));
-
+			
+			n.showError("Fehler! Grund:" + caught.toString());
+			
 		}
 
 		@Override
 		public void onSuccess(Void result) {
-
+			
+			n.showSuccess("Notiz" + currentlyDisplayedNote.getTitle() + " wurde gelöscht");
+			
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(new ShowAllNotes());
+			
 		}
 
 	}
@@ -183,22 +247,25 @@ public class ShowNote extends BasicView {
 	}
 
 	public void updateNote() {
-		n.setTitle(titleTextBox.getText());
-		n.setSubtitle(subtitleTextBox.getText());
-		n.setContent(noteArea.getText());
+		currentlyDisplayedNote.setTitle(titleTextBox.getText());
+		currentlyDisplayedNote.setSubtitle(subtitleTextBox.getText());
+		currentlyDisplayedNote.setContent(noteArea.getText());
 		java.util.Date utilDate = dueDateBox.getValue();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		n.setDueDate(sqlDate);
+		currentlyDisplayedNote.setDueDate(sqlDate);
 		// n.setNoteBook(nb);
-		editorVerwaltung.saveNote(n, new UpdateCallback());
+		editorVerwaltung.saveNote(currentlyDisplayedNote, new UpdateCallback());
 
 	}
 
 	private class UpdateCallback implements AsyncCallback<Note> {
+		
+		private Notificator n = Notificator.getNotificator();
 
 		@Override
 		public void onFailure(Throwable caught) {
 
+			n.showError("Could not save");
 			GWT.log("Update failed because of:");
 			GWT.log(caught.toString());
 
@@ -206,7 +273,8 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onSuccess(Note result) {
-			Window.alert("Saved");
+		
+			n.showSuccess("Note was saved.");
 
 		}
 
