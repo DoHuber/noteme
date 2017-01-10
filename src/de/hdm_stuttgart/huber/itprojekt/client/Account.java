@@ -16,10 +16,10 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 public class Account extends BasicView {
 	
 	private VerticalPanel contentPanel = new VerticalPanel();
-	private UserInfo ui = null;
-	private Button deleteBtn = new Button("Delete");
+	private UserInfo loggedInUser = null;
+	private Button deleteButton = new Button("Delete");
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	UserCallback uc = new UserCallback();
+	UserCallback userCallback = new UserCallback();
 	private static String logOutUrl;
 	
 	public Account () {
@@ -27,7 +27,7 @@ public class Account extends BasicView {
 	}
 	
 	public Account (UserInfo userInfo) {
-		this.ui = userInfo;
+		this.loggedInUser = userInfo;
 	}
 
 	@Override
@@ -40,13 +40,13 @@ public class Account extends BasicView {
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "User: " + ui.getFirstName() + ui.getSurName();
+		return "User: " + loggedInUser.getFirstName() + loggedInUser.getSurName();
 		
 	}
 	
 	public String accountInformation() {
-		return 	"Nickname: " + ui.getNickname()
-				+ "E-Mail: " + ui.getEmailAddress();
+		return 	"Nickname: " + loggedInUser.getNickname()
+				+ "E-Mail: " + loggedInUser.getEmailAddress();
 	}
 	
 
@@ -54,11 +54,11 @@ public class Account extends BasicView {
 	public void run() {
 		// TODO Auto-generated method stub
 		//contentPanel.add(deleteBtn);
-		deleteBtn.addClickHandler(new DeleteClickHandler());
+		deleteButton.addClickHandler(new DeleteClickHandler());
 		
-		editorVerwaltung.getCurrentUser(uc);
+		editorVerwaltung.getCurrentUser(userCallback);
 		
-		RootPanel.get("main").add(deleteBtn);
+		RootPanel.get("main").add(deleteButton);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
 		
@@ -75,7 +75,7 @@ public class Account extends BasicView {
 		@Override
 		public void onSuccess(UserInfo result) {
 			
-			ui = result;
+			loggedInUser = result;
 			
 		}
 		
@@ -85,8 +85,8 @@ public class Account extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
-		if(	Window.confirm("Möchten Sie Ihren Account "+ ui.getNickname()+ " wirklich löschen?")){
-			editorVerwaltung.deleteUserInfo(ui, new DeleteCallback());
+		if(	Window.confirm("Möchten Sie Ihren Account "+ loggedInUser.getNickname()+ " wirklich löschen?")){
+			editorVerwaltung.deleteUserInfo(loggedInUser, new DeleteCallback());
 		}
 		//MenuView navigation = new MenuView();
 		//RootPanel.get("menu").clear();

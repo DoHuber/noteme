@@ -186,13 +186,9 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		UserInfo u = administration.getCurrentUser();
 
 		Vector<Note> allNotesForUserId = new Vector<>();
-		try {
-			allNotesForUserId = NoteMapper.getNoteMapper().getAllNotesForUserId(u.getId());
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
+		allNotesForUserId = NoteMapper.getNoteMapper().getAllNotesForUserId(u.getId());
+	
 		AllUserNotesR report2 = new AllUserNotesR();
 		report2.setTitle("All Notes of current User");
 		report2.setCreated(new Date(System.currentTimeMillis()));

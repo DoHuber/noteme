@@ -8,7 +8,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -45,12 +44,12 @@ public class ShowNotebook extends BasicView {
 	AllNotesCallback callback = new AllNotesCallback();
 
 	private Vector<Note> notes = new Vector<Note>();
-	private HorizontalPanel actionButtons = setupActionButtons();
-	private VerticalPanel titlesEditInterface = setupEditField();
+	private HorizontalPanel actionButtons;
+	private VerticalPanel titlesEditInterface;
 	private HorizontalPanel wrapper = new HorizontalPanel();
 
-	public ShowNotebook(NoteBook selected) {
-		this.displayedNoteBook = selected;
+	public ShowNotebook(NoteBook noteBookToDisplay) {
+		this.displayedNoteBook = noteBookToDisplay;
 	}
 
 	@Override
@@ -61,9 +60,9 @@ public class ShowNotebook extends BasicView {
 
 	@Override
 	public String getSubHeadlineText() {
-		// TODO Auto-generated method stub
-		// return "Subtitle: " + nb.getSubtitle();
-		return null;
+		
+		return "Subtitle: " + displayedNoteBook.getSubtitle();
+	
 	}
 
 	@Override
@@ -71,9 +70,13 @@ public class ShowNotebook extends BasicView {
 		
 		setupButtonClickHandlers();
 		
+		actionButtons = setupActionButtons();
+		titlesEditInterface = setupEditField();
+		
 		setUpLayoutWithWrapperPanel();
 		
 		addEverythingToRootPanel();
+	
 		
 		if (displayedNoteBook.hasRuntimePermission()) {
 			setUpForPermissions();
@@ -115,8 +118,11 @@ public class ShowNotebook extends BasicView {
 	
 	private VerticalPanel setupEditField() {
 		
-		title.setText(displayedNoteBook.getTitle());
-		subtitle.setText(displayedNoteBook.getSubtitle());
+		title.setTitle("Title");
+		subtitle.setTitle("Subtitle");
+		
+		title.setValue(displayedNoteBook.getTitle());
+		subtitle.setValue(displayedNoteBook.getSubtitle());
 		
 		VerticalPanel vp = new VerticalPanel();
 		vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
@@ -162,41 +168,46 @@ public class ShowNotebook extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			
+			// TODO AlertDialog statt Window. -> Bekannte GWT-Issue, friert alles ein im Super Dev Mode
+			// Wegen nichtkonformer JavaScript-Implementation in Firefox (Es ist 2017!!)
 			if (Window.confirm("Möchten Sie das Notizbuch " + displayedNoteBook.getTitle() + " wirklich löschen?")) {
 				editorVerwaltung.deleteNoteBook(displayedNoteBook, new DeleteCallback());
 			}
-			MenuView navigation = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(navigation);
-
-			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
-
+			
 		}
 	}
 
 	public void addNotesToTable(Vector<Note> result) {
+		
 		notes = result;
+		
 		NoteTable nt = new NoteTable(notes);
 		nt.addClickNote();
-		// RootPanel.get("main").clear();
 		RootPanel.get("tableNotebook").add(nt.start());
-		// RootPanel.get("table").clear();
-		// RootPanel.get("table").add(nt.start());
+	
 	}
 
 	private class DeleteCallback implements AsyncCallback<Void> {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			caught.printStackTrace();
-			horizontalPanel.add(new Label(caught.toString()));
-
+			Notificator.getNotificator().showError("Löschen des Notizbuches fehlgeschlagen!");
+			GWT.log(caught.toString());
 		}
 
 		@Override
 		public void onSuccess(Void result) {
+			Notificator.getNotificator().showSuccess("Notizbuch gelöscht.");
+			
+			// Das muss hier geschehen, da sonst eine Race Condition
+			// zwischen Delete-Callback und ShowAllNotes-Callback auftritt,
+			// die zu "Geisternotizbüchern" führen kann, d.h. es werden eigentlich gelöschte
+			// Notizbücher clientseitig noch angezeigt, da der ShowAllNotes-Callback schneller
+			// als der Delete-Callback war
+			ShowAllNotebooks san = new ShowAllNotebooks();
+			RootPanel.get("main").clear();
+			RootPanel.get("main").add(san);
 
 		}
 	}

@@ -233,7 +233,7 @@ public class NoteBookMapper extends DataMapper {
 
 	public Vector<NoteBook> getAllNoteBooksSharedBy(UserInfo u) {
 
-		String sql = "SELECT DISTINCT notebook.id AS id FROM notebook JOIN permission ON notebook.id = permission.notebook_id WHERE author_id = ?";
+		String sql = "SELECT DISTINCT notebook.id AS id FROM notebook JOIN permission ON notebook.id = permission.notebook_id WHERE notebook.author_id = ?";
 		Vector<NoteBook> v = new Vector<>();
 
 		try {

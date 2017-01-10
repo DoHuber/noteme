@@ -1,6 +1,5 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import com.google.appengine.api.users.User;

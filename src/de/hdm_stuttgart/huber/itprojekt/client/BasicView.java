@@ -20,7 +20,7 @@ public abstract class BasicView extends FlowPanel {
 		super.onLoad();
 		// RootPanel.get("main").clear();
 		this.add(createHeadline(getHeadlineText(), getSubHeadlineText()));
-
+		
 		run();
 
 	}

@@ -3,11 +3,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.PopupPanel;
 
 public class Notificator {
 	
@@ -40,7 +36,7 @@ public class Notificator {
 		text = "<p style=\"color:green\">" + text + "</p>";
 		NotificationPopup widget = new NotificationPopup(text, false, false);
 		widget.setTitle("Success");
-		positionAndShow(widget, 2);
+		positionAndShow(widget, 5);
 		
 	}
 	

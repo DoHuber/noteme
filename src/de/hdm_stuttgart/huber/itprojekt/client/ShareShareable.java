@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
@@ -151,7 +150,7 @@ public class ShareShareable extends BasicView {
 
 		@Override
 		public void onSuccess(Void result) {
-			Window.alert("Erfolg!");
+			Notificator.getNotificator().showSuccess("Note was shared with " + userPicker.getValue());
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(new ShowPermission());
 		}
