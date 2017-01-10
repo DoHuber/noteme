@@ -27,6 +27,7 @@ public class ShowAllNotebooks extends BasicView {
 	final Button sharedByBtn = new Button("Stuff I shared");
 	final Button sharedWithBtn = new Button("Stuff shared with me");
 	final Button allNoteBooksBtn = new Button("All Notebooks");
+	Button createNoteBookButton = new Button(IconConstants.ICON_ADD_NOTE);
 	private Vector<NoteBook> notebook = new Vector<NoteBook>();
 
 	public ShowAllNotebooks(Vector<NoteBook> nList) {
@@ -74,9 +75,21 @@ public class ShowAllNotebooks extends BasicView {
 		sharedWithBtn.addClickHandler(new SharedWithClickHandler());
 		allNoteBooksBtn.addClickHandler(new AllNoteBooksClickHandler());
 		sharedByBtn.addClickHandler(new SharedByClickHandler());
+		createNoteBookButton.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				RootPanel.get("main").clear();
+				RootPanel.get("main").add(new CreateNotebook());
+				
+			}
+			
+		});
 		buttonsPanel.add(sharedByBtn);
 		buttonsPanel.add(sharedWithBtn);
 		buttonsPanel.add(allNoteBooksBtn);
+		buttonsPanel.add(createNoteBookButton);
 		fPanel2.add(buttonsPanel);
 		fPanel2.add(contentPanel);
 

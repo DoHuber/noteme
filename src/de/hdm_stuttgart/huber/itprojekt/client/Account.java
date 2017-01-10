@@ -12,21 +12,20 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
-
 public class Account extends BasicView {
-	
+
 	private VerticalPanel contentPanel = new VerticalPanel();
 	private UserInfo loggedInUser = null;
-	private Button deleteButton = new Button("Delete");
+	private Button deleteButton = new Button("Delete my account");
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	UserCallback userCallback = new UserCallback();
 	private static String logOutUrl;
-	
-	public Account () {
-		
+
+	public Account() {
+
 	}
-	
-	public Account (UserInfo userInfo) {
+
+	public Account(UserInfo userInfo) {
 		this.loggedInUser = userInfo;
 	}
 
@@ -34,87 +33,86 @@ public class Account extends BasicView {
 	public String getHeadlineText() {
 		return "MY ACCOUNT";
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
 		return "User: " + loggedInUser.getFirstName() + loggedInUser.getSurName();
-		
+
 	}
-	
+
 	public String accountInformation() {
-		return 	"Nickname: " + loggedInUser.getNickname()
-				+ "E-Mail: " + loggedInUser.getEmailAddress();
+		return "Nickname: " + loggedInUser.getNickname() + "E-Mail: " + loggedInUser.getEmailAddress();
 	}
-	
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		//contentPanel.add(deleteBtn);
+		
+		
 		deleteButton.addClickHandler(new DeleteClickHandler());
-		
+
 		editorVerwaltung.getCurrentUser(userCallback);
-		
+
 		RootPanel.get("main").add(deleteButton);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
-		
+
 	}
-	
-	private class UserCallback implements AsyncCallback<UserInfo>{
+
+	private class UserCallback implements AsyncCallback<UserInfo> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onSuccess(UserInfo result) {
-			
+
 			loggedInUser = result;
-			
+
 		}
-		
+
 	}
-	
+
 	private class DeleteClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-		if(	Window.confirm("Möchten Sie Ihren Account "+ loggedInUser.getNickname()+ " wirklich löschen?")){
-			editorVerwaltung.deleteUserInfo(loggedInUser, new DeleteCallback());
-		}
-		//MenuView navigation = new MenuView();
-		//RootPanel.get("menu").clear();
-		//RootPanel.get("menu").add(navigation);
-		//Account san =  new Account();
-		//RootPanel.get("main").clear();
-		Window.Location.replace(GWT.getHostPageBaseURL() + "IT_Projekt.html");
+			if (Window.confirm("Möchten Sie Ihren Account " + loggedInUser.getNickname() + " wirklich löschen?")) {
+				
+				logOutUrl = loggedInUser.getLogoutUrl();
+				editorVerwaltung.deleteUserInfo(loggedInUser, new DeleteCallback());
+				
+			}
+
 		}
 	}
-	
+
 	public static void setLogOutUrl(String logOutUrl) {
 		Account.logOutUrl = logOutUrl;
 	}
-	
-	private class DeleteCallback implements AsyncCallback<Void>{
+
+	private class DeleteCallback implements AsyncCallback<Void> {
 
 		@Override
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
 			contentPanel.add(new Label(caught.toString()));
-			
+
 		}
 
 		@Override
 		public void onSuccess(Void result) {
+
+			// Und raus damit
+			Window.Location.replace(logOutUrl);
 			
 		}
-		
+
 	}
 
 }

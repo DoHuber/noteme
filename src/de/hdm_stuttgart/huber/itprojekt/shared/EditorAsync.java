@@ -58,4 +58,6 @@ public interface EditorAsync {
 	void deleteUserInfo(UserInfo ui, AsyncCallback<Void> callback);
 	void getAllEmails(AsyncCallback<Vector<String>> callback);
 
+	void getDueNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
+
 }

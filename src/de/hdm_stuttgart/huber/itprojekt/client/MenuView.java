@@ -59,9 +59,9 @@ public class MenuView extends VerticalPanel {
 		//Anchor createNote = new Anchor("New Note");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		//Anchor createNotebook = new Anchor("New Notebook");
-		Anchor showPermission = new Anchor("Permissions");
+		Anchor showPermission = new Anchor("Shared stuff");
 		Anchor account = new Anchor("Account");
-		Anchor reportAnchor = new Anchor("Report");
+		Anchor reportAnchor = new Anchor("ReportGenerator");
 
 		logoutAnchor = new Anchor("Log out");
 		logoutAnchor.setHref(logOutUrl);

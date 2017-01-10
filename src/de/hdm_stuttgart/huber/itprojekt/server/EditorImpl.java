@@ -355,4 +355,24 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		}
 	}
 
+	@Override
+	public Vector<Note> getDueNotesForCurrentUser() {
+		
+		// TODO performanter implementieren mit eigener Mapper-Funktion
+		
+		Date today = new Date(System.currentTimeMillis());
+		Vector<Note> dueNotes = new Vector<>();
+		
+		for (Note n : getAllNotesForCurrentUser()) {
+			
+			if (n.getDueDate().before(today) || n.getDueDate().equals(today)) {
+				dueNotes.add(n);
+			}
+			
+		}
+		
+		return dueNotes;
+		
+	}
+
 }

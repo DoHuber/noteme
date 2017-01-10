@@ -159,9 +159,6 @@ public class CreateNote extends BasicView {
 		@Override
 		public void onClick(ClickEvent event) {
 			createNote();
-			ShowAllNotes san = new ShowAllNotes();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
 		}
 
 	}

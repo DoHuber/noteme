@@ -54,12 +54,12 @@ public class ShowPermission extends BasicView {
 	@Override
 	public String getHeadlineText() {
 
-		return "MY PERMISSIONS";
+		return "Shared with other users";
 	}
 
 	@Override
 	public String getSubHeadlineText() {
-		return "Select a note for more information!";
+		return "Click to unshare";
 	}
 
 	final Button freigabeButton = new Button("Freigegebene Notizen");

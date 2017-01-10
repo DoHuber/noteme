@@ -62,6 +62,8 @@ public interface Editor extends RemoteService {
 	public Vector<Note> getAllFrom(NoteBook nb);
 
 	public Vector<Note> getAllNotes() throws BullshitException;
+	
+	public Vector<Note> getDueNotesForCurrentUser();
 
 	public UserInfo saveUser(UserInfo user);
 

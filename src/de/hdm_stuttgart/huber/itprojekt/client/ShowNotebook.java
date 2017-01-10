@@ -238,7 +238,8 @@ public class ShowNotebook extends BasicView {
 
 		@Override
 		public void onSuccess(NoteBook result) {
-			Window.alert("Saved");
+			
+			Notificator.getNotificator().showSuccess("NoteBook " + result.getTitle() + " was saved.");
 
 		}
 

@@ -2,7 +2,9 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
@@ -13,50 +15,69 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class DueDateFromUser extends BasicView {
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	AllNotesCallback callback = new AllNotesCallback();
+	DueNotesCallback callback = new DueNotesCallback();
 	private Vector<Note> notes = new Vector<Note>();
 	private UserInfo ui = null;
+
 	public DueDateFromUser(Vector<Note> nList) {
 		notes = nList;
 	}
-	
-	public DueDateFromUser(UserInfo ui ){
+
+	public DueDateFromUser(UserInfo ui) {
 		this.ui = ui;
 	}
-	public DueDateFromUser (){
-		
+
+	public DueDateFromUser() {
+
 	}
+
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
-		return "Welcome: "+ ui.getFirstName() +" " + ui.getSurName();
+
+		return "Welcome: " + ui.getFirstName() + " " + ui.getSurName();
 	}
 
 	@Override
 	public String getSubHeadlineText() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "Notes that are due today or in the past:";
 	}
 
 	@Override
 	public void run() {
-		editorVerwaltung.getAllNotesForUser(callback);
+
+		editorVerwaltung.getDueNotesForCurrentUser(callback);
+
 	}
-	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
+
+	private class DueNotesCallback implements AsyncCallback<Vector<Note>> {
+
 		@Override
 		public void onSuccess(Vector<Note> result) {
-			addNotesToTable(result);
-		
+
+			if (result.isEmpty()) {
+	
+				RootPanel.get("main").add(new Label("None due today or in the past"));
+				
+			} else {
+
+				addNotesToTable(result);
+			}
+
 		}
 
 		@Override
 		public void onFailure(Throwable caught) {
 
+			Notificator.getNotificator().showError("Connection or Server Problems!");
+			GWT.log(caught.toString());
 
 		}
 
 	}
+
 	public void addNotesToTable(Vector<Note> result) {
+		
 		notes = result;
 		NoteTable nt = new NoteTable(notes);
 		nt.addClickNote();

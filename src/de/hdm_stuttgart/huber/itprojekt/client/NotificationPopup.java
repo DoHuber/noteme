@@ -4,6 +4,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -28,8 +29,12 @@ public class NotificationPopup extends PopupPanel {
 		
 		super(autoHide, modal);
 		this.myWidget = new HTML(text);
-		setWidth("20%");
-		setHeight("5%");
+		
+		int widthInPixel = (int) (Window.getClientWidth() * 0.2);
+		int heightInPixel = (int) (Window.getClientHeight() * 0.05);
+		
+		setWidth(Integer.toString(widthInPixel) + "px");
+		setHeight(Integer.toString(heightInPixel) + "px");
 		myWidget.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		setWidget(myWidget);
 		

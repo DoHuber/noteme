@@ -259,10 +259,13 @@ public class ShowNote extends BasicView {
 	}
 
 	private class UpdateCallback implements AsyncCallback<Note> {
+		
+		private Notificator n = Notificator.getNotificator();
 
 		@Override
 		public void onFailure(Throwable caught) {
 
+			n.showError("Could not save");
 			GWT.log("Update failed because of:");
 			GWT.log(caught.toString());
 
@@ -270,7 +273,8 @@ public class ShowNote extends BasicView {
 
 		@Override
 		public void onSuccess(Note result) {
-			Window.alert("Saved");
+		
+			n.showSuccess("Note was saved.");
 
 		}
 

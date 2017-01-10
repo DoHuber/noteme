@@ -12,6 +12,9 @@ public class Notificator {
 	
 	/**
 	 * Singleton, verwaltet Notifications für eine Sitzung
+	 * Muss ein Singleton sein, da sonst das Stapelfeauture für mehrere Benachrichtigungen
+	 * zur gleichen Zeit nicht funktioniert.
+	 * 
 	 * @author Dominik Huber
 	 */
 
@@ -55,7 +58,7 @@ public class Notificator {
 		
 		if (activeNotifications.isEmpty()) {
 			
-			int left = (int) (Window.getClientWidth() * 0.85);
+			int left = (int) (Window.getClientWidth() * 0.75);
 			int top = (int) (Window.getClientHeight() * 0.85);
 			
 			p.setPopupPosition(left, top);
