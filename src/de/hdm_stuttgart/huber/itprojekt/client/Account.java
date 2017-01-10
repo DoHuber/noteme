@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -55,16 +56,18 @@ public class Account extends BasicView {
 		name.setText(loggedInUser.getFirstName());
 		surname.setText(loggedInUser.getSurName());
 		email.setText(loggedInUser.getEmailAddress());
+		vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		vp.setWidth("100%");
 		vp.add(name);
 		vp.add(surname);
 		vp.add(email);
-		
+		vp.add(deleteButton);
 		deleteButton.addClickHandler(new DeleteClickHandler());
 
 		editorVerwaltung.getCurrentUser(userCallback);
 	
 		RootPanel.get("main").add(vp);
-		RootPanel.get("main").add(deleteButton);
+	//	RootPanel.get("main").add(deleteButton);
 		
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
