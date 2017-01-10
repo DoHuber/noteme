@@ -16,9 +16,10 @@
     <ownedEnd xmi:type="uml:Property" xmi:id="_3D-dqZn2EeablpjWrqHyLA" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_3D-dpZn2EeablpjWrqHyLA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_3D_EsJn2EeablpjWrqHyLA" name="Editor">
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_EsZn2EeablpjWrqHyLA" name="Notizbücher verwalten"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_EsZn2EeablpjWrqHyLA" name="Notizen hinzufügen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_Espn2EeablpjWrqHyLA" name="Notizbuch erstellen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_ZqWbwJn3EeablpjWrqHyLA" name="Notizbuch freigeben"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_ICvksNcoEeaFS8GBi_TnIw" name="Notizbuch löschen"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_dqPYwJn3EeablpjWrqHyLA" memberEnd="_dqQm4Zn3EeablpjWrqHyLA _dqRN8Jn3EeablpjWrqHyLA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_dqP_0Jn3EeablpjWrqHyLA" source="org.eclipse.papyrus">
@@ -26,5 +27,12 @@
     </eAnnotations>
     <ownedEnd xmi:type="uml:Property" xmi:id="_dqQm4Zn3EeablpjWrqHyLA" name="notizbücher freigeben" type="_ZqWbwJn3EeablpjWrqHyLA" association="_dqPYwJn3EeablpjWrqHyLA"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_dqRN8Jn3EeablpjWrqHyLA" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_dqPYwJn3EeablpjWrqHyLA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KMHE8NcoEeaFS8GBi_TnIw" memberEnd="_KMI6IdcoEeaFS8GBi_TnIw _KMJhMNcoEeaFS8GBi_TnIw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_KMITENcoEeaFS8GBi_TnIw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_KMI6INcoEeaFS8GBi_TnIw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_KMI6IdcoEeaFS8GBi_TnIw" name="notizbuch löschen" type="_ICvksNcoEeaFS8GBi_TnIw" association="_KMHE8NcoEeaFS8GBi_TnIw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_KMJhMNcoEeaFS8GBi_TnIw" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_KMHE8NcoEeaFS8GBi_TnIw"/>
   </packagedElement>
 </uml:Model>
