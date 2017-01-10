@@ -161,8 +161,8 @@ div#tableNotebook {
 
 div#layout {
 	width: 1000px;
-	height: 700px;
-	background: #FFE5F2;
+	height: 800px;
+	background: #d8c3cd;
 	/* background: #E6E6FA; */
 	/* margin-top: 250px; */
 	margin-left: 200px;
@@ -178,28 +178,30 @@ div#header {
 }
 
 div#menu {
-	margin-bottom: 150px;
-	margin-left: 40px;
+	/*margin-bottom: 150px;*/
+	margin-left: 33px;
 	position: absolute;
 	/* overflow: scroll; */
 	/* height: 300px;*/
-	height: 330px;
-	width: 185px;
+	height: 325px;
+	width: 187px;
 	/*padding: 10px;*/
 	float: left;
 	font-color: #2E8B57;
 	background-color: #ffffff;
-	font-size: 16px;
+	font-size: 17px;
 }
 
 div#main {
 	margin-left: 250px;
 	margin-right: 30px;
 	padding: 10px;
-	height: 540px;
-	width: 720px;
+	height: 647px;
+	width: 729px;
+	/*padding: 2px 0px 0px 0px;*/
 	position: absolute;
 	background: #FFFFFF;
+	overflow: scroll;
 	/* background: #a2a2f9 oder #FFE5F2; */
 	
 	}
@@ -207,4 +209,3 @@ div#main {
 .testName{
 	backround: #FFFFFF; 
 }
-	

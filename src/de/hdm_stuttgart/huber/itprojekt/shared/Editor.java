@@ -44,7 +44,7 @@ public interface Editor extends RemoteService {
 
 	// CRUD-Methoden nach User, nur nach Login verwendbar!
 	public Vector<Note> getAllNotesForCurrentUser();
-
+	public Vector<Note> getAllNotesForUser();
 	public Vector<NoteBook> getAllNoteBooksForCurrentUser();
 
 	// Methoden mit Freigabe dabei
@@ -70,5 +70,7 @@ public interface Editor extends RemoteService {
 	public UserInfo getCurrentUser();
 	
 	public Vector<String> getAllEmails();
+
+	void deleteUserInfo(UserInfo ui);
 
 }
