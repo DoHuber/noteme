@@ -39,17 +39,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public void init() throws IllegalArgumentException {
 
-		try {
 			this.noteMapper = NoteMapper.getNoteMapper();
 			this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
 			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
 			this.permissionMapper = PermissionMapper.getPermissionMapper();
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
 	}
 

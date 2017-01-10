@@ -130,7 +130,7 @@ public class ShowNotebook extends BasicView {
 
 	private void setupButtonClickHandlers() {
 		deleteButton.addClickHandler(new DeleteClickHandler());
-		shareButton.addClickHandler(new ShareNotebookClickHndler());
+		shareButton.addClickHandler(new ShareNotebookClickHandler());
 		createButton.addClickHandler(new CreateNoteClickHandler());
 		updateConfirmButton.addClickHandler(new UpdateClickHandler());
 	}
@@ -248,15 +248,12 @@ public class ShowNotebook extends BasicView {
 		}
 	}
 
-	private class ShareNotebookClickHndler implements ClickHandler {
+	private class ShareNotebookClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(mView);
-
-			ShareNotebook sNb = new ShareNotebook(displayedNoteBook);
+			
+			ShareShareable sNb = new ShareShareable(displayedNoteBook);
 			RootPanel.get("main").clear();
 			RootPanel.get("main").add(sNb);
 

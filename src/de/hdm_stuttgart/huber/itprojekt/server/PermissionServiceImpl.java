@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.google.appengine.api.users.User;
@@ -7,9 +8,11 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionService;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable;
@@ -36,15 +39,14 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 	@Override
 	public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l) {
 
-		// Muss eine Permission erstellen die das Objekt für den User
-		// beneficiary freigibt
 		/**
 		 * Gedanken zur Logik: Wenn eine Permission existiert, die gesteigert
 		 * werden soll, ist sie zu finden. In diesem Fall dann die Permission
 		 * verändern und abspeichern, mit höherem Rang.
 		 *
-		 * Wenn noch keine Permission existiert, neue anlegen.
+		 * Wenn noch keine Permission existiert, neue anlegen. Wenn das Shareable ein Notizbuch ist, muss kaskadiert werden.
 		 */
+		
 		Permission p = permissionMapper.getPermissionFor(beneficiary, sharedObject);
 		if (p == null) {
 
@@ -57,6 +59,18 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 
 			upgradeExistingPermissionTo(p, l);
 
+		}
+		
+		/**
+		 * # REEEEKUSSRSSSIISONNNN 
+		 */
+		if (sharedObject.getType() == 'b') {
+			
+			Vector<Note> notesToShare = NoteMapper.getNoteMapper().getAllNotesForNoteBookId(sharedObject.getId());
+			for (Note row : notesToShare) {
+				shareWith(beneficiary, row, l);
+			}
+			
 		}
 
 	}

@@ -20,11 +20,19 @@ public class NoteMapper extends DataMapper {
 	}
 
 	// Öffentliche Methode um den Singleton-NoteMapper zu erhalten
-	public static NoteMapper getNoteMapper() throws ClassNotFoundException, SQLException {
+	public static NoteMapper getNoteMapper() {
 
 		if (noteMapper == null) {
 
-			noteMapper = new NoteMapper();
+			try {
+				noteMapper = new NoteMapper();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 
