@@ -49,7 +49,11 @@ public class ShowReportDemo extends MenuView {
 		FlowPanel pureMenu = new FlowPanel();
 		UnorderedListWidget menuList = new UnorderedListWidget();
 
+		// Home "Button"
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		home.setStyleName("pure-menu-heading");
+		home.getElement().getStyle().setColor("#ffffff");
+		
 		Anchor showUserNotebooks = new Anchor("UserNotebooks");
 		Anchor showAllNotebooks = new Anchor("AllNotebooks");
 		Anchor showUserNotes = new Anchor("UserNotes");

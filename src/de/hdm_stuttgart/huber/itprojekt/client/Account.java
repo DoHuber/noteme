@@ -5,8 +5,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
@@ -19,6 +21,10 @@ public class Account extends BasicView {
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	UserCallback userCallback = new UserCallback();
 	private static String logOutUrl;
+	private VerticalPanel vp = new VerticalPanel();
+	private TextBox name = new TextBox();
+	private TextBox surname  = new TextBox();
+	private TextBox	email = new TextBox();
 
 	public Account() {
 
@@ -38,23 +44,28 @@ public class Account extends BasicView {
 	@Override
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
-		return "User: " + loggedInUser.getFirstName() + loggedInUser.getSurName();
+		return "Nickname: " + loggedInUser.getNickname();
 
 	}
 
-	public String accountInformation() {
-		return "Nickname: " + loggedInUser.getNickname() + "E-Mail: " + loggedInUser.getEmailAddress();
-	}
+
 
 	@Override
 	public void run() {
-		
+		name.setText(loggedInUser.getFirstName());
+		surname.setText(loggedInUser.getSurName());
+		email.setText(loggedInUser.getEmailAddress());
+		vp.add(name);
+		vp.add(surname);
+		vp.add(email);
 		
 		deleteButton.addClickHandler(new DeleteClickHandler());
 
 		editorVerwaltung.getCurrentUser(userCallback);
-
+	
+		RootPanel.get("main").add(vp);
 		RootPanel.get("main").add(deleteButton);
+		
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
 
