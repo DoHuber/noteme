@@ -43,7 +43,7 @@ public class ShowNote extends BasicView {
 	private TextBox subtitleTextBox = new TextBox();
 	private RichTextToolbar richTextToolbar = new RichTextToolbar(noteArea);
 	private DateBox dueDateBox = new DateBox();
-	private Label empty = new Label("---                   ");
+	private Label empty = new Label("                   ");
 	private Label title = new Label("Title");
 	private Label subtitle = new Label("Subtitle");
 	private Label dueDate = new Label("Due Date");
