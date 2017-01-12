@@ -171,7 +171,7 @@ public class CreateNote extends BasicView {
 		Note note = new Note();
 		note.setTitle(titleTextBox.getText());
 		note.setSubtitle(SubtitleTextBox.getText());
-		note.setContent(noteArea.getText());
+		note.setContent(noteArea.getHTML());
 		java.util.Date utilDate = dueDateBox.getValue();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		note.setDueDate(sqlDate);

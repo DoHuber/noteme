@@ -147,7 +147,9 @@ public class ShowNote extends BasicView {
 	}
 
 	private void setUpContentPanel() {
-		noteArea.setText(currentlyDisplayedNote.getContent());
+		
+		noteArea.setHTML(currentlyDisplayedNote.getContent());
+		// noteArea.setText(currentlyDisplayedNote.getContent());
 		noteArea.setSize("100%", "100%px");
 		noteArea.setStyleName("noteArea");
 		
@@ -247,9 +249,10 @@ public class ShowNote extends BasicView {
 	}
 
 	public void updateNote() {
+		
 		currentlyDisplayedNote.setTitle(titleTextBox.getText());
 		currentlyDisplayedNote.setSubtitle(subtitleTextBox.getText());
-		currentlyDisplayedNote.setContent(noteArea.getText());
+		currentlyDisplayedNote.setContent(noteArea.getHTML());
 		java.util.Date utilDate = dueDateBox.getValue();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		currentlyDisplayedNote.setDueDate(sqlDate);
