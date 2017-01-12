@@ -94,6 +94,7 @@ public class IT_Projekt implements EntryPoint {
 			public void onFailure(Throwable caught) {
 				GWT.log(caught.toString());
 				loadMenu();
+				loadDueNotes();
 			}
 
 			@Override
@@ -101,12 +102,15 @@ public class IT_Projekt implements EntryPoint {
 				if (result == "none") {
 
 					loadMenu();
+					loadDueNotes();
 
 				} else {
 
 					CreateNote prefilledCreateForm = new CreateNote(result);
 					RootPanel.get("main").clear();
 					RootPanel.get("main").add(prefilledCreateForm);
+					
+					loadMenu();
 
 				}
 			}
@@ -125,12 +129,13 @@ public class IT_Projekt implements EntryPoint {
 		MenuView.setLogOutUrl(userInfo.getLogoutUrl());
 		RootPanel.get("menu").clear();
 		RootPanel.get("menu").add(navigation);
-		
+
+	}
+
+	private void loadDueNotes() {
 		DueDateFromUser du = new DueDateFromUser(userInfo);
 		RootPanel.get("main").clear();
 		RootPanel.get("main").add(du);
-		
-
 	}
 
 	private void loadLogin() {
