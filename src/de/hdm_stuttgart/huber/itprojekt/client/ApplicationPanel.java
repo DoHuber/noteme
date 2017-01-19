@@ -2,7 +2,6 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -28,13 +27,14 @@ public class ApplicationPanel extends DockLayoutPanel {
 		header = new SimplePanel();
 		footer = new SimplePanel();
 		
-		header.setStyleName("panelheader");
-		
-		navigation.addStyleName("dockpanel");
+		header.setStyleName("bordered");
+		navigation.setStyleName("bordered");
+		header.setStyleName("bordered");
+		footer.setStyleName("bordered");
 
 		this.addNorth(header, 20);
 		this.addSouth(footer, 10);
-		this.addWest(navigation, 25);
+		this.addWest(navigation, 20);
 		this.add(centerContent);
 		
 	}
@@ -61,7 +61,6 @@ public class ApplicationPanel extends DockLayoutPanel {
 
 	public void setCenterContent(Widget centerContent) {
 		
-		centerContent.setStyleName("dockpanel");
 		this.centerContent.setWidget(centerContent);
 		
 	}
@@ -69,7 +68,6 @@ public class ApplicationPanel extends DockLayoutPanel {
 	
 	public void setNavigation(MenuView navigation) {
 		
-		navigation.setStyleName("dockpanel");
 		navigation.setHeight("100%");
 		navigation.setWidth("100%");
 		
@@ -85,7 +83,9 @@ public class ApplicationPanel extends DockLayoutPanel {
 
 	public void setHeader(Widget header) {
 		
-		header.setStyleName("dockpanel");
+		header.setHeight("100%");
+		header.setWidth("100%");
+		
 		this.header.setWidget(header);
 		
 	}
@@ -95,6 +95,10 @@ public class ApplicationPanel extends DockLayoutPanel {
 	}
 
 	public void setFooter(Widget footer) {
+		
+		footer.setHeight("100%");
+		footer.setWidth("100%");
+		
 		this.footer.setWidget(footer);
 	}
 	

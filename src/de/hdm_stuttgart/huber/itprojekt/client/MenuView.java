@@ -39,6 +39,9 @@ public class MenuView extends VerticalPanel {
 
 	protected void onLoad() {
 		
+		this.setHorizontalAlignment(ALIGN_CENTER);
+		this.setStyleName("headerpanel");
+		
 		editorVerwaltung.getCurrentUser(uc);
 
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");

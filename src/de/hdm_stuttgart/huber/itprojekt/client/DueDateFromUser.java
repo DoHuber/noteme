@@ -14,6 +14,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class DueDateFromUser extends BasicView {
+	
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	DueNotesCallback callback = new DueNotesCallback();
 	private Vector<Note> notes = new Vector<Note>();
@@ -57,7 +58,8 @@ public class DueDateFromUser extends BasicView {
 
 			if (result.isEmpty()) {
 	
-				RootPanel.get("main").add(new Label("None due today or in the past"));
+				Label l = new Label("Nothing due today or in the past!");
+				ApplicationPanel.getApplicationPanel().replaceContentWith(l);
 				
 			} else {
 

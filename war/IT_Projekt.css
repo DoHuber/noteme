@@ -34,18 +34,15 @@ h1 {
     font-size: small;
 }
 
-.dockpanel {
-	border-style: solid;
-	border-with: 5px;
-	border-color: blue;
-	border-collapse: collapse;
-}
-
-.panelheader {
-	background-color: #e1d1d6;
+.bordered {
 	border-style: solid;
 	border-width: 2px;
 	border-color: black;
+	border-collapse: collapse;
+}
+
+.headerpanel {
+	background-color: #e1d1d6;
 }
 
 

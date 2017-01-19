@@ -17,8 +17,9 @@ public abstract class BasicView extends FlowPanel {
 	 */
 	@Override
 	public void onLoad() {
+		
 		super.onLoad();
-		// RootPanel.get("main").clear();
+		
 		this.add(createHeadline(getHeadlineText(), getSubHeadlineText()));
 		
 		run();

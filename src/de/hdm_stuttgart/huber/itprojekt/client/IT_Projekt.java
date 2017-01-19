@@ -11,8 +11,11 @@ import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -44,22 +47,19 @@ public class IT_Projekt implements EntryPoint {
 	private TextBox nameBox2 = new TextBox();
 	private Button btn = new Button("Save");
 	
-	ApplicationPanel ap;
+	ApplicationPanel applicationPanel;
 
 	public void onModuleLoad() {
 		
 		setUpUncaughtExceptionHandler();
 		
-		ap = ApplicationPanel.getApplicationPanel();
-		ap.setStyleName("dockpanel");
+		applicationPanel = ApplicationPanel.getApplicationPanel();
+		applicationPanel.setStyleName("dockpanel");
 
-		ap.setHeader(new HTML("<img src=\"Header.jpg\" alt=\"Fehler!\">"));
+		setUpHeaderPanel();
+		setUpFooter();
 		
-		Label footerLabel = new Label("Servus i bims im Footer");
-		footerLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		ap.setFooter(footerLabel);
-		
-		RootLayoutPanel.get().add(ap);
+		RootLayoutPanel.get().add(applicationPanel);
 
 		GWT.log("Servus i bims");
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
@@ -104,6 +104,32 @@ public class IT_Projekt implements EntryPoint {
 
 	}
 
+	private void setUpFooter() {
+		Label footerLabel = new Label("Servus i bims im Footer");
+		footerLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		footerLabel.setStyleName("headerpanel");
+		applicationPanel.setFooter(footerLabel);
+	}
+
+	private void setUpHeaderPanel() {
+		
+		HorizontalPanel headerPanel = new HorizontalPanel();
+		
+		headerPanel.setStyleName("headerpanel");
+		headerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		headerPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		
+		headerPanel.add(new HTML("<img width=\"33%\" src=\"LeftUpperSprite.jpg\" alt=\"Fehler\">"));
+		headerPanel.add(new Label("TODO: NoteMe"));
+		headerPanel.add(new Button("Hier ist dann mal Google"));
+		
+		headerPanel.setCellWidth(headerPanel.getWidget(0), "33%");
+		headerPanel.setCellWidth(headerPanel.getWidget(1), "33%");
+		headerPanel.setCellWidth(headerPanel.getWidget(2), "33%");
+		
+		applicationPanel.setHeader(headerPanel);
+	}
+
 	private void setUpUncaughtExceptionHandler() {
 		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
@@ -136,8 +162,7 @@ public class IT_Projekt implements EntryPoint {
 				} else {
 
 					CreateNote prefilledCreateForm = new CreateNote(result);
-					RootPanel.get("main").clear();
-					RootPanel.get("main").add(prefilledCreateForm);
+					applicationPanel.replaceContentWith(prefilledCreateForm);
 					
 					loadMenu();
 
@@ -157,21 +182,21 @@ public class IT_Projekt implements EntryPoint {
 		MenuView navigation = new MenuView();
 		MenuView.setLogOutUrl(userInfo.getLogoutUrl());
 		
-		ap.setNavigation(navigation);
+		applicationPanel.setNavigation(navigation);
 
 	}
 
 	private void loadDueNotes() {
 		
 		DueDateFromUser du = new DueDateFromUser(userInfo);
-		ap.setCenterContent(du);
+		applicationPanel.setCenterContent(du);
 	
 	}
 
 	private void loadLogin() {
 
 		signInLink.setHref(userInfo.getLoginUrl());
-		ap.setCenterContent(signInLink);
+		applicationPanel.setCenterContent(signInLink);
 		
 	}
 
