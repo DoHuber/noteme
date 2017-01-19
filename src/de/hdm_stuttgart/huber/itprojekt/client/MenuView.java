@@ -56,12 +56,7 @@ public class MenuView extends VerticalPanel {
 		// Weitere Button Definitions
 		Anchor showNotes = new Anchor("Notes");
 		Anchor showNotebooks = new Anchor("Notebooks");
-<<<<<<< HEAD
-		Anchor showPermission = new Anchor("Shared stuff");
-=======
-		//Anchor createNotebook = new Anchor("New Notebook");
 		Anchor showPermission = new Anchor("Shared");
->>>>>>> branch 'master' of https://github.com/DoHuber/it-projekt.git
 		Anchor account = new Anchor("Account");
 		Anchor reportAnchor = new Anchor("ReportGenerator");
 		Anchor embedAnchor = new Anchor("Embed");
