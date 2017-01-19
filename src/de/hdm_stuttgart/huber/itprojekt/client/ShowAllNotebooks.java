@@ -72,6 +72,7 @@ public class ShowAllNotebooks extends BasicView {
 		FlowPanel contentPanel = new FlowPanel();
 		FlowPanel fPanel2 = new FlowPanel();
 		FlowPanel buttonsPanel = new FlowPanel();
+		buttonsPanel.setStyleName("buttonsPanel");
 		sharedWithBtn.addClickHandler(new SharedWithClickHandler());
 		allNoteBooksBtn.addClickHandler(new AllNoteBooksClickHandler());
 		sharedByBtn.addClickHandler(new SharedByClickHandler());
@@ -101,6 +102,7 @@ public class ShowAllNotebooks extends BasicView {
 		// RootPanel.get("main").add(nbt.start());
 		// RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		RootPanel.get("tableNotebook1").clear();
 	}
 
 	private class AllNoteBooksClickHandler implements ClickHandler {

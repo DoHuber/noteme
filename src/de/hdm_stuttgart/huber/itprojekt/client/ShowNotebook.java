@@ -105,7 +105,7 @@ public class ShowNotebook extends BasicView {
 	private void addEverythingToRootPanel() {
 		RootPanel.get("main").add(wrapper);
 		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
+		RootPanel.get("tableNotebook1").clear();
 	}
 
 	private void setUpLayoutWithWrapperPanel() {
@@ -183,7 +183,7 @@ public class ShowNotebook extends BasicView {
 		
 		NoteTable nt = new NoteTable(notes);
 		nt.addClickNote();
-		RootPanel.get("tableNotebook").add(nt.start());
+		RootPanel.get("tableNotebook1").add(nt.start());
 	
 	}
 

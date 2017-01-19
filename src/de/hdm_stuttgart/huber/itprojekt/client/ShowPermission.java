@@ -16,7 +16,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
  * Klasse zur Darstellung der Notizen, die vom Nutzer nicht explizit einem
  * ordner zugeordnet sind.
  * 
- * @author Lisa Kuechler
+ * @author Nikita Nalivayko & Lisa Küchler
  *
  */
 public class ShowPermission extends BasicView {
@@ -85,6 +85,7 @@ public class ShowPermission extends BasicView {
 		// RootPanel.get("main").add(nt.start());
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		RootPanel.get("tableNotebook1").clear();
 
 		// freigabeButton.addClickHandler(new freigabeButtonClickHandler());
 		// BUTTONS !!

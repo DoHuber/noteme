@@ -159,6 +159,13 @@ div#tableNotebook {
 	width: 520px;
 }
 
+div#tableNotebook1 {
+	margin-left: -520px;
+	margin-top: 270px;
+	height: 300px;
+	width: 520px;
+}
+
 div#layout {
 	width: 1000px;
 	height: 800px;
@@ -208,8 +215,11 @@ div#main {
 	background: #FFFFFF;
 	overflow: scroll;
 	/* background: #a2a2f9 oder #FFE5F2; */
-	
-	}
+}
+
+.buttonsPanel {
+	margin-left: 175px;
+}
 	
 .testName{
 	backround: #FFFFFF; 
