@@ -1,14 +1,20 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import java.util.Arrays;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -37,11 +43,23 @@ public class IT_Projekt implements EntryPoint {
 	private Label name2 = new Label("Last Name");
 	private TextBox nameBox2 = new TextBox();
 	private Button btn = new Button("Save");
+	
+	ApplicationPanel ap;
 
 	public void onModuleLoad() {
+		
+		setUpUncaughtExceptionHandler();
+		
+		ap = ApplicationPanel.getApplicationPanel();
+		ap.setStyleName("dockpanel");
 
-		// Logger l = Logger.getLogger("test");
-		// l.log(Level.INFO, "Servus i bims");
+		ap.setHeader(new HTML("<img src=\"Header.jpg\" alt=\"Fehler!\">"));
+		
+		Label footerLabel = new Label("Servus i bims im Footer");
+		footerLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		ap.setFooter(footerLabel);
+		
+		RootLayoutPanel.get().add(ap);
 
 		GWT.log("Servus i bims");
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
@@ -86,6 +104,17 @@ public class IT_Projekt implements EntryPoint {
 
 	}
 
+	private void setUpUncaughtExceptionHandler() {
+		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+
+			@Override
+			public void onUncaughtException(Throwable e) {
+				GWT.log(e.getMessage());
+				GWT.log(Arrays.toString(e.getStackTrace()));
+			}
+		});
+	}
+
 	private void checkIfNewNote() {
 
 		editorVerwaltung.getSource(new AsyncCallback<String>() {
@@ -124,27 +153,26 @@ public class IT_Projekt implements EntryPoint {
 	 *
 	 */
 	private void loadMenu() {
-
+		
 		MenuView navigation = new MenuView();
 		MenuView.setLogOutUrl(userInfo.getLogoutUrl());
-		RootPanel.get("menu").clear();
-		RootPanel.get("menu").add(navigation);
+		
+		ap.setNavigation(navigation);
 
 	}
 
 	private void loadDueNotes() {
+		
 		DueDateFromUser du = new DueDateFromUser(userInfo);
-		RootPanel.get("main").clear();
-		RootPanel.get("main").add(du);
+		ap.setCenterContent(du);
+	
 	}
 
 	private void loadLogin() {
 
 		signInLink.setHref(userInfo.getLoginUrl());
-		loginPanel.add(loginLabel);
-		loginPanel.add(signInLink);
-		RootPanel.get("menu").add(loginPanel);
-
+		ap.setCenterContent(signInLink);
+		
 	}
 
 	public void createUser() {
@@ -176,15 +204,14 @@ public class IT_Projekt implements EntryPoint {
 			userInfo.setFirstName(nameBox.getText());
 			userInfo.setSurName(nameBox2.getText());
 			editorVerwaltung.saveUser(userInfo, new SaveCallBack());
-			// Window.alert("Yes");
+			
 		}
 
 		private class SaveCallBack implements AsyncCallback<UserInfo> {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-
+				
 			}
 
 			@Override

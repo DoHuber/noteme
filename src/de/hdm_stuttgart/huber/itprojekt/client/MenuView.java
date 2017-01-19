@@ -38,27 +38,15 @@ public class MenuView extends VerticalPanel {
 	UserInfo ui = null;
 
 	protected void onLoad() {
-
-		// MenuPanel
-		FlowPanel menu = new FlowPanel();
-		FlowPanel pureMenu = new FlowPanel();
-		UnorderedListWidget menuList = new UnorderedListWidget();
-
+		
 		editorVerwaltung.getCurrentUser(uc);
-		// VerticalPanel vPanel = new VerticalPanel();
 
-		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#ffffff");
-
-		// Home "Button"
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
 		home.setStyleName("pure-menu-heading");
 		home.getElement().getStyle().setColor("#ffffff");
 
-		// Weitere Button Definitions
 		Anchor showNotes = new Anchor("Notes");
-		//Anchor createNote = new Anchor("New Note");
 		Anchor showNotebooks = new Anchor("Notebooks");
-		//Anchor createNotebook = new Anchor("New Notebook");
 		Anchor showPermission = new Anchor("Shared stuff");
 		Anchor account = new Anchor("Account");
 		Anchor reportAnchor = new Anchor("ReportGenerator");
@@ -69,50 +57,34 @@ public class MenuView extends VerticalPanel {
 
 		showNotes.getElement().getStyle().setColor("#660033");
 		showNotebooks.getElement().getStyle().setColor("#660033");
-		//createNotebook.getElement().getStyle().setColor("#660033");
-		//createNote.getElement().getStyle().setColor("#660033");
 		showPermission.getElement().getStyle().setColor("#660033");
 		account.getElement().getStyle().setColor("#660033");
 		reportAnchor.getElement().getStyle().setColor("#660033");
 		logoutAnchor.getElement().getStyle().setColor("#660033");
 		embedAnchor.getElement().getStyle().setColor("#660033");
 
-		// Test
-		// Anchor hello = new Anchor("Say Hello");
-
-		// Den Buttons werden Widgets hinzugef�gt
 		showNotes.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(showNotes));
-
-//		createNote.setStyleName("pure-menu-link");
-//		menuList.add(new ListItemWidget(createNote));
+		this.add(new ListItemWidget(showNotes));
 
 		showNotebooks.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(showNotebooks));
-
-//		createNotebook.setStyleName("pure-menu-link");
-//		menuList.add(new ListItemWidget(createNotebook));
+		this.add(new ListItemWidget(showNotebooks));
 
 		showPermission.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(showPermission));
+		this.add(new ListItemWidget(showPermission));
 
 		account.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(account));
+		this.add(new ListItemWidget(account));
 
 		reportAnchor.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(reportAnchor));
+		this.add(new ListItemWidget(reportAnchor));
 		
 		embedAnchor.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(embedAnchor));
+		this.add(new ListItemWidget(embedAnchor));
 
 		logoutAnchor.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(logoutAnchor));
+		this.add(new ListItemWidget(logoutAnchor));
 
-		pureMenu.add(home);
-		pureMenu.add(menuList);
-		menu.add(pureMenu);
-
-		RootPanel.get("menu").add(menu);
+		// RootPanel.get("menu").add(menu);
 		/**
 		 * Die "Buttons" werden mit dem ClickHandler verbunden. Die "Buttons
 		 * reagieren auf den Mausklick."

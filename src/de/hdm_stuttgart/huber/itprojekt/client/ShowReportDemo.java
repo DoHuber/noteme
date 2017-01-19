@@ -16,9 +16,6 @@ import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
 
