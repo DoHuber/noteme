@@ -34,7 +34,7 @@ public class ShowNotebook extends BasicView {
 	private Button updateConfirmButton = new Button("Save");
 	private Button shareButton = new Button(IconConstants.ICON_SHARE);
 
-	private Button createButton = new Button(IconConstants.ICON_ADD_NOTE);
+	private Button createButton = new Button(IconConstants.ICON_ADD_NOTE2);
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	
 	NoteBook displayedNoteBook = new NoteBook();
