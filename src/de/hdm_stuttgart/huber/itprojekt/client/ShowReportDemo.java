@@ -16,9 +16,6 @@ import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
 
@@ -55,9 +52,13 @@ public class ShowReportDemo extends MenuView {
 		home.getElement().getStyle().setColor("#ffffff");
 //		home.getElement().getStyle().setFontStyle("Roboto");
 		
+		Anchor filter = new Anchor("Filter");
 		Anchor showAllNotebooks = new Anchor("AllNotebooks");
 		Anchor showAllNotes = new Anchor("AllNotes");
 		Anchor showAllPermissions = new Anchor("AllPermissions");
+		
+		filter.setStyleName("pure-menu-link");
+		menuList.add(new ListItemWidget(filter));
 		
 		showAllNotebooks.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showAllNotebooks));
@@ -73,6 +74,15 @@ public class ShowReportDemo extends MenuView {
 		menu.add(pureMenu);
 		RootPanel.get("menu").add(menu);
 
+		filter.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
+			}
+
+		});
+		
 		showAllNotebooks.addClickHandler(new ClickHandler() {
 
 			@Override

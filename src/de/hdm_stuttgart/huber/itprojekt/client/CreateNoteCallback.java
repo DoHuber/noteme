@@ -3,6 +3,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 /**

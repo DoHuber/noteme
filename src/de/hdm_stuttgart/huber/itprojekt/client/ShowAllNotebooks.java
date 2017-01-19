@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 
 import com.google.gwt.user.client.ui.RootPanel;
 
+import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;

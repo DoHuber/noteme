@@ -1,4 +1,4 @@
-package de.hdm_stuttgart.huber.itprojekt.client;
+package de.hdm_stuttgart.huber.itprojekt.client.gui;
 
 public class IconConstants {
 	
