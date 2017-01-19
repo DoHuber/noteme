@@ -45,7 +45,6 @@ public class MenuView extends VerticalPanel {
 		UnorderedListWidget menuList = new UnorderedListWidget();
 
 		editorVerwaltung.getCurrentUser(uc);
-		// VerticalPanel vPanel = new VerticalPanel();
 
 		RootPanel.get("menu").getElement().getStyle().setBackgroundColor("#ffffff");
 
@@ -56,9 +55,7 @@ public class MenuView extends VerticalPanel {
 
 		// Weitere Button Definitions
 		Anchor showNotes = new Anchor("Notes");
-		//Anchor createNote = new Anchor("New Note");
 		Anchor showNotebooks = new Anchor("Notebooks");
-		//Anchor createNotebook = new Anchor("New Notebook");
 		Anchor showPermission = new Anchor("Shared stuff");
 		Anchor account = new Anchor("Account");
 		Anchor reportAnchor = new Anchor("ReportGenerator");
@@ -69,29 +66,18 @@ public class MenuView extends VerticalPanel {
 
 		showNotes.getElement().getStyle().setColor("#660033");
 		showNotebooks.getElement().getStyle().setColor("#660033");
-		//createNotebook.getElement().getStyle().setColor("#660033");
-		//createNote.getElement().getStyle().setColor("#660033");
 		showPermission.getElement().getStyle().setColor("#660033");
 		account.getElement().getStyle().setColor("#660033");
 		reportAnchor.getElement().getStyle().setColor("#660033");
 		logoutAnchor.getElement().getStyle().setColor("#660033");
 		embedAnchor.getElement().getStyle().setColor("#660033");
 
-		// Test
-		// Anchor hello = new Anchor("Say Hello");
-
 		// Den Buttons werden Widgets hinzugef�gt
 		showNotes.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotes));
 
-//		createNote.setStyleName("pure-menu-link");
-//		menuList.add(new ListItemWidget(createNote));
-
 		showNotebooks.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showNotebooks));
-
-//		createNotebook.setStyleName("pure-menu-link");
-//		menuList.add(new ListItemWidget(createNotebook));
 
 		showPermission.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showPermission));
@@ -111,23 +97,19 @@ public class MenuView extends VerticalPanel {
 		pureMenu.add(home);
 		pureMenu.add(menuList);
 		menu.add(pureMenu);
-
 		RootPanel.get("menu").add(menu);
+		
 		/**
 		 * Die "Buttons" werden mit dem ClickHandler verbunden. Die "Buttons
 		 * reagieren auf den Mausklick."
 		 *
 		 */
-
 		showNotes.addClickHandler(new ShowAllNotesHandler());
-		//createNote.addClickHandler(new CreateNoteHandler());
 		showNotebooks.addClickHandler(new ShowAllNotebooksHandler());
-		//createNotebook.addClickHandler(new CreateNotebookHandler());
 		showPermission.addClickHandler(new ShowPermissionHandler());
 		account.addClickHandler(new AccountHandler());
 		reportAnchor.addClickHandler(new ReportHandler());
 		logoutAnchor.addClickHandler(new LogoutHandler());
-		
 		embedAnchor.addClickHandler(new ClickHandler(){
 
 			@Override
@@ -137,11 +119,7 @@ public class MenuView extends VerticalPanel {
 				RootPanel.get("main").add(new EmbedCode());
 				
 			}
-		
 		});
-
-
-
 	}
 
 	/*
@@ -192,20 +170,6 @@ public class MenuView extends VerticalPanel {
 			new ShowAllNotes().getHeadlineText();
 		}
 	}
-
-//	private class CreateNotebookHandler implements ClickHandler {
-//
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			MenuView mView = new MenuView();
-//			RootPanel.get("menu").clear();
-//			RootPanel.get("menu").add(mView);
-//
-//			CreateNotebook cN = new CreateNotebook();
-//			RootPanel.get("main").clear();
-//			RootPanel.get("main").add(cN);
-//		}
-//	}
 
 	private class AccountHandler implements ClickHandler {
 
