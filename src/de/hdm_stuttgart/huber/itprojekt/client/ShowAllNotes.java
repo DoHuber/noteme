@@ -77,6 +77,8 @@ public class ShowAllNotes extends BasicView {
 		FlowPanel fPanel2 = new FlowPanel();
 		FlowPanel buttonsPanel = new FlowPanel();
 		
+		buttonsPanel.setStyleName("buttonsPanel");
+		
 		sharedWithBtn.addClickHandler(new SharedWithClickHandler());
 		allNotesBtn.addClickHandler(new AllNotesClickHandler());
 		sharedByBtn.addClickHandler(new SharedByClickHandler());
@@ -95,6 +97,7 @@ public class ShowAllNotes extends BasicView {
 	
 		RootPanel.get("main").add(fPanel2);
 		RootPanel.get("tableNotebook").clear();
+		RootPanel.get("tableNotebook1").clear();
 		
 	}
 

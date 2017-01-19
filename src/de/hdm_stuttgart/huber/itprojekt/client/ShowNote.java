@@ -91,6 +91,7 @@ public class ShowNote extends BasicView {
 		RootPanel.get("main").add(contentPanel);
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		RootPanel.get("tableNotebook1").clear();
 		
 		if(currentlyDisplayedNote.hasRuntimePermission()) {
 			processNoteWithPermissions();
@@ -150,7 +151,7 @@ public class ShowNote extends BasicView {
 		
 		noteArea.setHTML(currentlyDisplayedNote.getContent());
 		// noteArea.setText(currentlyDisplayedNote.getContent());
-		noteArea.setSize("100%", "100%px");
+		noteArea.setSize("100%", "100%");
 		noteArea.setStyleName("noteArea");
 		
 		grid.setWidget(1, 0, noteArea);

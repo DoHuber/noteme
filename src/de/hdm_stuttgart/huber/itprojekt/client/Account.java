@@ -71,6 +71,7 @@ public class Account extends BasicView {
 		
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		RootPanel.get("tableNotebook1").clear();
 
 	}
 
