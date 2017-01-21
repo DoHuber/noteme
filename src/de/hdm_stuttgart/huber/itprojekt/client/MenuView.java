@@ -7,7 +7,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
