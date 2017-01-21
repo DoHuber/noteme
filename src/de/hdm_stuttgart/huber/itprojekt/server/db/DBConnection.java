@@ -31,7 +31,7 @@ public class DBConnection {
 
 			if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
 
-				url = "jdbc:google:mysql://it-projekt-149914:noizbuch2/notizbuch";
+				url = "jdbc:google:mysql://it-projekt-hdm:it-projekt-huber-sql/notizbuch";
 				user = "root";
 				pass = "nm9000!";
 				Class.forName("com.mysql.jdbc.GoogleDriver");

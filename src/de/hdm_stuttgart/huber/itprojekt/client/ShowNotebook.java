@@ -43,7 +43,6 @@ public class ShowNotebook extends BasicVerticalView {
 	private TextBox subtitle = new TextBox();
 	AllNotesCallback callback = new AllNotesCallback();
 
-	private Vector<Note> notes = new Vector<Note>();
 	private HorizontalPanel actionButtons;
 	private VerticalPanel titlesEditInterface;
 	private HorizontalPanel wrapper = new HorizontalPanel();

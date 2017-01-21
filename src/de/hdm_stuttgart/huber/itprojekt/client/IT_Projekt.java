@@ -8,7 +8,6 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.media.client.Audio;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -21,6 +20,7 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
@@ -32,7 +32,6 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 public class IT_Projekt implements EntryPoint {
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private UserInfo userInfo = null;
-	private Anchor signInLink = new Anchor("Sign In");
 
 	private Audio bootSound;
 	private Audio bootAdminSound;
