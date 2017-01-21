@@ -36,7 +36,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 	}
 
 	@Override
-	public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l) {
+	public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l) throws IllegalArgumentException {
 
 		/**
 		 * Gedanken zur Logik: Wenn eine Permission existiert, die gesteigert

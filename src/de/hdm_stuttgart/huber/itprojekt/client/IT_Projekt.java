@@ -42,20 +42,20 @@ public class IT_Projekt implements EntryPoint {
 	private Label name2 = new Label("Last Name");
 	private TextBox nameBox2 = new TextBox();
 	private Button btn = new Button("Save");
-	
+
 	ApplicationPanel applicationPanel;
 	Button accountButton = new Button(IconConstants.ICON_ACCOUNT_CIRCLE);
 
 	public void onModuleLoad() {
-		
+
 		setUpUncaughtExceptionHandler();
-		
+
 		applicationPanel = ApplicationPanel.getApplicationPanel();
 		applicationPanel.setStyleName("dockpanel");
 
 		setUpHeaderPanel();
 		setUpFooter();
-		
+
 		RootLayoutPanel.get().add(applicationPanel);
 
 		GWT.log("Servus i bims");
@@ -102,47 +102,46 @@ public class IT_Projekt implements EntryPoint {
 	}
 
 	private void setUpFooter() {
-		
+
 		HorizontalPanel footerPanel = new HorizontalPanel();
 		footerPanel.add(new Label("Gruppe 7 IT-Projekt: Hochschule der Medien"));
 		Anchor a = new Anchor("Report Generator");
 		a.setHref(GWT.getHostPageBaseURL() + "Report.html");
 		footerPanel.add(a);
-		
+
 		applicationPanel.setFooter(footerPanel);
-		
+
 	}
 
 	private void setUpHeaderPanel() {
-		
+
 		HorizontalPanel headerPanel = new HorizontalPanel();
-		
+
 		headerPanel.setStyleName("headerpanel");
 		headerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		headerPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		
+
 		headerPanel.add(new HTML("<img width=\"33%\" src=\"LeftUpperSprite.jpg\" alt=\"Fehler\">"));
-		
+
 		Label l = new Label("NoteMe");
 		l.setStyleName("headerlabel");
 		headerPanel.add(l);
-		
-		
-		accountButton.addClickHandler(new ClickHandler(){
+
+		accountButton.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				openAccountPanel();
 			}
-			
+
 		});
-		
+
 		headerPanel.add(accountButton);
-		
+
 		headerPanel.setCellWidth(headerPanel.getWidget(0), "33%");
 		headerPanel.setCellWidth(headerPanel.getWidget(1), "33%");
 		headerPanel.setCellWidth(headerPanel.getWidget(2), "33%");
-		
+
 		applicationPanel.setHeader(headerPanel);
 	}
 
@@ -156,13 +155,13 @@ public class IT_Projekt implements EntryPoint {
 			}
 		});
 	}
-	
+
 	private void openAccountPanel() {
-		
+
 		AccountPanel ap = new AccountPanel(userInfo);
 		ap.setPopupPosition(accountButton.getAbsoluteLeft(), accountButton.getAbsoluteTop());
 		ap.show();
-		
+
 	}
 
 	private void checkIfNewNote() {
@@ -187,7 +186,7 @@ public class IT_Projekt implements EntryPoint {
 
 					CreateNote prefilledCreateForm = new CreateNote(result);
 					applicationPanel.replaceContentWith(prefilledCreateForm);
-					
+
 					loadMenu();
 
 				}
@@ -202,18 +201,18 @@ public class IT_Projekt implements EntryPoint {
 	 *
 	 */
 	private void loadMenu() {
-		
+
 		MenuView navigation = new MenuView();
-		
+
 		applicationPanel.setNavigation(navigation);
 
 	}
 
 	private void loadDueNotes() {
-		
+
 		DueDateFromUser du = new DueDateFromUser(userInfo);
 		applicationPanel.setCenterContent(du);
-	
+
 	}
 
 	private void loadLogin() {
@@ -221,17 +220,17 @@ public class IT_Projekt implements EntryPoint {
 		Label l = new Label("You need to sign in in order to access this application.");
 		Anchor a = new Anchor("Sign in");
 		a.setHref(userInfo.getLoginUrl());
-		
+
 		VerticalPanel vp = new VerticalPanel();
 		vp.add(l);
 		vp.add(a);
-		
+
 		ApplicationPanel.getApplicationPanel().replaceContentWith(vp);
-		
+
 	}
 
 	public void createUser() {
-		
+
 		user.add(name);
 		user.add(nameBox);
 		user.add(name2);
@@ -239,9 +238,9 @@ public class IT_Projekt implements EntryPoint {
 		user.add(nameBox2);
 		user.add(btn);
 		btn.addClickHandler(new SaveClickHandler());
-		
+
 		ApplicationPanel.getApplicationPanel().replaceContentWith(user);
-		
+
 	}
 
 	private void initializeAudio() {
@@ -258,27 +257,27 @@ public class IT_Projekt implements EntryPoint {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
+
 			userInfo.setFirstName(nameBox.getText());
 			userInfo.setSurName(nameBox2.getText());
 			editorVerwaltung.saveUser(userInfo, new SaveCallBack());
-			
+
 		}
 
 		private class SaveCallBack implements AsyncCallback<UserInfo> {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				
+
 			}
 
 			@Override
 			public void onSuccess(UserInfo result) {
-				
+
 				loadMenu();
 				loadDueNotes();
 				Notificator.getNotificator().showSuccess("Welcome to NoteMe!");
-				
+
 			}
 
 		}

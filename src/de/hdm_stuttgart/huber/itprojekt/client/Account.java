@@ -8,6 +8,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.TextBox;
+
+import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
@@ -50,6 +52,15 @@ public class Account extends BasicVerticalView {
 		deleteButton.addClickHandler(new DeleteClickHandler());
 		logOutUrl = loggedInUser.getLogoutUrl();
 		
+		saveButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				saveUpdates();
+			}
+			
+		});
+		
 		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		this.setWidth("100%");
 		this.add(name);
@@ -60,6 +71,27 @@ public class Account extends BasicVerticalView {
 		
 		GWT.log(loggedInUser.toString());
 
+	}
+
+	private void saveUpdates() {
+		
+		loggedInUser.setFirstName(name.getValue());
+		loggedInUser.setSurName(surname.getValue());
+		
+		editorVerwaltung.saveUser(loggedInUser, new AsyncCallback<UserInfo>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				GWT.log(caught.toString());
+			}
+
+			@Override
+			public void onSuccess(UserInfo result) {
+				Notificator.getNotificator().showSuccess("Changes saved");
+			}
+		
+		});
+		
 	}
 
 	private class DeleteClickHandler implements ClickHandler {
