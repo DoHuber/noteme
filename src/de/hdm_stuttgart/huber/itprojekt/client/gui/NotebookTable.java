@@ -10,11 +10,11 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
+import de.hdm_stuttgart.huber.itprojekt.client.ApplicationPanel;
 import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
 import de.hdm_stuttgart.huber.itprojekt.client.ShowNotebook;
 
@@ -28,10 +28,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  *
  */
 
-public class NotebookTable {
+public class NotebookTable extends FlowPanel {
 
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	private FlowPanel fPanel = new FlowPanel();
 	private FlowPanel buttonPanel = new FlowPanel();
 
 	/**
@@ -61,7 +60,8 @@ public class NotebookTable {
 		this.table = table;
 	}
 
-	public FlowPanel start() {
+	@Override
+	public void onLoad() {
 		TextColumn<NoteBook> title = new TextColumn<NoteBook>() {
 
 			@Override
@@ -102,10 +102,9 @@ public class NotebookTable {
 
 		table.setStyleName("googleTable");
 
-		fPanel.add(buttonPanel);
-		fPanel.add(panel);
+		this.add(buttonPanel);
+		this.add(panel);
 
-		return fPanel;
 	}
 
 	@SuppressWarnings("unused")
@@ -117,7 +116,7 @@ public class NotebookTable {
 			 * Sicherheitsfunktion. Soll das Notizbuch wirklich gelöscht werden?
 			 */
 			if (Window.confirm("Wollen Sie das notizbuch löschen?")) {
-				fPanel.add(new HTML("<p> Das Notizbuch wurde gelöscht</p>"));
+				NotebookTable.this.add(new HTML("<p> Das Notizbuch wurde gelöscht</p>"));
 			}
 
 		}
@@ -143,11 +142,10 @@ public class NotebookTable {
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
+			
 			selected = selection.getSelectedObject();
 			ShowNotebook sn = new ShowNotebook(selected);
-
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(sn);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(sn);
 
 		}
 	}

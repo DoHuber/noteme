@@ -1,15 +1,20 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-import com.google.gwt.user.client.ui.FlowPanel;
+
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Basisklasse
  * 
  * @author Nikita Nalivayko
+ * 
+ * Funktioniert fast identisch zu BasicView, nur dass hier ein VerticalPanel als
+ * Grundlage dient. Inhalte werden immer horizontal zentriert, um das alte Verhalten mit RootPanels
+ * zu replizieren.
  *
  */
-public abstract class BasicView extends FlowPanel {
+public abstract class BasicVerticalView extends VerticalPanel {
 
 	/**
 	 * Jedes GWT Widget muss diese Methode implementieren. Sie gibt an, sas
@@ -21,6 +26,9 @@ public abstract class BasicView extends FlowPanel {
 		super.onLoad();
 		
 		this.add(createHeadline(getHeadlineText(), getSubHeadlineText()));
+		
+		this.setHorizontalAlignment(ALIGN_CENTER);
+		this.setWidth("100%");
 		
 		run();
 

@@ -1,10 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 
-public class EmbedCode extends BasicView {
+public class EmbedCode extends BasicVerticalView {
 
 	public EmbedCode() {
 		
@@ -27,17 +25,11 @@ public class EmbedCode extends BasicView {
 	
 
 		String s = "<form action=\'https://a-1-dot-it-projekt-149914.appspot.com/it_projekt/listener\' method=\'POST\'>" +
-			"<input type=\'hidden\' name=\'test\' value=\'test vom huber\'>" +
 			"<input type=\'image\' src=\'https://a-1-dot-it-projekt-149914.appspot.com/sharebutton.png\' alt=\'Share\' style=\'border:2px black solid\'>" +
 			"</form>";
 	
 		Label l = new Label(s);
-		
-		RootPanel.get("main").clear();
-		RootPanel.get("table").clear();
-		RootPanel.get("main").add(l);
-		
-	
+		this.add(l);
 		
 	}
 

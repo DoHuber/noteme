@@ -60,8 +60,8 @@ public class ClientsideSettings {
 
 		if (editorVerwaltung == null) {
 			editorVerwaltung = GWT.create(Editor.class);
-
 		}
+		
 		return editorVerwaltung;
 	}
 

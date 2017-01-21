@@ -2,15 +2,13 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 
-import com.google.gwt.user.client.ui.RootPanel;
-
-import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
@@ -22,7 +20,8 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  * @author erdmann, nalivayko
  *
  */
-public class ShowAllNotebooks extends BasicView {
+public class ShowAllNotebooks extends BasicVerticalView {
+
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	AllNotebooksCallback callback = new AllNotebooksCallback();
 	final Button sharedByBtn = new Button("Shared by me");
@@ -30,6 +29,8 @@ public class ShowAllNotebooks extends BasicView {
 	final Button allNoteBooksBtn = new Button("All Notebooks");
 	Button createNoteBookButton = new Button(IconConstants.ICON_ADD_NOTE);
 	private Vector<NoteBook> notebook = new Vector<NoteBook>();
+
+	private NotebookTable currentTable;
 
 	public ShowAllNotebooks(Vector<NoteBook> nList) {
 		notebook = nList;
@@ -77,17 +78,7 @@ public class ShowAllNotebooks extends BasicView {
 		sharedWithBtn.addClickHandler(new SharedWithClickHandler());
 		allNoteBooksBtn.addClickHandler(new AllNoteBooksClickHandler());
 		sharedByBtn.addClickHandler(new SharedByClickHandler());
-		createNoteBookButton.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new CreateNotebook());
-				
-			}
-			
-		});
+		createNoteBookButton.addClickHandler(new CreateNoteBookClickHandler());
 		buttonsPanel.add(sharedByBtn);
 		buttonsPanel.add(sharedWithBtn);
 		buttonsPanel.add(allNoteBooksBtn);
@@ -97,14 +88,10 @@ public class ShowAllNotebooks extends BasicView {
 
 		editorVerwaltung.getAllNoteBooksForCurrentUser(callback);
 
-		// NotebookTable nbt = new NotebookTable(notebook);
-		// nbt.addClickNote();
-		RootPanel.get("main").add(fPanel2);
-		// RootPanel.get("main").add(nbt.start());
-		// RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
-		RootPanel.get("tableNotebook1").clear();
+		this.add(fPanel2);
 	}
+
+
 
 	private class AllNoteBooksClickHandler implements ClickHandler {
 
@@ -119,7 +106,7 @@ public class ShowAllNotebooks extends BasicView {
 	private class AllNotebooksCallback implements AsyncCallback<Vector<NoteBook>> {
 		@Override
 		public void onSuccess(Vector<NoteBook> result) {
-			addNoteBooksToTable(result);
+			fillTableWith(result);
 		}
 
 		@Override
@@ -143,13 +130,12 @@ public class ShowAllNotebooks extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-
+			GWT.log(caught.toString());
 		}
 
 		@Override
 		public void onSuccess(Vector<NoteBook> result) {
-			addNoteBooksToTable(result);
+			fillTableWith(result);
 
 		}
 
@@ -170,24 +156,39 @@ public class ShowAllNotebooks extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-
+			GWT.log(caught.toString());
 		}
 
 		@Override
 		public void onSuccess(Vector<NoteBook> result) {
-			addNoteBooksToTable(result);
+
+			fillTableWith(result);
 
 		}
 
 	}
 
-	public void addNoteBooksToTable(Vector<NoteBook> result) {
-		notebook = result;
-		NotebookTable ntB = new NotebookTable(notebook);
+	public void fillTableWith(Vector<NoteBook> result) {
+
+		if (currentTable != null) {
+			this.remove(currentTable);
+		}
+
+		NotebookTable ntB = new NotebookTable(result);
 		ntB.addClickNote();
-		RootPanel.get("table").clear();
-		RootPanel.get("table").add(ntB.start());
+
+		this.add(ntB);
+		currentTable = ntB;
+
+	}
+
+	private final class CreateNoteBookClickHandler implements ClickHandler {
+		@Override
+		public void onClick(ClickEvent event) {
+
+			ApplicationPanel.getApplicationPanel().replaceContentWith(new CreateNotebook());
+
+		}
 	}
 
 }

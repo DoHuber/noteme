@@ -4,7 +4,7 @@ h1 {
   font-size: 2em;
   font-weight: bold;
   color: #660033;
-  /*margin: 10% 0% 25%;*/
+
   margin: 40px 0px 10px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
@@ -13,59 +13,86 @@ h1 {
   font-size: 16px;
   font-weight: bold;
   color: #660033;
-  /*margin: 10% 0% 25%;
-  margin: 40px 0px 70px;
-  margin-left: 50px;
-  margin-down: 50px;*/
+
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
 
 .pure-menu-link {
+	
     display: block;
     text-decoration: none;
     white-space: nowrap;
     color: #660033;
-   /*color: #777;*/
     font-family: 'Roboto', sans-serif;
-    
-    padding: .5em 1em;
-    /*margin-left: 10px;*/
-}
-.pure-menu-link:after {
-	padding-left: 0.5em;
-    /* content: "\25B8";
-    content: "\25BE";*/
-    font-size: small;
-}
-/* .pure-menu-link:hover {
-	background-color: transparent;
-	
-}*/
-.pure-menu-link:visited {
-	color: #777777;
+    font-size: large;
+    border: medium solid #660033;
+
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 5%;
+
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .pure-menu-heading {
-	background-color: #660033;
-	/*width: 40%;*/
-	width: 150px;
-	font-color: #FFFFFF;
-	color: #ffffff;
-	text-align: center;
-	/*background-image: url('Home.jpg') no-repeat scroll;
-	margin-bottom: 150px;
-	margin-left: 40px;
-	position: absolute; */
 
-	display: block;
+    background-color: #660033;
+    color: #ffffff;
+    text-align: center;
+
+    display: block;
     text-decoration: none;
     white-space: nowrap;
-    font-size: 110%;
+    font-size: larger;
     text-transform: uppercase;
-    padding: .5em 1em;
-    display: inline-block;
+
+    margin: 5% 2%;
+
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+}
+
+.pure-menu-link:after {
+    font-size: small;
+}
+
+.bordered {
+
+    border: 2px solid black;
+    border-collapse: collapse;
+    background-color: #e1d1d6;
+
+}
+
+.headerlabel {
+
+    font-size: xx-large;
+    color: #660033;
+    align-content: center;
     
+}
+
+.navigation {
+
+    border-collapse: collapse;
+    background-color: #e1d1d6;
+
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+
+}
+
+.headerpanel {
+	background-color: #e1d1d6;
+}
+
+
+.pure-menu-link:visited {
+	color: #777777;
 }
 
 .noteArea {
@@ -90,26 +117,6 @@ h1 {
 	image: url('sharebutton.png') no-repeat scroll;
 }
 
-/* .googleTable {
-	margin-left: 50px;
-	margin-top: 200px;
-}*/
-
-/*.pure-button {
-	background-color: #FFE5F2;
-    text-decoration: none;
-    border-radius: 2px;
-    width: 5em;
-   /* font-family: 'Roboto', sans-serif; */
-  /* font-color: #660033;
-    color:  #660033;
-    /* display: inline-block;
-    zoom: 1; 
-    box-sizing: border-box; */
-   /* margin-right: 10px;
-    /*padding-bottom: 1em;
-    padding-down: 1em;
-} */
 
 .psbutton {
 	color: white;

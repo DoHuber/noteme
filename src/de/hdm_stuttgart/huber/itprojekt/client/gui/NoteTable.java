@@ -6,11 +6,11 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
+import de.hdm_stuttgart.huber.itprojekt.client.ApplicationPanel;
 import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
 import de.hdm_stuttgart.huber.itprojekt.client.ShowNote;
 
@@ -26,10 +26,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
  *
  */
 
-public class NoteTable {
+public class NoteTable extends FlowPanel {
 
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	private FlowPanel fPanel = new FlowPanel();
 
 	/**
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
@@ -40,6 +39,10 @@ public class NoteTable {
 
 	public NoteTable(Vector<Note> list) {
 		this.notes = list;
+	}
+
+	public NoteTable() {
+		
 	}
 
 	public Vector<Note> getNotes() {
@@ -57,9 +60,14 @@ public class NoteTable {
 	public void setTable(DataGrid<Note> table) {
 		this.table = table;
 	}
+	
+	
 
-	public FlowPanel start() {
-
+	@Override
+	protected void onLoad() {
+		
+		super.onLoad();
+		
 		TextColumn<Note> title = new TextColumn<Note>() {
 
 			@Override
@@ -95,8 +103,9 @@ public class NoteTable {
 
 			@Override
 			public String getValue(Note note) {
-				// TODO Auto-generated method stub
+				
 				return note.getModificationDate().toString();
+				
 			}
 		};
 		table.addColumn(modificationDate, "Modification Date");
@@ -115,18 +124,20 @@ public class NoteTable {
 			}
 		};
 		table.addColumn(dueDate, "Due Date");
-
+			
 		table.setRowCount(notes.size(), false);
 		table.setWidth("80%");
 		table.setVisibleRange(0, notes.size());
 		table.setRowData(0, notes);
+		
 		LayoutPanel panel = new LayoutPanel();
+		
 		panel.setSize("60em", "40em");
 		panel.add(table);
-		fPanel.add(panel);
-
-		return fPanel;
+				
+		this.add(panel);
 	}
+
 
 	/**
 	 * Eine Angeklickte Notiz wird angezeigt
@@ -147,12 +158,11 @@ public class NoteTable {
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
+			
 			selected = selection.getSelectedObject();
 			ShowNote sn = new ShowNote(selected);
-
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(sn);
-
+			ApplicationPanel.getApplicationPanel().replaceContentWith(sn);
+		
 		}
 	}
 

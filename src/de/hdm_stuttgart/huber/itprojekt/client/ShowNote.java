@@ -10,7 +10,6 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -23,7 +22,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
-public class ShowNote extends BasicView {
+public class ShowNote extends BasicVerticalView {
 	/**
 	 * @author Nikita Nalivayko
 	 */
@@ -65,6 +64,7 @@ public class ShowNote extends BasicView {
 
 	@Override
 	public String getSubHeadlineText() {
+
 		if (currentlyDisplayedNote.getNoteBook() == null) {
 			return "There is no notebook deposited for the note.";
 		} else {
@@ -75,7 +75,6 @@ public class ShowNote extends BasicView {
 
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
 		return "Note: " + currentlyDisplayedNote.getTitle();
 	}
 
@@ -90,10 +89,7 @@ public class ShowNote extends BasicView {
 
 		empty.getElement().getStyle().setColor("#660033");
 
-		RootPanel.get("main").add(contentPanel);
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
-		RootPanel.get("tableNotebook1").clear();
+		this.add(contentPanel);
 		
 		if(currentlyDisplayedNote.hasRuntimePermission()) {
 			processNoteWithPermissions();
@@ -116,8 +112,9 @@ public class ShowNote extends BasicView {
 		
 		// Fehlerkondition: User darf dann eigentlich gar nicht hier sein
 		if (!p.isUserAllowedTo(Level.READ)) {
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(new ShowAllNotes());
+
+			ApplicationPanel.getApplicationPanel().replaceContentWith(new ShowAllNotes());
+
 		}
 		
 		
@@ -142,18 +139,19 @@ public class ShowNote extends BasicView {
 	}
 
 	private void setUpAlignPanel() {
+
 		alignPanel.add(empty);
 		alignPanel.add(dueDate);
 		alignPanel.add(dueDateBox);
 		alignPanel.add(updateConfirmButton);
 		dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
+
 	}
 
 	private void setUpContentPanel() {
 		
 		noteArea.setHTML(currentlyDisplayedNote.getContent());
-		// noteArea.setText(currentlyDisplayedNote.getContent());
-		noteArea.setSize("100%", "100%");
+		noteArea.setSize("100%", "100%px");
 		noteArea.setStyleName("noteArea");
 		
 		grid.setWidget(1, 0, noteArea);
@@ -172,15 +170,15 @@ public class ShowNote extends BasicView {
 	}
 
 	private void setUpButtonPanel() {
-		// ButtonPanel
+
 		HorizontalPanel buttonPanel = new HorizontalPanel();
 		buttonPanel.add(shareButton);
 		buttonPanel.add(deleteButton);
-		RootPanel.get("main").add(buttonPanel);
+		this.add(buttonPanel);
 	}
 
 	private void setUpButtons() {
-		// Buttons
+
 		deleteButton.addClickHandler(new DeleteClickHandler());
 		shareButton.addClickHandler(new ShareClickHandler());
 		updateConfirmButton.addClickHandler(new UpdateClickHandler());
@@ -196,8 +194,7 @@ public class ShowNote extends BasicView {
 		public void onClick(ClickEvent event) {
 		
 			ShareShareable shareStuff = new ShareShareable(currentlyDisplayedNote);
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(shareStuff);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(shareStuff);
 
 		}
 
@@ -232,8 +229,7 @@ public class ShowNote extends BasicView {
 			
 			n.showSuccess("Notiz" + currentlyDisplayedNote.getTitle() + " wurde gelöscht");
 			
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(new ShowAllNotes());
+			ApplicationPanel.getApplicationPanel().replaceContentWith(new ShowAllNotes());
 			
 		}
 
@@ -259,7 +255,6 @@ public class ShowNote extends BasicView {
 		java.util.Date utilDate = dueDateBox.getValue();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		currentlyDisplayedNote.setDueDate(sqlDate);
-		// n.setNoteBook(nb);
 		editorVerwaltung.saveNote(currentlyDisplayedNote, new UpdateCallback());
 
 	}
