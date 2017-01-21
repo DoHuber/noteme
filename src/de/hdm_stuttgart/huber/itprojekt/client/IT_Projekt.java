@@ -8,6 +8,7 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.media.client.Audio;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
@@ -43,6 +44,7 @@ public class IT_Projekt implements EntryPoint {
 	private Button btn = new Button("Save");
 	
 	ApplicationPanel applicationPanel;
+	Button accountButton = new Button(IconConstants.ICON_ACCOUNT_CIRCLE);
 
 	public void onModuleLoad() {
 		
@@ -124,7 +126,18 @@ public class IT_Projekt implements EntryPoint {
 		Label l = new Label("NoteMe");
 		l.setStyleName("headerlabel");
 		headerPanel.add(l);
-		headerPanel.add(new Button("Hier ist dann mal Google"));
+		
+		
+		accountButton.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				openAccountPanel();
+			}
+			
+		});
+		
+		headerPanel.add(accountButton);
 		
 		headerPanel.setCellWidth(headerPanel.getWidget(0), "33%");
 		headerPanel.setCellWidth(headerPanel.getWidget(1), "33%");
@@ -142,6 +155,14 @@ public class IT_Projekt implements EntryPoint {
 				GWT.log(Arrays.toString(e.getStackTrace()));
 			}
 		});
+	}
+	
+	private void openAccountPanel() {
+		
+		AccountPanel ap = new AccountPanel(userInfo);
+		ap.setPopupPosition(accountButton.getAbsoluteLeft(), accountButton.getAbsoluteTop());
+		ap.show();
+		
 	}
 
 	private void checkIfNewNote() {
@@ -197,8 +218,15 @@ public class IT_Projekt implements EntryPoint {
 
 	private void loadLogin() {
 
-		signInLink.setHref(userInfo.getLoginUrl());
-		applicationPanel.setCenterContent(signInLink);
+		Label l = new Label("You need to sign in in order to access this application.");
+		Anchor a = new Anchor("Sign in");
+		a.setHref(userInfo.getLoginUrl());
+		
+		VerticalPanel vp = new VerticalPanel();
+		vp.add(l);
+		vp.add(a);
+		
+		ApplicationPanel.getApplicationPanel().replaceContentWith(vp);
 		
 	}
 

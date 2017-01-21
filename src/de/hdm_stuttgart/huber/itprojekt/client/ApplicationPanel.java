@@ -50,7 +50,10 @@ public class ApplicationPanel extends DockLayoutPanel {
 	
 	public void replaceContentWith(Widget w) {
 		
+		if (centerContent.getWidget() != null) {
 		centerContent.remove(centerContent.getWidget());
+		}
+		
 		centerContent.setWidget(w);
 		
 	}

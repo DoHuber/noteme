@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -12,15 +13,14 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
-public class Account extends BasicView {
+public class Account extends BasicVerticalView {
 
-	private VerticalPanel contentPanel = new VerticalPanel();
 	private UserInfo loggedInUser = null;
 	private Button deleteButton = new Button("Delete my account");
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	UserCallback userCallback = new UserCallback();
 	private static String logOutUrl;
-	private VerticalPanel vp = new VerticalPanel();
+
 	private TextBox name = new TextBox();
 	private TextBox surname  = new TextBox();
 	private TextBox	email = new TextBox();
@@ -47,30 +47,22 @@ public class Account extends BasicView {
 
 	}
 
-
-
 	@Override
 	public void run() {
+		
 		name.setText(loggedInUser.getFirstName());
 		surname.setText(loggedInUser.getSurName());
 		email.setText(loggedInUser.getEmailAddress());
-		vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		vp.setWidth("100%");
-		vp.add(name);
-		vp.add(surname);
-		vp.add(email);
-		vp.add(deleteButton);
+		
 		deleteButton.addClickHandler(new DeleteClickHandler());
-
 		editorVerwaltung.getCurrentUser(userCallback);
 	
-		/**
-		RootPanel.get("main").add(vp);
-		RootPanel.get("main").add(deleteButton);
-		
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
-		**/
+		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		this.setWidth("100%");
+		this.add(name);
+		this.add(surname);
+		this.add(email);
+		this.add(deleteButton);
 
 	}
 
@@ -113,9 +105,7 @@ public class Account extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			caught.printStackTrace();
-			contentPanel.add(new Label(caught.toString()));
-
+			GWT.log(caught.toString());
 		}
 
 		@Override
