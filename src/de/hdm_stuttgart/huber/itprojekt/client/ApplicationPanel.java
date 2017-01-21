@@ -69,7 +69,7 @@ public class ApplicationPanel extends DockLayoutPanel {
 	}
 
 	
-	public void setNavigation(MenuView navigation) {
+	public void setNavigation(Widget navigation) {
 		
 		navigation.setWidth("100%");
 		this.navigation.setWidget(navigation);

@@ -18,6 +18,16 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 
+.loadingpanel {
+	
+	background-color: #ffffff;
+	border: 2px solid green;
+	font-size: large;
+	font-family: 'Roboto', sans-serif;
+	padding: 5%;
+	
+}
+
 .pure-menu-link {
 	
     display: block;

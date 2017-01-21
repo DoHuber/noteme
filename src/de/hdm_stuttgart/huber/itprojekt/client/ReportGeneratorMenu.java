@@ -3,13 +3,19 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
+import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
@@ -35,49 +41,72 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
  * @version 1.0
  * 
  */
-public class ShowReportDemo extends MenuView {
+public class ReportGeneratorMenu extends VerticalPanel {
 
 	ReportGeneratorAsync reportGenerator = ClientsideSettings.getReportGenerator();
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+	
+	private Anchor filter = new Anchor("Custom Reports");
+	private Anchor showAllNotebooks = new Anchor("All Notebooks");
+	private Anchor showAllNotes = new Anchor("All Notes");
+	private Anchor showAllPermissions = new Anchor("All Permissions");
+	private Anchor home;
+	
+	private PopupPanel loadingPanel;
 
 	protected void onLoad() {
 
-		FlowPanel menu = new FlowPanel();
-		FlowPanel pureMenu = new FlowPanel();
-		UnorderedListWidget menuList = new UnorderedListWidget();
+		this.setHorizontalAlignment(ALIGN_CENTER);
+		
+		intializeLoadingPopup();
+		
+		home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		
+		setStylesAndAddToPanel();
 
-		// Home "Button"
-		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		setUpClickHandlers();
+
+	}
+
+	private void intializeLoadingPopup() {
+		
+		loadingPanel = new PopupPanel(false, true);
+		HTML h = new HTML("Report wird geladen");
+		h.setStyleName("loadingpanel");
+		loadingPanel.setWidget(h);
+		int left = (int) (Window.getClientWidth() * 0.5);
+		int top = (int) (Window.getClientHeight() * 0.5);
+		loadingPanel.setPopupPosition(left, top);
+		
+	}
+
+	private void setStylesAndAddToPanel() {
+		
 		home.setStyleName("pure-menu-heading");
 		home.getElement().getStyle().setColor("#ffffff");
-//		home.getElement().getStyle().setFontStyle("Roboto");
-		
-		Anchor filter = new Anchor("Filter");
-		Anchor showAllNotebooks = new Anchor("AllNotebooks");
-		Anchor showAllNotes = new Anchor("AllNotes");
-		Anchor showAllPermissions = new Anchor("AllPermissions");
+		this.add(home);
 		
 		filter.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(filter));
+		this.add(filter);
 		
 		showAllNotebooks.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(showAllNotebooks));
+		this.add(showAllNotebooks);
 
 		showAllNotes.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(showAllNotes));
+		this.add(showAllNotes);
 
 		showAllPermissions.setStyleName("pure-menu-link");
-		menuList.add(new ListItemWidget(showAllPermissions));
+		this.add(showAllPermissions);
+	}
 
-		pureMenu.add(home);
-		pureMenu.add(menuList);
-		menu.add(pureMenu);
-		RootPanel.get("menu").add(menu);
-
+	private void setUpClickHandlers() {
+		
 		filter.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
+				
+				ApplicationPanel.getApplicationPanel().replaceContentWith(new FilterAbleReports());
 				
 			}
 
@@ -87,7 +116,10 @@ public class ShowReportDemo extends MenuView {
 
 			@Override
 			public void onClick(ClickEvent event) {
+				
+				loadingPanel.show();
 				reportGenerator.createAllNotebooksR(new GenericReportCallback<AllNotebooksR>());
+				
 			}
 
 		});
@@ -96,6 +128,8 @@ public class ShowReportDemo extends MenuView {
 
 			@Override
 			public void onClick(ClickEvent event) {
+				
+				loadingPanel.show();
 				reportGenerator.createAllNotesR(new GenericReportCallback<AllNotesR>());
 
 			}
@@ -107,12 +141,13 @@ public class ShowReportDemo extends MenuView {
 
 			@Override
 			public void onClick(ClickEvent event) {
+				
+				loadingPanel.show();
 				reportGenerator.createAllPermissionsR(new GenericReportCallback<AllPermissionsR>());
 
 			}
 
 		});
-
 	}
 
 	private void printSimpleReport(SimpleReport r) {
@@ -120,9 +155,10 @@ public class ShowReportDemo extends MenuView {
 		HTMLReportWriter writer = new HTMLReportWriter();
 		String html = writer.simpleReport2HTML(r);
 		HTML htmlToDisplay = new HTML(html);
+		ScrollPanel panel = new ScrollPanel(htmlToDisplay);
+		panel.setSize("100%", "100%");
 
-		RootPanel.get("main").clear();
-		RootPanel.get("main").add(htmlToDisplay);
+		ApplicationPanel.getApplicationPanel().replaceContentWith(panel);
 
 	}
 
@@ -130,12 +166,18 @@ public class ShowReportDemo extends MenuView {
 
 		@Override
 		public void onFailure(Throwable caught) {
+			
+			loadingPanel.hide();
 			GWT.log(caught.toString());
+			Notificator.getNotificator().showError("Report could not be generated");
+			
 		}
 
 		@Override
 		public void onSuccess(T result) {
 
+			loadingPanel.hide();
+			
 			if (result instanceof SimpleReport) {
 				SimpleReport r = (SimpleReport) result;
 				printSimpleReport(r);

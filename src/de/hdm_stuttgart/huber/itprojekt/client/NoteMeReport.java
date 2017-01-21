@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -34,6 +35,8 @@ public class NoteMeReport implements EntryPoint {
 	private Label loginLabel = new Label(
 			"Please sign in to your Google Account to access the cool and nice application.");
 	private Anchor signInLink = new Anchor("Sign In");
+	
+	private ApplicationPanel applicationPanel;
 
 	/**
 	 * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
@@ -44,6 +47,9 @@ public class NoteMeReport implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
+		
+		applicationPanel = ApplicationPanel.getApplicationPanel();
+		RootLayoutPanel.get().add(applicationPanel);
 
 		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
@@ -57,10 +63,12 @@ public class NoteMeReport implements EntryPoint {
 		SharedServicesAsync loginService = GWT.create(SharedServices.class);
 		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
 
+			@Override
 			public void onFailure(Throwable e) {
-
+				GWT.log(e.toString());
 			}
 
+			@Override
 			public void onSuccess(UserInfo result) {
 
 				userInfo = result;
@@ -70,7 +78,9 @@ public class NoteMeReport implements EntryPoint {
 					loadMenu();
 
 				} else {
+					
 					loadLogin();
+					
 				}
 
 			}
@@ -85,8 +95,14 @@ public class NoteMeReport implements EntryPoint {
 			reportGenerator = ClientsideSettings.getReportGenerator();
 		}
 
-		ShowReportDemo navigation = new ShowReportDemo();
-		RootPanel.get("menu").add(navigation);
+		ReportGeneratorMenu navigation = new ReportGeneratorMenu();
+		applicationPanel.setNavigation(navigation);
+		
+		Label l = new Label("NoteMe - Report Generator");
+		applicationPanel.setHeader(l);
+		
+		Label n = new Label("Gruppe 7, IT-Projekt HdM Stuttgart");
+		applicationPanel.setFooter(n);
 
 	}
 
@@ -95,7 +111,8 @@ public class NoteMeReport implements EntryPoint {
 		signInLink.setHref(userInfo.getLoginUrl());
 		loginPanel.add(loginLabel);
 		loginPanel.add(signInLink);
-		RootPanel.get("menu").add(loginPanel);
+		
+		ApplicationPanel.getApplicationPanel().replaceContentWith(loginPanel);
 
 	}
 
@@ -151,6 +168,7 @@ public class NoteMeReport implements EntryPoint {
 
 		@Override
 		public void onSuccess(AllUserNotebooksR report) {
+			
 			GWT.log("onSuccess reached!");
 			GWT.log(report.toString());
 			if (report != null) {
