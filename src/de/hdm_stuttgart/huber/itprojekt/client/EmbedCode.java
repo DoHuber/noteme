@@ -1,7 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class EmbedCode extends BasicView {
 

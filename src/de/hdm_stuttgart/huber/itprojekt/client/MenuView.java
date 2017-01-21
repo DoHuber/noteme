@@ -39,14 +39,12 @@ public class MenuView extends VerticalPanel {
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
 		home.setStyleName("pure-menu-heading");
 		home.getElement().getStyle().setColor("#ffffff");
+		
+		this.add(home);
 
 		Anchor showNotes = new Anchor("Notes");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		Anchor showPermission = new Anchor("Shared stuff");
-
-		showNotes.getElement().getStyle().setColor("#660033");
-		showNotebooks.getElement().getStyle().setColor("#660033");
-		showPermission.getElement().getStyle().setColor("#660033");
 
 		showNotes.setStyleName("pure-menu-link");
 		this.add(new ListItemWidget(showNotes));

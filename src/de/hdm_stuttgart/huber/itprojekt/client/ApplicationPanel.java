@@ -28,10 +28,10 @@ public class ApplicationPanel extends DockLayoutPanel {
 		footer = new SimplePanel();
 		
 		header.setStyleName("bordered");
-		navigation.setStyleName("bordered");
+		navigation.setStyleName("navigation");
 		header.setStyleName("bordered");
 		footer.setStyleName("bordered");
-
+		
 		this.addNorth(header, 20);
 		this.addSouth(footer, 10);
 		this.addWest(navigation, 20);
@@ -68,9 +68,7 @@ public class ApplicationPanel extends DockLayoutPanel {
 	
 	public void setNavigation(MenuView navigation) {
 		
-		navigation.setHeight("100%");
 		navigation.setWidth("100%");
-		
 		this.navigation.setWidget(navigation);
 		
 	}

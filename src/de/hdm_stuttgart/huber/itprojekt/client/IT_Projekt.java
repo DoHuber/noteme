@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -101,10 +100,15 @@ public class IT_Projekt implements EntryPoint {
 	}
 
 	private void setUpFooter() {
-		Label footerLabel = new Label("Servus i bims im Footer");
-		footerLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		footerLabel.setStyleName("headerpanel");
-		applicationPanel.setFooter(footerLabel);
+		
+		HorizontalPanel footerPanel = new HorizontalPanel();
+		footerPanel.add(new Label("Gruppe 7 IT-Projekt: Hochschule der Medien"));
+		Anchor a = new Anchor("Report Generator");
+		a.setHref(GWT.getHostPageBaseURL() + "Report.html");
+		footerPanel.add(a);
+		
+		applicationPanel.setFooter(footerPanel);
+		
 	}
 
 	private void setUpHeaderPanel() {
@@ -116,7 +120,10 @@ public class IT_Projekt implements EntryPoint {
 		headerPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		
 		headerPanel.add(new HTML("<img width=\"33%\" src=\"LeftUpperSprite.jpg\" alt=\"Fehler\">"));
-		headerPanel.add(new Label("TODO: NoteMe"));
+		
+		Label l = new Label("NoteMe");
+		l.setStyleName("headerlabel");
+		headerPanel.add(l);
 		headerPanel.add(new Button("Hier ist dann mal Google"));
 		
 		headerPanel.setCellWidth(headerPanel.getWidget(0), "33%");
