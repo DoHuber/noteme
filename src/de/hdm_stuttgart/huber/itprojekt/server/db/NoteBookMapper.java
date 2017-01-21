@@ -145,13 +145,13 @@ public class NoteBookMapper extends DataMapper {
 
 		try {
 
-			PreparedStatement stmt = connection.prepareStatement("DELETE FROM Notebook WHERE id = ?");
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM notizbuch.notebook WHERE id = ?");
 			stmt.setInt(1, notebook.getId());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(e);
 		}
 
 	}

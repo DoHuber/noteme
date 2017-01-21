@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
+import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
@@ -257,6 +258,7 @@ public class IT_Projekt implements EntryPoint {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			
 			userInfo.setFirstName(nameBox.getText());
 			userInfo.setSurName(nameBox2.getText());
 			editorVerwaltung.saveUser(userInfo, new SaveCallBack());
@@ -272,8 +274,11 @@ public class IT_Projekt implements EntryPoint {
 
 			@Override
 			public void onSuccess(UserInfo result) {
+				
 				loadMenu();
-
+				loadDueNotes();
+				Notificator.getNotificator().showSuccess("Welcome to NoteMe!");
+				
 			}
 
 		}

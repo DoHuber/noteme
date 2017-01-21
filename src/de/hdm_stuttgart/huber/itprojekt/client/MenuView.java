@@ -47,13 +47,13 @@ public class MenuView extends VerticalPanel {
 		Anchor showPermission = new Anchor("Shared stuff");
 
 		showNotes.setStyleName("pure-menu-link");
-		this.add(new ListItemWidget(showNotes));
+		this.add(showNotes);
 
 		showNotebooks.setStyleName("pure-menu-link");
-		this.add(new ListItemWidget(showNotebooks));
+		this.add(showNotebooks);
 
 		showPermission.setStyleName("pure-menu-link");
-		this.add(new ListItemWidget(showPermission));
+		this.add(showPermission);
 
 		showNotes.addClickHandler(new ShowAllNotesHandler());
 		showNotebooks.addClickHandler(new ShowAllNotebooksHandler());

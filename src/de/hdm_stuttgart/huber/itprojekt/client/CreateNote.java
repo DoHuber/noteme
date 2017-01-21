@@ -169,9 +169,14 @@ public class CreateNote extends BasicVerticalView {
 		note.setTitle(titleTextBox.getText());
 		note.setSubtitle(SubtitleTextBox.getText());
 		note.setContent(noteArea.getHTML());
+		
+		if (dueDateBox.getValue() != null) {
+			
 		java.util.Date utilDate = dueDateBox.getValue();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		note.setDueDate(sqlDate);
+		
+		}
 		
 		if (intoNoteBook.getValue()) {
 			

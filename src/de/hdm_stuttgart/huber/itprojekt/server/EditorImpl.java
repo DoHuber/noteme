@@ -39,10 +39,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public void init() throws IllegalArgumentException {
 
-			this.noteMapper = NoteMapper.getNoteMapper();
-			this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
-			this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
-			this.permissionMapper = PermissionMapper.getPermissionMapper();
+		this.noteMapper = NoteMapper.getNoteMapper();
+		this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
+		this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
+		this.permissionMapper = PermissionMapper.getPermissionMapper();
 
 	}
 
@@ -342,8 +342,6 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 			permissionMapper.deletePermission(p);
 		}
 
-
-
 		try {
 			userInfoMapper.delete(ui);
 		} catch (ClassNotFoundException e) {
@@ -357,22 +355,32 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
 	@Override
 	public Vector<Note> getDueNotesForCurrentUser() {
-		
+
 		// TODO performanter implementieren mit eigener Mapper-Funktion
-		
+
 		Date today = new Date(System.currentTimeMillis());
 		Vector<Note> dueNotes = new Vector<>();
-		
-		for (Note n : getAllNotesForCurrentUser()) {
-			
-			if (n.getDueDate().before(today) || n.getDueDate().equals(today)) {
-				dueNotes.add(n);
-			}
-			
+
+		Vector<Note> allNotesCurrentUser = getAllNotesForCurrentUser();
+
+		if (allNotesCurrentUser == null || allNotesCurrentUser.isEmpty()) {
+			return new Vector<Note>();
 		}
-		
+
+		for (Note n : allNotesCurrentUser) {
+
+			if (n.getDueDate() != null) {
+
+				if (n.getDueDate().before(today) || n.getDueDate().equals(today)) {
+					dueNotes.add(n);
+				}
+
+			}
+
+		}
+
 		return dueNotes;
-		
+
 	}
 
 }

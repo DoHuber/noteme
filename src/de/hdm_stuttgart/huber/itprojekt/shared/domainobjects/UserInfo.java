@@ -59,11 +59,13 @@ public class UserInfo extends DomainObject {
 		return serialVersionUID;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "UserInfo [firstName=" + firstName + ", surName=" + surName + ", googleId=" + googleId + ", loggedIn="
 				+ loggedIn + ", loginUrl=" + loginUrl + ", logoutUrl=" + logoutUrl + ", emailAddress=" + emailAddress
-				+ ", nickname=" + nickname + "]";
+				+ ", nickname=" + nickname + ", isAdmin=" + isAdmin + ", id=" + id + "]";
 	}
 
 	public int getId() {
@@ -72,6 +74,10 @@ public class UserInfo extends DomainObject {
 
 	public String getFirstName() {
 		return firstName;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setFirstName(String firstName) {
