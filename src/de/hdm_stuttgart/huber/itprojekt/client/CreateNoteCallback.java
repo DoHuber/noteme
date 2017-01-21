@@ -1,8 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
-
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 /**
@@ -31,14 +29,12 @@ public class CreateNoteCallback implements AsyncCallback<Note> {
 		if (result.getNoteBook() != null) {
 			
 			ShowNotebook snb = new ShowNotebook(result.getNoteBook());
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(snb);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(snb);
 			
 		} else {
 		
 		ShowAllNotes san = new ShowAllNotes();
-		RootPanel.get("main").clear();
-		RootPanel.get("main").add(san);
+		ApplicationPanel.getApplicationPanel().replaceContentWith(san);
 		
 		}
 	}

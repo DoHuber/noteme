@@ -22,7 +22,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
-public class ShowNotebook extends BasicView {
+public class ShowNotebook extends BasicVerticalView {
 
 	/**
 	 * @author Erdmann, Nalivayko
@@ -46,6 +46,8 @@ public class ShowNotebook extends BasicView {
 	private HorizontalPanel actionButtons;
 	private VerticalPanel titlesEditInterface;
 	private HorizontalPanel wrapper = new HorizontalPanel();
+	
+	private NoteTable currentTable;
 
 	public ShowNotebook(NoteBook noteBookToDisplay) {
 		this.displayedNoteBook = noteBookToDisplay;
@@ -74,9 +76,8 @@ public class ShowNotebook extends BasicView {
 		
 		setUpLayoutWithWrapperPanel();
 		
-		addEverythingToRootPanel();
+		this.add(wrapper);
 	
-		
 		if (displayedNoteBook.hasRuntimePermission()) {
 			setUpForPermissions();
 		}
@@ -102,17 +103,13 @@ public class ShowNotebook extends BasicView {
 		
 	}
 
-	private void addEverythingToRootPanel() {
-		RootPanel.get("main").add(wrapper);
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
-	}
-
 	private void setUpLayoutWithWrapperPanel() {
+		
 		wrapper.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		wrapper.add(actionButtons);
 		wrapper.add(titlesEditInterface);
 		wrapper.setWidth("100%");
+		
 	}
 	
 	private VerticalPanel setupEditField() {
@@ -177,13 +174,17 @@ public class ShowNotebook extends BasicView {
 		}
 	}
 
-	public void addNotesToTable(Vector<Note> result) {
+	public void addNotesToTable(Vector<Note> notes) {
 		
-		notes = result;
+		if (currentTable != null) {
+			this.remove(currentTable);
+		}
 		
 		NoteTable nt = new NoteTable(notes);
 		nt.addClickNote();
-		RootPanel.get("tableNotebook").add(nt.start());
+		
+		this.add(nt);
+		currentTable = nt;
 	
 	}
 
@@ -205,8 +206,7 @@ public class ShowNotebook extends BasicView {
 			// Notizbücher clientseitig noch angezeigt, da der ShowAllNotes-Callback schneller
 			// als der Delete-Callback war
 			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(san);
 
 		}
 	}
@@ -248,13 +248,9 @@ public class ShowNotebook extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			MenuView mView = new MenuView();
-			RootPanel.get("menu").clear();
-			RootPanel.get("menu").add(mView);
-
+			
 			CreateNote cN = new CreateNote(displayedNoteBook);
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(cN);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(cN);
 
 		}
 	}
@@ -265,8 +261,7 @@ public class ShowNotebook extends BasicView {
 		public void onClick(ClickEvent event) {
 			
 			ShareShareable sNb = new ShareShareable(displayedNoteBook);
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(sNb);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(sNb);
 
 		}
 

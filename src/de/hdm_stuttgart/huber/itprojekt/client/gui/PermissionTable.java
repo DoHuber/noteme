@@ -6,11 +6,11 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
+import de.hdm_stuttgart.huber.itprojekt.client.ApplicationPanel;
 import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
 import de.hdm_stuttgart.huber.itprojekt.client.ShowThisPermission;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
@@ -27,15 +27,13 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
  *
  */
 
-public class PermissionTable {
+public class PermissionTable extends FlowPanel {
 
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	private FlowPanel fPanel = new FlowPanel();
 
 	/**
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 	 */
-
 	private Note note = null;
 	private NoteBook notebook = null;
 	private Permission selected = null;
@@ -62,7 +60,8 @@ public class PermissionTable {
 		this.table = table;
 	}
 
-	public FlowPanel start() {
+	@Override
+	public void onLoad() {
 
 		TextColumn<Permission> level = new TextColumn<Permission>() {
 
@@ -118,9 +117,9 @@ public class PermissionTable {
 		LayoutPanel panel = new LayoutPanel();
 		panel.setSize("60em", "40em");
 		panel.add(table);
-		fPanel.add(panel);
+		
+		this.add(panel);
 
-		return fPanel;
 	}
 
 	/**
@@ -142,11 +141,10 @@ public class PermissionTable {
 
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
+			
 			selected = selection.getSelectedObject();
 			ShowThisPermission sn = new ShowThisPermission(selected);
-
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(sn);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(sn);
 
 		}
 	}

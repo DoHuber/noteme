@@ -6,7 +6,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -19,7 +18,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  * @author Nikita Nalivayko
  *
  */
-public class CreateNotebook extends BasicView {
+public class CreateNotebook extends BasicVerticalView {
 
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private VerticalPanel vPanel = new VerticalPanel();
@@ -28,36 +27,29 @@ public class CreateNotebook extends BasicView {
 	private Button createButton = new Button("Create");
 	private Label title = new Label("Title");
 	private Label subtitle = new Label("Subtitle");
-	// Label lb = new Label("Hier wird ein neues Notizbuch erstellt ");
-
+	
 	@Override
 	public void run() {
-		/*
-		 * Notizbuch anlegen Widgets
-		 * 
-		 */
+		
 		vPanel.add(title);
 		vPanel.add(titleTextBox);
 		vPanel.add(subtitle);
 		vPanel.add(subtitleTextBox);
 		vPanel.add(createButton);
-		// hPanel.add(vPanel);
 		createButton.addClickHandler(new CreateClickHandler());
 
-		RootPanel.get("main").add(vPanel);
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
+		this.add(vPanel);
 	}
 
 	@Override
 	public String getHeadlineText() {
-		// TODO Auto-generated method stub
+	
 		return "CREATE A NOTEBOOK";
 	}
 
 	@Override
 	public String getSubHeadlineText() {
-		// TODO Auto-generated method stub
+	
 		return "Give your notebook a title and subtitle to complete!";
 	}
 
@@ -107,8 +99,7 @@ public class CreateNotebook extends BasicView {
 			notificator.showSuccess("NoteBook " + result.getTitle() + " created successfully.");
 			
 			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(san);
 
 		}
 

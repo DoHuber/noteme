@@ -10,16 +10,13 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 
-public class ShowThisPermission extends BasicView {
+public class ShowThisPermission extends BasicVerticalView {
 
-	private VerticalPanel alignPanel = new VerticalPanel();
 	private Button deleteBtn = new Button("Unshare");
 	private Label level;
 	private Label user;
@@ -81,10 +78,6 @@ public class ShowThisPermission extends BasicView {
 		setUpLabels(levelAsString, typeAsVerboseString);
 		
 		setUpAlignPanel();
-		
-		RootPanel.get("main").add(alignPanel);
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
 
 	}
 
@@ -97,14 +90,15 @@ public class ShowThisPermission extends BasicView {
 	}
 
 	private void setUpAlignPanel() {
-		alignPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		alignPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		
-		alignPanel.add(user);
-		alignPanel.add(level);
-		alignPanel.add(object);
+		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		this.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		
-		alignPanel.add(deleteBtn);
+		this.add(user);
+		this.add(level);
+		this.add(object);
+		
+		this.add(deleteBtn);
 		deleteBtn.addClickHandler(new DeleteClickHandler());
 	}
 
@@ -137,8 +131,7 @@ public class ShowThisPermission extends BasicView {
 			Notificator.getNotificator().showSuccess("Unshared successfully!");
 			
 			ShowAllNotes san = new ShowAllNotes();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
+			ApplicationPanel.getApplicationPanel().replaceContentWith(san);
 
 		}
 

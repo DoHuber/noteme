@@ -31,13 +31,8 @@ public class EmbedCode extends BasicView {
 			"</form>";
 	
 		Label l = new Label(s);
-		
-		RootPanel.get("main").clear();
-		RootPanel.get("table").clear();
-		RootPanel.get("main").add(l);
-		
 	
-		
+		// TODO Manage display
 	}
 
 }

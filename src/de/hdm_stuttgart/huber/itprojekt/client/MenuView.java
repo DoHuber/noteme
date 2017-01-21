@@ -3,17 +3,11 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.ListItemWidget;
-import de.hdm_stuttgart.huber.itprojekt.client.gui.UnorderedListWidget;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
@@ -31,17 +25,15 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class MenuView extends VerticalPanel {
 
-	private static String logOutUrl;
-	private Anchor logoutAnchor;
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	UserCallback uc = new UserCallback();
 	UserInfo ui = null;
 
 	protected void onLoad() {
-		
+
 		this.setHorizontalAlignment(ALIGN_CENTER);
 		this.setStyleName("headerpanel");
-		
+
 		editorVerwaltung.getCurrentUser(uc);
 
 		Anchor home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
@@ -51,20 +43,10 @@ public class MenuView extends VerticalPanel {
 		Anchor showNotes = new Anchor("Notes");
 		Anchor showNotebooks = new Anchor("Notebooks");
 		Anchor showPermission = new Anchor("Shared stuff");
-		Anchor account = new Anchor("Account");
-		Anchor reportAnchor = new Anchor("ReportGenerator");
-		Anchor embedAnchor = new Anchor("Embed");
-
-		logoutAnchor = new Anchor("Log out");
-		logoutAnchor.setHref(logOutUrl);
 
 		showNotes.getElement().getStyle().setColor("#660033");
 		showNotebooks.getElement().getStyle().setColor("#660033");
 		showPermission.getElement().getStyle().setColor("#660033");
-		account.getElement().getStyle().setColor("#660033");
-		reportAnchor.getElement().getStyle().setColor("#660033");
-		logoutAnchor.getElement().getStyle().setColor("#660033");
-		embedAnchor.getElement().getStyle().setColor("#660033");
 
 		showNotes.setStyleName("pure-menu-link");
 		this.add(new ListItemWidget(showNotes));
@@ -75,66 +57,20 @@ public class MenuView extends VerticalPanel {
 		showPermission.setStyleName("pure-menu-link");
 		this.add(new ListItemWidget(showPermission));
 
-		account.setStyleName("pure-menu-link");
-		this.add(new ListItemWidget(account));
-
-		reportAnchor.setStyleName("pure-menu-link");
-		this.add(new ListItemWidget(reportAnchor));
-		
-		embedAnchor.setStyleName("pure-menu-link");
-		this.add(new ListItemWidget(embedAnchor));
-
-		logoutAnchor.setStyleName("pure-menu-link");
-		this.add(new ListItemWidget(logoutAnchor));
-
-		// RootPanel.get("menu").add(menu);
-		/**
-		 * Die "Buttons" werden mit dem ClickHandler verbunden. Die "Buttons
-		 * reagieren auf den Mausklick."
-		 *
-		 */
-
 		showNotes.addClickHandler(new ShowAllNotesHandler());
-		//createNote.addClickHandler(new CreateNoteHandler());
 		showNotebooks.addClickHandler(new ShowAllNotebooksHandler());
-		//createNotebook.addClickHandler(new CreateNotebookHandler());
 		showPermission.addClickHandler(new ShowPermissionHandler());
-		account.addClickHandler(new AccountHandler());
-		reportAnchor.addClickHandler(new ReportHandler());
-		logoutAnchor.addClickHandler(new LogoutHandler());
-		
-		embedAnchor.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new EmbedCode());
-				
-			}
-		
-		});
-
-
 
 	}
 
-	/*
-	 * Einfache ClickHandler werden implementiert
-	 * 
-	 */
 	private class ShowAllNotesHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			// MenuView mView = new MenuView();
-			// RootPanel.get("menu").clear();
-			// RootPanel.get("menu").add(mView);
 
 			ShowAllNotes san = new ShowAllNotes();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
-			new ShowAllNotes().getHeadlineText();
+			ApplicationPanel.getApplicationPanel().replaceContentWith(san);
+
 		}
 	}
 
@@ -142,14 +78,10 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			// MenuView mView = new MenuView();
-			// RootPanel.get("menu").clear();
-			// RootPanel.get().add(mView);
 
 			ShowAllNotebooks san = new ShowAllNotebooks();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
-			new ShowAllNotes().getHeadlineText();
+			ApplicationPanel.getApplicationPanel().replaceContentWith(san);
+
 		}
 	}
 
@@ -157,47 +89,18 @@ public class MenuView extends VerticalPanel {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			// MenuView mView = new MenuView();
-			// RootPanel.get("menu").clear();
-			// RootPanel.get().add(mView);
 
-			ShowPermission san = new ShowPermission();
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
-			new ShowAllNotes().getHeadlineText();
+			ShowAllPermissions sp = new ShowAllPermissions();
+			ApplicationPanel.getApplicationPanel().replaceContentWith(sp);
+
 		}
 	}
 
-//	private class CreateNotebookHandler implements ClickHandler {
-//
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			MenuView mView = new MenuView();
-//			RootPanel.get("menu").clear();
-//			RootPanel.get("menu").add(mView);
-//
-//			CreateNotebook cN = new CreateNotebook();
-//			RootPanel.get("main").clear();
-//			RootPanel.get("main").add(cN);
-//		}
-//	}
-
-	private class AccountHandler implements ClickHandler {
-
-		@Override
-		public void onClick(ClickEvent event) {
-			Account san = new Account(ui);
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(san);
-			new Account().getHeadlineText();
-		}
-	}
-
-	private class UserCallback implements AsyncCallback<UserInfo>{
+	private class UserCallback implements AsyncCallback<UserInfo> {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
+			GWT.log(caught.toString());
 		}
 
 		@Override
@@ -206,38 +109,4 @@ public class MenuView extends VerticalPanel {
 		}
 	}
 
-	private class ReportHandler implements ClickHandler {
-
-		@Override
-		public void onClick(ClickEvent event) {
-			Window.Location.replace(GWT.getHostPageBaseURL() + "Report.html");
-
-		}
-	}
-
-	private class LogoutHandler implements ClickHandler {
-
-		@Override
-		public void onClick(ClickEvent event) {
-
-			Label lb = new Label("Ich melde mich ab");
-			RootPanel.get("menu").clear();
-			RootPanel.get().add(lb);
-
-		}
-
-	}
-
-	public static void setLogOutUrl(String logOutUrl) {
-		MenuView.logOutUrl = logOutUrl;
-	}
-
-	protected void run() {
-	}
-
-	protected void append(String text) {
-		HTML content = new HTML(text);
-		content.setStylePrimaryName("bankproject-simpletext");
-		this.add(content);
-	}
 }

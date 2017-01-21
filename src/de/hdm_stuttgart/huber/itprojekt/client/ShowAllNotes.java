@@ -2,13 +2,12 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.RootPanel;
-
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
@@ -21,11 +20,13 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  * @author Nikita Nalivayko
  *
  */
-public class ShowAllNotes extends BasicView {
+public class ShowAllNotes extends BasicVerticalView {
 	
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	AllNotesCallback callback = new AllNotesCallback();
 	private Vector<Note> notes = new Vector<Note>();
+	
+	private NoteTable currentTable;
 
 	public ShowAllNotes(Vector<Note> nList) {
 		notes = nList;
@@ -44,7 +45,7 @@ public class ShowAllNotes extends BasicView {
 
 	// Gibt alle Notizen zurück
 	public Vector<Note> getAllNotesListe() {
-		// new ShowAllNotes().getHeadlineText();
+		
 		return notes;
 
 	}
@@ -91,10 +92,7 @@ public class ShowAllNotes extends BasicView {
 		fPanel2.add(contentPanel);
 
 		editorVerwaltung.getAllNotesForCurrentUser(callback);
-
-	
-		RootPanel.get("main").add(fPanel2);
-		RootPanel.get("tableNotebook").clear();
+		this.add(fPanel2);
 		
 	}
 
@@ -112,18 +110,15 @@ public class ShowAllNotes extends BasicView {
 		@Override
 		public void onSuccess(Vector<Note> result) {
 
-			// Logger logger = Logger.getLogger("test");
-			// logger.log(Level.INFO, Arrays.toString(result.toArray()));
-
-			addNotesToTable(result);
+			fillTableWith(result);
+			
 		}
 
 		@Override
 		public void onFailure(Throwable caught) {
 
-			// Logger logger = Logger.getLogger("test");
-			// logger.log(Level.SEVERE, caught.toString());
-
+			GWT.log(caught.toString());
+			
 		}
 
 	}
@@ -132,6 +127,7 @@ public class ShowAllNotes extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			
 			SharedWithCallback callback = new SharedWithCallback();
 			editorVerwaltung.getAllSharedNotesForCurrentUser(callback);
 
@@ -143,13 +139,12 @@ public class ShowAllNotes extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-
+			GWT.log(caught.toString());
 		}
 
 		@Override
 		public void onSuccess(Vector<Note> result) {
-			addNotesToTable(result);
+			fillTableWith(result);
 
 		}
 
@@ -159,6 +154,7 @@ public class ShowAllNotes extends BasicView {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			
 			SharedByCallback callback = new SharedByCallback();
 			editorVerwaltung.getAllNotesSharedByCurrentUser(callback);
 
@@ -170,72 +166,27 @@ public class ShowAllNotes extends BasicView {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-
+			GWT.log(caught.toString());
 		}
 
 		@Override
 		public void onSuccess(Vector<Note> result) {
-			addNotesToTable(result);
-
+			fillTableWith(result);
 		}
 
 	}
 
-	// @Override
-	// public void run() {
-
-	//
-	//
-	// hPanel.add(new HTML("<p> Hier kommt der <b>Huber</b>, <i>obacht!</i>
-	// </p>"));
-	//
-	// AsyncCallback<Vector<Note>> callback = new AsyncCallback<Vector<Note>>()
-	// {
-	//
-	// @Override
-	// public void onFailure(Throwable caught) {
-	//
-	// caught.printStackTrace();
-	// hPanel.add(new Label(caught.toString()));
-	// }
-	//
-	// @Override
-	// public void onSuccess(Vector<Note> result) {
-	//
-	// hPanel.add(new HTML("<p> Als nächstes die Hubermethode! </p>"));
-	// huberMethode(result);
-	//
-	// }
-	//
-	// };
-	//
-	// editorVerwaltung.getAllNoteBooks(callback);
-	//
-	// RootPanel.get().add(hPanel);
-	//
-	// }
-
-	// private void huberMethode(Vector<Note> result) {
-	//
-	// StringBuilder html = new StringBuilder();
-	//
-	// for (Note row : result) {
-	//
-	// html.append(row.toHtmlString() + "<br>");
-	//
-	// }
-	//
-	// RootPanel.get("main").add(new HTMLPanel(html.toString()));
-	//
-	// }
-
-	public void addNotesToTable(Vector<Note> result) {
-		notes = result;
-		NoteTable nt = new NoteTable(notes);
+	public void fillTableWith(Vector<Note> result) {
+		
+		if (currentTable != null) {
+			this.remove(currentTable);
+		}
+		
+		NoteTable nt = new NoteTable(result);
 		nt.addClickNote();
-		RootPanel.get("table").clear();
-		RootPanel.get("table").add(nt.start());
+		
+		this.add(nt);
+		currentTable = nt;
 
 	}
 

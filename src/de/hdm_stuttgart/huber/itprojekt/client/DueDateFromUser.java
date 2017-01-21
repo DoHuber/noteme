@@ -5,15 +5,13 @@ import java.util.Vector;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
-public class DueDateFromUser extends BasicView {
+public class DueDateFromUser extends BasicVerticalView {
 	
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	DueNotesCallback callback = new DueNotesCallback();
@@ -59,7 +57,7 @@ public class DueDateFromUser extends BasicView {
 			if (result.isEmpty()) {
 	
 				Label l = new Label("Nothing due today or in the past!");
-				ApplicationPanel.getApplicationPanel().replaceContentWith(l);
+				DueDateFromUser.this.add(l);
 				
 			} else {
 
@@ -83,8 +81,8 @@ public class DueDateFromUser extends BasicView {
 		notes = result;
 		NoteTable nt = new NoteTable(notes);
 		nt.addClickNote();
-		RootPanel.get("table").clear();
-		RootPanel.get("table").add(nt.start());
+		
+		this.add(nt);
 
 	}
 

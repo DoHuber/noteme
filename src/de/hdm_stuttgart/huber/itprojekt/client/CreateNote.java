@@ -14,7 +14,6 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -30,7 +29,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
  * @author Nikita Nalivayko
  *
  */
-public class CreateNote extends BasicView {
+public class CreateNote extends BasicVerticalView {
 
 	HorizontalPanel contentPanel = new HorizontalPanel();
 	VerticalPanel alignPanel = new VerticalPanel();
@@ -88,11 +87,9 @@ public class CreateNote extends BasicView {
 
 		contentPanel.add(alignPanel);
 		contentPanel.add(grid);
-		RootPanel.get("main").add(contentPanel);
+		this.add(contentPanel);
 
 		noteArea.setStyleName("noteArea");
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
 		
 	}
 

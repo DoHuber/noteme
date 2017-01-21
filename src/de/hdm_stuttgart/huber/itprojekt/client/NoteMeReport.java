@@ -85,14 +85,7 @@ public class NoteMeReport implements EntryPoint {
 			reportGenerator = ClientsideSettings.getReportGenerator();
 		}
 
-	
-
-
-
-
-
 		ShowReportDemo navigation = new ShowReportDemo();
-		ShowReportDemo.setLogOutUrl(userInfo.getLogoutUrl());
 		RootPanel.get("menu").add(navigation);
 
 	}

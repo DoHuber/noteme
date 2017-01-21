@@ -11,7 +11,6 @@ import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -33,9 +32,6 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 public class IT_Projekt implements EntryPoint {
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	private UserInfo userInfo = null;
-	private VerticalPanel loginPanel = new VerticalPanel();
-	private Label loginLabel = new Label(
-			"Please sign in to your Google Account to access the cool and nice application.");
 	private Anchor signInLink = new Anchor("Sign In");
 
 	private Audio bootSound;
@@ -180,7 +176,6 @@ public class IT_Projekt implements EntryPoint {
 	private void loadMenu() {
 		
 		MenuView navigation = new MenuView();
-		MenuView.setLogOutUrl(userInfo.getLogoutUrl());
 		
 		applicationPanel.setNavigation(navigation);
 
@@ -201,6 +196,7 @@ public class IT_Projekt implements EntryPoint {
 	}
 
 	public void createUser() {
+		
 		user.add(name);
 		user.add(nameBox);
 		user.add(name2);
@@ -208,8 +204,9 @@ public class IT_Projekt implements EntryPoint {
 		user.add(nameBox2);
 		user.add(btn);
 		btn.addClickHandler(new SaveClickHandler());
-		RootPanel.get("menu").clear();
-		RootPanel.get("menu").add(user);
+		
+		ApplicationPanel.getApplicationPanel().replaceContentWith(user);
+		
 	}
 
 	private void initializeAudio() {

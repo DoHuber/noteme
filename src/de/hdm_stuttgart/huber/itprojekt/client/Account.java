@@ -65,11 +65,13 @@ public class Account extends BasicView {
 
 		editorVerwaltung.getCurrentUser(userCallback);
 	
+		/**
 		RootPanel.get("main").add(vp);
-	//	RootPanel.get("main").add(deleteButton);
+		RootPanel.get("main").add(deleteButton);
 		
 		RootPanel.get("table").clear();
 		RootPanel.get("tableNotebook").clear();
+		**/
 
 	}
 

@@ -64,14 +64,9 @@ public class ShowReportDemo extends MenuView {
 		showAllNotebooks.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showAllNotebooks));
 
-//		showUserNotes.setStyleName("pure-menu-link");
-//		menuList.add(new ListItemWidget(showUserNotes));
-
 		showAllNotes.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showAllNotes));
 
-//		showUserPermissions.setStyleName("pure-menu-link");
-//		menuList.add(new ListItemWidget(showUserPermissions));
 
 		showAllPermissions.setStyleName("pure-menu-link");
 		menuList.add(new ListItemWidget(showAllPermissions));
@@ -81,13 +76,6 @@ public class ShowReportDemo extends MenuView {
 		menu.add(pureMenu);
 		RootPanel.get("menu").add(menu);
 
-//		showUserNotebooks.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				reportGenerator.createAllUserNotebooksR(new GenericReportCallback<AllUserNotebooksR>());
-//			}
-//		});
 
 		showAllNotebooks.addClickHandler(new ClickHandler() {
 
@@ -98,16 +86,6 @@ public class ShowReportDemo extends MenuView {
 
 		});
 		
-//		showUserNotes.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				reportGenerator.createAllUserNotesR(new GenericReportCallback<AllUserNotesR>());
-//
-//			}
-//
-//		});
-		
 		showAllNotes.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -117,17 +95,6 @@ public class ShowReportDemo extends MenuView {
 			}
 
 		});
-		
-//		showUserPermissions.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				reportGenerator.createAllUserPermissionsR(new GenericReportCallback<AllUserPermissionsR>());
-//				;
-//
-//			}
-//
-//		});
 		
 		showAllPermissions.addClickHandler(new ClickHandler() {
 

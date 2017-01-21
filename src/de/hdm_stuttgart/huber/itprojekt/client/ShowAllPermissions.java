@@ -1,11 +1,11 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
 import java.util.Vector;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.RootPanel;
-
 import de.hdm_stuttgart.huber.itprojekt.client.gui.PermissionTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
@@ -19,29 +19,30 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
  * @author Lisa Kuechler
  *
  */
-public class ShowPermission extends BasicView {
+public class ShowAllPermissions extends BasicVerticalView {
 	PermissionServiceAsync permissionVerwaltung = ClientsideSettings.getPermissionVerwaltung();
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	AllPermissionsCallback callback = new AllPermissionsCallback();
 	UserCallback cb = new UserCallback();
 	private UserInfo ui = null;
-	// HorizontalPanel hPanel = new HorizontalPanel();
 	private Vector<Permission> permissions = new Vector<Permission>();
+	
+	private PermissionTable currentTable;
 
-	public ShowPermission(Vector<Permission> nList) {
+	public ShowAllPermissions(Vector<Permission> nList) {
 		permissions = nList;
 	}
 
 	/**
 	 * No-Argument Konstruktor
 	 */
-	public ShowPermission() {
+	public ShowAllPermissions() {
 
 	}
 
 	// Gibt alle Notizen zurück
 	public Vector<Permission> getAllPermissionsListe() {
-		// new ShowAllNotes().getHeadlineText();
+		
 		return permissions;
 
 	}
@@ -68,10 +69,10 @@ public class ShowPermission extends BasicView {
 
 	@Override
 	public void run() {
+		
 		freigabeButton.setStyleName("pure-button");
 		nichtFreigabeButton.setStyleName("pure-button");
 		notizenAnzeigenButton.setStyleName("pure-button");
-		// notizenAnzeigenButton.setPushed(true);
 
 		FlowPanel contentPanel = new FlowPanel();
 		FlowPanel fPanel2 = new FlowPanel();
@@ -79,15 +80,8 @@ public class ShowPermission extends BasicView {
 		fPanel2.add(contentPanel);
 		editorVerwaltung.getCurrentUser(cb);
 
-		// NoteTable nt = new NoteTable(notes);
-		// nt.addClickNote();
-		RootPanel.get("main").add(contentPanel);
-		// RootPanel.get("main").add(nt.start());
-		RootPanel.get("table").clear();
-		RootPanel.get("tableNotebook").clear();
+		this.add(contentPanel);
 
-		// freigabeButton.addClickHandler(new freigabeButtonClickHandler());
-		// BUTTONS !!
 	}
 
 	private class UserCallback implements AsyncCallback<UserInfo> {
@@ -111,78 +105,29 @@ public class ShowPermission extends BasicView {
 	private class AllPermissionsCallback implements AsyncCallback<Vector<Permission>> {
 		@Override
 		public void onSuccess(Vector<Permission> result) {
-
-			// Logger logger = Logger.getLogger("test");
-			// logger.log(Level.INFO, Arrays.toString(result.toArray()));
-
+			
 			addPermissionsToTable(result);
+			
 		}
 
 		@Override
 		public void onFailure(Throwable caught) {
-
-			// Logger logger = Logger.getLogger("test");
-			// logger.log(Level.SEVERE, caught.toString());
-
+			GWT.log(caught.toString());
 		}
 
 	}
 
-	// @Override
-	// public void run() {
+	public void addPermissionsToTable(Vector<Permission> permissions) {
+		
+		if (currentTable != null) {
+			this.remove(currentTable);
+		}
 
-	//
-	//
-	// hPanel.add(new HTML("<p> Hier kommt der <b>Huber</b>, <i>obacht!</i>
-	// </p>"));
-	//
-	// AsyncCallback<Vector<Note>> callback = new AsyncCallback<Vector<Note>>()
-	// {
-	//
-	// @Override
-	// public void onFailure(Throwable caught) {
-	//
-	// caught.printStackTrace();
-	// hPanel.add(new Label(caught.toString()));
-	// }
-	//
-	// @Override
-	// public void onSuccess(Vector<Note> result) {
-	//
-	// hPanel.add(new HTML("<p> Als nächstes die Hubermethode! </p>"));
-	// huberMethode(result);
-	//
-	// }
-	//
-	// };
-	//
-	// editorVerwaltung.getAllNoteBooks(callback);
-	//
-	// RootPanel.get().add(hPanel);
-	//
-	// }
-
-	// private void huberMethode(Vector<Note> result) {
-	//
-	// StringBuilder html = new StringBuilder();
-	//
-	// for (Note row : result) {
-	//
-	// html.append(row.toHtmlString() + "<br>");
-	//
-	// }
-	//
-	// RootPanel.get("main").add(new HTMLPanel(html.toString()));
-	//
-	// }
-
-	public void addPermissionsToTable(Vector<Permission> result) {
-
-		permissions = result;
-		PermissionTable nt = new PermissionTable(permissions);
-		nt.addClickNote();
-		RootPanel.get("table").clear();
-		RootPanel.get("table").add(nt.start());
+		PermissionTable permissionTable = new PermissionTable(permissions);
+		permissionTable.addClickNote();
+		
+		this.add(permissionTable);
+		currentTable = permissionTable;
 
 	}
 

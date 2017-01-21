@@ -19,7 +19,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
-public class ShareShareable extends BasicView {
+public class ShareShareable extends BasicVerticalView {
 	
 	MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	Button confirmButton = new Button("Share");
@@ -64,16 +64,11 @@ public class ShareShareable extends BasicView {
 	}
 
 	private void setupUpDisplay() {
-		VerticalPanel vp = new VerticalPanel();
-		vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		vp.setWidth("100%");
 		
-		vp.add(userPicker);
-		vp.add(levelOptions);
-		vp.add(confirmButton);
+		this.add(userPicker);
+		this.add(levelOptions);
+		this.add(confirmButton);
 		
-		RootPanel.get("main").clear();
-		RootPanel.get("main").add(vp);
 	}
 
 	private void setUpButtonClickHandler() {
@@ -150,8 +145,7 @@ public class ShareShareable extends BasicView {
 		@Override
 		public void onSuccess(Void result) {
 			Notificator.getNotificator().showSuccess("Note was shared with " + userPicker.getValue());
-			RootPanel.get("main").clear();
-			RootPanel.get("main").add(new ShowPermission());
+			ApplicationPanel.getApplicationPanel().replaceContentWith(new ShowAllPermissions());
 		}
 
 	}
