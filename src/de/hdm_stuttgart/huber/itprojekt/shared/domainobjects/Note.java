@@ -2,7 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
 import java.sql.Date;
 
-public class Note extends DomainObject implements Shareable {
+public class Note extends DomainObject implements Shareable, DateFilterable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -174,6 +174,22 @@ public class Note extends DomainObject implements Shareable {
 
 	public void setSource(String source) {
 		this.source = source;
+	}
+
+	@Override
+	public Date getDate(DateType type) {
+		
+		switch (type) {
+			case CREATION_DATE:
+				return this.creationDate;
+			case MODIFICATION_DATE:
+				return this.modificationDate;
+			case DUE_DATE:
+				return this.dueDate;
+			default:
+				throw new IllegalArgumentException();
+		}
+		
 	}
 
 }

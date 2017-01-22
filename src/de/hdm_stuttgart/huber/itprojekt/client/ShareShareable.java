@@ -14,6 +14,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
 public class ShareShareable extends BasicVerticalView {
@@ -125,6 +126,12 @@ public class ShareShareable extends BasicVerticalView {
 			}
 
 			GWT.log("Selected Level:" + l);
+			
+			UserInfo loggedInUser = IT_Projekt.getLoggedInUser();
+			if (userEmail.equals(loggedInUser.getEmailAddress())) {
+				Notificator.getNotificator().showError("You cannot share with yourself.");
+				return;
+			}
 
 			permissionVerwaltung.shareWith(userEmail, toShare, l, new PermissionCallback());
 		}

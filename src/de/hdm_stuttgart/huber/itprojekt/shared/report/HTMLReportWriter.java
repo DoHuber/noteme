@@ -67,6 +67,21 @@ public class HTMLReportWriter extends ReportWriter {
 	public String paragraph2HTML(SimpleParagraph p) {
 		return "<p>" + p.toString() + "</p>";
 	}
+	
+	public String customReport2HTML(CustomReport r) {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(paragraph2HTML(r.getHeaderData()));
+		
+		for (SimpleReport sr : r.getSubReports()) {
+			sb.append(simpleReport2HTML(sr));
+		}
+		
+		sb.append(paragraph2HTML(r.getImprint()));
+		
+		return sb.toString();
+	}
+	
 
 	public String simpleReport2HTML(SimpleReport r) {
 

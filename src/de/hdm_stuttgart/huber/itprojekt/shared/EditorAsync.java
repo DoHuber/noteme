@@ -35,7 +35,7 @@ public interface EditorAsync {
 	void saveNoteBook(NoteBook noteBook, AsyncCallback<NoteBook> callback);
 
 	void getAllNotesForCurrentUser(AsyncCallback<Vector<Note>> callback);
-	void getAllNotesForUser(AsyncCallback<Vector<Note>> callback);
+	void getAllNotesForUser(UserInfo user, AsyncCallback<Vector<Note>> callback);
 
 	void getAllNoteBooksForCurrentUser(AsyncCallback<Vector<NoteBook>> callback);
 

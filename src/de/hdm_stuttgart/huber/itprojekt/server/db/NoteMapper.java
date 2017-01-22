@@ -211,7 +211,7 @@ public class NoteMapper extends DataMapper {
 	public Vector<Note> getAllNotesForUser(int userId){
 		try {
 
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE author_id = ? AND due_date >=NOW() ORDER BY due_date LIMIT 5");
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM notizbuch.note WHERE author_id = ?");
 			stmt.setInt(1, userId);
 
 			ResultSet rs = stmt.executeQuery();

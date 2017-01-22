@@ -1,5 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
+import java.sql.Date;
+import java.util.Map;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
@@ -8,6 +11,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.CustomReport;
 
 /**
  * Das asynchrone Gegenstück des Interface {@link ReportGenerator}. Es wird
@@ -32,5 +36,8 @@ public interface ReportGeneratorAsync {
 	void init(AsyncCallback<Void> callback);
 
 	void createAllUserPermissionsR(AsyncCallback<AllUserPermissionsR> callback);
+
+	void createCustomReport(String type, String userEmail, Map<String, Date> timespan, boolean includePermissions,
+			AsyncCallback<CustomReport> callback);
 
 }

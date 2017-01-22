@@ -125,4 +125,12 @@ public abstract class Report implements Serializable {
 		this.created = created;
 	}
 
+	@Override
+	public String toString() {
+		return "Report [imprint=" + imprint + ", headerData=" + headerData + ", title=" + title + ", created=" + created
+				+ "]";
+	}
+	
+	
+
 }

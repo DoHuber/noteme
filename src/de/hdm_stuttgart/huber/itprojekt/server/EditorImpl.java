@@ -17,7 +17,6 @@ import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
-import de.hdm_stuttgart.huber.itprojekt.shared.BullshitException;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
@@ -156,7 +155,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<Note> getAllNotes() throws BullshitException {
+	public Vector<Note> getAllNotes() {
 
 		try {
 
@@ -165,20 +164,20 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			throw new BullshitException(e.toString());
+			return new Vector<Note>();
 		}
 
 	}
 
 	@Override
-	public Vector<NoteBook> getAllNoteBooks() throws BullshitException {
+	public Vector<NoteBook> getAllNoteBooks() {
 
 		try {
 			return noteBookMapper.getAllNoteBooks();
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			throw new BullshitException(e.toString());
+			return null;
 		}
 	}
 
@@ -313,10 +312,9 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<Note> getAllNotesForUser() {
+	public Vector<Note> getAllNotesForUser(UserInfo user) {
 
-		UserInfo currentUser = getCurrentUser();
-		return noteMapper.getAllNotesForUser(currentUser.getId());
+		return noteMapper.getAllNotesForUser(user.getId());
 	}
 
 	@Override

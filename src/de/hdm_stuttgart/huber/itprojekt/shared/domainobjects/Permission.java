@@ -37,12 +37,7 @@ public class Permission extends DomainObject {
 		this.level = Level.NONE;
 	}
 
-	@Override
-	public String toString() {
-		return "Permission [level=" + level + ", user=" + beneficiary + ", sharedObject=" + sharedObject + ", id=" + id
-				+ "]";
-	}
-
+	
 	public boolean isUserAllowedTo(Level action) {
 
 		if (this.level.value >= action.value) {
@@ -51,6 +46,12 @@ public class Permission extends DomainObject {
 			return false;
 		}
 
+	}
+
+	@Override
+	public String toString() {
+		return "Permission [level=" + level + ", author=" + author + ", beneficiary=" + beneficiary + ", sharedObject="
+				+ sharedObject + ", id=" + id + "]";
 	}
 
 	// Getter und Setter

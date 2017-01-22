@@ -1,5 +1,9 @@
 package de.hdm_stuttgart.huber.itprojekt.server.db;
 
+import java.util.Vector;
+
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
+
 /**
  * Testskript zum Ausprobieren ob die DataMapper richtig funktionieren. Nicht
  * für die produktive Applikation gedacht.
@@ -8,6 +12,13 @@ package de.hdm_stuttgart.huber.itprojekt.server.db;
 public class CoolAndNiceTestScript {
 
 	public static void main(String[] args) throws Throwable {
+		
+		Vector<UserInfo> all = UserInfoMapper.getUserInfoMapper().getAllUserInfos();
+		
+		
+		for (UserInfo u : all) {
+			System.out.println(u.toString());
+		}
 
 	}
 

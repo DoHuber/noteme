@@ -1,5 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
+import java.sql.Date;
+import java.util.Map;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -9,6 +12,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.CustomReport;
 
 /**
  * <p>
@@ -54,4 +58,7 @@ public interface ReportGenerator extends RemoteService {
 	public abstract AllUserPermissionsR createAllUserPermissionsR() throws IllegalArgumentException;
 
 	public abstract AllPermissionsR createAllPermissionsR() throws IllegalArgumentException;
+	
+	public CustomReport createCustomReport(String type, String userEmail, Map<String, Date> timespan, boolean includePermissions);
+	
 }

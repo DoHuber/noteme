@@ -1,14 +1,18 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Map;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
+import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
+import de.hdm_stuttgart.huber.itprojekt.shared.PermissionService;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
@@ -21,8 +25,10 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Column;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.CustomReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.Row;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleParagraph;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
 
 /**
  * Implementierung des <code>ReportGenerator</code>-Interface. Die technische
@@ -40,7 +46,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	 * die essentiellen Methoden für die Koexistenz von Datenobjekten (vgl.
 	 * bo-Package) bietet.
 	 */
-	private Editor administration = null;
+	private Editor editor = null;
 
 	/**
 	 * <p>
@@ -74,7 +80,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		 */
 		EditorImpl a = new EditorImpl();
 		a.init();
-		this.administration = a;
+		this.editor = a;
 	}
 
 	/**
@@ -83,7 +89,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	 * @return das BankVerwaltungsobjekt
 	 */
 	protected Editor getNoteBookVerwaltung() {
-		return this.administration;
+		return this.editor;
 	}
 
 	/**
@@ -100,7 +106,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	@Override
 	public AllUserNotebooksR createAllUserNotebooksR() throws IllegalArgumentException {
 
-		UserInfo u = administration.getCurrentUser();
+		UserInfo u = editor.getCurrentUser();
 
 		Vector<NoteBook> allNoteBooksForUserId = NoteBookMapper.getNoteBookMapper().getAllNoteBooksForUserId(u.getId());
 
@@ -180,10 +186,18 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		return report2;
 	}
 
+	
 	@Override
 	public AllUserNotesR createAllUserNotesR() throws IllegalArgumentException {
+		
+		UserInfo u = editor.getCurrentUser();
+		return createAllUserNotesReportFor(u);
+		
+	}
+	
+	public AllUserNotesR createAllUserNotesReportFor(UserInfo u) throws IllegalArgumentException {
 
-		UserInfo u = administration.getCurrentUser();
+		
 
 		Vector<Note> allNotesForUserId = new Vector<>();
 		
@@ -277,7 +291,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	@Override
 	public AllUserPermissionsR createAllUserPermissionsR() throws IllegalArgumentException {
 
-		UserInfo u = administration.getCurrentUser();
+		UserInfo u = editor.getCurrentUser();
 
 		Vector<Permission> allPermissionsCreatedBy = PermissionMapper.getPermissionMapper()
 				.getAllPermissionsCreatedBy(u);
@@ -354,5 +368,118 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		return report;
 
 	}
+
+	@Override
+	public CustomReport createCustomReport(String type, String userEmail, Map<String, java.sql.Date> timespan,
+			boolean includePermissions) {
+		
+		Vector<UserInfo> applicableUsers = new Vector<UserInfo>();
+		
+		if (userEmail.equals("none")) {
+			
+			applicableUsers = new SharedServicesImpl().getAllUsers();
+			System.out.println("Calling the Mapper for all Users");
+			
+		} else {
+			
+			applicableUsers.add(UserInfoMapper.getUserInfoMapper().findByEmailAdress(userEmail));
+			System.out.println("Calling the Mapper for User with email: " + userEmail);
+			
+		}
+		
+		System.out.println("User Email: " + userEmail);
+		System.out.println("Applicable user count: " + Integer.toString(applicableUsers.size()));
+		System.out.println(Arrays.toString(applicableUsers.toArray()));
+		System.out.println("Type: " + type);
+		System.out.println("Include Perms: " + Boolean.toString(includePermissions));
+		
+		CustomReport report = new CustomReport();
+		
+		report.setTitle("Custom Report, created on: " + new Date().toString());
+		
+		for (UserInfo currentUser : applicableUsers) {
+			
+			if (type.equals("notes")) {
+				
+				if (includePermissions) {
+					
+					appendNotesWithPermissionsTo(report, currentUser);
+					
+				} else {
+					
+					appendNotesToReport(report, currentUser);
+					
+				}
+				
+			}
+			
+		}
+		
+		report.setHeaderData(new SimpleParagraph("Custom Report on " + type + ", includes Permissions: " + Boolean.toString(includePermissions)));
+		report.setImprint(new SimpleParagraph("End of Custom Report"));
+		
+		return report;
+	}
+
+	private void appendNotesToReport(CustomReport report, UserInfo currentUser) {
+		
+		System.out.println("Appending Notes Report");
+		SimpleReport toAdd = createAllUserNotesReportFor(currentUser);
+		report.addSubReport(toAdd);
+		
+	}
+
+	private void appendNotesWithPermissionsTo(CustomReport report, UserInfo currentUser) {
+		
+		
+		Vector<Note> allNotes = editor.getAllNotesForUser(currentUser);
+		PermissionService permService = new PermissionServiceImpl();
+		
+		System.out.println("Appending Notes w/Permissions Report");
+		System.out.println("User has " + Integer.toString(allNotes.size()) + " Notes.");
+		System.out.println(Arrays.toString(allNotes.toArray()));
+		System.out.println("User is: " + currentUser.toString());
+		
+		for (Note element : allNotes) {
+			
+			SimpleReport reportOnNote = new SimpleReport();
+			reportOnNote.setTitle("Report on Note" + element.getTitle());
+			reportOnNote.setHeaderData(new SimpleParagraph(element.toString()));
+			
+			Vector<Permission> permissionsForNote = permService.getAllPermissionsFor(element);
+			
+			Row headerRow = new Row();
+			headerRow.addColumn(new Column("id"));
+			headerRow.addColumn(new Column("Author"));
+			headerRow.addColumn(new Column("Beneficiary"));
+			headerRow.addColumn(new Column("Level"));
+			
+			reportOnNote.addRow(headerRow);
+			
+			int permissionCounter = 0;
+			
+			for (Permission p : permissionsForNote) {
+				
+				Row row = new Row();
+				row.addColumn(Integer.toString(p.getId()));
+				row.addColumn(p.getAuthor().toString());
+				row.addColumn(p.getBeneficiary().toString());
+				row.addColumn(Integer.toString(p.getLevelAsInt()));
+				
+				reportOnNote.addRow(row);
+				
+				permissionCounter++;
+			}
+			
+			reportOnNote.setImprint(new SimpleParagraph("Note has " + Integer.toString(permissionCounter) + " Permissions"));
+			
+			report.addSubReport(reportOnNote);
+			
+		}
+		
+	}
+
+	
+	
 
 }

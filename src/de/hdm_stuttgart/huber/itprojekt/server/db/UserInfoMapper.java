@@ -130,15 +130,15 @@ public class UserInfoMapper extends DataMapper {
 		}
 	}
 
-	public Vector<UserInfo> getAllNoteUser() throws ClassNotFoundException, SQLException {
-		Connection con = DBConnection.getConnection();
+	public Vector<UserInfo> getAllUserInfos() {
+		
 		Vector<UserInfo> result = new Vector<>();
 
 		try {
 			// wieso kein prepared Statement mehr?
 			// PreparedStatement stmt = con.prepareStatement("SELECT NoteUserId
 			// FROM NoteUser");
-			Statement stmt = con.createStatement();
+			Statement stmt = connection.createStatement();
 			ResultSet results = stmt.executeQuery("SELECT * FROM notizbuch.userinfo");
 
 			while (results.next()) {
@@ -150,6 +150,9 @@ public class UserInfoMapper extends DataMapper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("Mapper: found " + Integer.toString(result.size()) + " Users");
+		
 		return result;
 	}
 

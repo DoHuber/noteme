@@ -63,7 +63,7 @@ public abstract class CompositeReport extends Report implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CompositeReport [subReports=" + subReports + "]";
+		return super.toString();
 	}
 
 }

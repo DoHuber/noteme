@@ -32,7 +32,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
  */
 public class IT_Projekt implements EntryPoint {
 	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	private UserInfo userInfo = null;
+	private static UserInfo loggedInUser;
 
 	private Audio bootSound;
 	private Audio bootAdminSound;
@@ -68,13 +68,13 @@ public class IT_Projekt implements EntryPoint {
 
 			public void onSuccess(UserInfo result) {
 
-				userInfo = result;
+				loggedInUser = result;
 
-				if (userInfo.isLoggedIn()) {
+				if (loggedInUser.isLoggedIn()) {
 
 					initializeAudio();
 
-					if (!userInfo.isAdmin()) {
+					if (!loggedInUser.isAdmin()) {
 
 						IT_Projekt.this.bootSound.play();
 
@@ -84,7 +84,7 @@ public class IT_Projekt implements EntryPoint {
 
 					}
 
-					if (userInfo.getFirstName() == null && userInfo.getSurName() == null) {
+					if (loggedInUser.getFirstName() == null && loggedInUser.getSurName() == null) {
 						createUser();
 					}
 
@@ -158,7 +158,7 @@ public class IT_Projekt implements EntryPoint {
 
 	private void openAccountPanel() {
 
-		AccountPanel ap = new AccountPanel(userInfo);
+		AccountPanel ap = new AccountPanel(loggedInUser);
 		ap.setPopupPosition(accountButton.getAbsoluteLeft(), accountButton.getAbsoluteTop());
 		ap.show();
 
@@ -210,7 +210,7 @@ public class IT_Projekt implements EntryPoint {
 
 	private void loadDueNotes() {
 
-		DueDateFromUser du = new DueDateFromUser(userInfo);
+		DueDateFromUser du = new DueDateFromUser(loggedInUser);
 		applicationPanel.setCenterContent(du);
 
 	}
@@ -219,7 +219,7 @@ public class IT_Projekt implements EntryPoint {
 
 		Label l = new Label("You need to sign in in order to access this application.");
 		Anchor a = new Anchor("Sign in");
-		a.setHref(userInfo.getLoginUrl());
+		a.setHref(loggedInUser.getLoginUrl());
 
 		VerticalPanel vp = new VerticalPanel();
 		vp.add(l);
@@ -258,9 +258,9 @@ public class IT_Projekt implements EntryPoint {
 		@Override
 		public void onClick(ClickEvent event) {
 
-			userInfo.setFirstName(nameBox.getText());
-			userInfo.setSurName(nameBox2.getText());
-			editorVerwaltung.saveUser(userInfo, new SaveCallBack());
+			loggedInUser.setFirstName(nameBox.getText());
+			loggedInUser.setSurName(nameBox2.getText());
+			editorVerwaltung.saveUser(loggedInUser, new SaveCallBack());
 
 		}
 
@@ -281,6 +281,10 @@ public class IT_Projekt implements EntryPoint {
 			}
 
 		}
+	}
+	
+	public static UserInfo getLoggedInUser() {
+		return loggedInUser;
 	}
 
 }

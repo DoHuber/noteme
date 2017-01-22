@@ -1,5 +1,7 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
+import java.util.Vector;
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -66,6 +68,13 @@ public class SharedServicesImpl extends RemoteServiceServlet implements SharedSe
 		}
 
 		return userInfo;
+	}
+
+	@Override
+	public Vector<UserInfo> getAllUsers() {
+		
+		return userInfoMapper.getAllUserInfos();
+		
 	}
 
 }

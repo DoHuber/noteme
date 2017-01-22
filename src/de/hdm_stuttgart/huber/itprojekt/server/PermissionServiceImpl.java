@@ -51,7 +51,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 
 			p = new Permission();
 			p.setLevel(l);
-			setCurrentUserAsAuthor(p);
+			setCurrentUserAsAuthor(p, beneficiary);
 			createNewPermission(p, beneficiary, sharedObject);
 
 		} else {
@@ -74,7 +74,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 
 	}
 
-	private void setCurrentUserAsAuthor(Permission p) {
+	private void setCurrentUserAsAuthor(Permission p, UserInfo beneficiary) {
 
 		UserService userService = UserServiceFactory.getUserService();
 		if (!userService.isUserLoggedIn()) {
@@ -83,7 +83,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 
 		User currentGoogleUser = userService.getCurrentUser();
 		UserInfo author = UserInfoMapper.getUserInfoMapper().findUserByGoogleId(currentGoogleUser.getUserId());
-
+		
 		p.setAuthor(author);
 
 	}

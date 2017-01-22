@@ -18,7 +18,7 @@ import java.util.Vector;
  * @see Column
  * @author Thies
  */
-public abstract class SimpleReport extends Report {
+public class SimpleReport extends Report {
 
 	/**
 	 * 
@@ -62,7 +62,13 @@ public abstract class SimpleReport extends Report {
 
 	@Override
 	public String toString() {
-		return "SimpleReport [table=" + table + "]";
+		
+		String retVal = "";
+		for (Row r : table) {
+			retVal = retVal + r.toString();
+		}
+		
+		return retVal;
 	}
 
 }
