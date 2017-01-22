@@ -21,7 +21,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
 /**
  * Notiz anlegen!
@@ -57,7 +57,7 @@ public class CreateNote extends BasicVerticalView {
 
 	}
 
-	public CreateNote(NoteBook nb) {
+	public CreateNote(Notebook nb) {
 		
 		intoNoteBook.setValue(true);
 		noteBookSelector.addItem(nb);
@@ -180,7 +180,7 @@ public class CreateNote extends BasicVerticalView {
 		
 		if (intoNoteBook.getValue()) {
 			
-			NoteBook nb;
+			Notebook nb;
 			nb = noteBookSelector.getSelectedItem();
 			note.setNoteBook(nb);
 			
@@ -201,7 +201,7 @@ public class CreateNote extends BasicVerticalView {
 
 	}
 
-	private class AddToListBoxCallback implements AsyncCallback<Vector<NoteBook>> {
+	private class AddToListBoxCallback implements AsyncCallback<Vector<Notebook>> {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -210,7 +210,7 @@ public class CreateNote extends BasicVerticalView {
 		}
 
 		@Override
-		public void onSuccess(Vector<NoteBook> result) {
+		public void onSuccess(Vector<Notebook> result) {
 			noteBookSelector.addAll(result);
 		}
 

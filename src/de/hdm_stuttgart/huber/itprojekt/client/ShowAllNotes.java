@@ -13,7 +13,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
 /**
  * Klasse zur Darstellung der Notizen, die vom Nutzer nicht explizit einem
@@ -41,7 +41,7 @@ public class ShowAllNotes extends BasicVerticalView {
 
 	}
 
-	public ShowAllNotes(NoteBook selected) {
+	public ShowAllNotes(Notebook selected) {
 
 	}
 

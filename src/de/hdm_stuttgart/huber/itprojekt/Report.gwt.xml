@@ -5,6 +5,7 @@
 
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.logging.Logging"/>
+	<inherits name='com.google.gwt.user.theme.clean.Clean'/>
 	
 	<entry-point class='de.hdm_stuttgart.huber.itprojekt.client.NoteMeReport'/>
 	<source path="client"/>

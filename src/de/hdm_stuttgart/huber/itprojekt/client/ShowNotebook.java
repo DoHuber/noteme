@@ -19,7 +19,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 
@@ -38,7 +38,7 @@ public class ShowNotebook extends BasicVerticalView {
 	private Button createButton = new Button(IconConstants.ICON_ADD_NOTE2);
 	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 	
-	NoteBook displayedNoteBook = new NoteBook();
+	Notebook displayedNoteBook = new Notebook();
 	private TextBox title = new TextBox();
 	private TextBox subtitle = new TextBox();
 	AllNotesCallback callback = new AllNotesCallback();
@@ -49,7 +49,7 @@ public class ShowNotebook extends BasicVerticalView {
 
 	private NoteTable currentTable;
 
-	public ShowNotebook(NoteBook noteBookToDisplay) {
+	public ShowNotebook(Notebook noteBookToDisplay) {
 		this.displayedNoteBook = noteBookToDisplay;
 	}
 
@@ -227,7 +227,7 @@ public class ShowNotebook extends BasicVerticalView {
 
 	}
 
-	private class UpdateCallback implements AsyncCallback<NoteBook> {
+	private class UpdateCallback implements AsyncCallback<Notebook> {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -236,7 +236,7 @@ public class ShowNotebook extends BasicVerticalView {
 		}
 
 		@Override
-		public void onSuccess(NoteBook result) {
+		public void onSuccess(Notebook result) {
 			
 			Notificator.getNotificator().showSuccess("NoteBook " + result.getTitle() + " was saved.");
 

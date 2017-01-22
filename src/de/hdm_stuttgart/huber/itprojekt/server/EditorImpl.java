@@ -19,7 +19,7 @@ import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.Editor;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
@@ -55,7 +55,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public NoteBook createNoteBook(NoteBook noteBook) {
+	public Notebook createNoteBook(Notebook noteBook) {
 
 		Date currentDate = new Date(System.currentTimeMillis());
 		noteBook.setCreationDate(currentDate);
@@ -66,7 +66,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public NoteBook saveNoteBook(NoteBook noteBook) {
+	public Notebook saveNoteBook(Notebook noteBook) {
 
 		try {
 
@@ -80,13 +80,13 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public NoteBook getNoteBookById(NoteBook notebook) throws Exception {
+	public Notebook getNoteBookById(Notebook notebook) throws Exception {
 
 		return noteBookMapper.findById(notebook.getId());
 	}
 
 	@Override
-	public void deleteNoteBook(NoteBook noteBook) {
+	public void deleteNoteBook(Notebook noteBook) {
 		/**
 		 * Delete Notebook muss zuerst alle Notizen im Notizbuch löschen, das
 		 * ist wichtig und Aufgabe der Applikationslogik, wäre zwar theoretisch
@@ -170,7 +170,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<NoteBook> getAllNoteBooks() {
+	public Vector<Notebook> getAllNoteBooks() {
 
 		try {
 			return noteBookMapper.getAllNoteBooks();
@@ -187,6 +187,12 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 		UserInfo currentUser = getCurrentUser();
 		return noteMapper.getAllNotesForUserId(currentUser.getId());
 
+	}
+	
+	@Override 
+	public Vector<Notebook> getAllNoteBooksFor(UserInfo u) {
+		
+		return noteBookMapper.getAllNoteBooksForUserId(u.getId());
 	}
 
 	@Override
@@ -208,7 +214,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<NoteBook> getAllNoteBooksForCurrentUser() {
+	public Vector<Notebook> getAllNoteBooksForCurrentUser() {
 
 		UserInfo currentUser = getCurrentUser();
 		return noteBookMapper.getAllNoteBooksForUserId(currentUser.getId());
@@ -216,7 +222,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<Note> getAllFrom(NoteBook nb) {
+	public Vector<Note> getAllFrom(Notebook nb) {
 
 		int noteBookId = nb.getId();
 		return noteMapper.getAllNotesForNoteBookId(noteBookId);
@@ -261,10 +267,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser() {
+	public Vector<Notebook> getAllSharedNoteBooksForCurrentUser() {
 
-		Vector<NoteBook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());
-		for (NoteBook row : v) {
+		Vector<Notebook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());
+		for (Notebook row : v) {
 
 			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
 			row.setRunTimePermission(p);
@@ -283,7 +289,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	}
 
 	@Override
-	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser() {
+	public Vector<Notebook> getAllNoteBooksSharedByCurrentUser() {
 
 		return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
 
@@ -320,8 +326,8 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 	@Override
 	public void deleteUserInfo(UserInfo ui) {
 		// TODO Auto-generated method stub
-		Vector<NoteBook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());
-		for (NoteBook nb : vector) {
+		Vector<Notebook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());
+		for (Notebook nb : vector) {
 			deleteNoteBook(nb);
 		}
 

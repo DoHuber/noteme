@@ -5,19 +5,19 @@ import java.util.List;
 
 import com.google.gwt.user.client.ui.ListBox;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
 public class NoteBookListBox extends ListBox {
 
-	private ArrayList<NoteBook> items = new ArrayList<>();
+	private ArrayList<Notebook> items = new ArrayList<>();
 
 	public NoteBookListBox() {
 
 	}
 
-	public void addAll(List<NoteBook> l) {
+	public void addAll(List<Notebook> l) {
 
-		for (NoteBook n : l) {
+		for (Notebook n : l) {
 
 			items.add(n);
 			addItem(n);
@@ -26,14 +26,14 @@ public class NoteBookListBox extends ListBox {
 
 	}
 
-	public void addItem(NoteBook nb) {
+	public void addItem(Notebook nb) {
 
 		items.add(nb);
 		super.addItem(nb.getTitle());
 
 	}
 
-	public NoteBook getSelectedItem() {
+	public Notebook getSelectedItem() {
 
 		int index = super.getSelectedIndex();
 		return items.get(index);

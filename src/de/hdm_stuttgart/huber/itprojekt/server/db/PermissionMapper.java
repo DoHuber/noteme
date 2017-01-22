@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import de.hdm_stuttgart.huber.itprojekt.server.db.DataMapper;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
@@ -45,7 +45,7 @@ public class PermissionMapper extends DataMapper {
 
 		if (sharedObject instanceof Note) {
 			sql.append("note_id = ?;");
-		} else if (sharedObject instanceof NoteBook) {
+		} else if (sharedObject instanceof Notebook) {
 			sql.append("notebook_id = ?;");
 		} else {
 			throw new RuntimeException("Das war der falsche Datentyp");

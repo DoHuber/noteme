@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Label;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 
 public class ShowThisPermission extends BasicVerticalView {
@@ -25,7 +25,7 @@ public class ShowThisPermission extends BasicVerticalView {
 	PermissionServiceAsync permissionVerwaltung = ClientsideSettings.getPermissionVerwaltung();
 	private Permission p;
 	private Note note;
-	private NoteBook notebook;
+	private Notebook notebook;
 
 	public ShowThisPermission() {
 
@@ -68,7 +68,7 @@ public class ShowThisPermission extends BasicVerticalView {
 		// TODO zu viel Logik im Client
 		String typeAsVerboseString;
 		if (noteB == "b") {
-			notebook = (NoteBook) p.getSharedObject();
+			notebook = (Notebook) p.getSharedObject();
 			typeAsVerboseString = "Notebook: " + notebook.getTitle();
 		} else {
 			note = (Note) p.getSharedObject();

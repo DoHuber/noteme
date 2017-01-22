@@ -9,7 +9,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 /**
@@ -25,13 +25,13 @@ public interface Editor extends RemoteService {
 	public String getHelloWorld();
 
 	// CRUD-Methoden für NoteBook
-	public NoteBook createNoteBook(NoteBook notebook);
+	public Notebook createNoteBook(Notebook notebook);
 
-	public NoteBook saveNoteBook(NoteBook noteBook);
+	public Notebook saveNoteBook(Notebook noteBook);
 
-	public NoteBook getNoteBookById(NoteBook notebook) throws Exception;
+	public Notebook getNoteBookById(Notebook notebook) throws Exception;
 
-	public void deleteNoteBook(NoteBook noteBook);
+	public void deleteNoteBook(Notebook noteBook);
 
 	// CRUD-Methoden für Note
 	public Note createNote(Note note);
@@ -47,21 +47,23 @@ public interface Editor extends RemoteService {
 	
 	public Vector<Note> getAllNotesForUser(UserInfo user);
 	
-	public Vector<NoteBook> getAllNoteBooksForCurrentUser();
+	public Vector<Notebook> getAllNoteBooksForCurrentUser();
+	
+	public Vector<Notebook> getAllNoteBooksFor(UserInfo u);
 
 	// Methoden mit Freigabe dabei
 	public Vector<Note> getAllSharedNotesForCurrentUser();
 
-	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser();
+	public Vector<Notebook> getAllSharedNoteBooksForCurrentUser();
 
 	public Vector<Note> getAllNotesSharedByCurrentUser();
 
-	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser();
+	public Vector<Notebook> getAllNoteBooksSharedByCurrentUser();
 
 	// Zusätzliche Methoden zu NoteBook
-	public Vector<NoteBook> getAllNoteBooks();
+	public Vector<Notebook> getAllNoteBooks();
 
-	public Vector<Note> getAllFrom(NoteBook nb);
+	public Vector<Note> getAllFrom(Notebook nb);
 
 	public Vector<Note> getAllNotes();
 	

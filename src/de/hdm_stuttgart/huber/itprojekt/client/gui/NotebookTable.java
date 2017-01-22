@@ -19,7 +19,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
 import de.hdm_stuttgart.huber.itprojekt.client.ShowNotebook;
 
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
 /**
  * Die Klasse NotebookTable wird alle Notizbücher in einer Tabelle Darstellen
@@ -36,56 +36,56 @@ public class NotebookTable extends FlowPanel {
 	/**
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 	 */
-	private NoteBook selected = null;
-	private Vector<NoteBook> noteB;
-	DataGrid<NoteBook> table = new DataGrid<NoteBook>();
+	private Notebook selected = null;
+	private Vector<Notebook> noteB;
+	DataGrid<Notebook> table = new DataGrid<Notebook>();
 
-	public NotebookTable(Vector<NoteBook> list) {
+	public NotebookTable(Vector<Notebook> list) {
 		this.noteB = list;
 	}
 
-	public Vector<NoteBook> getNoteBooks() {
+	public Vector<Notebook> getNoteBooks() {
 		return noteB;
 	}
 
-	public void setNoteBooks(Vector<NoteBook> noteB) {
+	public void setNoteBooks(Vector<Notebook> noteB) {
 		this.noteB = noteB;
 	}
 
-	public DataGrid<NoteBook> getTable() {
+	public DataGrid<Notebook> getTable() {
 		return table;
 	}
 
-	public void setTable(DataGrid<NoteBook> table) {
+	public void setTable(DataGrid<Notebook> table) {
 		this.table = table;
 	}
 
 	@Override
 	public void onLoad() {
-		TextColumn<NoteBook> title = new TextColumn<NoteBook>() {
+		TextColumn<Notebook> title = new TextColumn<Notebook>() {
 
 			@Override
-			public String getValue(NoteBook noteB) {
+			public String getValue(Notebook noteB) {
 
 				return noteB.getTitle();
 			}
 		};
 		table.addColumn(title, "Title");
 
-		TextColumn<NoteBook> subtitle = new TextColumn<NoteBook>() {
+		TextColumn<Notebook> subtitle = new TextColumn<Notebook>() {
 
 			@Override
-			public String getValue(NoteBook noteB) {
+			public String getValue(Notebook noteB) {
 				// TODO Auto-generated method stub
 				return noteB.getSubtitle();
 			}
 		};
 		table.addColumn(subtitle, "Subtitle");
 
-		TextColumn<NoteBook> creationDate = new TextColumn<NoteBook>() {
+		TextColumn<Notebook> creationDate = new TextColumn<Notebook>() {
 
 			@Override
-			public String getValue(NoteBook noteB) {
+			public String getValue(Notebook noteB) {
 				// !!!! Könnte Fehler verursachen
 				return noteB.getCreationDate().toString();
 			}
@@ -128,15 +128,15 @@ public class NotebookTable extends FlowPanel {
 	 */
 
 	public void addClickNote() {
-		final SingleSelectionModel<NoteBook> selection = new SingleSelectionModel<NoteBook>();
+		final SingleSelectionModel<Notebook> selection = new SingleSelectionModel<Notebook>();
 		table.setSelectionModel(selection);
 		selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
 	}
 
 	private class SelectionChangeHandler implements Handler {
-		private final SingleSelectionModel<NoteBook> selection;
+		private final SingleSelectionModel<Notebook> selection;
 
-		private SelectionChangeHandler(SingleSelectionModel<NoteBook> selection) {
+		private SelectionChangeHandler(SingleSelectionModel<Notebook> selection) {
 			this.selection = selection;
 		}
 

@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
 /**
  * Klasse zur Darstellung von Notizb�chern, gleiche Funktionsweise wie
@@ -29,11 +29,11 @@ public class ShowAllNotebooks extends BasicVerticalView {
 	final Button sharedWithBtn = new Button("Shared with me");
 	final Button allNoteBooksBtn = new Button("All Notebooks");
 	Button createNoteBookButton = new Button(IconConstants.ICON_ADD_NOTE);
-	private Vector<NoteBook> notebook = new Vector<NoteBook>();
+	private Vector<Notebook> notebook = new Vector<Notebook>();
 
 	private NotebookTable currentTable;
 
-	public ShowAllNotebooks(Vector<NoteBook> nList) {
+	public ShowAllNotebooks(Vector<Notebook> nList) {
 		notebook = nList;
 	}
 
@@ -44,17 +44,17 @@ public class ShowAllNotebooks extends BasicVerticalView {
 
 	}
 
-	public ShowAllNotebooks(NoteBook selected) {
+	public ShowAllNotebooks(Notebook selected) {
 
 	}
 
 	// Gibt alle Notizb�cher zurück
-	public Vector<NoteBook> getAllNotebooksListe() {
+	public Vector<Notebook> getAllNotebooksListe() {
 		return notebook;
 
 	}
 
-	public void setAllNotesListe(Vector<NoteBook> liste) {
+	public void setAllNotesListe(Vector<Notebook> liste) {
 		this.notebook = liste;
 
 	}
@@ -104,9 +104,9 @@ public class ShowAllNotebooks extends BasicVerticalView {
 
 	}
 
-	private class AllNotebooksCallback implements AsyncCallback<Vector<NoteBook>> {
+	private class AllNotebooksCallback implements AsyncCallback<Vector<Notebook>> {
 		@Override
-		public void onSuccess(Vector<NoteBook> result) {
+		public void onSuccess(Vector<Notebook> result) {
 			fillTableWith(result);
 		}
 
@@ -127,7 +127,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
 
 	}
 
-	private class SharedWithCallback implements AsyncCallback<Vector<NoteBook>> {
+	private class SharedWithCallback implements AsyncCallback<Vector<Notebook>> {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -135,7 +135,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
 		}
 
 		@Override
-		public void onSuccess(Vector<NoteBook> result) {
+		public void onSuccess(Vector<Notebook> result) {
 			fillTableWith(result);
 
 		}
@@ -153,7 +153,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
 
 	}
 
-	private class SharedByCallback implements AsyncCallback<Vector<NoteBook>> {
+	private class SharedByCallback implements AsyncCallback<Vector<Notebook>> {
 
 		@Override
 		public void onFailure(Throwable caught) {
@@ -161,7 +161,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
 		}
 
 		@Override
-		public void onSuccess(Vector<NoteBook> result) {
+		public void onSuccess(Vector<Notebook> result) {
 
 			fillTableWith(result);
 
@@ -169,7 +169,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
 
 	}
 
-	public void fillTableWith(Vector<NoteBook> result) {
+	public void fillTableWith(Vector<Notebook> result) {
 
 		if (currentTable != null) {
 			this.remove(currentTable);

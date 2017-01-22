@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class NoteBookMapper extends DataMapper {
@@ -33,7 +33,7 @@ public class NoteBookMapper extends DataMapper {
 		return noteBookMapper;
 	}
 
-	public NoteBook create(NoteBook notebook) {
+	public Notebook create(Notebook notebook) {
 
 		try {
 
@@ -79,7 +79,7 @@ public class NoteBookMapper extends DataMapper {
 	 * @throws SQLException
 	 */
 
-	public NoteBook findById(long id) throws ClassNotFoundException, SQLException {
+	public Notebook findById(long id) throws ClassNotFoundException, SQLException {
 
 		Connection connection = DBConnection.getConnection();
 
@@ -91,7 +91,7 @@ public class NoteBookMapper extends DataMapper {
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 
-				return new NoteBook(
+				return new Notebook(
 
 						rs.getInt("id"), rs.getString("title"), rs.getString("subtitle"),
 						UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")),
@@ -115,7 +115,7 @@ public class NoteBookMapper extends DataMapper {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public NoteBook save(NoteBook notebook) throws ClassNotFoundException, SQLException {
+	public Notebook save(Notebook notebook) throws ClassNotFoundException, SQLException {
 		Connection con = DBConnection.getConnection();
 
 		try {
@@ -141,7 +141,7 @@ public class NoteBookMapper extends DataMapper {
 		return findById(notebook.getId());
 	}
 
-	public void delete(NoteBook notebook) {
+	public void delete(Notebook notebook) {
 
 		try {
 
@@ -156,7 +156,7 @@ public class NoteBookMapper extends DataMapper {
 
 	}
 
-	public Vector<NoteBook> getAllNoteBooks() {
+	public Vector<Notebook> getAllNoteBooks() {
 
 		try {
 
@@ -172,7 +172,7 @@ public class NoteBookMapper extends DataMapper {
 
 	}
 
-	public Vector<NoteBook> getAllNoteBooksForUserId(int userId) {
+	public Vector<Notebook> getAllNoteBooksForUserId(int userId) {
 
 		try {
 
@@ -190,7 +190,7 @@ public class NoteBookMapper extends DataMapper {
 
 	}
 
-	public Vector<NoteBook> getAllNoteBooksSharedWith(UserInfo u) {
+	public Vector<Notebook> getAllNoteBooksSharedWith(UserInfo u) {
 
 		try {
 
@@ -210,13 +210,13 @@ public class NoteBookMapper extends DataMapper {
 
 	}
 
-	private Vector<NoteBook> makeNoteBooksFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+	private Vector<Notebook> makeNoteBooksFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
 
-		Vector<NoteBook> v = new Vector<>();
+		Vector<Notebook> v = new Vector<>();
 
 		while (rs.next()) {
 
-			NoteBook resultRow = new NoteBook(rs.getInt("id"));
+			Notebook resultRow = new Notebook(rs.getInt("id"));
 
 			resultRow.setTitle(rs.getString("title"));
 			resultRow.setSubtitle(rs.getString("subtitle"));
@@ -231,10 +231,10 @@ public class NoteBookMapper extends DataMapper {
 		return v;
 	}
 
-	public Vector<NoteBook> getAllNoteBooksSharedBy(UserInfo u) {
+	public Vector<Notebook> getAllNoteBooksSharedBy(UserInfo u) {
 
 		String sql = "SELECT DISTINCT notebook.id AS id FROM notebook JOIN permission ON notebook.id = permission.notebook_id WHERE notebook.author_id = ?";
-		Vector<NoteBook> v = new Vector<>();
+		Vector<Notebook> v = new Vector<>();
 
 		try {
 

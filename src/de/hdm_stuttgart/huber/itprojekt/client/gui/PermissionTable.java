@@ -15,7 +15,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.ClientsideSettings;
 import de.hdm_stuttgart.huber.itprojekt.client.ShowThisPermission;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 
 /**
@@ -35,7 +35,7 @@ public class PermissionTable extends FlowPanel {
 	 * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
 	 */
 	private Note note = null;
-	private NoteBook notebook = null;
+	private Notebook notebook = null;
 	private Permission selected = null;
 	private Vector<Permission> permission;
 	DataGrid<Permission> table = new DataGrid<Permission>();
@@ -99,7 +99,7 @@ public class PermissionTable extends FlowPanel {
 				String noteB = String.valueOf(permission.getSharedObject().getType());
 				String string = null;
 				if (noteB == "b") {
-					notebook = (NoteBook) permission.getSharedObject();
+					notebook = (Notebook) permission.getSharedObject();
 					string = "Notebook: " + notebook.getTitle();
 				} else {
 					note = (Note) permission.getSharedObject();

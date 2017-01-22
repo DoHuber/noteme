@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
 /**
  * Notizbuch anlegen
@@ -67,7 +67,7 @@ public class CreateNotebook extends BasicVerticalView {
 	// Neues Notizbuch wird erstellt
 	public void createNotebook() {
 
-		NoteBook nb = new NoteBook();
+		Notebook nb = new Notebook();
 
 		nb.setTitle(titleTextBox.getText());
 		nb.setSubtitle(subtitleTextBox.getText());
@@ -82,7 +82,7 @@ public class CreateNotebook extends BasicVerticalView {
 	 * angelegte Notizbuch wird an die EditorImpl übergeben.
 	 *
 	 */
-	private class CreateNotebookCallback implements AsyncCallback<NoteBook> {
+	private class CreateNotebookCallback implements AsyncCallback<Notebook> {
 		
 		private Notificator notificator = Notificator.getNotificator();
 
@@ -95,7 +95,7 @@ public class CreateNotebook extends BasicVerticalView {
 		}
 
 		@Override
-		public void onSuccess(NoteBook result) {
+		public void onSuccess(Notebook result) {
 
 			notificator.showSuccess("NoteBook " + result.getTitle() + " created successfully.");
 			

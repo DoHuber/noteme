@@ -3,14 +3,21 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
@@ -30,13 +37,14 @@ public class NoteMeReport implements EntryPoint {
 
 	ReportGeneratorAsync reportGenerator;
 
-	private UserInfo userInfo = null;
+	private UserInfo loggedInUser;
 	private VerticalPanel loginPanel = new VerticalPanel();
 	private Label loginLabel = new Label(
 			"Please sign in to your Google Account to access the cool and nice application.");
 	private Anchor signInLink = new Anchor("Sign In");
 	
 	private ApplicationPanel applicationPanel;
+
 
 	/**
 	 * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
@@ -71,9 +79,9 @@ public class NoteMeReport implements EntryPoint {
 			@Override
 			public void onSuccess(UserInfo result) {
 
-				userInfo = result;
+				loggedInUser = result;
 
-				if (userInfo.isLoggedIn()) {
+				if (loggedInUser.isLoggedIn()) {
 
 					loadMenu();
 
@@ -98,17 +106,58 @@ public class NoteMeReport implements EntryPoint {
 		ReportGeneratorMenu navigation = new ReportGeneratorMenu();
 		applicationPanel.setNavigation(navigation);
 		
-		Label l = new Label("NoteMe - Report Generator");
-		applicationPanel.setHeader(l);
+		setUpHeaderPanel();
 		
 		Label n = new Label("Gruppe 7, IT-Projekt HdM Stuttgart");
 		applicationPanel.setFooter(n);
 
 	}
 
+	private void setUpHeaderPanel() {
+		
+		HorizontalPanel headerPanel = new HorizontalPanel();
+		final Button accountButton = new Button(IconConstants.ICON_ACCOUNT_CIRCLE);
+
+		headerPanel.setStyleName("headerpanel");
+		headerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		headerPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+
+		headerPanel.add(new HTML("<img width=\"33%\" src=\"LeftUpperSprite.jpg\" alt=\"Fehler\">"));
+
+		Label l = new Label("NoteMe");
+		l.setStyleName("headerlabel");
+		headerPanel.add(l);
+
+		accountButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				openAccountPanel(accountButton);
+			}
+
+		});
+
+		headerPanel.add(accountButton);
+
+		headerPanel.setCellWidth(headerPanel.getWidget(0), "33%");
+		headerPanel.setCellWidth(headerPanel.getWidget(1), "33%");
+		headerPanel.setCellWidth(headerPanel.getWidget(2), "33%");
+
+		applicationPanel.setHeader(headerPanel);
+		
+	}
+
+	private void openAccountPanel(Button accountButton) {
+
+		AccountPanel ap = new AccountPanel(loggedInUser);
+		ap.setPopupPosition(accountButton.getAbsoluteLeft(), accountButton.getAbsoluteTop());
+		ap.show();
+
+	}
+
 	private void loadLogin() {
 
-		signInLink.setHref(userInfo.getLoginUrl());
+		signInLink.setHref(loggedInUser.getLoginUrl());
 		loginPanel.add(loginLabel);
 		loginPanel.add(signInLink);
 		

@@ -10,7 +10,7 @@ public class Note extends DomainObject implements Shareable, DateFilterable {
 	private String title = null;
 	private String subtitle = null;
 	private UserInfo owner = null;
-	private NoteBook noteBook = null;
+	private Notebook noteBook = null;
 	private Date dueDate = null;
 	private Date creationDate = null;
 	private Date modificationDate = null;
@@ -38,7 +38,7 @@ public class Note extends DomainObject implements Shareable, DateFilterable {
 	 * @param creationDate
 	 * @param modificationDate
 	 */
-	public Note(int noteId, String content, String title, String subtitle, UserInfo owner, NoteBook noteBook,
+	public Note(int noteId, String content, String title, String subtitle, UserInfo owner, Notebook noteBook,
 			Date dueDate, Date creationDate, Date modificationDate) {
 		super();
 		this.id = noteId;
@@ -123,11 +123,11 @@ public class Note extends DomainObject implements Shareable, DateFilterable {
 		this.owner = owner;
 	}
 
-	public NoteBook getNoteBook() {
+	public Notebook getNoteBook() {
 		return noteBook;
 	}
 
-	public void setNoteBook(NoteBook noteBook) {
+	public void setNoteBook(Notebook noteBook) {
 		this.noteBook = noteBook;
 	}
 
