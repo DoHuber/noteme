@@ -14,27 +14,27 @@ import java.util.Map;
  */
 public abstract class DataMapper {
 
-	protected Map<Integer, Object> loadedObjects = new HashMap<>();
-	protected Connection connection;
+    protected Map<Integer, Object> loadedObjects = new HashMap<>();
+    protected Connection connection;
 
-	protected DataMapper() throws ClassNotFoundException, SQLException {
+    protected DataMapper() throws ClassNotFoundException, SQLException {
 
-		connection = DBConnection.getConnection();
+        connection = DBConnection.getConnection();
 
-	}
+    }
 
-	protected <T> boolean isObjectLoaded(long id, Class<T> classToCheck) {
+    protected <T> boolean isObjectLoaded(long id, Class<T> classToCheck) {
 
-		Object o = loadedObjects.get(id);
-		return o != null && classToCheck.isAssignableFrom(o.getClass());
+        Object o = loadedObjects.get(id);
+        return o != null && classToCheck.isAssignableFrom(o.getClass());
 
-	}
+    }
 
-	@Override
-	protected void finalize() throws Throwable {
+    @Override
+    protected void finalize() throws Throwable {
 
-		super.finalize();
-		connection.close();
+        super.finalize();
+        connection.close();
 
-	}
+    }
 }

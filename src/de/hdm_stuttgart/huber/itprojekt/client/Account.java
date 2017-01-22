@@ -8,124 +8,122 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.TextBox;
-
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 public class Account extends BasicVerticalView {
 
-	private UserInfo loggedInUser = null;
-	private Button saveButton = new Button("Save changes");
-	private Button deleteButton = new Button("Delete my account");
-	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	private static String logOutUrl;
+    private static String logOutUrl;
+    private UserInfo loggedInUser = null;
+    private Button saveButton = new Button("Save changes");
+    private Button deleteButton = new Button("Delete my account");
+    private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+    private TextBox name = new TextBox();
+    private TextBox surname = new TextBox();
+    private TextBox email = new TextBox();
 
-	private TextBox name = new TextBox();
-	private TextBox surname  = new TextBox();
-	private TextBox	email = new TextBox();
+    public Account(UserInfo userInfo) {
+        this.loggedInUser = userInfo;
+    }
 
-	public Account(UserInfo userInfo) {
-		this.loggedInUser = userInfo;
-	}
+    public static void setLogOutUrl(String logOutUrl) {
+        Account.logOutUrl = logOutUrl;
+    }
 
-	@Override
-	public String getHeadlineText() {
-		return "MY ACCOUNT";
+    @Override
+    public String getHeadlineText() {
+        return "MY ACCOUNT";
 
-	}
+    }
 
-	@Override
-	public String getSubHeadlineText() {
+    @Override
+    public String getSubHeadlineText() {
 
-		return "Nickname: " + loggedInUser.getNickname();
+        return "Nickname: " + loggedInUser.getNickname();
 
-	}
+    }
 
-	@Override
-	public void run() {
+    @Override
+    public void run() {
 
-		name.setText(loggedInUser.getFirstName());
-		surname.setText(loggedInUser.getSurName());
-		email.setText(loggedInUser.getEmailAddress());
+        name.setText(loggedInUser.getFirstName());
+        surname.setText(loggedInUser.getSurName());
+        email.setText(loggedInUser.getEmailAddress());
 
-		deleteButton.addClickHandler(new DeleteClickHandler());
-		logOutUrl = loggedInUser.getLogoutUrl();
-		
-		saveButton.addClickHandler(new ClickHandler() {
+        deleteButton.addClickHandler(new DeleteClickHandler());
+        logOutUrl = loggedInUser.getLogoutUrl();
 
-			@Override
-			public void onClick(ClickEvent event) {
-				saveUpdates();
-			}
-			
-		});
-		
-		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		this.setWidth("100%");
-		this.add(name);
-		this.add(surname);
-		this.add(email);
-		this.add(saveButton);
-		this.add(deleteButton);
-		
-		GWT.log(loggedInUser.toString());
+        saveButton.addClickHandler(new ClickHandler() {
 
-	}
+            @Override
+            public void onClick(ClickEvent event) {
+                saveUpdates();
+            }
 
-	private void saveUpdates() {
-		
-		loggedInUser.setFirstName(name.getValue());
-		loggedInUser.setSurName(surname.getValue());
-		
-		editorVerwaltung.saveUser(loggedInUser, new AsyncCallback<UserInfo>() {
+        });
 
-			@Override
-			public void onFailure(Throwable caught) {
-				GWT.log(caught.toString());
-			}
+        this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        this.setWidth("100%");
+        this.add(name);
+        this.add(surname);
+        this.add(email);
+        this.add(saveButton);
+        this.add(deleteButton);
 
-			@Override
-			public void onSuccess(UserInfo result) {
-				Notificator.getNotificator().showSuccess("Changes saved");
-			}
-		
-		});
-		
-	}
+        GWT.log(loggedInUser.toString());
 
-	private class DeleteClickHandler implements ClickHandler {
+    }
 
-		@Override
-		public void onClick(ClickEvent event) {
-			if (Window.confirm("Möchten Sie Ihren Account " + loggedInUser.getNickname() + " wirklich löschen?")) {
-				
-				logOutUrl = loggedInUser.getLogoutUrl();
-				editorVerwaltung.deleteUserInfo(loggedInUser, new DeleteCallback());
-				
-			}
+    private void saveUpdates() {
 
-		}
-	}
+        loggedInUser.setFirstName(name.getValue());
+        loggedInUser.setSurName(surname.getValue());
 
-	public static void setLogOutUrl(String logOutUrl) {
-		Account.logOutUrl = logOutUrl;
-	}
+        editorVerwaltung.saveUser(loggedInUser, new AsyncCallback<UserInfo>() {
 
-	private class DeleteCallback implements AsyncCallback<Void> {
+            @Override
+            public void onFailure(Throwable caught) {
+                GWT.log(caught.toString());
+            }
 
-		@Override
-		public void onFailure(Throwable caught) {
-			GWT.log(caught.toString());
-		}
+            @Override
+            public void onSuccess(UserInfo result) {
+                Notificator.getNotificator().showSuccess("Changes saved");
+            }
 
-		@Override
-		public void onSuccess(Void result) {
-				
-			Window.Location.replace(logOutUrl);
-			
-		}
+        });
 
-	}
+    }
+
+    private class DeleteClickHandler implements ClickHandler {
+
+        @Override
+        public void onClick(ClickEvent event) {
+            if (Window.confirm("Möchten Sie Ihren Account " + loggedInUser.getNickname() + " wirklich löschen?")) {
+
+                logOutUrl = loggedInUser.getLogoutUrl();
+                editorVerwaltung.deleteUserInfo(loggedInUser, new DeleteCallback());
+
+            }
+
+        }
+    }
+
+    private class DeleteCallback implements AsyncCallback<Void> {
+
+        @Override
+        public void onFailure(Throwable caught) {
+            GWT.log(caught.toString());
+        }
+
+        @Override
+        public void onSuccess(Void result) {
+
+            Window.Location.replace(logOutUrl);
+
+        }
+
+    }
 
 }

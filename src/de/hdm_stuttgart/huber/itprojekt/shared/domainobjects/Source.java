@@ -4,33 +4,31 @@ import com.google.gwt.http.client.URL;
 
 public class Source extends DomainObject {
 
-	public Source(URL url) {
-		// TODO Auto-generated constructor stub
-	}
+    private static final long serialVersionUID = 1L;
+    private Source URL;
+    private int sourceId;
 
-	public Source() {
-		// TODO Auto-generated constructor stub
-	}
+    public Source(URL url) {
+        // TODO Auto-generated constructor stub
+    }
+    public Source() {
+        // TODO Auto-generated constructor stub
+    }
 
-	private static final long serialVersionUID = 1L;
+    public Source getURL() {
+        return URL;
+    }
 
-	private Source URL;
-	private int sourceId;
+    public void setURL(Source uRL) {
+        URL = uRL;
+    }
 
-	public Source getURL() {
-		return URL;
-	}
+    public int getSourceId() {
+        return sourceId;
+    }
 
-	public void setURL(Source uRL) {
-		URL = uRL;
-	}
-
-	public int getSourceId() {
-		return sourceId;
-	}
-
-	public void setSourceId(int sourceId) {
-		this.sourceId = sourceId;
-	}
+    public void setSourceId(int sourceId) {
+        this.sourceId = sourceId;
+    }
 
 }

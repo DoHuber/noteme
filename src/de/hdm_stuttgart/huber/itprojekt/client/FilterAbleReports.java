@@ -1,10 +1,5 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-import java.sql.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -12,227 +7,217 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
-
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.CustomReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Vector;
+
 public class FilterAbleReports extends BasicVerticalView {
 
-	public FilterAbleReports() {
+    private final static String[] REPORT_CHOICES = {"notes", "notebooks", "permissions"};
+    EditorAsync editor = ClientsideSettings.getEditorVerwaltung();
+    private HorizontalPanel alignPanel;
+    private ListBox whatKindOfReport;
+    private SuggestBox whichUser;
+    private Button startButton;
+    private CheckBox includePermissions;
+    private DateBox fromDate;
+    private DateBox toDate;
+    private MultiWordSuggestOracle oracle;
+    private PopupPanel loadingPanel;
+    public FilterAbleReports() {
 
-	}
+    }
 
-	@Override
-	public String getHeadlineText() {
+    @Override
+    public String getHeadlineText() {
 
-		return "Filter reports here";
-	}
+        return "Filter reports here";
+    }
 
-	@Override
-	public String getSubHeadlineText() {
+    @Override
+    public String getSubHeadlineText() {
 
-		return "Select from the Boxes below.";
-	}
+        return "Select from the Boxes below.";
+    }
 
-	private HorizontalPanel alignPanel;
-	private ListBox whatKindOfReport;
-	private SuggestBox whichUser;
-	private Button startButton;
-	private CheckBox includePermissions;
+    @Override
+    public void run() {
 
-	private DateBox fromDate;
-	private DateBox toDate;
+        whatKindOfReport = new ListBox();
 
-	private final static String[] REPORT_CHOICES = { "notes", "notebooks", "permissions" };
-	private MultiWordSuggestOracle oracle;
+        initializePopupPanel();
 
-	private PopupPanel loadingPanel;
+        for (String element : REPORT_CHOICES) {
+            whatKindOfReport.addItem(element);
+        }
 
-	EditorAsync editor = ClientsideSettings.getEditorVerwaltung();
+        whatKindOfReport.addChangeHandler(new ChangeHandler() {
 
-	@Override
-	public void run() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                String currentlySelected = whatKindOfReport.getValue(whatKindOfReport.getSelectedIndex());
 
-		whatKindOfReport = new ListBox();
+                if (Objects.equals(currentlySelected, "permissions")) {
 
-		initializePopupPanel();
+                    fromDate.setEnabled(false);
+                    toDate.setEnabled(false);
+                    includePermissions.setVisible(false);
 
-		for (String element : REPORT_CHOICES) {
-			whatKindOfReport.addItem(element);
-		}
+                } else {
 
-		whatKindOfReport.addChangeHandler(new ChangeHandler() {
+                    fromDate.setEnabled(true);
+                    toDate.setEnabled(true);
+                    includePermissions.setVisible(true);
 
-			@Override
-			public void onChange(ChangeEvent event) {
-				String currentlySelected = whatKindOfReport.getValue(whatKindOfReport.getSelectedIndex());
+                }
+            }
 
-				if (currentlySelected == "permissions") {
+        });
 
-					fromDate.setEnabled(false);
-					toDate.setEnabled(false);
-					includePermissions.setVisible(false);
+        whatKindOfReport.setVisibleItemCount(REPORT_CHOICES.length);
 
-				} else {
+        oracle = new MultiWordSuggestOracle();
+        whichUser = new SuggestBox(oracle);
 
-					fromDate.setEnabled(true);
-					toDate.setEnabled(true);
-					includePermissions.setVisible(true);
+        editor.getAllEmails(new AllMailCallback());
 
-				}
-			}
+        startButton = new Button("Generate");
+        startButton.addClickHandler(new ClickHandler() {
 
-		});
+            @Override
+            public void onClick(ClickEvent event) {
+                ApplicationPanel.getApplicationPanel().replaceContentWith(new Label(""));
+                loadingPanel.show();
+                getThaReport();
+            }
 
-		whatKindOfReport.setVisibleItemCount(REPORT_CHOICES.length);
+        });
 
-		oracle = new MultiWordSuggestOracle();
-		whichUser = new SuggestBox(oracle);
+        alignPanel = new HorizontalPanel();
+        alignPanel.setWidth("80%");
+        alignPanel.setVerticalAlignment(ALIGN_MIDDLE);
 
-		editor.getAllEmails(new AllMailCallback());
+        alignPanel.add(whatKindOfReport);
 
-		startButton = new Button("Generate");
-		startButton.addClickHandler(new ClickHandler() {
+        VerticalPanel layoutPanel = new VerticalPanel();
+        layoutPanel.add(new Label("Select a user or leave empty for all"));
+        layoutPanel.add(whichUser);
+        alignPanel.add(layoutPanel);
 
-			@Override
-			public void onClick(ClickEvent event) {
-				ApplicationPanel.getApplicationPanel().replaceContentWith(new Label(""));
-				loadingPanel.show();
-				getThaReport();
-			}
+        fromDate = new DateBox();
+        toDate = new DateBox();
 
-		});
+        fromDate.setTitle("From what date");
+        toDate.setTitle("To what date");
 
-		alignPanel = new HorizontalPanel();
-		alignPanel.setWidth("80%");
-		alignPanel.setVerticalAlignment(ALIGN_MIDDLE);
+        VerticalPanel sandwich = new VerticalPanel();
+        sandwich.add(new Label("Select from and to dates"));
+        sandwich.add(fromDate);
+        sandwich.add(toDate);
 
-		alignPanel.add(whatKindOfReport);
+        alignPanel.add(sandwich);
 
-		VerticalPanel layoutPanel = new VerticalPanel();
-		layoutPanel.add(new Label("Select a user or leave empty for all"));
-		layoutPanel.add(whichUser);
-		alignPanel.add(layoutPanel);
+        includePermissions = new CheckBox();
+        VerticalPanel vp = new VerticalPanel();
+        vp.add(new Label("Include Permissions?"));
+        vp.add(includePermissions);
 
-		fromDate = new DateBox();
-		toDate = new DateBox();
+        alignPanel.add(vp);
 
-		fromDate.setTitle("From what date");
-		toDate.setTitle("To what date");
+        this.add(alignPanel);
+        this.add(startButton);
 
-		VerticalPanel sandwich = new VerticalPanel();
-		sandwich.add(new Label("Select from and to dates"));
-		sandwich.add(fromDate);
-		sandwich.add(toDate);
+    }
 
-		alignPanel.add(sandwich);
+    private void initializePopupPanel() {
 
-		includePermissions = new CheckBox();
-		VerticalPanel vp = new VerticalPanel();
-		vp.add(new Label("Include Permissions?"));
-		vp.add(includePermissions);
+        loadingPanel = new PopupPanel(false, true);
+        HTML h = new HTML("Report wird geladen");
+        h.setStyleName("loadingpanel");
+        loadingPanel.setWidget(h);
+        int left = (int) (Window.getClientWidth() * 0.5);
+        int top = (int) (Window.getClientHeight() * 0.5);
+        loadingPanel.setPopupPosition(left, top);
 
-		alignPanel.add(vp);
+    }
 
-		this.add(alignPanel);
-		this.add(startButton);
+    protected void getThaReport() {
 
-	}
+        ReportGeneratorAsync rg = ClientsideSettings.getReportGenerator();
 
-	private void initializePopupPanel() {
+        String type = whatKindOfReport.getValue(whatKindOfReport.getSelectedIndex());
+        String userEmail = whichUser.getValue();
+        if (Objects.equals(userEmail, "")) {
+            userEmail = "none";
+        }
 
-		loadingPanel = new PopupPanel(false, true);
-		HTML h = new HTML("Report wird geladen");
-		h.setStyleName("loadingpanel");
-		loadingPanel.setWidget(h);
-		int left = (int) (Window.getClientWidth() * 0.5);
-		int top = (int) (Window.getClientHeight() * 0.5);
-		loadingPanel.setPopupPosition(left, top);
+        Map<String, Date> timespan = new HashMap<>();
 
-	}
+        if (fromDate.getValue() != null) {
+            timespan.put("from", new Date(fromDate.getValue().getTime()));
+        }
 
-	protected void getThaReport() {
+        if (toDate.getValue() != null) {
+            timespan.put("to", new Date(toDate.getValue().getTime()));
+        }
 
-		ReportGeneratorAsync rg = ClientsideSettings.getReportGenerator();
+        boolean includePerms = includePermissions.getValue();
 
-		String type = whatKindOfReport.getValue(whatKindOfReport.getSelectedIndex());
-		String userEmail = whichUser.getValue();
-		if (userEmail == "") {
-			userEmail = "none";
-		}
+        rg.createCustomReport(type, userEmail, timespan, includePerms, new AsyncCallback<CustomReport>() {
 
-		Map<String, Date> timespan = new HashMap<>();
+            @Override
+            public void onFailure(Throwable caught) {
+                GWT.log(caught.toString());
+                Notificator.getNotificator().showError("Report cannot be created");
+                loadingPanel.hide();
+            }
 
-		if (fromDate.getValue() != null) {
-			timespan.put("from", new Date(fromDate.getValue().getTime()));
-		}
+            @Override
+            public void onSuccess(CustomReport result) {
 
-		if (toDate.getValue() != null) {
-			timespan.put("to", new Date(toDate.getValue().getTime()));
-		}
+                loadingPanel.hide();
 
-		boolean includePerms = includePermissions.getValue();
+                GWT.log(result.toString());
+                String s = new HTMLReportWriter().customReport2HTML(result);
+                HTML h = new HTML(s);
+                ScrollPanel sp = new ScrollPanel(h);
 
-		rg.createCustomReport(type, userEmail, timespan, includePerms, new AsyncCallback<CustomReport>() {
+                sp.setSize("100%", "100%");
 
-			@Override
-			public void onFailure(Throwable caught) {
-				GWT.log(caught.toString());
-				Notificator.getNotificator().showError("Report cannot be created");
-				loadingPanel.hide();
-			}
+                ApplicationPanel.getApplicationPanel().replaceContentWith(sp);
+            }
 
-			@Override
-			public void onSuccess(CustomReport result) {
-				
-				loadingPanel.hide();
+        });
 
-				GWT.log(result.toString());
-				String s = new HTMLReportWriter().customReport2HTML(result);
-				HTML h = new HTML(s);
-				ScrollPanel sp = new ScrollPanel(h);
+    }
 
-				sp.setSize("100%", "100%");
+    private class AllMailCallback implements AsyncCallback<Vector<String>> {
 
-				ApplicationPanel.getApplicationPanel().replaceContentWith(sp);
-			}
+        @Override
+        public void onFailure(Throwable caught) {
 
-		});
+            GWT.log(caught.toString());
 
-	}
+        }
 
-	private class AllMailCallback implements AsyncCallback<Vector<String>> {
+        @Override
+        public void onSuccess(Vector<String> result) {
 
-		@Override
-		public void onFailure(Throwable caught) {
+            oracle.addAll(result);
+            Notificator.getNotificator().showSuccess("Emails geholt");
 
-			GWT.log(caught.toString());
+        }
 
-		}
-
-		@Override
-		public void onSuccess(Vector<String> result) {
-
-			oracle.addAll(result);
-			Notificator.getNotificator().showSuccess("Emails geholt");
-
-		}
-
-	}
+    }
 
 }

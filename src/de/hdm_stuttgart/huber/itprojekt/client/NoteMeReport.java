@@ -6,354 +6,338 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-
+import com.google.gwt.user.client.ui.*;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.*;
 
 /**
  * Entry-Point-Klasse des Projekts <b>BankProjekt</b>.
  */
 public class NoteMeReport implements EntryPoint {
 
-	ReportGeneratorAsync reportGenerator;
+    ReportGeneratorAsync reportGenerator;
 
-	private UserInfo loggedInUser;
-	private VerticalPanel loginPanel = new VerticalPanel();
-	private Label loginLabel = new Label(
-			"Please sign in to your Google Account to access the cool and nice application.");
-	private Anchor signInLink = new Anchor("Sign In");
-	
-	private ApplicationPanel applicationPanel;
+    private UserInfo loggedInUser;
+    private VerticalPanel loginPanel = new VerticalPanel();
+    private Label loginLabel = new Label(
+            "Please sign in to your Google Account to access the cool and nice application.");
+    private Anchor signInLink = new Anchor("Sign In");
+
+    private ApplicationPanel applicationPanel;
 
 
-	/**
-	 * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
-	 * zusichert, benötigen wir eine Methode
-	 * <code>public void onModuleLoad()</code>. Diese ist das GWT-Pendant der
-	 * <code>main()</code>-Methode normaler Java-Applikationen.
-	 */
+    /**
+     * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
+     * zusichert, benötigen wir eine Methode
+     * <code>public void onModuleLoad()</code>. Diese ist das GWT-Pendant der
+     * <code>main()</code>-Methode normaler Java-Applikationen.
+     */
 
-	@Override
-	public void onModuleLoad() {
-		
-		applicationPanel = ApplicationPanel.getApplicationPanel();
-		RootLayoutPanel.get().add(applicationPanel);
+    @Override
+    public void onModuleLoad() {
 
-		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+        applicationPanel = ApplicationPanel.getApplicationPanel();
+        RootLayoutPanel.get().add(applicationPanel);
 
-			@Override
-			public void onUncaughtException(Throwable e) {
-				GWT.log(e.toString());
-			}
+        GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
-		});
+            @Override
+            public void onUncaughtException(Throwable e) {
+                GWT.log(e.toString());
+            }
 
-		SharedServicesAsync loginService = GWT.create(SharedServices.class);
-		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
+        });
 
-			@Override
-			public void onFailure(Throwable e) {
-				GWT.log(e.toString());
-			}
+        SharedServicesAsync loginService = GWT.create(SharedServices.class);
+        loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
 
-			@Override
-			public void onSuccess(UserInfo result) {
+            @Override
+            public void onFailure(Throwable e) {
+                GWT.log(e.toString());
+            }
 
-				loggedInUser = result;
+            @Override
+            public void onSuccess(UserInfo result) {
 
-				if (loggedInUser.isLoggedIn()) {
+                loggedInUser = result;
 
-					loadMenu();
+                if (loggedInUser.isLoggedIn()) {
 
-				} else {
-					
-					loadLogin();
-					
-				}
+                    loadMenu();
 
-			}
+                } else {
 
-		});
+                    loadLogin();
 
-	}
+                }
 
-	private void loadMenu() {
+            }
 
-		if (reportGenerator == null) {
-			reportGenerator = ClientsideSettings.getReportGenerator();
-		}
+        });
 
-		ReportGeneratorMenu navigation = new ReportGeneratorMenu();
-		applicationPanel.setNavigation(navigation);
-		
-		setUpHeaderPanel();
-		
-		HorizontalPanel hp = new HorizontalPanel();
-		hp.add(new Label("Gruppe 7: Hochschule der Medien"));
-		Anchor a = new Anchor("NoteMe - Hauptapplikation");
-		a.setHref(GWT.getHostPageBaseURL() + "IT_Projekt.html");
-		hp.add(a);
-		
-		hp.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		
-		applicationPanel.setFooter(hp);
+    }
 
-	}
+    private void loadMenu() {
 
-	private void setUpHeaderPanel() {
-		
-		HorizontalPanel headerPanel = new HorizontalPanel();
-		final Button accountButton = new Button(IconConstants.ICON_ACCOUNT_CIRCLE);
+        if (reportGenerator == null) {
+            reportGenerator = ClientsideSettings.getReportGenerator();
+        }
 
-		headerPanel.setStyleName("headerpanel");
-		headerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		headerPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+        ReportGeneratorMenu navigation = new ReportGeneratorMenu();
+        applicationPanel.setNavigation(navigation);
 
-		headerPanel.add(new HTML("<img width=\"33%\" src=\"LeftUpperSprite.jpg\" alt=\"Fehler\">"));
+        setUpHeaderPanel();
 
-		Label l = new Label("NoteMe");
-		l.setStyleName("headerlabel");
-		headerPanel.add(l);
+        HorizontalPanel hp = new HorizontalPanel();
+        hp.add(new Label("Gruppe 7: Hochschule der Medien"));
+        Anchor a = new Anchor("NoteMe - Hauptapplikation");
+        a.setHref(GWT.getHostPageBaseURL() + "IT_Projekt.html");
+        hp.add(a);
 
-		accountButton.addClickHandler(new ClickHandler() {
+        hp.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 
-			@Override
-			public void onClick(ClickEvent event) {
-				openAccountPanel(accountButton);
-			}
+        applicationPanel.setFooter(hp);
 
-		});
+    }
 
-		headerPanel.add(accountButton);
+    private void setUpHeaderPanel() {
 
-		headerPanel.setCellWidth(headerPanel.getWidget(0), "33%");
-		headerPanel.setCellWidth(headerPanel.getWidget(1), "33%");
-		headerPanel.setCellWidth(headerPanel.getWidget(2), "33%");
+        HorizontalPanel headerPanel = new HorizontalPanel();
+        final Button accountButton = new Button(IconConstants.ICON_ACCOUNT_CIRCLE);
 
-		applicationPanel.setHeader(headerPanel);
-		
-	}
+        headerPanel.setStyleName("headerpanel");
+        headerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        headerPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 
-	private void openAccountPanel(Button accountButton) {
+        headerPanel.add(new HTML("<img width=\"33%\" src=\"LeftUpperSprite.jpg\" alt=\"Fehler\">"));
 
-		AccountPanel ap = new AccountPanel(loggedInUser);
-		ap.setPopupPosition(accountButton.getAbsoluteLeft(), accountButton.getAbsoluteTop());
-		ap.show();
+        Label l = new Label("NoteMe");
+        l.setStyleName("headerlabel");
+        headerPanel.add(l);
 
-	}
+        accountButton.addClickHandler(new ClickHandler() {
 
-	private void loadLogin() {
+            @Override
+            public void onClick(ClickEvent event) {
+                openAccountPanel(accountButton);
+            }
 
-		signInLink.setHref(loggedInUser.getLoginUrl());
-		loginPanel.add(loginLabel);
-		loginPanel.add(signInLink);
-		
-		ApplicationPanel.getApplicationPanel().replaceContentWith(loginPanel);
+        });
 
-	}
+        headerPanel.add(accountButton);
 
-	/**
-	 * Diese Nested Class wird als Callback für das Erzeugen des
-	 * AllAccountOfAllCustomersReport benötigt.
-	 * 
-	 * @author rathke
-	 * @version 1.0
-	 */
-	class createAllNotebooksRCallback implements AsyncCallback<AllNotebooksR> {
+        headerPanel.setCellWidth(headerPanel.getWidget(0), "33%");
+        headerPanel.setCellWidth(headerPanel.getWidget(1), "33%");
+        headerPanel.setCellWidth(headerPanel.getWidget(2), "33%");
 
-		@Override
-		public void onFailure(Throwable caught) {
+        applicationPanel.setHeader(headerPanel);
+
+    }
+
+    private void openAccountPanel(Button accountButton) {
+
+        AccountPanel ap = new AccountPanel(loggedInUser);
+        ap.setPopupPosition(accountButton.getAbsoluteLeft(), accountButton.getAbsoluteTop());
+        ap.show();
+
+    }
+
+    private void loadLogin() {
+
+        signInLink.setHref(loggedInUser.getLoginUrl());
+        loginPanel.add(loginLabel);
+        loginPanel.add(signInLink);
+
+        ApplicationPanel.getApplicationPanel().replaceContentWith(loginPanel);
+
+    }
+
+    /**
+     * Diese Nested Class wird als Callback für das Erzeugen des
+     * AllAccountOfAllCustomersReport benötigt.
+     *
+     * @author rathke
+     * @version 1.0
+     */
+    class createAllNotebooksRCallback implements AsyncCallback<AllNotebooksR> {
+
+        @Override
+        public void onFailure(Throwable caught) {
+            /*
+			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
+			 * aus.
+			 */
+            GWT.log("Erzeugen des Reports fehlgeschlagen!");
+            GWT.log(caught.toString());
+        }
+
+        @Override
+        public void onSuccess(AllNotebooksR report) {
+
+            GWT.log("onSuccess reached!");
+            GWT.log(report.toString());
+
+            if (report != null) {
+
+                HTMLReportWriter writer = new HTMLReportWriter();
+                String html = writer.simpleReport2HTML(report);
+
+                RootPanel.get("main").clear();
+                RootPanel.get("main").add(new HTML(html));
+
+            }
+        }
+
+    }
+
+    class createAllUserNotebooksRCallback implements AsyncCallback<AllUserNotebooksR> {
+
+        @Override
+        public void onFailure(Throwable caught) {
 			/*
 			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
 			 * aus.
 			 */
-			GWT.log("Erzeugen des Reports fehlgeschlagen!");
-			GWT.log(caught.toString());
-		}
+            GWT.log("Erzeugen des Reports fehlgeschlagen!");
+            GWT.log(caught.toString());
+        }
 
-		@Override
-		public void onSuccess(AllNotebooksR report) {
+        @Override
+        public void onSuccess(AllUserNotebooksR report) {
 
-			GWT.log("onSuccess reached!");
-			GWT.log(report.toString());
+            GWT.log("onSuccess reached!");
+            GWT.log(report.toString());
+            if (report != null) {
 
-			if (report != null) {
+                HTMLReportWriter writer = new HTMLReportWriter();
+                String html = writer.simpleReport2HTML(report);
 
-				HTMLReportWriter writer = new HTMLReportWriter();
-				String html = writer.simpleReport2HTML(report);
+                RootPanel.get("main").clear();
+                RootPanel.get("main").add(new HTML(html));
 
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new HTML(html));
+            }
+        }
 
-			}
-		}
+    }
 
-	}
+    class createAllNotesRCallback implements AsyncCallback<AllNotesR> {
 
-	class createAllUserNotebooksRCallback implements AsyncCallback<AllUserNotebooksR> {
-
-		@Override
-		public void onFailure(Throwable caught) {
+        @Override
+        public void onFailure(Throwable caught) {
 			/*
 			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
 			 * aus.
 			 */
-			GWT.log("Erzeugen des Reports fehlgeschlagen!");
-			GWT.log(caught.toString());
-		}
+            GWT.log("Erzeugen des Reports fehlgeschlagen!");
+            GWT.log(caught.toString());
+        }
 
-		@Override
-		public void onSuccess(AllUserNotebooksR report) {
-			
-			GWT.log("onSuccess reached!");
-			GWT.log(report.toString());
-			if (report != null) {
+        @Override
+        public void onSuccess(AllNotesR report) {
+            GWT.log("onSuccess reached!");
+            GWT.log(report.toString());
+            if (report != null) {
 
-				HTMLReportWriter writer = new HTMLReportWriter();
-				String html = writer.simpleReport2HTML(report);
+                HTMLReportWriter writer = new HTMLReportWriter();
+                String html = writer.simpleReport2HTML(report);
 
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new HTML(html));
+                RootPanel.get("main").clear();
+                RootPanel.get("main").add(new HTML(html));
 
-			}
-		}
+            }
+        }
 
-	}
+    }
 
-	class createAllNotesRCallback implements AsyncCallback<AllNotesR> {
+    class createAllUserNotesRCallback implements AsyncCallback<AllUserNotesR> {
 
-		@Override
-		public void onFailure(Throwable caught) {
+        @Override
+        public void onFailure(Throwable caught) {
 			/*
 			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
 			 * aus.
 			 */
-			GWT.log("Erzeugen des Reports fehlgeschlagen!");
-			GWT.log(caught.toString());
-		}
+            GWT.log("Erzeugen des Reports fehlgeschlagen!");
+            GWT.log(caught.toString());
+        }
 
-		@Override
-		public void onSuccess(AllNotesR report) {
-			GWT.log("onSuccess reached!");
-			GWT.log(report.toString());
-			if (report != null) {
+        @Override
+        public void onSuccess(AllUserNotesR report) {
+            GWT.log("onSuccess reached!");
+            GWT.log(report.toString());
+            if (report != null) {
 
-				HTMLReportWriter writer = new HTMLReportWriter();
-				String html = writer.simpleReport2HTML(report);
+                HTMLReportWriter writer = new HTMLReportWriter();
+                String html = writer.simpleReport2HTML(report);
 
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new HTML(html));
+                RootPanel.get("main").clear();
+                RootPanel.get("main").add(new HTML(html));
 
-			}
-		}
+            }
+        }
 
-	}
+    }
 
-	class createAllUserNotesRCallback implements AsyncCallback<AllUserNotesR> {
+    class createAllPermissionsRCallback implements AsyncCallback<AllPermissionsR> {
 
-		@Override
-		public void onFailure(Throwable caught) {
+        @Override
+        public void onFailure(Throwable caught) {
 			/*
 			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
 			 * aus.
 			 */
-			GWT.log("Erzeugen des Reports fehlgeschlagen!");
-			GWT.log(caught.toString());
-		}
+            GWT.log("Erzeugen des Reports fehlgeschlagen!");
+            GWT.log(caught.toString());
+        }
 
-		@Override
-		public void onSuccess(AllUserNotesR report) {
-			GWT.log("onSuccess reached!");
-			GWT.log(report.toString());
-			if (report != null) {
+        @Override
+        public void onSuccess(AllPermissionsR report) {
+            GWT.log("onSuccess reached!");
+            GWT.log(report.toString());
+            if (report != null) {
 
-				HTMLReportWriter writer = new HTMLReportWriter();
-				String html = writer.simpleReport2HTML(report);
+                HTMLReportWriter writer = new HTMLReportWriter();
+                String html = writer.simpleReport2HTML(report);
 
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new HTML(html));
+                RootPanel.get("main").clear();
+                RootPanel.get("main").add(new HTML(html));
 
-			}
-		}
+            }
+        }
 
-	}
+    }
 
-	class createAllPermissionsRCallback implements AsyncCallback<AllPermissionsR> {
+    class createAllUserPermissionsRCallback implements AsyncCallback<AllUserPermissionsR> {
 
-		@Override
-		public void onFailure(Throwable caught) {
+        @Override
+        public void onFailure(Throwable caught) {
 			/*
 			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
 			 * aus.
 			 */
-			GWT.log("Erzeugen des Reports fehlgeschlagen!");
-			GWT.log(caught.toString());
-		}
+            GWT.log("Erzeugen des Reports fehlgeschlagen!");
+            GWT.log(caught.toString());
+        }
 
-		@Override
-		public void onSuccess(AllPermissionsR report) {
-			GWT.log("onSuccess reached!");
-			GWT.log(report.toString());
-			if (report != null) {
+        @Override
+        public void onSuccess(AllUserPermissionsR report) {
+            GWT.log("onSuccess reached!");
+            GWT.log(report.toString());
+            if (report != null) {
 
-				HTMLReportWriter writer = new HTMLReportWriter();
-				String html = writer.simpleReport2HTML(report);
+                HTMLReportWriter writer = new HTMLReportWriter();
+                String html = writer.simpleReport2HTML(report);
 
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new HTML(html));
+                RootPanel.get("main").clear();
+                RootPanel.get("main").add(new HTML(html));
 
-			}
-		}
+            }
+        }
 
-	}
-
-	class createAllUserPermissionsRCallback implements AsyncCallback<AllUserPermissionsR> {
-
-		@Override
-		public void onFailure(Throwable caught) {
-			/*
-			 * Wenn ein Fehler auftritt, dann geben wir eine kurze Log Message
-			 * aus.
-			 */
-			GWT.log("Erzeugen des Reports fehlgeschlagen!");
-			GWT.log(caught.toString());
-		}
-
-		@Override
-		public void onSuccess(AllUserPermissionsR report) {
-			GWT.log("onSuccess reached!");
-			GWT.log(report.toString());
-			if (report != null) {
-
-				HTMLReportWriter writer = new HTMLReportWriter();
-				String html = writer.simpleReport2HTML(report);
-
-				RootPanel.get("main").clear();
-				RootPanel.get("main").add(new HTML(html));
-
-			}
-		}
-
-	}
+    }
 
 }

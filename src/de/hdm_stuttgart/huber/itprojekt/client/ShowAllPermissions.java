@@ -1,7 +1,5 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-import java.util.Vector;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -12,123 +10,122 @@ import de.hdm_stuttgart.huber.itprojekt.shared.PermissionServiceAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
+import java.util.Vector;
+
 /**
  * Klasse zur Darstellung der Notizen, die vom Nutzer nicht explizit einem
  * ordner zugeordnet sind.
- * 
- * @author Nikita Nalivayko & Lisa Küchler
  *
+ * @author Nikita Nalivayko & Lisa Küchler
  */
 public class ShowAllPermissions extends BasicVerticalView {
-	PermissionServiceAsync permissionVerwaltung = ClientsideSettings.getPermissionVerwaltung();
-	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	AllPermissionsCallback callback = new AllPermissionsCallback();
-	UserCallback cb = new UserCallback();
-	private UserInfo ui = null;
-	private Vector<Permission> permissions = new Vector<Permission>();
+    final Button freigabeButton = new Button("Freigegebene Notizen");
+    final Button nichtFreigabeButton = new Button("Nicht freigegebene Notizen");
+    final Button notizenAnzeigenButton = new Button("Alle");
+    PermissionServiceAsync permissionVerwaltung = ClientsideSettings.getPermissionVerwaltung();
+    EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+    AllPermissionsCallback callback = new AllPermissionsCallback();
+    UserCallback cb = new UserCallback();
+    private UserInfo ui = null;
+    private Vector<Permission> permissions = new Vector<Permission>();
+    private PermissionTable currentTable;
 
-	private PermissionTable currentTable;
+    public ShowAllPermissions(Vector<Permission> nList) {
+        permissions = nList;
+    }
 
-	public ShowAllPermissions(Vector<Permission> nList) {
-		permissions = nList;
-	}
+    /**
+     * No-Argument Konstruktor
+     */
+    public ShowAllPermissions() {
 
-	/**
-	 * No-Argument Konstruktor
-	 */
-	public ShowAllPermissions() {
+    }
 
-	}
+    // Gibt alle Notizen zurück
+    public Vector<Permission> getAllPermissionsListe() {
 
-	// Gibt alle Notizen zurück
-	public Vector<Permission> getAllPermissionsListe() {
+        return permissions;
 
-		return permissions;
+    }
 
-	}
+    public void setAllNotesListe(Vector<Permission> liste) {
+        this.permissions = liste;
 
-	public void setAllNotesListe(Vector<Permission> liste) {
-		this.permissions = liste;
+    }
 
-	}
+    @Override
+    public String getHeadlineText() {
 
-	@Override
-	public String getHeadlineText() {
+        return "Shared with other users";
+    }
 
-		return "Shared with other users";
-	}
+    @Override
+    public String getSubHeadlineText() {
+        return "Click to unshare";
+    }
 
-	@Override
-	public String getSubHeadlineText() {
-		return "Click to unshare";
-	}
+    @Override
+    public void run() {
 
-	final Button freigabeButton = new Button("Freigegebene Notizen");
-	final Button nichtFreigabeButton = new Button("Nicht freigegebene Notizen");
-	final Button notizenAnzeigenButton = new Button("Alle");
+        freigabeButton.setStyleName("pure-button");
+        nichtFreigabeButton.setStyleName("pure-button");
+        notizenAnzeigenButton.setStyleName("pure-button");
 
-	@Override
-	public void run() {
+        FlowPanel contentPanel = new FlowPanel();
+        FlowPanel fPanel2 = new FlowPanel();
 
-		freigabeButton.setStyleName("pure-button");
-		nichtFreigabeButton.setStyleName("pure-button");
-		notizenAnzeigenButton.setStyleName("pure-button");
+        fPanel2.add(contentPanel);
+        editorVerwaltung.getCurrentUser(cb);
 
-		FlowPanel contentPanel = new FlowPanel();
-		FlowPanel fPanel2 = new FlowPanel();
+        this.add(contentPanel);
 
-		fPanel2.add(contentPanel);
-		editorVerwaltung.getCurrentUser(cb);
+    }
 
-		this.add(contentPanel);
+    public void addPermissionsToTable(Vector<Permission> permissions) {
 
-	}
+        if (currentTable != null) {
+            this.remove(currentTable);
+        }
 
-	private class UserCallback implements AsyncCallback<UserInfo> {
+        PermissionTable permissionTable = new PermissionTable(permissions);
+        permissionTable.addClickNote();
 
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
+        this.add(permissionTable);
+        currentTable = permissionTable;
 
-		}
+    }
 
-		@Override
-		public void onSuccess(UserInfo result) {
+    private class UserCallback implements AsyncCallback<UserInfo> {
 
-			ui = result;
-			permissionVerwaltung.getAllPermissionsCreatedBy(ui, callback);
+        @Override
+        public void onFailure(Throwable caught) {
+            // TODO Auto-generated method stub
 
-		}
+        }
 
-	}
+        @Override
+        public void onSuccess(UserInfo result) {
 
-	private class AllPermissionsCallback implements AsyncCallback<Vector<Permission>> {
-		@Override
-		public void onSuccess(Vector<Permission> result) {
+            ui = result;
+            permissionVerwaltung.getAllPermissionsCreatedBy(ui, callback);
 
-			addPermissionsToTable(result);
+        }
 
-		}
+    }
 
-		@Override
-		public void onFailure(Throwable caught) {
-			GWT.log(caught.toString());
-		}
+    private class AllPermissionsCallback implements AsyncCallback<Vector<Permission>> {
+        @Override
+        public void onSuccess(Vector<Permission> result) {
 
-	}
+            addPermissionsToTable(result);
 
-	public void addPermissionsToTable(Vector<Permission> permissions) {
+        }
 
-		if (currentTable != null) {
-			this.remove(currentTable);
-		}
+        @Override
+        public void onFailure(Throwable caught) {
+            GWT.log(caught.toString());
+        }
 
-		PermissionTable permissionTable = new PermissionTable(permissions);
-		permissionTable.addClickNote();
-
-		this.add(permissionTable);
-		currentTable = permissionTable;
-
-	}
+    }
 
 }

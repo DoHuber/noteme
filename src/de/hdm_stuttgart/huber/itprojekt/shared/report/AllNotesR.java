@@ -4,15 +4,14 @@ import java.io.Serializable;
 
 /**
  * Ausgabe aller Notizen
- * 
- * @author dominik ermdann
  *
+ * @author dominik ermdann
  */
 public class AllNotesR extends SimpleReport implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
 }

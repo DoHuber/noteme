@@ -1,18 +1,9 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.sql.SQLException;
-import java.sql.Date;
-import java.util.Vector;
-
-import javax.servlet.http.HttpSession;
-
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
@@ -23,368 +14,370 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
+import javax.servlet.http.HttpSession;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Vector;
+
 public class EditorImpl extends RemoteServiceServlet implements Editor {
 
-	/**
-	 * AUTO-GENERATED
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * AUTO-GENERATED
+     */
+    private static final long serialVersionUID = 1L;
 
-	private NoteMapper noteMapper;
-	private NoteBookMapper noteBookMapper;
-	private UserInfoMapper userInfoMapper;
-	private PermissionMapper permissionMapper;
+    private NoteMapper noteMapper;
+    private NoteBookMapper noteBookMapper;
+    private UserInfoMapper userInfoMapper;
+    private PermissionMapper permissionMapper;
 
-	@Override
-	public void init() throws IllegalArgumentException {
+    @Override
+    public void init() throws IllegalArgumentException {
 
-		this.noteMapper = NoteMapper.getNoteMapper();
-		this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
-		this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
-		this.permissionMapper = PermissionMapper.getPermissionMapper();
+        this.noteMapper = NoteMapper.getNoteMapper();
+        this.noteBookMapper = NoteBookMapper.getNoteBookMapper();
+        this.userInfoMapper = UserInfoMapper.getUserInfoMapper();
+        this.permissionMapper = PermissionMapper.getPermissionMapper();
 
-	}
+    }
 
-	@Override
-	@Deprecated
-	public String getHelloWorld() {
-		// Sinnlose Methode, gibt einen zufälligen String zurück
-		// Zu Testzwecken, wird dann bezeiten rausgeworfen
-		SecureRandom random = new SecureRandom();
-		return new BigInteger(256, random).toString();
-	}
+    @Override
+    @Deprecated
+    public String getHelloWorld() {
+        // Sinnlose Methode, gibt einen zufälligen String zurück
+        // Zu Testzwecken, wird dann bezeiten rausgeworfen
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(256, random).toString();
+    }
 
-	@Override
-	public Notebook createNoteBook(Notebook noteBook) {
+    @Override
+    public Notebook createNoteBook(Notebook noteBook) {
 
-		Date currentDate = new Date(System.currentTimeMillis());
-		noteBook.setCreationDate(currentDate);
-		noteBook.setModificationDate(currentDate);
-		noteBook.setOwner(getCurrentUser());
+        Date currentDate = new Date(System.currentTimeMillis());
+        noteBook.setCreationDate(currentDate);
+        noteBook.setModificationDate(currentDate);
+        noteBook.setOwner(getCurrentUser());
 
-		return noteBookMapper.create(noteBook);
-	}
+        return noteBookMapper.create(noteBook);
+    }
 
-	@Override
-	public Notebook saveNoteBook(Notebook noteBook) {
+    @Override
+    public Notebook saveNoteBook(Notebook noteBook) {
 
-		try {
+        try {
 
-			return noteBookMapper.save(noteBook);
+            return noteBookMapper.save(noteBook);
 
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
 
-	}
+    }
 
-	@Override
-	public Notebook getNoteBookById(Notebook notebook) throws Exception {
+    @Override
+    public Notebook getNoteBookById(Notebook notebook) throws Exception {
 
-		return noteBookMapper.findById(notebook.getId());
-	}
+        return noteBookMapper.findById(notebook.getId());
+    }
 
-	@Override
-	public void deleteNoteBook(Notebook noteBook) {
-		/**
-		 * Delete Notebook muss zuerst alle Notizen im Notizbuch löschen, das
-		 * ist wichtig und Aufgabe der Applikationslogik, wäre zwar theoretisch
-		 * auch mit CASCADE in mySQL implementierbar, ggf. nachfragen?
-		 */
+    @Override
+    public void deleteNoteBook(Notebook noteBook) {
 
-		Vector<Note> notesToDelete = getAllFrom(noteBook);
-		for (Note row : notesToDelete) {
-			noteMapper.delete(row);
-		}
+        Vector<Note> notesToDelete = getAllFrom(noteBook);
+        for (Note row : notesToDelete) {
+            noteMapper.delete(row);
+        }
 
-		noteBookMapper.delete(noteBook);
+        noteBookMapper.delete(noteBook);
 
-	}
+    }
 
-	@Override
-	public Note createNote(Note note) {
+    @Override
+    public Note createNote(Note note) {
 
-		Date currentDate = new Date(System.currentTimeMillis());
+        Date currentDate = new Date(System.currentTimeMillis());
 
-		note.setCreationDate(currentDate);
-		note.setModificationDate(currentDate);
-		note.setOwner(this.getCurrentUser());
+        note.setCreationDate(currentDate);
+        note.setModificationDate(currentDate);
+        note.setOwner(this.getCurrentUser());
 
-		try {
+        try {
 
-			return noteMapper.create(note);
+            return noteMapper.create(note);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		return null; // TODO
-	}
+        return null; // TODO
+    }
 
-	@Override
-	public Note saveNote(Note note) {
+    @Override
+    public Note saveNote(Note note) {
 
-		// Aus Gründen der Sichtbarkeit (oder war das PHP?)
-		Note newNote = note;
+        // Aus Gründen der Sichtbarkeit (oder war das PHP?)
+        Note newNote = note;
 
-		try {
+        try {
 
-			noteMapper.save(newNote);
-			newNote = noteMapper.findById(newNote.getId());
+            noteMapper.save(newNote);
+            newNote = noteMapper.findById(newNote.getId());
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		return newNote;
-	}
+        return newNote;
+    }
 
-	@Override
-	public Note getNoteById(Note note) throws Exception {
+    @Override
+    public Note getNoteById(Note note) throws Exception {
 
-		return noteMapper.findById(note.getId());
+        return noteMapper.findById(note.getId());
 
-	}
+    }
 
-	@Override
-	public void deleteNote(Note note) {
+    @Override
+    public void deleteNote(Note note) {
 
-		noteMapper.delete(note);
+        noteMapper.delete(note);
 
-	}
+    }
 
-	@Override
-	public Vector<Note> getAllNotes() {
+    @Override
+    public Vector<Note> getAllNotes() {
 
-		try {
+        try {
 
-			return noteMapper.getAllNotes();
+            return noteMapper.getAllNotes();
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			e.printStackTrace();
-			return new Vector<Note>();
-		}
+            e.printStackTrace();
+            return new Vector<Note>();
+        }
 
-	}
+    }
 
-	@Override
-	public Vector<Notebook> getAllNoteBooks() {
+    @Override
+    public Vector<Notebook> getAllNoteBooks() {
 
-		try {
-			return noteBookMapper.getAllNoteBooks();
-		} catch (Exception e) {
+        try {
+            return noteBookMapper.getAllNoteBooks();
+        } catch (Exception e) {
 
-			e.printStackTrace();
-			return null;
-		}
-	}
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-	@Override
-	public Vector<Note> getAllNotesForCurrentUser() {
+    @Override
+    public Vector<Note> getAllNotesForCurrentUser() {
 
-		UserInfo currentUser = getCurrentUser();
-		return noteMapper.getAllNotesForUserId(currentUser.getId());
+        UserInfo currentUser = getCurrentUser();
+        return noteMapper.getAllNotesForUserId(currentUser.getId());
 
-	}
-	
-	@Override 
-	public Vector<Notebook> getAllNoteBooksFor(UserInfo u) {
-		
-		return noteBookMapper.getAllNoteBooksForUserId(u.getId());
-	}
+    }
 
-	@Override
-	public UserInfo getCurrentUser() {
+    @Override
+    public Vector<Notebook> getAllNoteBooksFor(UserInfo u) {
 
-		UserService userService = UserServiceFactory.getUserService();
-		if (!userService.isUserLoggedIn()) {
-			throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
-		}
+        return noteBookMapper.getAllNoteBooksForUserId(u.getId());
+    }
 
-		User currentGoogleUser = userService.getCurrentUser();
+    @Override
+    public UserInfo getCurrentUser() {
 
-		// Da durch die Logik sichergestellt ist, dass jeder eingeloggte User
-		// registriert ist,
-		// ist das hier problemlos möglich
+        UserService userService = UserServiceFactory.getUserService();
+        if (!userService.isUserLoggedIn()) {
+            throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
+        }
 
-		return userInfoMapper.findUserByGoogleId(currentGoogleUser.getUserId());
+        User currentGoogleUser = userService.getCurrentUser();
 
-	}
+        // Da durch die Logik sichergestellt ist, dass jeder eingeloggte User
+        // registriert ist,
+        // ist das hier problemlos möglich
 
-	@Override
-	public Vector<Notebook> getAllNoteBooksForCurrentUser() {
+        return userInfoMapper.findUserByGoogleId(currentGoogleUser.getUserId());
 
-		UserInfo currentUser = getCurrentUser();
-		return noteBookMapper.getAllNoteBooksForUserId(currentUser.getId());
+    }
 
-	}
+    @Override
+    public Vector<Notebook> getAllNoteBooksForCurrentUser() {
 
-	@Override
-	public Vector<Note> getAllFrom(Notebook nb) {
+        UserInfo currentUser = getCurrentUser();
+        return noteBookMapper.getAllNoteBooksForUserId(currentUser.getId());
 
-		int noteBookId = nb.getId();
-		return noteMapper.getAllNotesForNoteBookId(noteBookId);
+    }
 
-	}
+    @Override
+    public Vector<Note> getAllFrom(Notebook nb) {
 
-	@Override
-	public UserInfo saveUser(UserInfo user) {
+        int noteBookId = nb.getId();
+        return noteMapper.getAllNotesForNoteBookId(noteBookId);
 
-		try {
+    }
 
-			return userInfoMapper.save(user);
+    @Override
+    public UserInfo saveUser(UserInfo user) {
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+        try {
 
-	}
+            return userInfoMapper.save(user);
 
-	/**
-	 * Erläuterungen zu den beiden folgenden Methoden: Mit den Objekten von Note
-	 * oder NoteBook wird jeweils noch ein Permission-Objekt, dass die aktuellen
-	 * Berechtigungen des eingeloggten Users beschreibt, mitgegeben.
-	 *
-	 * Somit ist dem Client ermöglicht, komfortabel zu prüfen, ob der aktuelle
-	 * User gewisse Operationen für bestimmte Objekte durchführen darf.
-	 */
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
 
-	@Override
-	public Vector<Note> getAllSharedNotesForCurrentUser() {
+    }
 
-		Vector<Note> v = noteMapper.getAllNotesSharedWith(getCurrentUser());
-		for (Note row : v) {
+    /**
+     * Erläuterungen zu den beiden folgenden Methoden: Mit den Objekten von Note
+     * oder NoteBook wird jeweils noch ein Permission-Objekt, dass die aktuellen
+     * Berechtigungen des eingeloggten Users beschreibt, mitgegeben.
+     * <p>
+     * Somit ist dem Client ermöglicht, komfortabel zu prüfen, ob der aktuelle
+     * User gewisse Operationen für bestimmte Objekte durchführen darf.
+     */
 
-			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
-			row.setRunTimePermission(p);
+    @Override
+    public Vector<Note> getAllSharedNotesForCurrentUser() {
 
-		}
+        Vector<Note> v = noteMapper.getAllNotesSharedWith(getCurrentUser());
+        for (Note row : v) {
 
-		return v;
-	}
+            Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
+            row.setRunTimePermission(p);
 
-	@Override
-	public Vector<Notebook> getAllSharedNoteBooksForCurrentUser() {
+        }
 
-		Vector<Notebook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());
-		for (Notebook row : v) {
+        return v;
+    }
 
-			Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
-			row.setRunTimePermission(p);
+    @Override
+    public Vector<Notebook> getAllSharedNoteBooksForCurrentUser() {
 
-		}
+        Vector<Notebook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());
+        for (Notebook row : v) {
 
-		return v;
-	}
+            Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);
+            row.setRunTimePermission(p);
 
-	@Override
-	public Vector<Note> getAllNotesSharedByCurrentUser() {
+        }
 
-		UserInfo u = getCurrentUser();
-		return noteMapper.getAllNotesSharedBy(u);
+        return v;
+    }
 
-	}
+    @Override
+    public Vector<Note> getAllNotesSharedByCurrentUser() {
 
-	@Override
-	public Vector<Notebook> getAllNoteBooksSharedByCurrentUser() {
+        UserInfo u = getCurrentUser();
+        return noteMapper.getAllNotesSharedBy(u);
 
-		return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
+    }
 
-	}
+    @Override
+    public Vector<Notebook> getAllNoteBooksSharedByCurrentUser() {
 
-	@Override
-	public String getSource() {
+        return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());
 
-		HttpSession session = this.getThreadLocalRequest().getSession();
-		String source = (String) session.getAttribute("source");
+    }
 
-		if (source == null) {
-			source = "none";
-		}
+    @Override
+    public String getSource() {
 
-		// Attribut entfernen, damit der Client nicht verwirrt wird
-		session.removeAttribute("source");
+        HttpSession session = this.getThreadLocalRequest().getSession();
+        String source = (String) session.getAttribute("source");
 
-		return source;
+        if (source == null) {
+            source = "none";
+        }
 
-	}
+        // Attribut entfernen, damit der Client nicht verwirrt wird
+        session.removeAttribute("source");
 
-	@Override
-	public Vector<String> getAllEmails() {
-		return userInfoMapper.getAllEmailAdresses();
-	}
+        return source;
 
-	@Override
-	public Vector<Note> getAllNotesForUser(UserInfo user) {
+    }
 
-		return noteMapper.getAllNotesForUser(user.getId());
-	}
+    @Override
+    public Vector<String> getAllEmails() {
+        return userInfoMapper.getAllEmailAdresses();
+    }
 
-	@Override
-	public void deleteUserInfo(UserInfo ui) {
-		// TODO Auto-generated method stub
-		Vector<Notebook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());
-		for (Notebook nb : vector) {
-			deleteNoteBook(nb);
-		}
+    @Override
+    public Vector<Note> getAllNotesForUser(UserInfo user) {
 
-		Vector<Note> vectorNotes = noteMapper.getAllNotesForUserId(ui.getId());
-		for (Note n : vectorNotes) {
-			deleteNote(n);
-		}
+        return noteMapper.getAllNotesForUser(user.getId());
+    }
 
-		Vector<Permission> vectorPermissions = permissionMapper.getAllPermissionsCreatedBy(ui);
-		for (Permission p : vectorPermissions) {
-			permissionMapper.deletePermission(p);
-		}
+    @Override
+    public void deleteUserInfo(UserInfo ui) {
+        // TODO Auto-generated method stub
+        Vector<Notebook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());
+        for (Notebook nb : vector) {
+            deleteNoteBook(nb);
+        }
 
-		Vector<Permission> vectorPerm = permissionMapper.getAllPermissionsFor(ui);
-		for (Permission p : vectorPerm) {
-			permissionMapper.deletePermission(p);
-		}
+        Vector<Note> vectorNotes = noteMapper.getAllNotesForUserId(ui.getId());
+        for (Note n : vectorNotes) {
+            deleteNote(n);
+        }
 
-		try {
-			userInfoMapper.delete(ui);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+        Vector<Permission> vectorPermissions = permissionMapper.getAllPermissionsCreatedBy(ui);
+        for (Permission p : vectorPermissions) {
+            permissionMapper.deletePermission(p);
+        }
 
-	@Override
-	public Vector<Note> getDueNotesForCurrentUser() {
+        Vector<Permission> vectorPerm = permissionMapper.getAllPermissionsFor(ui);
+        for (Permission p : vectorPerm) {
+            permissionMapper.deletePermission(p);
+        }
 
-		// TODO performanter implementieren mit eigener Mapper-Funktion
+        try {
+            userInfoMapper.delete(ui);
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-		Date today = new Date(System.currentTimeMillis());
-		Vector<Note> dueNotes = new Vector<>();
+    @Override
+    public Vector<Note> getDueNotesForCurrentUser() {
 
-		Vector<Note> allNotesCurrentUser = getAllNotesForCurrentUser();
+        // TODO performanter implementieren mit eigener Mapper-Funktion
 
-		if (allNotesCurrentUser == null || allNotesCurrentUser.isEmpty()) {
-			return new Vector<Note>();
-		}
+        Date today = new Date(System.currentTimeMillis());
+        Vector<Note> dueNotes = new Vector<>();
 
-		for (Note n : allNotesCurrentUser) {
+        Vector<Note> allNotesCurrentUser = getAllNotesForCurrentUser();
 
-			if (n.getDueDate() != null) {
+        if (allNotesCurrentUser == null || allNotesCurrentUser.isEmpty()) {
+            return new Vector<Note>();
+        }
 
-				if (n.getDueDate().before(today) || n.getDueDate().equals(today)) {
-					dueNotes.add(n);
-				}
+        for (Note n : allNotesCurrentUser) {
 
-			}
+            if (n.getDueDate() != null) {
 
-		}
+                if (n.getDueDate().before(today) || n.getDueDate().equals(today)) {
+                    dueNotes.add(n);
+                }
 
-		return dueNotes;
+            }
 
-	}
+        }
+
+        return dueNotes;
+
+    }
 
 }

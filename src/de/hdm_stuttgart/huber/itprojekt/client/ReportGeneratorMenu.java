@@ -5,20 +5,11 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-
+import com.google.gwt.user.client.ui.*;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.*;
 
 /**
  * <p>
@@ -30,154 +21,153 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.SimpleReport;
  * Ein detaillierter beschriebener Showcase findet sich in
  * {@link CreateAccountDemo}.
  * </p>
- * 
- * @see CreateAccountDemo
+ *
  * @author thies
  * @version 1.0
- * 
+ * @see CreateAccountDemo
  */
 public class ReportGeneratorMenu extends VerticalPanel {
 
-	ReportGeneratorAsync reportGenerator = ClientsideSettings.getReportGenerator();
-	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	
-	private Anchor filter = new Anchor("Custom Reports");
-	private Anchor showAllNotebooks = new Anchor("All Notebooks");
-	private Anchor showAllNotes = new Anchor("All Notes");
-	private Anchor showAllPermissions = new Anchor("All Permissions");
-	private Anchor home;
-	
-	private PopupPanel loadingPanel;
+    ReportGeneratorAsync reportGenerator = ClientsideSettings.getReportGenerator();
+    EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 
-	protected void onLoad() {
+    private Anchor filter = new Anchor("Custom Reports");
+    private Anchor showAllNotebooks = new Anchor("All Notebooks");
+    private Anchor showAllNotes = new Anchor("All Notes");
+    private Anchor showAllPermissions = new Anchor("All Permissions");
+    private Anchor home;
 
-		this.setHorizontalAlignment(ALIGN_CENTER);
-		
-		intializeLoadingPopup();
-		
-		home = new Anchor("Home", GWT.getHostPageBaseURL() + "Report.html");
-		
-		setStylesAndAddToPanel();
+    private PopupPanel loadingPanel;
 
-		setUpClickHandlers();
+    protected void onLoad() {
 
-	}
+        this.setHorizontalAlignment(ALIGN_CENTER);
 
-	private void intializeLoadingPopup() {
-		
-		loadingPanel = new PopupPanel(false, true);
-		HTML h = new HTML("Report wird geladen");
-		h.setStyleName("loadingpanel");
-		loadingPanel.setWidget(h);
-		int left = (int) (Window.getClientWidth() * 0.5);
-		int top = (int) (Window.getClientHeight() * 0.5);
-		loadingPanel.setPopupPosition(left, top);
-		
-	}
+        intializeLoadingPopup();
 
-	private void setStylesAndAddToPanel() {
-		
-		home.setStyleName("pure-menu-heading");
-		home.getElement().getStyle().setColor("#ffffff");
-		this.add(home);
-		
-		filter.setStyleName("pure-menu-link");
-		this.add(filter);
-		
-		showAllNotebooks.setStyleName("pure-menu-link");
-		this.add(showAllNotebooks);
+        home = new Anchor("Home", GWT.getHostPageBaseURL() + "Report.html");
 
-		showAllNotes.setStyleName("pure-menu-link");
-		this.add(showAllNotes);
+        setStylesAndAddToPanel();
 
-		showAllPermissions.setStyleName("pure-menu-link");
-		this.add(showAllPermissions);
-	}
+        setUpClickHandlers();
 
-	private void setUpClickHandlers() {
-		
-		filter.addClickHandler(new ClickHandler() {
+    }
 
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				ApplicationPanel.getApplicationPanel().replaceContentWith(new FilterAbleReports());
-				
-			}
+    private void intializeLoadingPopup() {
 
-		});
-		
-		showAllNotebooks.addClickHandler(new ClickHandler() {
+        loadingPanel = new PopupPanel(false, true);
+        HTML h = new HTML("Report wird geladen");
+        h.setStyleName("loadingpanel");
+        loadingPanel.setWidget(h);
+        int left = (int) (Window.getClientWidth() * 0.5);
+        int top = (int) (Window.getClientHeight() * 0.5);
+        loadingPanel.setPopupPosition(left, top);
 
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				loadingPanel.show();
-				reportGenerator.createAllNotebooksR(new GenericReportCallback<AllNotebooksR>());
-				
-			}
+    }
 
-		});
-		
-		showAllNotes.addClickHandler(new ClickHandler() {
+    private void setStylesAndAddToPanel() {
 
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				loadingPanel.show();
-				reportGenerator.createAllNotesR(new GenericReportCallback<AllNotesR>());
+        home.setStyleName("pure-menu-heading");
+        home.getElement().getStyle().setColor("#ffffff");
+        this.add(home);
 
-			}
+        filter.setStyleName("pure-menu-link");
+        this.add(filter);
 
-		});
-		
-		
-		showAllPermissions.addClickHandler(new ClickHandler() {
+        showAllNotebooks.setStyleName("pure-menu-link");
+        this.add(showAllNotebooks);
 
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				loadingPanel.show();
-				reportGenerator.createAllPermissionsR(new GenericReportCallback<AllPermissionsR>());
+        showAllNotes.setStyleName("pure-menu-link");
+        this.add(showAllNotes);
 
-			}
+        showAllPermissions.setStyleName("pure-menu-link");
+        this.add(showAllPermissions);
+    }
 
-		});
-	}
+    private void setUpClickHandlers() {
 
-	private void printSimpleReport(SimpleReport r) {
+        filter.addClickHandler(new ClickHandler() {
 
-		HTMLReportWriter writer = new HTMLReportWriter();
-		String html = writer.simpleReport2HTML(r);
-		HTML htmlToDisplay = new HTML(html);
-		ScrollPanel panel = new ScrollPanel(htmlToDisplay);
-		panel.setSize("100%", "100%");
+            @Override
+            public void onClick(ClickEvent event) {
 
-		ApplicationPanel.getApplicationPanel().replaceContentWith(panel);
+                ApplicationPanel.getApplicationPanel().replaceContentWith(new FilterAbleReports());
 
-	}
+            }
 
-	private class GenericReportCallback<T> implements AsyncCallback<T> {
+        });
 
-		@Override
-		public void onFailure(Throwable caught) {
-			
-			loadingPanel.hide();
-			GWT.log(caught.toString());
-			Notificator.getNotificator().showError("Report could not be generated");
-			
-		}
+        showAllNotebooks.addClickHandler(new ClickHandler() {
 
-		@Override
-		public void onSuccess(T result) {
+            @Override
+            public void onClick(ClickEvent event) {
 
-			loadingPanel.hide();
-			
-			if (result instanceof SimpleReport) {
-				SimpleReport r = (SimpleReport) result;
-				printSimpleReport(r);
-			}
-		}
-	}
+                loadingPanel.show();
+                reportGenerator.createAllNotebooksR(new GenericReportCallback<AllNotebooksR>());
+
+            }
+
+        });
+
+        showAllNotes.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+
+                loadingPanel.show();
+                reportGenerator.createAllNotesR(new GenericReportCallback<AllNotesR>());
+
+            }
+
+        });
+
+
+        showAllPermissions.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+
+                loadingPanel.show();
+                reportGenerator.createAllPermissionsR(new GenericReportCallback<AllPermissionsR>());
+
+            }
+
+        });
+    }
+
+    private void printSimpleReport(SimpleReport r) {
+
+        HTMLReportWriter writer = new HTMLReportWriter();
+        String html = writer.simpleReport2HTML(r);
+        HTML htmlToDisplay = new HTML(html);
+        ScrollPanel panel = new ScrollPanel(htmlToDisplay);
+        panel.setSize("100%", "100%");
+
+        ApplicationPanel.getApplicationPanel().replaceContentWith(panel);
+
+    }
+
+    private class GenericReportCallback<T> implements AsyncCallback<T> {
+
+        @Override
+        public void onFailure(Throwable caught) {
+
+            loadingPanel.hide();
+            GWT.log(caught.toString());
+            Notificator.getNotificator().showError("Report could not be generated");
+
+        }
+
+        @Override
+        public void onSuccess(T result) {
+
+            loadingPanel.hide();
+
+            if (result instanceof SimpleReport) {
+                SimpleReport r = (SimpleReport) result;
+                printSimpleReport(r);
+            }
+        }
+    }
 
 }

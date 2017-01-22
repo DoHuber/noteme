@@ -1,18 +1,11 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
-import java.sql.Date;
-import java.util.Map;
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import de.hdm_stuttgart.huber.itprojekt.shared.report.*;
 
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotebooksR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllNotesR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllPermissionsR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotebooksR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserNotesR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.AllUserPermissionsR;
-import de.hdm_stuttgart.huber.itprojekt.shared.report.CustomReport;
+import java.sql.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -39,26 +32,26 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.CustomReport;
  * -Methoden implementiert werden. Die bestehenden Methoden bleiben davon
  * unbeeinflusst, so dass bestehende Programmlogik nicht verändert werden muss.
  * </p>
- * 
+ *
  * @author thies
  */
 @RemoteServiceRelativePath("generator")
 public interface ReportGenerator extends RemoteService {
 
-	public void init() throws IllegalArgumentException;
+    void init() throws IllegalArgumentException;
 
-	public abstract AllUserNotebooksR createAllUserNotebooksR() throws IllegalArgumentException;
+    AllUserNotebooksR createAllUserNotebooksR() throws IllegalArgumentException;
 
-	public abstract AllNotebooksR createAllNotebooksR() throws IllegalArgumentException;
+    AllNotebooksR createAllNotebooksR() throws IllegalArgumentException;
 
-	public abstract AllUserNotesR createAllUserNotesR() throws IllegalArgumentException;
+    AllUserNotesR createAllUserNotesR() throws IllegalArgumentException;
 
-	public abstract AllNotesR createAllNotesR() throws IllegalArgumentException;
+    AllNotesR createAllNotesR() throws IllegalArgumentException;
 
-	public abstract AllUserPermissionsR createAllUserPermissionsR() throws IllegalArgumentException;
+    AllUserPermissionsR createAllUserPermissionsR() throws IllegalArgumentException;
 
-	public abstract AllPermissionsR createAllPermissionsR() throws IllegalArgumentException;
-	
-	public CustomReport createCustomReport(String type, String userEmail, Map<String, Date> timespan, boolean includePermissions);
-	
+    AllPermissionsR createAllPermissionsR() throws IllegalArgumentException;
+
+    CustomReport createCustomReport(String type, String userEmail, Map<String, Date> timespan, boolean includePermissions);
+
 }

@@ -1,219 +1,208 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-import java.util.Vector;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
-
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
+import java.util.Vector;
+
 /**
  * Notiz anlegen!
- * 
- * @author Nikita Nalivayko
  *
+ * @author Nikita Nalivayko
  */
 public class CreateNote extends BasicVerticalView {
 
-	HorizontalPanel contentPanel = new HorizontalPanel();
-	VerticalPanel alignPanel = new VerticalPanel();
-	Button createButton = new Button("Create");
+    HorizontalPanel contentPanel = new HorizontalPanel();
+    VerticalPanel alignPanel = new VerticalPanel();
+    Button createButton = new Button("Create");
 
-	private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	private RichTextArea noteArea = new RichTextArea();
+    private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+    private RichTextArea noteArea = new RichTextArea();
 
-	private TextBox titleTextBox = new TextBox();
-	private TextBox SubtitleTextBox = new TextBox();
-	private RichTextToolbar richTextToolbar = new RichTextToolbar(noteArea);
-	private DateBox dueDateBox = new DateBox();
-	private Label title = new Label("Title");
-	private Label subtitle = new Label("Subtitle");
-	private Label dueDate = new Label("Due Date");
-	private Label test = new Label();
-	private String source;
-	private boolean sourceProvided = false;
-	private Grid grid = new Grid(2, 1);
+    private TextBox titleTextBox = new TextBox();
+    private TextBox SubtitleTextBox = new TextBox();
+    private RichTextToolbar richTextToolbar = new RichTextToolbar(noteArea);
+    private DateBox dueDateBox = new DateBox();
+    private Label title = new Label("Title");
+    private Label subtitle = new Label("Subtitle");
+    private Label dueDate = new Label("Due Date");
+    private Label test = new Label();
+    private String source;
+    private boolean sourceProvided = false;
+    private Grid grid = new Grid(2, 1);
 
-	private CheckBox intoNoteBook = new CheckBox("Put new note into notebook?");
-	private NoteBookListBox noteBookSelector = new NoteBookListBox();
+    private CheckBox intoNoteBook = new CheckBox("Put new note into notebook?");
+    private NoteBookListBox noteBookSelector = new NoteBookListBox();
 
-	public CreateNote() {
+    public CreateNote() {
 
-	}
+    }
 
-	public CreateNote(Notebook nb) {
-		
-		intoNoteBook.setValue(true);
-		noteBookSelector.addItem(nb);
-		noteBookSelector.setSelectedIndex(0);
+    public CreateNote(Notebook nb) {
 
-	}
+        intoNoteBook.setValue(true);
+        noteBookSelector.addItem(nb);
+        noteBookSelector.setSelectedIndex(0);
 
-	public CreateNote(String source) {
+    }
 
-		this.source = source;
-		sourceProvided = true;
+    public CreateNote(String source) {
 
-	}
+        this.source = source;
+        sourceProvided = true;
 
-	@Override
-	public void run() {
-	
-		setupAlignPanel();
-		
-		createButton.addClickHandler(new CreateClickHandler());
-		grid.setWidget(0, 0, richTextToolbar);
+    }
 
-		setUpNoteBookSelection();
+    @Override
+    public void run() {
 
-		noteArea.setSize("100%", "100%");
-		grid.setWidget(1, 0, noteArea);
+        setupAlignPanel();
 
-		contentPanel.add(alignPanel);
-		contentPanel.add(grid);
-		this.add(contentPanel);
+        createButton.addClickHandler(new CreateClickHandler());
+        grid.setWidget(0, 0, richTextToolbar);
 
-		noteArea.setStyleName("noteArea");
-		
-	}
+        setUpNoteBookSelection();
 
-	private void setupAlignPanel() {
-		alignPanel.add(title);
-		alignPanel.add(titleTextBox);
+        noteArea.setSize("100%", "100%");
+        grid.setWidget(1, 0, noteArea);
 
-		alignPanel.add(subtitle);
-		alignPanel.add(SubtitleTextBox);
+        contentPanel.add(alignPanel);
+        contentPanel.add(grid);
+        this.add(contentPanel);
 
-		if (sourceProvided) {
-			Label sourceLabel = new Label("Source: " + source);
-			alignPanel.add(sourceLabel);
-		}
+        noteArea.setStyleName("noteArea");
 
-		alignPanel.add(dueDate);
-		alignPanel.add(dueDateBox);
+    }
 
-		alignPanel.add(test);
-		alignPanel.add(createButton);
-	}
+    private void setupAlignPanel() {
+        alignPanel.add(title);
+        alignPanel.add(titleTextBox);
 
-	private void setUpNoteBookSelection() {
-		
-		noteBookSelector.setEnabled(false);
-		alignPanel.add(noteBookSelector);
-		addNoteBooksToListBox();
+        alignPanel.add(subtitle);
+        alignPanel.add(SubtitleTextBox);
 
-		intoNoteBook.setValue(false);
-		intoNoteBook.addValueChangeHandler(new ValueChangeHandler<Boolean>(){
+        if (sourceProvided) {
+            Label sourceLabel = new Label("Source: " + source);
+            alignPanel.add(sourceLabel);
+        }
 
-			@Override
-			public void onValueChange(ValueChangeEvent<Boolean> event) {
-				
-				noteBookSelector.setEnabled(event.getValue());
-				
-			}
-			
-		});
-	
-		alignPanel.add(intoNoteBook);
-		
-	}
+        alignPanel.add(dueDate);
+        alignPanel.add(dueDateBox);
 
-	@Override
-	public String getHeadlineText() {
+        alignPanel.add(test);
+        alignPanel.add(createButton);
+    }
 
-		return "CREATE A NOTE";
-	}
+    private void setUpNoteBookSelection() {
 
-	@Override
-	public String getSubHeadlineText() {
+        noteBookSelector.setEnabled(false);
+        alignPanel.add(noteBookSelector);
+        addNoteBooksToListBox();
 
-		return "Give your note a title and subtitle to complete!";
-	}
+        intoNoteBook.setValue(false);
+        intoNoteBook.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
-	/**
-	 * 
-	 * ClickHandler zum anlegen einer Notiz
-	 *
-	 */
-	private class CreateClickHandler implements ClickHandler {
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> event) {
 
-		@Override
-		public void onClick(ClickEvent event) {
-			createNote();
-		}
+                noteBookSelector.setEnabled(event.getValue());
 
-	}
+            }
 
-	/**
-	 * Neue Notiz wird erstellt
-	 */
-	public void createNote() {
+        });
 
-		Note note = new Note();
-		note.setTitle(titleTextBox.getText());
-		note.setSubtitle(SubtitleTextBox.getText());
-		note.setContent(noteArea.getHTML());
-		
-		if (dueDateBox.getValue() != null) {
-			
-		java.util.Date utilDate = dueDateBox.getValue();
-		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		note.setDueDate(sqlDate);
-		
-		}
-		
-		if (intoNoteBook.getValue()) {
-			
-			Notebook nb;
-			nb = noteBookSelector.getSelectedItem();
-			note.setNoteBook(nb);
-			
-		}
+        alignPanel.add(intoNoteBook);
 
-		if (sourceProvided) {
-			note.setSource(source);
-		}
+    }
 
-		editorVerwaltung.createNote(note, new CreateNoteCallback());
+    @Override
+    public String getHeadlineText() {
 
-	}
+        return "CREATE A NOTE";
+    }
 
-	private void addNoteBooksToListBox() {
+    @Override
+    public String getSubHeadlineText() {
 
-		editorVerwaltung.getAllNoteBooksForCurrentUser(new AddToListBoxCallback());
-		editorVerwaltung.getAllSharedNoteBooksForCurrentUser(new AddToListBoxCallback());
+        return "Give your note a title and subtitle to complete!";
+    }
 
-	}
+    /**
+     * Neue Notiz wird erstellt
+     */
+    public void createNote() {
 
-	private class AddToListBoxCallback implements AsyncCallback<Vector<Notebook>> {
+        Note note = new Note();
+        note.setTitle(titleTextBox.getText());
+        note.setSubtitle(SubtitleTextBox.getText());
+        note.setContent(noteArea.getHTML());
 
-		@Override
-		public void onFailure(Throwable caught) {
-			GWT.log("RPC failed, see reason below:");
-			GWT.log(caught.toString());
-		}
+        if (dueDateBox.getValue() != null) {
 
-		@Override
-		public void onSuccess(Vector<Notebook> result) {
-			noteBookSelector.addAll(result);
-		}
+            java.util.Date utilDate = dueDateBox.getValue();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            note.setDueDate(sqlDate);
 
-	}
+        }
+
+        if (intoNoteBook.getValue()) {
+
+            Notebook nb;
+            nb = noteBookSelector.getSelectedItem();
+            note.setNoteBook(nb);
+
+        }
+
+        if (sourceProvided) {
+            note.setSource(source);
+        }
+
+        editorVerwaltung.createNote(note, new CreateNoteCallback());
+
+    }
+
+    private void addNoteBooksToListBox() {
+
+        editorVerwaltung.getAllNoteBooksForCurrentUser(new AddToListBoxCallback());
+        editorVerwaltung.getAllSharedNoteBooksForCurrentUser(new AddToListBoxCallback());
+
+    }
+
+    /**
+     * ClickHandler zum anlegen einer Notiz
+     */
+    private class CreateClickHandler implements ClickHandler {
+
+        @Override
+        public void onClick(ClickEvent event) {
+            createNote();
+        }
+
+    }
+
+    private class AddToListBoxCallback implements AsyncCallback<Vector<Notebook>> {
+
+        @Override
+        public void onFailure(Throwable caught) {
+            GWT.log("RPC failed, see reason below:");
+            GWT.log(caught.toString());
+        }
+
+        @Override
+        public void onSuccess(Vector<Notebook> result) {
+            noteBookSelector.addAll(result);
+        }
+
+    }
 
 }

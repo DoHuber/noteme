@@ -8,16 +8,16 @@ import java.io.Serializable;
  * in den Superklassen vorliegt. Ihre Existenz ist dennoch wichtig, um bestimmte
  * Typen von Reports deklarieren und mit ihnen objektorientiert umgehen zu
  * können.
- * 
+ *
  * @author Thies
  */
 
 // gibt alle Notizbücher aus
 public class AllNotebooksR extends SimpleReport implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
 }
