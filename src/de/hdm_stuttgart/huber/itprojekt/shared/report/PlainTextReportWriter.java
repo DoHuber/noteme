@@ -53,7 +53,8 @@ public class PlainTextReportWriter extends ReportWriter {
      *
      * @param r der zu prozessierende Report
      */
-    public void process(AllUserNotebooksR r) {
+    @Override
+	public void process(AllUserNotebooksR r) {
 
         // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
         this.resetReportText();
@@ -99,7 +100,8 @@ public class PlainTextReportWriter extends ReportWriter {
      *
      * @param r der zu prozessierende Report
      */
-    public void process(CompositeReport r) {
+    @Override
+	public void process(CompositeReport r) {
 
         // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.
         this.resetReportText();

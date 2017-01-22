@@ -75,7 +75,8 @@ public class Note extends DomainObject implements Shareable, DateFilterable {
         return this.runTimePermission != null;
     }
 
-    public int getId() {
+    @Override
+	public int getId() {
         return id;
     }
 
@@ -147,7 +148,8 @@ public class Note extends DomainObject implements Shareable, DateFilterable {
         this.modificationDate = modificationDate;
     }
 
-    public Permission getRuntimePermission() {
+    @Override
+	public Permission getRuntimePermission() {
         return runTimePermission;
     }
 

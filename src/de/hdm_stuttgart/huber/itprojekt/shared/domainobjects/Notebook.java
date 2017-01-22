@@ -48,7 +48,8 @@ public class Notebook extends DomainObject implements Shareable, DateFilterable 
                 + ", Erstellt am:" + creationDate + ", Zuletzt modifiziert am:" + modificationDate + '}';
     }
 
-    public int getId() {
+    @Override
+	public int getId() {
         return this.id;
     }
 
@@ -92,7 +93,8 @@ public class Notebook extends DomainObject implements Shareable, DateFilterable 
         this.modificationDate = modificationDate;
     }
 
-    public Permission getRuntimePermission() {
+    @Override
+	public Permission getRuntimePermission() {
         return runTimePermission;
     }
 

@@ -39,7 +39,8 @@ public class ReportGeneratorMenu extends VerticalPanel {
 
     private PopupPanel loadingPanel;
 
-    protected void onLoad() {
+    @Override
+	protected void onLoad() {
 
         this.setHorizontalAlignment(ALIGN_CENTER);
 

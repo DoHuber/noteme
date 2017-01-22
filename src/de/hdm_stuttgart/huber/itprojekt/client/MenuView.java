@@ -25,7 +25,8 @@ public class MenuView extends VerticalPanel {
     UserInfo ui = null;
     private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
 
-    protected void onLoad() {
+    @Override
+	protected void onLoad() {
 
         this.setHorizontalAlignment(ALIGN_CENTER);
         this.setStyleName("headerpanel");

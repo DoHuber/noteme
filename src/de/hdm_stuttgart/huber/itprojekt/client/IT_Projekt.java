@@ -39,7 +39,8 @@ public class IT_Projekt implements EntryPoint {
         return loggedInUser;
     }
 
-    public void onModuleLoad() {
+    @Override
+	public void onModuleLoad() {
 
         setUpUncaughtExceptionHandler();
 
@@ -55,11 +56,13 @@ public class IT_Projekt implements EntryPoint {
         SharedServicesAsync loginService = GWT.create(SharedServices.class);
         loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
 
-            public void onFailure(Throwable e) {
+            @Override
+			public void onFailure(Throwable e) {
                 GWT.log(e.toString());
             }
 
-            public void onSuccess(UserInfo result) {
+            @Override
+			public void onSuccess(UserInfo result) {
 
                 loggedInUser = result;
 

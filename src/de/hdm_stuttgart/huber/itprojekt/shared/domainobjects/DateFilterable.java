@@ -6,7 +6,8 @@ public interface DateFilterable {
 
     Date getDate(DateType type);
 
-    String toString();
+    @Override
+	String toString();
 
     enum DateType {
 

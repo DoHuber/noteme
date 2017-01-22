@@ -331,7 +331,8 @@ public class RichTextToolbar extends Composite {
      */
     private class EventHandler implements ClickHandler, ChangeHandler, KeyUpHandler {
 
-        public void onChange(ChangeEvent event) {
+        @Override
+		public void onChange(ChangeEvent event) {
             Widget sender = (Widget) event.getSource();
 
             if (sender == backColors) {
@@ -349,7 +350,8 @@ public class RichTextToolbar extends Composite {
             }
         }
 
-        public void onClick(ClickEvent event) {
+        @Override
+		public void onClick(ClickEvent event) {
             Widget sender = (Widget) event.getSource();
 
             if (sender == bold) {
@@ -405,7 +407,8 @@ public class RichTextToolbar extends Composite {
             }
         }
 
-        public void onKeyUp(KeyUpEvent event) {
+        @Override
+		public void onKeyUp(KeyUpEvent event) {
             Widget sender = (Widget) event.getSource();
             if (sender == richText) {
                 // We use the RichTextArea's onKeyUp event to update the toolbar
