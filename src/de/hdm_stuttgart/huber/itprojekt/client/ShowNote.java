@@ -227,7 +227,7 @@ public class ShowNote extends BasicVerticalView {
 		@Override
 		public void onSuccess(Void result) {
 			
-			n.showSuccess("Notiz" + currentlyDisplayedNote.getTitle() + " wurde gelöscht");
+			n.showSuccess("Notiz " + currentlyDisplayedNote.getTitle() + " wurde gelöscht");
 			
 			ApplicationPanel.getApplicationPanel().replaceContentWith(new ShowAllNotes());
 			

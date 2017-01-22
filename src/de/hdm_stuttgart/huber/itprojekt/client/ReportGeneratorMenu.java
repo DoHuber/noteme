@@ -55,7 +55,7 @@ public class ReportGeneratorMenu extends VerticalPanel {
 		
 		intializeLoadingPopup();
 		
-		home = new Anchor("Home", GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		home = new Anchor("Home", GWT.getHostPageBaseURL() + "Report.html");
 		
 		setStylesAndAddToPanel();
 

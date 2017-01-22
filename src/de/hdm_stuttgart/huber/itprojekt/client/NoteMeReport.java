@@ -108,8 +108,15 @@ public class NoteMeReport implements EntryPoint {
 		
 		setUpHeaderPanel();
 		
-		Label n = new Label("Gruppe 7, IT-Projekt HdM Stuttgart");
-		applicationPanel.setFooter(n);
+		HorizontalPanel hp = new HorizontalPanel();
+		hp.add(new Label("Gruppe 7: Hochschule der Medien"));
+		Anchor a = new Anchor("NoteMe - Hauptapplikation");
+		a.setHref(GWT.getHostPageBaseURL() + "IT_Projekt.html");
+		hp.add(a);
+		
+		hp.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		
+		applicationPanel.setFooter(hp);
 
 	}
 
