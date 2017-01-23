@@ -1228,18 +1228,7 @@
   <PapyrusJava:External xmi:id="_u0n88N5aEea8gODtCA-DPQ" name="java.sql.Date" base_Classifier="_u0kSkN5aEea8gODtCA-DPQ"/>
   <PapyrusJava:External xmi:id="_u2Y3gN5aEea8gODtCA-DPQ" name="Level" base_Classifier="_cGQj4N5bEea8gODtCA-DPQ"/>
   <PapyrusJava:External xmi:id="_u34FQN5aEea8gODtCA-DPQ" name="java.io.Serializable" base_Classifier="_u32QEN5aEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_b61-EN5bEea8gODtCA-DPQ" base_BehavioralFeature="_b6yTsN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_b66PgN5bEea8gODtCA-DPQ" base_BehavioralFeature="_b63zQN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_b7Q00N5bEea8gODtCA-DPQ" base_BehavioralFeature="_b7O_oN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_b7gFYN5bEea8gODtCA-DPQ" base_BehavioralFeature="_b7cbAd5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_b7k94N5bEea8gODtCA-DPQ" base_BehavioralFeature="_b7h6kN5bEea8gODtCA-DPQ"/>
   <standard:Create xmi:id="_cGks8N5bEea8gODtCA-DPQ" base_BehavioralFeature="_cGhCkN5bEea8gODtCA-DPQ"/>
   <PapyrusJava:External xmi:id="_cGsBsN5bEea8gODtCA-DPQ" name="Level" base_Classifier="_cGoXUN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_cG1ysN5bEea8gODtCA-DPQ" base_BehavioralFeature="_cGzWcN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_cHAKwN5bEea8gODtCA-DPQ" base_BehavioralFeature="_cG9HcN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_cHLJ4N5bEea8gODtCA-DPQ" base_BehavioralFeature="_cHFqUN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_cILPcN5bEea8gODtCA-DPQ" base_BehavioralFeature="_cIG-AN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_cIW1oN5bEea8gODtCA-DPQ" base_BehavioralFeature="_cITLQN5bEea8gODtCA-DPQ"/>
-  <standard:Create xmi:id="_cIoicN5bEea8gODtCA-DPQ" base_BehavioralFeature="_cIk4EN5bEea8gODtCA-DPQ"/>
   <standard:Create xmi:id="_cKF7AN5bEea8gODtCA-DPQ" base_BehavioralFeature="_cKC3sN5bEea8gODtCA-DPQ"/>
 </xmi:XMI>
