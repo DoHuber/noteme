@@ -159,6 +159,7 @@ public class CreateNote extends BasicVerticalView {
 
             Notebook nb;
             nb = noteBookSelector.getSelectedItem();
+            GWT.log("Returned notebook:" + nb.toString());
             note.setNoteBook(nb);
 
         }

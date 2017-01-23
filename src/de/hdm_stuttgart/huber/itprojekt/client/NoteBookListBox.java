@@ -34,8 +34,16 @@ public class NoteBookListBox extends ListBox {
 
     public Notebook getSelectedItem() {
 
-        int index = super.getSelectedIndex();
-        return items.get(index);
+    	String title = super.getValue(super.getSelectedIndex());
+    	
+        // Unperformant, aber die davorige Lösung hat nicht funktioniert..
+    	for (Notebook n : items) {
+    		if (n.getTitle().equals(title)) {
+    			return n;
+    		}
+    	}
+    	
+    	throw new RuntimeException("Notebook existiert nicht");
 
     }
 

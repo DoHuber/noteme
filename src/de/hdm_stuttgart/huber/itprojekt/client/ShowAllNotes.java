@@ -22,7 +22,7 @@ import java.util.Vector;
  */
 public class ShowAllNotes extends BasicVerticalView {
 
-    final Button sharedByBtn = new Button("Sared by me");
+    final Button sharedByBtn = new Button("Shared by me");
     final Button sharedWithBtn = new Button("Shared with me");
     final Button allNotesBtn = new Button("All Notes");
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
@@ -107,6 +107,7 @@ public class ShowAllNotes extends BasicVerticalView {
 
         this.add(nt);
         currentTable = nt;
+       
 
     }
 
