@@ -99,7 +99,7 @@ public class SourceMapper extends DataMapper {
     }
 
     public Vector<Source> getAllSource() throws Exception {
-        Vector<Source> result = new Vector<>();
+        Vector<Source> result = new Vector<Source>();
 
         Connection con = DBConnection.getConnection();
         PreparedStatement stmt = con.prepareStatement("SELECT Id FROM Source");

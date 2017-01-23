@@ -29,7 +29,7 @@ public class SimpleReport extends Report {
      * Tabelle mit Positionsdaten. Die Tabelle wird zeilenweise in diesem
      * <code>Vector</code> abgelegt.
      */
-    private Vector<Row> table = new Vector<>();
+    private Vector<Row> table = new Vector<Row>();
 
     /**
      * Hinzufügen einer Zeile.

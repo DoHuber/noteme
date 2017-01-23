@@ -104,7 +104,7 @@ public class ReportGeneratorMenu extends VerticalPanel {
             public void onClick(ClickEvent event) {
 
                 loadingPanel.show();
-                reportGenerator.createAllNotebooksR(new GenericReportCallback<>());
+                reportGenerator.createAllNotebooksR(new GenericReportCallback<AllNotebooksR>());
 
             }
 
@@ -116,7 +116,7 @@ public class ReportGeneratorMenu extends VerticalPanel {
             public void onClick(ClickEvent event) {
 
                 loadingPanel.show();
-                reportGenerator.createAllNotesR(new GenericReportCallback<>());
+                reportGenerator.createAllNotesR(new GenericReportCallback<AllNotesR>());
 
             }
 
@@ -129,7 +129,7 @@ public class ReportGeneratorMenu extends VerticalPanel {
             public void onClick(ClickEvent event) {
 
                 loadingPanel.show();
-                reportGenerator.createAllPermissionsR(new GenericReportCallback<>());
+                reportGenerator.createAllPermissionsR(new GenericReportCallback<AllPermissionsR>());
 
             }
 

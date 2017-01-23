@@ -15,7 +15,7 @@ public class DueDateFromUser extends BasicVerticalView {
 
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
     DueNotesCallback callback = new DueNotesCallback();
-    private Vector<Note> notes = new Vector<>();
+    private Vector<Note> notes = new Vector<Note>();
     private UserInfo ui = null;
 
     public DueDateFromUser(Vector<Note> nList) {

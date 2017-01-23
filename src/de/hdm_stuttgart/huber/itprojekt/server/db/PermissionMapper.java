@@ -27,7 +27,9 @@ public class PermissionMapper extends DataMapper {
         if (permissionMapper == null) {
             try {
                 permissionMapper = new PermissionMapper();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

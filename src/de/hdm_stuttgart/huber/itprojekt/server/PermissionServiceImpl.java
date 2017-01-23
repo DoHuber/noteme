@@ -66,7 +66,7 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
 
         UserService userService = UserServiceFactory.getUserService();
         if (!userService.isUserLoggedIn()) {
-            throw new InvalidLoginStatusException();
+            throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
         }
 
         User currentGoogleUser = userService.getCurrentUser();
@@ -102,7 +102,9 @@ public class PermissionServiceImpl extends RemoteServiceServlet implements Permi
     @Override
     public Permission getRunTimePermissionFor(UserInfo u, Shareable sharedObject) {
 
-        return permissionMapper.getPermissionFor(u, sharedObject);
+        Permission p = permissionMapper.getPermissionFor(u, sharedObject);
+
+        return p;
     }
 
     @Override

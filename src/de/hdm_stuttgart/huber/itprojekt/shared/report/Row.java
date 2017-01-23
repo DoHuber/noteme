@@ -21,7 +21,7 @@ public class Row implements Serializable {
     /**
      * Speicherplatz für die Spalten der Zeile.
      */
-    private Vector<Column> columns = new Vector<>();
+    private Vector<Column> columns = new Vector<Column>();
 
     /**
      * Hinzufügen einer Spalte.

@@ -190,7 +190,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     public AllUserNotesR createAllUserNotesReportFor(UserInfo u, Map<String, java.sql.Date> timespan)
             throws IllegalArgumentException {
 
-        Vector<Note> allNotesForUserId;
+        Vector<Note> allNotesForUserId = new Vector<>();
         allNotesForUserId = NoteMapper.getNoteMapper().getAllNotesForUserId(u.getId());
 
         if (!timespan.isEmpty()) {
@@ -242,7 +242,10 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
         Vector<Note> allNotes = new Vector<>();
         try {
             allNotes = NoteMapper.getNoteMapper().getAllNotes();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -374,7 +377,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     public CustomReport createCustomReport(String type, String userEmail, Map<String, java.sql.Date> timespan,
                                            boolean includePermissions) {
 
-        Vector<UserInfo> applicableUsers = new Vector<>();
+        Vector<UserInfo> applicableUsers = new Vector<UserInfo>();
 
         if (userEmail.equals("none")) {
 
@@ -400,43 +403,39 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
         for (UserInfo currentUser : applicableUsers) {
 
-            switch (type) {
-                case "notes":
+            if (type.equals("notes")) {
 
-                    if (includePermissions) {
+                if (includePermissions) {
 
-                        appendNotesWithPermissionsTo(report, currentUser, timespan);
+                    appendNotesWithPermissionsTo(report, currentUser, timespan);
 
-                    } else {
+                } else {
 
-                        appendNotesToReport(report, currentUser, timespan);
+                    appendNotesToReport(report, currentUser, timespan);
 
-                    }
+                }
 
-                    break;
-                case "notebooks":
+            } else if (type.equals("notebooks")) {
 
-                    if (includePermissions) {
+                if (includePermissions) {
 
-                        appendNoteBooksWithPermissionsTo(report, currentUser, timespan);
+                    appendNoteBooksWithPermissionsTo(report, currentUser, timespan);
 
-                    } else {
+                } else {
 
-                        appendNoteBooksToReport(report, currentUser, timespan);
+                    appendNoteBooksToReport(report, currentUser, timespan);
 
-                    }
+                }
 
-                    break;
-                case "permissions":
+            } else if (type.equals("permissions")) {
 
-                    SimpleReport toAdd = createAllUserPermissionsReportFor(currentUser);
+                SimpleReport toAdd = createAllUserPermissionsReportFor(currentUser);
 
-                    if (toAdd != null) {
-                        toAdd.setHeaderData(new SimpleParagraph("Permissions von: " + currentUser.toString()));
-                        report.addSubReport(toAdd);
-                    }
+                if (toAdd != null) {
+                    toAdd.setHeaderData(new SimpleParagraph("Permissions von: " + currentUser.toString()));
+                    report.addSubReport(toAdd);
+                }
 
-                    break;
             }
 
         }

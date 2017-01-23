@@ -25,8 +25,10 @@ public class FilterAbleReports extends BasicVerticalView {
 
     private final static String[] REPORT_CHOICES = {"notes", "notebooks", "permissions"};
     EditorAsync editor = ClientsideSettings.getEditorVerwaltung();
+    private HorizontalPanel alignPanel;
     private ListBox whatKindOfReport;
     private SuggestBox whichUser;
+    private Button startButton;
     private CheckBox includePermissions;
     private DateBox fromDate;
     private DateBox toDate;
@@ -89,7 +91,7 @@ public class FilterAbleReports extends BasicVerticalView {
 
         editor.getAllEmails(new AllMailCallback());
 
-        Button startButton = new Button("Generate");
+        startButton = new Button("Generate");
         startButton.addClickHandler(new ClickHandler() {
 
             @Override
@@ -101,7 +103,7 @@ public class FilterAbleReports extends BasicVerticalView {
 
         });
 
-        HorizontalPanel alignPanel = new HorizontalPanel();
+        alignPanel = new HorizontalPanel();
         alignPanel.setWidth("80%");
         alignPanel.setVerticalAlignment(ALIGN_MIDDLE);
 

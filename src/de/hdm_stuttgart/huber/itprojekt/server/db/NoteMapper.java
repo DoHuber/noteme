@@ -26,7 +26,10 @@ public class NoteMapper extends DataMapper {
 
             try {
                 noteMapper = new NoteMapper();
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
@@ -183,7 +186,7 @@ public class NoteMapper extends DataMapper {
             e.printStackTrace();
         }
 
-        return new Vector<>();
+        return new Vector<Note>();
 
     }
 
@@ -202,7 +205,7 @@ public class NoteMapper extends DataMapper {
             e.printStackTrace();
         }
 
-        return new Vector<>();
+        return new Vector<Note>();
 
     }
 
@@ -220,7 +223,7 @@ public class NoteMapper extends DataMapper {
             e.printStackTrace();
         }
 
-        return new Vector<>();
+        return new Vector<Note>();
 
 
     }

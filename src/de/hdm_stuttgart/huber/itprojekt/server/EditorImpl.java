@@ -157,7 +157,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
         } catch (Exception e) {
 
             e.printStackTrace();
-            return new Vector<>();
+            return new Vector<Note>();
         }
 
     }
@@ -193,7 +193,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
         UserService userService = UserServiceFactory.getUserService();
         if (!userService.isUserLoggedIn()) {
-            throw new InvalidLoginStatusException();
+            throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
         }
 
         User currentGoogleUser = userService.getCurrentUser();
@@ -341,7 +341,10 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
         try {
             userInfoMapper.delete(ui);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -358,7 +361,7 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
         Vector<Note> allNotesCurrentUser = getAllNotesForCurrentUser();
 
         if (allNotesCurrentUser == null || allNotesCurrentUser.isEmpty()) {
-            return new Vector<>();
+            return new Vector<Note>();
         }
 
         for (Note n : allNotesCurrentUser) {

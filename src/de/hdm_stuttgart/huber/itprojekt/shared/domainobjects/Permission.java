@@ -24,7 +24,7 @@ public class Permission extends DomainObject {
 
     public boolean isUserAllowedTo(Level action) {
 
-        return this.level.value < action.value;
+        return this.level.value >= action.value;
 
     }
 

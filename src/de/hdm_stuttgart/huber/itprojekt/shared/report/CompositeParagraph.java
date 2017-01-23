@@ -20,7 +20,7 @@ public class CompositeParagraph extends Paragraph implements Serializable {
     /**
      * Speicherort der Unterabschnitte.
      */
-    private Vector<SimpleParagraph> subParagraphs = new Vector<>();
+    private Vector<SimpleParagraph> subParagraphs = new Vector<SimpleParagraph>();
 
     /**
      * Einen Unterabschnitt hinzufügen.
@@ -79,7 +79,7 @@ public class CompositeParagraph extends Paragraph implements Serializable {
 		 * Wir legen einen leeren Buffer an, in den wir sukzessive sämtliche
 		 * String-Repräsentationen der Unterabschnitte eintragen.
 		 */
-        StringBuilder result = new StringBuilder();
+        StringBuffer result = new StringBuffer();
 
         // Schleife über alle Unterabschnitte
         for (int i = 0; i < this.subParagraphs.size(); i++) {

@@ -46,7 +46,7 @@ public class HTMLReportWriter extends ReportWriter {
      * @return HTML-Text
      */
     public String paragraph2HTML(CompositeParagraph p) {
-        StringBuilder result = new StringBuilder();
+        StringBuffer result = new StringBuffer();
 
         for (int i = 0; i < p.getNumParagraphs(); i++) {
             result.append("<p>").append(p.getParagraphAt(i)).append("</p>");
@@ -146,7 +146,7 @@ public class HTMLReportWriter extends ReportWriter {
          * In diesen Buffer schreiben wir während der Prozessierung sukzessive
 		 * unsere Ergebnisse.
 		 */
-        StringBuilder result = new StringBuilder();
+        StringBuffer result = new StringBuffer();
 
 		/*
 		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports
@@ -204,7 +204,7 @@ public class HTMLReportWriter extends ReportWriter {
 		 * In diesen Buffer schreiben wir während der Prozessierung sukzessive
 		 * unsere Ergebnisse.
 		 */
-        StringBuilder result = new StringBuilder();
+        StringBuffer result = new StringBuffer();
 
 		/*
 		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports

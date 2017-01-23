@@ -27,7 +27,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
     AllNotebooksCallback callback = new AllNotebooksCallback();
     Button createNoteBookButton = new Button(IconConstants.ICON_ADD_NOTE);
-    private Vector<Notebook> notebook = new Vector<>();
+    private Vector<Notebook> notebook = new Vector<Notebook>();
 
     private NotebookTable currentTable;
 

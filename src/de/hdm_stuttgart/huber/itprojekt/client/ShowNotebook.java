@@ -81,11 +81,11 @@ public class ShowNotebook extends BasicVerticalView {
         shareButton.setEnabled(false);
         Permission p = displayedNoteBook.getRuntimePermission();
 
-        if (p.isUserAllowedTo(Level.DELETE)) {
+        if (!p.isUserAllowedTo(Level.DELETE)) {
             deleteButton.setEnabled(false);
         }
 
-        if (p.isUserAllowedTo(Level.EDIT)) {
+        if (!p.isUserAllowedTo(Level.EDIT)) {
             createButton.setEnabled(false);
             title.setEnabled(false);
             subtitle.setEnabled(false);
