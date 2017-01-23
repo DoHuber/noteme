@@ -1,140 +1,136 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
 /**
- * 
  * @author Lisa
- *
  */
 
 public class UserInfo extends DomainObject {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String firstName;
-	private String surName;
-	private String googleId;
+    private String firstName;
+    private String surName;
+    private String googleId;
 
-	// AppEngine Users API
-	private boolean loggedIn = false;
-	private String loginUrl;
-	private String logoutUrl;
-	private String emailAddress;
-	private String nickname;
+    // AppEngine Users API
+    private boolean loggedIn = false;
+    private String loginUrl;
+    private String logoutUrl;
+    private String emailAddress;
+    private String nickname;
 
-	private boolean isAdmin;
+    private boolean isAdmin;
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
+    public UserInfo(int id, String firstName, String userName, String surName, String email, String googleId) {
+        super();
 
-	public void setAdminStatus(boolean status) {
-		this.isAdmin = status;
-	}
+        this.id = id;
+        this.firstName = firstName;
+        this.nickname = userName;
+        this.surName = surName;
+        this.emailAddress = email;
+        this.googleId = googleId;
+    }
 
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
+    // DEVELOPMENT!!!
+    public UserInfo(int id) {
+        this.id = id;
+    }
 
-	public UserInfo(int id, String firstName, String userName, String surName, String email, String googleId) {
-		super();
+    public UserInfo() {
 
-		this.id = id;
-		this.firstName = firstName;
-		this.nickname = userName;
-		this.surName = surName;
-		this.emailAddress = email;
-		this.googleId = googleId;
-	}
+    }
 
-	// DEVELOPMENT!!!
-	public UserInfo(int id) {
-		this.id = id;
-	}
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
-	public UserInfo() {
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
-	}
+    public void setAdminStatus(boolean status) {
+        this.isAdmin = status;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
 
-	
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
-	@Override
-	public String toString() {
-		return "UserInfo [firstName=" + firstName + ", surName=" + surName + ", googleId=" + googleId + ", loggedIn="
-				+ loggedIn + ", loginUrl=" + loginUrl + ", logoutUrl=" + logoutUrl + ", emailAddress=" + emailAddress
-				+ ", nickname=" + nickname + ", isAdmin=" + isAdmin + ", id=" + id + "]";
-	}
+    @Override
+    public String toString() {
+        return "UserInfo [firstName=" + firstName + ", surName=" + surName + ", googleId=" + googleId + ", loggedIn="
+                + loggedIn + ", loginUrl=" + loginUrl + ", logoutUrl=" + logoutUrl + ", emailAddress=" + emailAddress
+                + ", nickname=" + nickname + ", isAdmin=" + isAdmin + ", id=" + id + "]";
+    }
 
-	public int getId() {
-		return this.id;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setNickname(String userName) {
-		this.nickname = userName;
-	}
+    public String getNickname() {
+        return nickname;
+    }
 
-	public String getSurName() {
-		return surName;
-	}
+    public void setNickname(String userName) {
+        this.nickname = userName;
+    }
 
-	public void setSurName(String surName) {
-		this.surName = surName;
-	}
+    public String getSurName() {
+        return surName;
+    }
 
-	public String getEmailAddress() {
-		return emailAddress;
-	}
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
 
-	public void setEmailAddress(String email) {
-		this.emailAddress = email;
-	}
+    public String getEmailAddress() {
+        return emailAddress;
+    }
 
-	public String getGoogleId() {
-		return googleId;
-	}
+    public void setEmailAddress(String email) {
+        this.emailAddress = email;
+    }
 
-	public void setGoogleId(String googleId) { // f�llt f�r googleId die
-												// NoteUserId weg?
-		this.googleId = googleId;
-	}
+    public String getGoogleId() {
+        return googleId;
+    }
 
-	public String getLoginUrl() {
-		return loginUrl;
-	}
+    public void setGoogleId(String googleId) { // f�llt f�r googleId die
+        // NoteUserId weg?
+        this.googleId = googleId;
+    }
 
-	public void setLoginUrl(String loginUrl) {
-		this.loginUrl = loginUrl;
-	}
+    public String getLoginUrl() {
+        return loginUrl;
+    }
 
-	public String getLogoutUrl() {
-		return logoutUrl;
-	}
+    public void setLoginUrl(String loginUrl) {
+        this.loginUrl = loginUrl;
+    }
 
-	public void setLogoutUrl(String logoutUrl) {
-		this.logoutUrl = logoutUrl;
-	}
+    public String getLogoutUrl() {
+        return logoutUrl;
+    }
 
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-	}
+    public void setLogoutUrl(String logoutUrl) {
+        this.logoutUrl = logoutUrl;
+    }
 
 }

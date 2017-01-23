@@ -2,92 +2,86 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
 public class Permission extends DomainObject {
 
-	// Hat eclipse mal automatisch generiert
-	private static final long serialVersionUID = 1L;
+    // Hat eclipse mal automatisch generiert
+    private static final long serialVersionUID = 1L;
+    private Level level;
+    private UserInfo author;
+    private UserInfo beneficiary;
+    private Shareable sharedObject;
+    // Konstruktoren
+    public Permission(int id, Level l) {
+        this.id = id;
+        this.level = l;
+    }
 
-	// Enumerator, hier besser geeignet
-	public enum Level {
+    public Permission(Level l) {
+        this.level = l;
+    }
 
-		NONE(0), READ(10), EDIT(20), DELETE(30);
+    public Permission() {
+        this.level = Level.NONE;
+    }
 
-		private int value;
+    public boolean isUserAllowedTo(Level action) {
 
-		private Level(int i) {
-			value = i;
-		}
+        return this.level.value >= action.value;
 
-	}
+    }
 
-	private Level level;
-	private UserInfo author;
-	private UserInfo beneficiary;
-	private Shareable sharedObject;
+    @Override
+    public String toString() {
+        return "Permission [level=" + level + ", author=" + author + ", beneficiary=" + beneficiary + ", sharedObject="
+                + sharedObject + ", id=" + id + "]";
+    }
 
-	// Konstruktoren
-	public Permission(int id, Level l) {
-		this.id = id;
-		this.level = l;
-	}
+    // Getter und Setter
+    public UserInfo getBeneficiary() {
+        return beneficiary;
+    }
 
-	public Permission(Level l) {
-		this.level = l;
-	}
+    public void setBeneficiary(UserInfo user) {
+        this.beneficiary = user;
+    }
 
-	public Permission() {
-		this.level = Level.NONE;
-	}
+    public Shareable getSharedObject() {
+        return sharedObject;
+    }
 
-	@Override
-	public String toString() {
-		return "Permission [level=" + level + ", user=" + beneficiary + ", sharedObject=" + sharedObject + ", id=" + id
-				+ "]";
-	}
+    public void setSharedObject(Shareable sharedObject) {
+        this.sharedObject = sharedObject;
+    }
 
-	public boolean isUserAllowedTo(Level action) {
+    public int getLevelAsInt() {
+        return this.level.value;
+    }
 
-		if (this.level.value >= action.value) {
-			return true;
-		} else {
-			return false;
-		}
+    public UserInfo getAuthor() {
+        return author;
+    }
 
-	}
+    public void setAuthor(UserInfo author) {
+        this.author = author;
+    }
 
-	// Getter und Setter
-	public UserInfo getBeneficiary() {
-		return beneficiary;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setBeneficiary(UserInfo user) {
-		this.beneficiary = user;
-	}
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 
-	public Shareable getSharedObject() {
-		return sharedObject;
-	}
+    // Enumerator, hier besser geeignet
+    public enum Level {
 
-	public void setSharedObject(Shareable sharedObject) {
-		this.sharedObject = sharedObject;
-	}
+        NONE(0), READ(10), EDIT(20), DELETE(30);
 
-	public int getLevelAsInt() {
-		return this.level.value;
-	}
+        private int value;
 
-	public UserInfo getAuthor() {
-		return author;
-	}
+        Level(int i) {
+            value = i;
+        }
 
-	public void setAuthor(UserInfo author) {
-		this.author = author;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setLevel(Level level) {
-		this.level = level;
-	}
+    }
 
 }

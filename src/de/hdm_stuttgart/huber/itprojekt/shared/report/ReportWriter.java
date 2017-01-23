@@ -12,27 +12,25 @@ package de.hdm_stuttgart.huber.itprojekt.shared.report;
  * dieser Klasse werden die Signaturen der Methoden deklariert, die für die
  * Prozessierung der Quellinformation zuständig sind.
  * </p>
- * 
+ *
  * @author Thies
  */
 public abstract class ReportWriter {
 
-	/**
-	 * Übersetzen eines <code>AllAccountsOfCustomerReport</code> in das
-	 * Zielformat.
-	 * 
-	 * @param r
-	 *            der zu übersetzende Report
-	 */
-	public abstract void process(AllUserNotebooksR r);
+    /**
+     * Übersetzen eines <code>AllAccountsOfCustomerReport</code> in das
+     * Zielformat.
+     *
+     * @param r der zu übersetzende Report
+     */
+    public abstract void process(AllUserNotebooksR r);
 
-	/**
-	 * Übersetzen eines <code>AllAccountsOfAllCustomersReport</code> in das
-	 * Zielformat.
-	 * 
-	 * @param r
-	 *            der zu übersetzende Report
-	 */
-	public abstract void process(CompositeReport r);
+    /**
+     * Übersetzen eines <code>AllAccountsOfAllCustomersReport</code> in das
+     * Zielformat.
+     *
+     * @param r der zu übersetzende Report
+     */
+    public abstract void process(CompositeReport r);
 
 }

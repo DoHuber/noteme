@@ -1,78 +1,77 @@
-/**
- * 
- */
 package de.hdm_stuttgart.huber.itprojekt.shared;
-
-import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
+
+import java.util.Vector;
 
 /**
  * @author elcpt
- *
  */
 
 @RemoteServiceRelativePath("testEditor")
 public interface Editor extends RemoteService {
 
-	public void init() throws IllegalArgumentException;
+    void init() throws IllegalArgumentException;
 
-	public String getHelloWorld();
+    String getHelloWorld();
 
-	// CRUD-Methoden für NoteBook
-	public NoteBook createNoteBook(NoteBook notebook);
+    // CRUD-Methoden für NoteBook
+    Notebook createNoteBook(Notebook notebook);
 
-	public NoteBook saveNoteBook(NoteBook noteBook);
+    Notebook saveNoteBook(Notebook noteBook);
 
-	public NoteBook getNoteBookById(NoteBook notebook) throws Exception;
+    Notebook getNoteBookById(Notebook notebook) throws Exception;
 
-	public void deleteNoteBook(NoteBook noteBook);
+    void deleteNoteBook(Notebook noteBook);
 
-	// CRUD-Methoden für Note
-	public Note createNote(Note note);
+    // CRUD-Methoden für Note
+    Note createNote(Note note);
 
-	public Note saveNote(Note note);
+    Note saveNote(Note note);
 
-	public Note getNoteById(Note note) throws Exception;
+    Note getNoteById(Note note) throws Exception;
 
-	public void deleteNote(Note note);
+    void deleteNote(Note note);
 
-	// CRUD-Methoden nach User, nur nach Login verwendbar!
-	public Vector<Note> getAllNotesForCurrentUser();
-	public Vector<Note> getAllNotesForUser();
-	public Vector<NoteBook> getAllNoteBooksForCurrentUser();
+    // CRUD-Methoden nach User, nur nach Login verwendbar!
+    Vector<Note> getAllNotesForCurrentUser();
 
-	// Methoden mit Freigabe dabei
-	public Vector<Note> getAllSharedNotesForCurrentUser();
+    Vector<Note> getAllNotesForUser(UserInfo user);
 
-	public Vector<NoteBook> getAllSharedNoteBooksForCurrentUser();
+    Vector<Notebook> getAllNoteBooksForCurrentUser();
 
-	public Vector<Note> getAllNotesSharedByCurrentUser();
+    Vector<Notebook> getAllNoteBooksFor(UserInfo u);
 
-	public Vector<NoteBook> getAllNoteBooksSharedByCurrentUser();
+    // Methoden mit Freigabe dabei
+    Vector<Note> getAllSharedNotesForCurrentUser();
 
-	// Zusätzliche Methoden zu NoteBook
-	public Vector<NoteBook> getAllNoteBooks() throws BullshitException;
+    Vector<Notebook> getAllSharedNoteBooksForCurrentUser();
 
-	public Vector<Note> getAllFrom(NoteBook nb);
+    Vector<Note> getAllNotesSharedByCurrentUser();
 
-	public Vector<Note> getAllNotes() throws BullshitException;
-	
-	public Vector<Note> getDueNotesForCurrentUser();
+    Vector<Notebook> getAllNoteBooksSharedByCurrentUser();
 
-	public UserInfo saveUser(UserInfo user);
+    // Zusätzliche Methoden zu NoteBook
+    Vector<Notebook> getAllNoteBooks();
 
-	public String getSource();
+    Vector<Note> getAllFrom(Notebook nb);
 
-	public UserInfo getCurrentUser();
-	
-	public Vector<String> getAllEmails();
+    Vector<Note> getAllNotes();
 
-	void deleteUserInfo(UserInfo ui);
+    Vector<Note> getDueNotesForCurrentUser();
+
+    UserInfo saveUser(UserInfo user);
+
+    String getSource();
+
+    UserInfo getCurrentUser();
+
+    Vector<String> getAllEmails();
+
+    void deleteUserInfo(UserInfo ui);
 
 }

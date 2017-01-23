@@ -5,11 +5,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 class CreateNoteHandler implements ClickHandler {
 
-	@Override
-	public void onClick(ClickEvent event) {
+    @Override
+    public void onClick(ClickEvent event) {
 
-		CreateNote cN = new CreateNote();
-		ApplicationPanel.getApplicationPanel().replaceContentWith(cN);
-		
-	}
+        CreateNote cN = new CreateNote();
+        ApplicationPanel.getApplicationPanel().replaceContentWith(cN);
+
+    }
 }

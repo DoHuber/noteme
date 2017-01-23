@@ -1,11 +1,13 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
-public interface Shareable {
+import java.io.Serializable;
 
-	public int getId();
+public interface Shareable extends Serializable {
 
-	public char getType();
+    int getId();
 
-	public Permission getRuntimePermission();
+    char getType();
+
+    Permission getRuntimePermission();
 
 }

@@ -12,18 +12,18 @@ import java.io.Serializable;
  * <code>\n</code>" genügen. Bei dem Zielformat HTML müsste jedoch der gesamte
  * Absatz in entsprechendes Markup eingefügt werden.
  * <p>
- * 
+ * <p>
  * <code>Paragraph</code> ist <code>Serializable</code>, so das Objekte dieser
  * Klasse durch das Netzwerk übertragbar sind.
- * 
- * @see Report
+ *
  * @author Thies
+ * @see Report
  */
 public abstract class Paragraph implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
 }

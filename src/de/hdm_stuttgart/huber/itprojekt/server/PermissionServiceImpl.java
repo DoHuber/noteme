@@ -1,12 +1,9 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
-import java.util.Vector;
-
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
 import de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper;
 import de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper;
@@ -17,134 +14,125 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
+import java.util.Vector;
+
 public class PermissionServiceImpl extends RemoteServiceServlet implements PermissionService {
 
-	/**
-	 * Das war eclipse
-	 */
-	private static final long serialVersionUID = -1339547511763075795L;
+    /**
+     * Das war eclipse
+     */
+    private static final long serialVersionUID = -1339547511763075795L;
 
-	private PermissionMapper permissionMapper = PermissionMapper.getPermissionMapper();
+    private PermissionMapper permissionMapper = PermissionMapper.getPermissionMapper();
 
-	public PermissionServiceImpl() {
+    public PermissionServiceImpl() {
 
-	}
+    }
 
-	public PermissionServiceImpl(Object delegate) {
-		super(delegate);
+    public PermissionServiceImpl(Object delegate) {
+        super(delegate);
 
-	}
+    }
 
-	@Override
-	public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l) {
+    @Override
+    public void shareWith(UserInfo beneficiary, Shareable sharedObject, Level l) throws IllegalArgumentException {
 
-		/**
-		 * Gedanken zur Logik: Wenn eine Permission existiert, die gesteigert
-		 * werden soll, ist sie zu finden. In diesem Fall dann die Permission
-		 * verändern und abspeichern, mit höherem Rang.
-		 *
-		 * Wenn noch keine Permission existiert, neue anlegen. Wenn das Shareable ein Notizbuch ist, muss kaskadiert werden.
-		 */
-		
-		Permission p = permissionMapper.getPermissionFor(beneficiary, sharedObject);
-		if (p == null) {
+        Permission p = permissionMapper.getPermissionFor(beneficiary, sharedObject);
+        if (p == null) {
 
-			p = new Permission();
-			p.setLevel(l);
-			setCurrentUserAsAuthor(p);
-			createNewPermission(p, beneficiary, sharedObject);
+            p = new Permission();
+            p.setLevel(l);
+            setCurrentUserAsAuthor(p, beneficiary);
+            createNewPermission(p, beneficiary, sharedObject);
 
-		} else {
+        } else {
 
-			upgradeExistingPermissionTo(p, l);
+            upgradeExistingPermissionTo(p, l);
 
-		}
-		
-		/**
-		 * # REEEEKUSSRSSSIISONNNN 
-		 */
-		if (sharedObject.getType() == 'b') {
-			
-			Vector<Note> notesToShare = NoteMapper.getNoteMapper().getAllNotesForNoteBookId(sharedObject.getId());
-			for (Note row : notesToShare) {
-				shareWith(beneficiary, row, l);
-			}
-			
-		}
+        }
 
-	}
+        if (sharedObject.getType() == 'b') {
 
-	private void setCurrentUserAsAuthor(Permission p) {
+            Vector<Note> notesToShare = NoteMapper.getNoteMapper().getAllNotesForNoteBookId(sharedObject.getId());
+            for (Note row : notesToShare) {
+                shareWith(beneficiary, row, l);
+            }
 
-		UserService userService = UserServiceFactory.getUserService();
-		if (!userService.isUserLoggedIn()) {
-			throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
-		}
+        }
 
-		User currentGoogleUser = userService.getCurrentUser();
-		UserInfo author = UserInfoMapper.getUserInfoMapper().findUserByGoogleId(currentGoogleUser.getUserId());
+    }
 
-		p.setAuthor(author);
+    private void setCurrentUserAsAuthor(Permission p, UserInfo beneficiary) {
 
-	}
+        UserService userService = UserServiceFactory.getUserService();
+        if (!userService.isUserLoggedIn()) {
+            throw new InvalidLoginStatusException("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
+        }
 
-	private void createNewPermission(Permission p, UserInfo beneficiary, Shareable sharedObject) {
+        User currentGoogleUser = userService.getCurrentUser();
+        UserInfo author = UserInfoMapper.getUserInfoMapper().findUserByGoogleId(currentGoogleUser.getUserId());
 
-		p.setBeneficiary(beneficiary);
-		p.setSharedObject(sharedObject);
-		permissionMapper.createPermission(p);
+        p.setAuthor(author);
 
-	}
+    }
 
-	private void upgradeExistingPermissionTo(Permission p, Level l) {
+    private void createNewPermission(Permission p, UserInfo beneficiary, Shareable sharedObject) {
 
-		p.setLevel(l);
-		permissionMapper.savePermission(p);
+        p.setBeneficiary(beneficiary);
+        p.setSharedObject(sharedObject);
+        permissionMapper.createPermission(p);
 
-	}
+    }
 
-	@Override
-	public void shareWith(String userEmail, Shareable sharedObject, Level l) {
+    private void upgradeExistingPermissionTo(Permission p, Level l) {
 
-		UserInfo userToShareWith = UserInfoMapper.getUserInfoMapper().findByEmailAdress(userEmail);
-		shareWith(userToShareWith, sharedObject, l);
+        p.setLevel(l);
+        permissionMapper.savePermission(p);
 
-	}
+    }
 
-	@Override
-	public Permission getRunTimePermissionFor(UserInfo u, Shareable sharedObject) {
+    @Override
+    public void shareWith(String userEmail, Shareable sharedObject, Level l) {
 
-		Permission p = permissionMapper.getPermissionFor(u, sharedObject);
+        UserInfo userToShareWith = UserInfoMapper.getUserInfoMapper().findByEmailAdress(userEmail);
+        shareWith(userToShareWith, sharedObject, l);
 
-		return p;
-	}
+    }
 
-	@Override
-	public Vector<Permission> getAllPermissionsFor(Shareable s) {
+    @Override
+    public Permission getRunTimePermissionFor(UserInfo u, Shareable sharedObject) {
 
-		return permissionMapper.getAllPermissionsFor(s);
+        Permission p = permissionMapper.getPermissionFor(u, sharedObject);
 
-	}
+        return p;
+    }
 
-	@Override
-	public void deletePermission(Permission p) {
+    @Override
+    public Vector<Permission> getAllPermissionsFor(Shareable s) {
 
-		permissionMapper.deletePermission(p);
+        return permissionMapper.getAllPermissionsFor(s);
 
-	}
+    }
 
-	@Override
-	public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u) {
+    @Override
+    public void deletePermission(Permission p) {
 
-		return permissionMapper.getAllPermissionsCreatedBy(u);
+        permissionMapper.deletePermission(p);
 
-	}
+    }
 
-	@Override
-	public Vector<Permission> getAllPermissions() {
+    @Override
+    public Vector<Permission> getAllPermissionsCreatedBy(UserInfo u) {
 
-		return permissionMapper.getAllPermissions();
+        return permissionMapper.getAllPermissionsCreatedBy(u);
 
-	}
+    }
+
+    @Override
+    public Vector<Permission> getAllPermissions() {
+
+        return permissionMapper.getAllPermissions();
+
+    }
 
 }

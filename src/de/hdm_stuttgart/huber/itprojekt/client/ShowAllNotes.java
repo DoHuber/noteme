@@ -1,197 +1,194 @@
 package de.hdm_stuttgart.huber.itprojekt.client;
 
-import java.util.Vector;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-
 import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.NoteTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
-import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.NoteBook;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
+
+import java.util.Vector;
 
 /**
  * Klasse zur Darstellung der Notizen, die vom Nutzer nicht explizit einem
  * ordner zugeordnet sind.
- * 
- * @author Nikita Nalivayko
  *
+ * @author Nikita Nalivayko
  */
 public class ShowAllNotes extends BasicVerticalView {
-	
-	EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-	AllNotesCallback callback = new AllNotesCallback();
-	private Vector<Note> notes = new Vector<Note>();
 
-	private NoteTable currentTable;
+    final Button sharedByBtn = new Button("Shared by me");
+    final Button sharedWithBtn = new Button("Shared with me");
+    final Button allNotesBtn = new Button("All Notes");
+    EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
+    AllNotesCallback callback = new AllNotesCallback();
+    Button addNoteButton = new Button(IconConstants.ICON_ADD_NOTE);
+    private Vector<Note> notes = new Vector<Note>();
+    private NoteTable currentTable;
 
-	public ShowAllNotes(Vector<Note> nList) {
-		notes = nList;
-	}
+    public ShowAllNotes(Vector<Note> nList) {
+        notes = nList;
+    }
 
-	/**
-	 * No-Argument Konstruktor
-	 */
-	public ShowAllNotes() {
+    /**
+     * No-Argument Konstruktor
+     */
+    public ShowAllNotes() {
 
-	}
+    }
 
-	public ShowAllNotes(NoteBook selected) {
+    public ShowAllNotes(Notebook selected) {
 
-	}
+    }
 
-	// Gibt alle Notizen zurück
-	public Vector<Note> getAllNotesListe() {
+    // Gibt alle Notizen zurück
+    public Vector<Note> getAllNotesListe() {
 
-		return notes;
+        return notes;
 
-	}
+    }
 
-	public void setAllNotesListe(Vector<Note> liste) {
-		this.notes = liste;
+    public void setAllNotesListe(Vector<Note> liste) {
+        this.notes = liste;
 
-	}
+    }
 
-	@Override
-	public String getHeadlineText() {
+    @Override
+    public String getHeadlineText() {
 
-		return "MY NOTES";
-	}
+        return "MY NOTES";
+    }
 
-	@Override
-	public String getSubHeadlineText() {
-		return "Select a note for more information!";
-	}
+    @Override
+    public String getSubHeadlineText() {
+        return "Select a note for more information!";
+    }
 
-	final Button sharedByBtn = new Button("Sared by me");
-	final Button sharedWithBtn = new Button("Shared with me");
-	final Button allNotesBtn = new Button("All Notes");
-	Button addNoteButton = new Button(IconConstants.ICON_ADD_NOTE);
+    @Override
+    public void run() {
 
-	@Override
-	public void run() {
+        FlowPanel contentPanel = new FlowPanel();
+        FlowPanel fPanel2 = new FlowPanel();
+        FlowPanel buttonsPanel = new FlowPanel();
 
-		FlowPanel contentPanel = new FlowPanel();
-		FlowPanel fPanel2 = new FlowPanel();
-		FlowPanel buttonsPanel = new FlowPanel();
-		
-		buttonsPanel.setStyleName("buttonsPanel");
+        buttonsPanel.setStyleName("buttonsPanel");
 
-		sharedWithBtn.addClickHandler(new SharedWithClickHandler());
-		allNotesBtn.addClickHandler(new AllNotesClickHandler());
-		sharedByBtn.addClickHandler(new SharedByClickHandler());
-		addNoteButton.addClickHandler(new CreateNoteHandler());
-		
-		buttonsPanel.add(sharedByBtn);
-		buttonsPanel.add(sharedWithBtn);
-		buttonsPanel.add(allNotesBtn);
-		buttonsPanel.add(addNoteButton);
-		
-		fPanel2.add(buttonsPanel);
-		fPanel2.add(contentPanel);
+        sharedWithBtn.addClickHandler(new SharedWithClickHandler());
+        allNotesBtn.addClickHandler(new AllNotesClickHandler());
+        sharedByBtn.addClickHandler(new SharedByClickHandler());
+        addNoteButton.addClickHandler(new CreateNoteHandler());
 
-		editorVerwaltung.getAllNotesForCurrentUser(callback);
-		this.add(fPanel2);
-		
-	}
+        buttonsPanel.add(sharedByBtn);
+        buttonsPanel.add(sharedWithBtn);
+        buttonsPanel.add(allNotesBtn);
+        buttonsPanel.add(addNoteButton);
 
-	private class AllNotesClickHandler implements ClickHandler {
+        fPanel2.add(buttonsPanel);
+        fPanel2.add(contentPanel);
 
-		@Override
-		public void onClick(ClickEvent event) {
-			editorVerwaltung.getAllNotesForCurrentUser(callback);
+        editorVerwaltung.getAllNotesForCurrentUser(callback);
+        this.add(fPanel2);
 
-		}
+    }
 
-	}
+    public void fillTableWith(Vector<Note> result) {
 
-	private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
-		@Override
-		public void onSuccess(Vector<Note> result) {
+        if (currentTable != null) {
+            this.remove(currentTable);
+        }
 
-			fillTableWith(result);
+        NoteTable nt = new NoteTable(result);
+        nt.addClickNote();
 
-		}
+        this.add(nt);
+        currentTable = nt;
+       
 
-		@Override
-		public void onFailure(Throwable caught) {
+    }
 
-			GWT.log(caught.toString());
+    private class AllNotesClickHandler implements ClickHandler {
 
-		}
+        @Override
+        public void onClick(ClickEvent event) {
+            editorVerwaltung.getAllNotesForCurrentUser(callback);
 
-	}
+        }
 
-	private class SharedWithClickHandler implements ClickHandler {
+    }
 
-		@Override
-		public void onClick(ClickEvent event) {
+    private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
+        @Override
+        public void onSuccess(Vector<Note> result) {
 
-			SharedWithCallback callback = new SharedWithCallback();
-			editorVerwaltung.getAllSharedNotesForCurrentUser(callback);
+            fillTableWith(result);
 
-		}
+        }
 
-	}
+        @Override
+        public void onFailure(Throwable caught) {
 
-	private class SharedWithCallback implements AsyncCallback<Vector<Note>> {
+            GWT.log(caught.toString());
 
-		@Override
-		public void onFailure(Throwable caught) {
-			GWT.log(caught.toString());
-		}
+        }
 
-		@Override
-		public void onSuccess(Vector<Note> result) {
-			fillTableWith(result);
+    }
 
-		}
+    private class SharedWithClickHandler implements ClickHandler {
 
-	}
+        @Override
+        public void onClick(ClickEvent event) {
 
-	private class SharedByClickHandler implements ClickHandler {
+            SharedWithCallback callback = new SharedWithCallback();
+            editorVerwaltung.getAllSharedNotesForCurrentUser(callback);
 
-		@Override
-		public void onClick(ClickEvent event) {
+        }
 
-			SharedByCallback callback = new SharedByCallback();
-			editorVerwaltung.getAllNotesSharedByCurrentUser(callback);
+    }
 
-		}
+    private class SharedWithCallback implements AsyncCallback<Vector<Note>> {
 
-	}
+        @Override
+        public void onFailure(Throwable caught) {
+            GWT.log(caught.toString());
+        }
 
-	private class SharedByCallback implements AsyncCallback<Vector<Note>> {
+        @Override
+        public void onSuccess(Vector<Note> result) {
+            fillTableWith(result);
 
-		@Override
-		public void onFailure(Throwable caught) {
-			GWT.log(caught.toString());
-		}
+        }
 
-		@Override
-		public void onSuccess(Vector<Note> result) {
-			fillTableWith(result);
-		}
+    }
 
-	}
+    private class SharedByClickHandler implements ClickHandler {
 
-	public void fillTableWith(Vector<Note> result) {
+        @Override
+        public void onClick(ClickEvent event) {
 
-		if (currentTable != null) {
-			this.remove(currentTable);
-		}
+            SharedByCallback callback = new SharedByCallback();
+            editorVerwaltung.getAllNotesSharedByCurrentUser(callback);
 
-		NoteTable nt = new NoteTable(result);
-		nt.addClickNote();
+        }
 
-		this.add(nt);
-		currentTable = nt;
+    }
 
-	}
+    private class SharedByCallback implements AsyncCallback<Vector<Note>> {
+
+        @Override
+        public void onFailure(Throwable caught) {
+            GWT.log(caught.toString());
+        }
+
+        @Override
+        public void onSuccess(Vector<Note> result) {
+            fillTableWith(result);
+        }
+
+    }
 
 }
