@@ -182,9 +182,15 @@ public class ShowNote extends BasicVerticalView {
         currentlyDisplayedNote.setTitle(titleTextBox.getText());
         currentlyDisplayedNote.setSubtitle(subtitleTextBox.getText());
         currentlyDisplayedNote.setContent(noteArea.getHTML());
-        java.util.Date utilDate = dueDateBox.getValue();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        currentlyDisplayedNote.setDueDate(sqlDate);
+        
+        if (dueDateBox.getValue() != null) {
+        	
+        	java.util.Date utilDate = dueDateBox.getValue();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            currentlyDisplayedNote.setDueDate(sqlDate);
+            
+        }
+        
         editorVerwaltung.saveNote(currentlyDisplayedNote, new UpdateCallback());
 
     }
@@ -256,6 +262,7 @@ public class ShowNote extends BasicVerticalView {
         public void onFailure(Throwable caught) {
 
             n.showError("Could not save");
+            n.showError(caught.toString());
             GWT.log("Update failed because of:");
             GWT.log(caught.toString());
 

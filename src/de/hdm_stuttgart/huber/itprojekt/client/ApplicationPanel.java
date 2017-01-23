@@ -29,6 +29,7 @@ public class ApplicationPanel extends DockLayoutPanel {
         return singleton;
     }
 
+  
     private void setUpContainers() {
 
         centerContent = new SimplePanel();

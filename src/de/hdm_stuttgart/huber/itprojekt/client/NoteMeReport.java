@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
+import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServices;
 import de.hdm_stuttgart.huber.itprojekt.shared.SharedServicesAsync;
@@ -66,7 +67,7 @@ public class NoteMeReport implements EntryPoint {
                 loggedInUser = result;
 
                 if (loggedInUser.isLoggedIn()) {
-
+                	
                     loadMenu();
 
                 } else {
@@ -81,7 +82,16 @@ public class NoteMeReport implements EntryPoint {
 
     }
 
-    private void loadMenu() {
+    
+
+	private void loadMenu() {
+		
+		if (!loggedInUser.isAdmin()) {
+			
+			Notificator.getNotificator().showError("Nur für Admins!");
+			return;
+			
+		}
 
         if (reportGenerator == null) {
             reportGenerator = ClientsideSettings.getReportGenerator();
