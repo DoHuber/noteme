@@ -189,6 +189,10 @@ public class ShowNote extends BasicVerticalView {
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             currentlyDisplayedNote.setDueDate(sqlDate);
             
+        } else {
+        	
+        	currentlyDisplayedNote.setDueDate(null);
+        	
         }
         
         editorVerwaltung.saveNote(currentlyDisplayedNote, new UpdateCallback());
