@@ -25,8 +25,6 @@ public class ShowThisPermission extends BasicVerticalView {
     private Label user;
     private Label object;
     private Permission p;
-    private Note note;
-    private Notebook notebook;
 
     public ShowThisPermission() {
 
@@ -69,10 +67,10 @@ public class ShowThisPermission extends BasicVerticalView {
         // TODO zu viel Logik im Client
         String typeAsVerboseString;
         if (Objects.equals(noteB, "b")) {
-            notebook = (Notebook) p.getSharedObject();
+            Notebook notebook = (Notebook) p.getSharedObject();
             typeAsVerboseString = "Notebook: " + notebook.getTitle();
         } else {
-            note = (Note) p.getSharedObject();
+            Note note = (Note) p.getSharedObject();
             typeAsVerboseString = "Note: " + note.getTitle();
         }
 

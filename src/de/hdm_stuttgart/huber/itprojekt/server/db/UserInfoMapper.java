@@ -23,9 +23,7 @@ public class UserInfoMapper extends DataMapper {
 
             try {
                 userInfoMapper = new UserInfoMapper();
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e.toString());
-            } catch (SQLException e) {
+            } catch (ClassNotFoundException | SQLException e) {
                 throw new RuntimeException(e.toString());
             }
 
@@ -75,11 +73,9 @@ public class UserInfoMapper extends DataMapper {
             ResultSet results = stmt.executeQuery();
             if (results.next()) {
 
-                UserInfo noteUser = new UserInfo(results.getInt("id"), results.getString("firstname"),
+                return new UserInfo(results.getInt("id"), results.getString("firstname"),
                         results.getString("username"), results.getString("lastname"), results.getString("email"),
                         results.getString("google_id"));
-
-                return noteUser;
 
             }
 

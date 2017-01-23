@@ -28,13 +28,12 @@ import java.util.Vector;
 public class PermissionTable extends FlowPanel {
 
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-    DataGrid<Permission> table = new DataGrid<Permission>();
+    DataGrid<Permission> table = new DataGrid<>();
     /**
      * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
      */
     private Note note = null;
     private Notebook notebook = null;
-    private Permission selected = null;
     private Vector<Permission> permission;
 
     public PermissionTable(Vector<Permission> list) {
@@ -94,7 +93,7 @@ public class PermissionTable extends FlowPanel {
                 // !!!! Könnte Fehler verursachen
                 // RICHITGGG Veursacht auch Fehler
                 String noteB = String.valueOf(permission.getSharedObject().getType());
-                String string = null;
+                String string;
                 if (Objects.equals(noteB, "b")) {
                     notebook = (Notebook) permission.getSharedObject();
                     string = "Notebook: " + notebook.getTitle();
@@ -124,7 +123,7 @@ public class PermissionTable extends FlowPanel {
      */
 
     public void addClickNote() {
-        final SingleSelectionModel<Permission> selection = new SingleSelectionModel<Permission>();
+        final SingleSelectionModel<Permission> selection = new SingleSelectionModel<>();
         table.setSelectionModel(selection);
         selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
     }
@@ -139,7 +138,7 @@ public class PermissionTable extends FlowPanel {
         @Override
         public void onSelectionChange(SelectionChangeEvent event) {
 
-            selected = selection.getSelectedObject();
+            Permission selected = selection.getSelectedObject();
             ShowThisPermission sn = new ShowThisPermission(selected);
             ApplicationPanel.getApplicationPanel().replaceContentWith(sn);
 

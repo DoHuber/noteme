@@ -14,7 +14,7 @@ public class ApplicationPanel extends DockLayoutPanel {
     private SimplePanel header;
     private SimplePanel footer;
 
-    protected ApplicationPanel(Unit unit) {
+    protected ApplicationPanel() {
         super(Unit.PCT);
 
         setUpContainers();
@@ -23,7 +23,7 @@ public class ApplicationPanel extends DockLayoutPanel {
     public static ApplicationPanel getApplicationPanel() {
 
         if (singleton == null) {
-            singleton = new ApplicationPanel(Unit.PCT);
+            singleton = new ApplicationPanel();
         }
 
         return singleton;

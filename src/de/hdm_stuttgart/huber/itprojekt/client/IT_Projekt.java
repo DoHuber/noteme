@@ -70,7 +70,7 @@ public class IT_Projekt implements EntryPoint {
 
                     initializeAudio();
 
-                    if (!loggedInUser.isAdmin()) {
+                    if (loggedInUser.isAdmin()) {
 
                         IT_Projekt.this.bootSound.play();
 

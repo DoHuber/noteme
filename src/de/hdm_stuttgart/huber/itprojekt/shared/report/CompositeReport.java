@@ -17,7 +17,7 @@ public abstract class CompositeReport extends Report implements Serializable {
     /**
      * Die Menge der Teil-Reports.
      */
-    private Vector<Report> subReports = new Vector<Report>();
+    private Vector<Report> subReports = new Vector<>();
 
     /**
      * Hinzufügen eines Teil-Reports.

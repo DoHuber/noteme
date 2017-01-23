@@ -6,13 +6,12 @@ import com.google.gwt.user.client.ui.PopupPanel;
 
 public class FloatingHeaderBar extends PopupPanel {
 
-    private HorizontalPanel content = new HorizontalPanel();
-
     public FloatingHeaderBar() {
 
         super(false, true);
 
         String height = Double.toString((Window.getClientHeight() * 0.1));
+        HorizontalPanel content = new HorizontalPanel();
         content.setHeight(height + "px");
 
         String width = Double.toString(((Window.getClientWidth() * 0.75)));

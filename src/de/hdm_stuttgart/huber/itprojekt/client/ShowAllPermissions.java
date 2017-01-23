@@ -26,8 +26,7 @@ public class ShowAllPermissions extends BasicVerticalView {
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
     AllPermissionsCallback callback = new AllPermissionsCallback();
     UserCallback cb = new UserCallback();
-    private UserInfo ui = null;
-    private Vector<Permission> permissions = new Vector<Permission>();
+    private Vector<Permission> permissions = new Vector<>();
     private PermissionTable currentTable;
 
     public ShowAllPermissions(Vector<Permission> nList) {
@@ -106,7 +105,7 @@ public class ShowAllPermissions extends BasicVerticalView {
         @Override
         public void onSuccess(UserInfo result) {
 
-            ui = result;
+            UserInfo ui = result;
             permissionVerwaltung.getAllPermissionsCreatedBy(ui, callback);
 
         }

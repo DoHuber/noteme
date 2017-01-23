@@ -7,12 +7,9 @@ public class InvalidLoginStatusException extends RuntimeException {
      */
     private static final long serialVersionUID = -6623416840322170431L;
 
-    public InvalidLoginStatusException() {
-        // TODO Auto-generated constructor stub
-    }
 
-    public InvalidLoginStatusException(String message) {
-        super(message);
+    public InvalidLoginStatusException() {
+        super("Kein User eingeloggt. Funktion an falscher Stelle verwendet?");
         // TODO Auto-generated constructor stub
     }
 

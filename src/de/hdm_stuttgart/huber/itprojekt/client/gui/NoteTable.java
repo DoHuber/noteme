@@ -25,11 +25,7 @@ import java.util.Vector;
 public class NoteTable extends FlowPanel {
 
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-    DataGrid<Note> table = new DataGrid<Note>();
-    /**
-     * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
-     */
-    private Note selected = null;
+    DataGrid<Note> table = new DataGrid<>();
     private Vector<Note> notes;
 
     public NoteTable(Vector<Note> list) {
@@ -138,7 +134,7 @@ public class NoteTable extends FlowPanel {
      */
 
     public void addClickNote() {
-        final SingleSelectionModel<Note> selection = new SingleSelectionModel<Note>();
+        final SingleSelectionModel<Note> selection = new SingleSelectionModel<>();
         table.setSelectionModel(selection);
         selection.addSelectionChangeHandler(new SelectionChangeHandler(selection));
     }
@@ -153,7 +149,10 @@ public class NoteTable extends FlowPanel {
         @Override
         public void onSelectionChange(SelectionChangeEvent event) {
 
-            selected = selection.getSelectedObject();
+            /*
+      Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
+     */
+            Note selected = selection.getSelectedObject();
             ShowNote sn = new ShowNote(selected);
             ApplicationPanel.getApplicationPanel().replaceContentWith(sn);
 

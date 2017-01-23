@@ -91,16 +91,16 @@ public class ShowNote extends BasicVerticalView {
         shareButton.setEnabled(false);
 
         Permission p = currentlyDisplayedNote.getRuntimePermission();
-        if (!p.isUserAllowedTo(Level.DELETE)) {
+        if (p.isUserAllowedTo(Level.DELETE)) {
             deleteButton.setEnabled(false);
         }
 
-        if (!p.isUserAllowedTo(Level.EDIT)) {
+        if (p.isUserAllowedTo(Level.EDIT)) {
             disableEditFields();
         }
 
         // Fehlerkondition: User darf dann eigentlich gar nicht hier sein
-        if (!p.isUserAllowedTo(Level.READ)) {
+        if (p.isUserAllowedTo(Level.READ)) {
 
             ApplicationPanel.getApplicationPanel().replaceContentWith(new ShowAllNotes());
 

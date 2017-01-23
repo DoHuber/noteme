@@ -63,7 +63,7 @@ public class PlainTextReportWriter extends ReportWriter {
          * In diesen Buffer schreiben wir während der Prozessierung sukzessive
 		 * unsere Ergebnisse.
 		 */
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
 		/*
 		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports
@@ -110,7 +110,7 @@ public class PlainTextReportWriter extends ReportWriter {
 		 * In diesen Buffer schreiben wir während der Prozessierung sukzessive
 		 * unsere Ergebnisse.
 		 */
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
 		/*
 		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports

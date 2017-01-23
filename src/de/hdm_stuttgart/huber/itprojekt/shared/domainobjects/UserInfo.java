@@ -46,7 +46,7 @@ public class UserInfo extends DomainObject {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return !isAdmin;
     }
 
     public void setAdminStatus(boolean status) {

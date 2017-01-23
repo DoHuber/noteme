@@ -28,7 +28,7 @@ public class ShowAllNotes extends BasicVerticalView {
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
     AllNotesCallback callback = new AllNotesCallback();
     Button addNoteButton = new Button(IconConstants.ICON_ADD_NOTE);
-    private Vector<Note> notes = new Vector<Note>();
+    private Vector<Note> notes = new Vector<>();
     private NoteTable currentTable;
 
     public ShowAllNotes(Vector<Note> nList) {
