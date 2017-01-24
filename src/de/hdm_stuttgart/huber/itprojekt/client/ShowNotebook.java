@@ -29,7 +29,7 @@ public class ShowNotebook extends BasicVerticalView {
      * Funktionen: Löschen, Editieren, Freigeben,
      */
     private Button deleteButton = new Button(IconConstants.ICON_DELETE);
-    private Button updateConfirmButton = new Button("Save");
+    private Button updateConfirmButton = new Button(IconConstants.ICON_CONFIRM);
     private Button shareButton = new Button(IconConstants.ICON_SHARE);
     private Button createButton = new Button(IconConstants.ICON_ADD_NOTE2);
     private TextBox title = new TextBox();
@@ -207,13 +207,10 @@ public class ShowNotebook extends BasicVerticalView {
         @Override
         public void onClick(ClickEvent event) {
 
-            if (Window.confirm("Möchten Sie die Änderungen speichern?")) {
-
-            }
-            displayedNoteBook.setTitle(title.getText());
+        	displayedNoteBook.setTitle(title.getText());
             displayedNoteBook.setSubtitle(subtitle.getText());
             editorVerwaltung.saveNoteBook(displayedNoteBook, new UpdateCallback());
-
+           
         }
 
     }

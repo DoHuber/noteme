@@ -24,7 +24,7 @@ public class ShowNote extends BasicVerticalView {
     private HorizontalPanel contentPanel = new HorizontalPanel();
     private VerticalPanel alignPanel = new VerticalPanel();
     private Button deleteButton = new Button(IconConstants.ICON_DELETE);
-    private Button updateConfirmButton = new Button("Update");
+    private Button updateConfirmButton = new Button(IconConstants.ICON_CONFIRM);
     private Button shareButton = new Button(IconConstants.ICON_SHARE);
 
     private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
@@ -250,10 +250,7 @@ public class ShowNote extends BasicVerticalView {
 
         @Override
         public void onClick(ClickEvent event) {
-            if (Window.confirm("Möchten Sie die Änderungen speichern?")) {
-                updateNote();
-            }
-
+        	updateNote();
         }
 
     }

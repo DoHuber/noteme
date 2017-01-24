@@ -8,6 +8,7 @@ public class IconConstants {
     public static final String ICON_ADD_NOTE = "<i class=\"material-icons\" style=\"font-size:14px\">note_add</i>";
     public static final String ICON_ADD_NOTE2 = "<i class=\"material-icons\">note_add</i>";
     public static final String ICON_ACCOUNT_CIRCLE = "<i class=\"material-icons\">account_circle</i>";
+    public static final String ICON_CONFIRM = "<i class=\"material-icons\">check_circle</i>";
 
     private IconConstants() {
 

@@ -88,7 +88,24 @@ public class NoteMeReport implements EntryPoint {
 		
 		if (!loggedInUser.isAdmin()) {
 			
-			Notificator.getNotificator().showError("Nur für Admins!");
+			Notificator.getNotificator().showError("Admins only!");
+			VerticalPanel vp = new VerticalPanel();
+			
+			vp.setWidth("100%");
+			vp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+			vp.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+			
+			vp.add(new Label("Admin-only feature: Either sign out to resign as admin, or switch to the main application:"));
+			Anchor a = new Anchor("Sign out");
+			a.setHref(loggedInUser.getLogoutUrl());
+			Anchor b = new Anchor("Main Application");
+			b.setHref(GWT.getHostPageBaseURL() + "IT_Projekt.html");
+			
+			vp.add(a);
+			vp.add(b);
+			
+			ApplicationPanel.getApplicationPanel().replaceContentWith(vp);
+			
 			return;
 			
 		}
