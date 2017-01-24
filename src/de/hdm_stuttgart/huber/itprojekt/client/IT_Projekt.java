@@ -54,7 +54,7 @@ public class IT_Projekt implements EntryPoint {
 
         GWT.log("Servus i bims");
         SharedServicesAsync loginService = GWT.create(SharedServices.class);
-        loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
+        loginService.login(GWT.getHostPageBaseURL() + "IT_Projekt.html", new AsyncCallback<UserInfo>() {
 
             @Override
 			public void onFailure(Throwable e) {

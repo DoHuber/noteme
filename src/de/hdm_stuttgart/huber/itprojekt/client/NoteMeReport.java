@@ -54,7 +54,7 @@ public class NoteMeReport implements EntryPoint {
         });
 
         SharedServicesAsync loginService = GWT.create(SharedServices.class);
-        loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
+        loginService.login(GWT.getHostPageBaseURL() + "Report.html", new AsyncCallback<UserInfo>() {
 
             @Override
             public void onFailure(Throwable e) {

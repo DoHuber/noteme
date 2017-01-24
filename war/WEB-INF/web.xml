@@ -7,7 +7,7 @@
 
     <!-- Servlets -->
     <servlet>
-        <servlet-name>testServlet</servlet-name>
+        <servlet-name>editor</servlet-name>
         <servlet-class>de.hdm_stuttgart.huber.itprojekt.server.EditorImpl</servlet-class>
     </servlet>
 
@@ -42,7 +42,7 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>testServlet</servlet-name>
+        <servlet-name>editor</servlet-name>
         <url-pattern>/it_projekt/testEditor</url-pattern>
     </servlet-mapping>
     
