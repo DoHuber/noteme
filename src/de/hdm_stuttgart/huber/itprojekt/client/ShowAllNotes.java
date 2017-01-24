@@ -12,6 +12,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -26,14 +27,9 @@ public class ShowAllNotes extends BasicVerticalView {
     final Button sharedWithBtn = new Button("Shared with me");
     final Button allNotesBtn = new Button("All Notes");
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-    AllNotesCallback callback = new AllNotesCallback();
     Button addNoteButton = new Button(IconConstants.ICON_ADD_NOTE);
-    private Vector<Note> notes = new Vector<Note>();
-    private NoteTable currentTable;
 
-    public ShowAllNotes(Vector<Note> nList) {
-        notes = nList;
-    }
+    private NoteTable currentTable;
 
     /**
      * No-Argument Konstruktor
@@ -43,18 +39,6 @@ public class ShowAllNotes extends BasicVerticalView {
     }
 
     public ShowAllNotes(Notebook selected) {
-
-    }
-
-    // Gibt alle Notizen zurück
-    public Vector<Note> getAllNotesListe() {
-
-        return notes;
-
-    }
-
-    public void setAllNotesListe(Vector<Note> liste) {
-        this.notes = liste;
 
     }
 
@@ -91,7 +75,7 @@ public class ShowAllNotes extends BasicVerticalView {
         fPanel2.add(buttonsPanel);
         fPanel2.add(contentPanel);
 
-        editorVerwaltung.getAllNotesForCurrentUser(callback);
+        editorVerwaltung.getAllNotesForCurrentUser(new AllNotesCallback());
         this.add(fPanel2);
 
     }
@@ -115,17 +99,41 @@ public class ShowAllNotes extends BasicVerticalView {
 
         @Override
         public void onClick(ClickEvent event) {
-            editorVerwaltung.getAllNotesForCurrentUser(callback);
+        	
+            editorVerwaltung.getAllNotesForCurrentUser(new AllNotesCallback());
 
         }
 
     }
 
     private class AllNotesCallback implements AsyncCallback<Vector<Note>> {
+    	
+    	private ArrayList<Note> allNotes = new ArrayList<>();
+    	private boolean finished = false;
+    	
+    	public AllNotesCallback() {
+    		
+    	}
+    	
+    	private AllNotesCallback(boolean finished, ArrayList<Note> dataSet) {
+    		this.finished = finished;
+    		allNotes = dataSet;
+    	}
+    	
         @Override
         public void onSuccess(Vector<Note> result) {
 
-            fillTableWith(result);
+            if (!finished) {
+            	
+            	allNotes.addAll(result);
+            	editorVerwaltung.getAllSharedNotesForCurrentUser(new AllNotesCallback(true, allNotes));
+            	
+            } else {
+            	
+            	allNotes.addAll(result);
+            	fillTableWith(new Vector<Note>(allNotes));
+            	
+            }
 
         }
 
