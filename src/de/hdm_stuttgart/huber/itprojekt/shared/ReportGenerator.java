@@ -2,6 +2,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.DateFilterable;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.*;
 
 import java.sql.Date;
@@ -52,6 +54,6 @@ public interface ReportGenerator extends RemoteService {
 
     AllPermissionsR createAllPermissionsR() throws IllegalArgumentException;
 
-    CustomReport createCustomReport(String type, String userEmail, Map<String, Date> timespan, boolean includePermissions);
+    CustomReport createCustomReport(String type, String userEmail, Map<String, Date> timespan, boolean includePermissions, DateFilterable.DateType dateType);
 
 }

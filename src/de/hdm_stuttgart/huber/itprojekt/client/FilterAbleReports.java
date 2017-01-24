@@ -12,6 +12,8 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.ReportGeneratorAsync;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.DateFilterable;
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.DateFilterable.DateType;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.CustomReport;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.HTMLReportWriter;
 
@@ -24,6 +26,7 @@ import java.util.Vector;
 public class FilterAbleReports extends BasicVerticalView {
 
     private final static String[] REPORT_CHOICES = {"notes", "notebooks", "permissions"};
+    
     EditorAsync editor = ClientsideSettings.getEditorVerwaltung();
     private HorizontalPanel alignPanel;
     private ListBox whatKindOfReport;
@@ -34,6 +37,8 @@ public class FilterAbleReports extends BasicVerticalView {
     private DateBox toDate;
     private MultiWordSuggestOracle oracle;
     private PopupPanel loadingPanel;
+    private ListBox dateChoices;
+    
     public FilterAbleReports() {
 
     }
@@ -53,38 +58,15 @@ public class FilterAbleReports extends BasicVerticalView {
     @Override
     public void run() {
 
-        whatKindOfReport = new ListBox();
-
         initializePopupPanel();
+        
+        whatKindOfReport = new ListBox();
 
         for (String element : REPORT_CHOICES) {
             whatKindOfReport.addItem(element);
         }
 
-        whatKindOfReport.addChangeHandler(new ChangeHandler() {
-
-            @Override
-            public void onChange(ChangeEvent event) {
-                String currentlySelected = whatKindOfReport.getValue(whatKindOfReport.getSelectedIndex());
-
-                if (Objects.equals(currentlySelected, "permissions")) {
-
-                    fromDate.setEnabled(false);
-                    toDate.setEnabled(false);
-                    includePermissions.setVisible(false);
-
-                } else {
-
-                    fromDate.setEnabled(true);
-                    toDate.setEnabled(true);
-                    includePermissions.setVisible(true);
-
-                }
-            }
-
-        });
-
-        whatKindOfReport.setVisibleItemCount(REPORT_CHOICES.length);
+        setUpReportTypeListBox();
 
         oracle = new MultiWordSuggestOracle();
         whichUser = new SuggestBox(oracle);
@@ -126,6 +108,15 @@ public class FilterAbleReports extends BasicVerticalView {
         sandwich.add(toDate);
 
         alignPanel.add(sandwich);
+        
+        dateChoices = new ListBox();
+       	String[] dateChoicesArray = {"creation date", "modification date"};
+        for (String s : dateChoicesArray) {
+        	dateChoices.addItem(s);
+        }
+        dateChoices.setVisibleItemCount(3);
+        
+        alignPanel.add(dateChoices);
 
         includePermissions = new CheckBox();
         VerticalPanel vp = new VerticalPanel();
@@ -138,6 +129,35 @@ public class FilterAbleReports extends BasicVerticalView {
         this.add(startButton);
 
     }
+
+	private void setUpReportTypeListBox() {
+		whatKindOfReport.addChangeHandler(new ChangeHandler() {
+
+            @Override
+            public void onChange(ChangeEvent event) {
+                String currentlySelected = whatKindOfReport.getValue(whatKindOfReport.getSelectedIndex());
+
+                if (Objects.equals(currentlySelected, "permissions")) {
+
+                    fromDate.setEnabled(false);
+                    toDate.setEnabled(false);
+                    includePermissions.setVisible(false);
+                    dateChoices.setEnabled(false);
+
+                } else {
+
+                    fromDate.setEnabled(true);
+                    toDate.setEnabled(true);
+                    includePermissions.setVisible(true);
+                    dateChoices.setEnabled(true);
+
+                }
+            }
+
+        });
+
+        whatKindOfReport.setVisibleItemCount(REPORT_CHOICES.length);
+	}
 
     private void initializePopupPanel() {
 
@@ -172,8 +192,17 @@ public class FilterAbleReports extends BasicVerticalView {
         }
 
         boolean includePerms = includePermissions.getValue();
+        
+        DateFilterable.DateType dateType = DateType.CREATION_DATE;
+        String dateTypeString = dateChoices.getValue(dateChoices.getSelectedIndex());
+        
+        if (dateTypeString.equals("creation date")) {
+        	dateType = DateType.CREATION_DATE;
+        } else if (dateTypeString.equals("modification date")) {
+        	dateType = DateType.MODIFICATION_DATE;
+        } 
 
-        rg.createCustomReport(type, userEmail, timespan, includePerms, new AsyncCallback<CustomReport>() {
+        rg.createCustomReport(type, userEmail, timespan, includePerms, dateType, new AsyncCallback<CustomReport>() {
 
             @Override
             public void onFailure(Throwable caught) {

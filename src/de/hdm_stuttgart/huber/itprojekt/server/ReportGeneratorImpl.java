@@ -89,16 +89,16 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     public AllUserNotebooksR createAllUserNotebooksR() throws IllegalArgumentException {
 
         UserInfo u = editor.getCurrentUser();
-        return createAllUserNotebooksReportFor(u, new HashMap<String, java.sql.Date>());
+        return createAllUserNotebooksReportFor(u, new HashMap<String, java.sql.Date>(), null);
 
     }
 
-    public AllUserNotebooksR createAllUserNotebooksReportFor(UserInfo u, Map<String, java.sql.Date> timespan) throws IllegalArgumentException {
+    public AllUserNotebooksR createAllUserNotebooksReportFor(UserInfo u, Map<String, java.sql.Date> timespan, DateType dateType) throws IllegalArgumentException {
 
         Vector<Notebook> allNoteBooksForUserId = NoteBookMapper.getNoteBookMapper().getAllNoteBooksForUserId(u.getId());
 
         if (!timespan.isEmpty()) {
-            filterForTimes(allNoteBooksForUserId, timespan);
+            filterForTimes(allNoteBooksForUserId, timespan, dateType);
 
             if (allNoteBooksForUserId.isEmpty()) {
                 return null;
@@ -183,18 +183,18 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     public AllUserNotesR createAllUserNotesR() throws IllegalArgumentException {
 
         UserInfo u = editor.getCurrentUser();
-        return createAllUserNotesReportFor(u, new HashMap<String, java.sql.Date>());
+        return createAllUserNotesReportFor(u, new HashMap<String, java.sql.Date>(), null);
 
     }
 
-    public AllUserNotesR createAllUserNotesReportFor(UserInfo u, Map<String, java.sql.Date> timespan)
+    public AllUserNotesR createAllUserNotesReportFor(UserInfo u, Map<String, java.sql.Date> timespan, DateType dateType)
             throws IllegalArgumentException {
 
         Vector<Note> allNotesForUserId = new Vector<>();
         allNotesForUserId = NoteMapper.getNoteMapper().getAllNotesForUserId(u.getId());
 
         if (!timespan.isEmpty()) {
-            filterForTimes(allNotesForUserId, timespan);
+            filterForTimes(allNotesForUserId, timespan, dateType);
 
             if (allNotesForUserId.isEmpty()) {
                 return null;
@@ -375,7 +375,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
     @Override
     public CustomReport createCustomReport(String type, String userEmail, Map<String, java.sql.Date> timespan,
-                                           boolean includePermissions) {
+                                           boolean includePermissions, DateType dateType) {
 
         Vector<UserInfo> applicableUsers = new Vector<UserInfo>();
 
@@ -407,11 +407,11 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
                 if (includePermissions) {
 
-                    appendNotesWithPermissionsTo(report, currentUser, timespan);
+                    appendNotesWithPermissionsTo(report, currentUser, timespan, dateType);
 
                 } else {
 
-                    appendNotesToReport(report, currentUser, timespan);
+                    appendNotesToReport(report, currentUser, timespan, dateType);
 
                 }
 
@@ -419,11 +419,11 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
                 if (includePermissions) {
 
-                    appendNoteBooksWithPermissionsTo(report, currentUser, timespan);
+                    appendNoteBooksWithPermissionsTo(report, currentUser, timespan, dateType);
 
                 } else {
 
-                    appendNoteBooksToReport(report, currentUser, timespan);
+                    appendNoteBooksToReport(report, currentUser, timespan, dateType);
 
                 }
 
@@ -448,7 +448,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     }
 
     @SuppressWarnings("unchecked")
-    private <T extends DateFilterable> void filterForTimes(Vector<T> dataSet, Map<String, java.sql.Date> timespan) {
+    private <T extends DateFilterable> void filterForTimes(Vector<T> dataSet, Map<String, java.sql.Date> timespan, DateType dateType) {
 
         // Der Synchronisation wegen, sonst hagelt es eine
         // ConcurrentModificationException
@@ -459,7 +459,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
             if (timespan.containsKey("from")) {
 
-                if (element.getDate(DateType.CREATION_DATE).before(timespan.get("from"))) {
+                if (element.getDate(dateType).before(timespan.get("from"))) {
                     dataSet.remove(element);
                     continue;
                 }
@@ -468,7 +468,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
             if (timespan.containsKey("to")) {
 
-                if (element.getDate(DateType.CREATION_DATE).after(timespan.get("to"))) {
+                if (element.getDate(dateType).after(timespan.get("to"))) {
                     dataSet.remove(element);
                 }
 
@@ -479,9 +479,9 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     }
 
     private void appendNoteBooksToReport(CustomReport report, UserInfo currentUser,
-                                         Map<String, java.sql.Date> timespan) {
+                                         Map<String, java.sql.Date> timespan, DateType dateType) {
 
-        SimpleReport toAdd = createAllUserNotebooksReportFor(currentUser, timespan);
+        SimpleReport toAdd = createAllUserNotebooksReportFor(currentUser, timespan, dateType);
 
         if (toAdd != null) {
             report.addSubReport(toAdd);
@@ -490,7 +490,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     }
 
     private void appendNoteBooksWithPermissionsTo(CustomReport report, UserInfo currentUser,
-                                                  Map<String, java.sql.Date> timespan) {
+                                                  Map<String, java.sql.Date> timespan, DateType dateType) {
 
         Vector<Notebook> allNoteBooks = editor.getAllNoteBooksFor(currentUser);
         PermissionService permService = new PermissionServiceImpl();
@@ -501,7 +501,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
         System.out.println("User is: " + currentUser.toString());
 
         if (!timespan.isEmpty()) {
-            filterForTimes(allNoteBooks, timespan);
+            filterForTimes(allNoteBooks, timespan, dateType);
         }
 
         for (Notebook element : allNoteBooks) {
@@ -544,10 +544,10 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
     }
 
-    private void appendNotesToReport(CustomReport report, UserInfo currentUser, Map<String, java.sql.Date> timespan) {
+    private void appendNotesToReport(CustomReport report, UserInfo currentUser, Map<String, java.sql.Date> timespan, DateType dateType) {
 
         System.out.println("Appending Notes Report");
-        SimpleReport toAdd = createAllUserNotesReportFor(currentUser, timespan);
+        SimpleReport toAdd = createAllUserNotesReportFor(currentUser, timespan, dateType);
 
         if (toAdd != null) {
             report.addSubReport(toAdd);
@@ -556,7 +556,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
     }
 
     private void appendNotesWithPermissionsTo(CustomReport report, UserInfo currentUser,
-                                              Map<String, java.sql.Date> timespan) {
+                                              Map<String, java.sql.Date> timespan, DateType dateType) {
 
         Vector<Note> allNotes = editor.getAllNotesForUser(currentUser);
         PermissionService permService = new PermissionServiceImpl();
@@ -567,7 +567,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
         System.out.println("User is: " + currentUser.toString());
 
         if (!timespan.isEmpty()) {
-            filterForTimes(allNotes, timespan);
+            filterForTimes(allNotes, timespan, dateType);
         }
 
         for (Note element : allNotes) {

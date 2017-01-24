@@ -1,6 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.DateFilterable.DateType;
 import de.hdm_stuttgart.huber.itprojekt.shared.report.*;
 
 import java.sql.Date;
@@ -31,6 +33,6 @@ public interface ReportGeneratorAsync {
     void createAllUserPermissionsR(AsyncCallback<AllUserPermissionsR> callback);
 
     void createCustomReport(String type, String userEmail, Map<String, Date> timespan, boolean includePermissions,
-                            AsyncCallback<CustomReport> callback);
+			DateType dateType, AsyncCallback<CustomReport> callback);
 
 }
