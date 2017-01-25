@@ -11,6 +11,8 @@ import de.hdm_stuttgart.huber.itprojekt.client.gui.NotebookTable;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -25,7 +27,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
     final Button sharedWithBtn = new Button("Shared with me");
     final Button allNoteBooksBtn = new Button("All Notebooks");
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
-    AllNotebooksCallback callback = new AllNotebooksCallback();
+
     Button createNoteBookButton = new Button(IconConstants.ICON_ADD_NOTE);
     private Vector<Notebook> notebook = new Vector<Notebook>();
 
@@ -85,7 +87,7 @@ public class ShowAllNotebooks extends BasicVerticalView {
         fPanel2.add(buttonsPanel);
         fPanel2.add(contentPanel);
 
-        editorVerwaltung.getAllNoteBooksForCurrentUser(callback);
+        editorVerwaltung.getAllNoteBooksForCurrentUser(new AllNotebooksCallback());
 
         this.add(fPanel2);
     }
@@ -108,16 +110,45 @@ public class ShowAllNotebooks extends BasicVerticalView {
 
         @Override
         public void onClick(ClickEvent event) {
-            editorVerwaltung.getAllNoteBooksForCurrentUser(callback);
+        	
+            editorVerwaltung.getAllNoteBooksForCurrentUser(new AllNotebooksCallback());
 
         }
 
     }
 
     private class AllNotebooksCallback implements AsyncCallback<Vector<Notebook>> {
+    	
+    	private List<Notebook> allNotes = new ArrayList<>();
+    	private boolean finished = false;
+    	
+    	public AllNotebooksCallback() {
+			
+		}
+    	
+    	public AllNotebooksCallback(boolean finished, List<Notebook> dataSet) {
+    		
+    		this.finished = finished;
+    		this.allNotes.addAll(dataSet);
+    		
+    	}
+    	
         @Override
         public void onSuccess(Vector<Notebook> result) {
-            fillTableWith(result);
+            
+        	if (!finished) {
+        		
+        		editorVerwaltung.getAllSharedNoteBooksForCurrentUser(new AllNotebooksCallback(true, result));
+        		
+        		
+        	} else {
+        		
+        		allNotes.addAll(result);
+        		fillTableWith(new Vector<Notebook>(allNotes));
+        		
+        	}
+        	
+        	
         }
 
         @Override

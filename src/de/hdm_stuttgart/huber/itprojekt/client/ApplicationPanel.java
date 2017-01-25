@@ -2,6 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.client;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -9,7 +10,7 @@ public class ApplicationPanel extends DockLayoutPanel {
 
     private static ApplicationPanel singleton;
 
-    private SimplePanel centerContent;
+    private ScrollPanel centerContent;
     private SimplePanel navigation;
     private SimplePanel header;
     private SimplePanel footer;
@@ -32,7 +33,7 @@ public class ApplicationPanel extends DockLayoutPanel {
   
     private void setUpContainers() {
 
-        centerContent = new SimplePanel();
+        centerContent = new ScrollPanel();
         navigation = new SimplePanel();
         header = new SimplePanel();
         footer = new SimplePanel();
