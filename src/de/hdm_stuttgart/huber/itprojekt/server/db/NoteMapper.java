@@ -130,7 +130,7 @@ public class NoteMapper extends DataMapper {
             stmt.setString(1, note.getTitle());
             stmt.setString(2, note.getSubtitle());
             stmt.setString(3, note.getContent());
-            stmt.setString(4, "Platzhalter Source"); // TODO
+            stmt.setString(4, note.getSource()); // TODO
 
             // Daten
             stmt.setDate(5, note.getCreationDate());
@@ -278,6 +278,7 @@ public class NoteMapper extends DataMapper {
             note.setContent(rs.getString("content"));
             note.setTitle(rs.getString("title"));
             note.setSubtitle(rs.getString("subtitle"));
+            note.setSource(rs.getString("note_source"));
 
             note.setOwner(noteUserMapper.findById(rs.getInt("author_id")));
             note.setNoteBook(noteBookMapper.findById(rs.getInt("notebook_id")));

@@ -134,6 +134,10 @@ public class ShowNote extends BasicVerticalView {
         alignPanel.add(dueDateBox);
         alignPanel.add(updateConfirmButton);
         dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
+        
+        if (currentlyDisplayedNote.getSource() != null) {
+        	alignPanel.add(new Label("Source: " + currentlyDisplayedNote.getSource()));
+        }
 
     }
 

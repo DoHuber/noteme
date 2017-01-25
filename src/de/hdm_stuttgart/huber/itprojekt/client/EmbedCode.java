@@ -26,6 +26,7 @@ public class EmbedCode extends BasicVerticalView {
 
         String s = "<form action=\'http://r1-dot-it-projekt-hdm.appspot.com/it_projekt/listener\' method=\'POST\'>" +
                 "<input type=\'image\' src=\'http://r1-dot-it-projekt-hdm.appspot.com/sharebutton.png\' alt=\'Share\' style=\'border:2px black solid\'>" +
+        		"<input type=\'hidden\' value=\'placeholder\' name=\'test\'>" + 
                 "</form>";
 
         Label l = new Label(s);

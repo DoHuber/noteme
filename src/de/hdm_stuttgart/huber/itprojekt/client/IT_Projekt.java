@@ -159,6 +159,8 @@ public class IT_Projekt implements EntryPoint {
     }
 
     private void checkIfNewNote() {
+    	
+    	GWT.log("Check if new note was called.");
 
         editorVerwaltung.getSource(new AsyncCallback<String>() {
 
@@ -172,6 +174,8 @@ public class IT_Projekt implements EntryPoint {
             @Override
             public void onSuccess(String result) {
                 if (Objects.equals(result, "none")) {
+                	
+                	GWT.log("Found none, loading menu.");
 
                     loadMenu();
                     loadDueNotes();

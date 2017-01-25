@@ -25,6 +25,8 @@ public class ExternalButtonListener extends HttpServlet {
         String remoteHost = request.getHeader("referer");
         HttpSession session = request.getSession();
         session.setAttribute("source", remoteHost);
+        
+        System.out.println("RemoteHost found to be: " + remoteHost);
 
         response.sendRedirect(response.encodeRedirectURL("/IT_Projekt.html"));
 
