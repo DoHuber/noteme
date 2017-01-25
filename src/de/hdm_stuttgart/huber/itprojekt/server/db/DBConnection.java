@@ -6,6 +6,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Enthält die Zugangsdaten für die mySQL-Datenbank
+ * und entscheidet, welche verwendet werden (je nachdem ob lokal oder
+ * in der AppEngine gearbeitet wird)
+ *
+ * @author Küchler, Behr
+ */
 public class DBConnection {
 
     // 2 Datenbank Zugangsdaten anlegen

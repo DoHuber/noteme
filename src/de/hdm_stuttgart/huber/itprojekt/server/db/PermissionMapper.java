@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+/**
+ * @see NoteMapper
+ */
 public class PermissionMapper extends DataMapper {
 
     // Statisches Attribut, welches den Singleton-PermissionMapper enthält

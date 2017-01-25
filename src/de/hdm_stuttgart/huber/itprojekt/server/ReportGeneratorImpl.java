@@ -16,6 +16,9 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
+ * Größtenteils aus dem Bankprojekt von Prof. Dr. Thies und Prof. Dr. Rathke übernommen, inklusive
+ * großer Teile des hier vorhandenen Javadocs
+ *
  * Implementierung des <code>ReportGenerator</code>-Interface. Die technische
  * Realisierung bzgl. <code>RemoteServiceServlet</code> bzw. GWT RPC erfolgt
  * analog zu {@lBankAdministrationImplImpl}. Für Details zu GWT RPC siehe dort.

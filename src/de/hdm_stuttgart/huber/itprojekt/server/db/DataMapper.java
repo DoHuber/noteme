@@ -6,32 +6,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * HashMap: Schlüssel und ein Wert (Schlüssel = id) Mapper merken sich welche
- * Objekte schon geladen haben, bei z.B. findById geht es schneller durch
- * HashMap zu schauen ob Objekt schon geladen haben
+ * Abstrakte Superklasse aller Mapper, enthält Methoden zur Verwaltung
+ * der Datenbankverbindung.
  *
  * @author Lisa
  */
 public abstract class DataMapper {
 
-    protected Map<Integer, Object> loadedObjects = new HashMap<>();
     protected Connection connection;
 
+    /**
+     * Holt eine aktive Datenbankverbindung für die Verwendung durch den Mapper
+     *
+     * @throws ClassNotFoundException wenn der Treiber nicht gefunden werden kann
+     * @throws SQLException wenn z.B. die Datenbank offline, oder das Passwort falsch ist.
+     */
     protected DataMapper() throws ClassNotFoundException, SQLException {
 
         connection = DBConnection.getConnection();
 
     }
 
-    protected <T> boolean isObjectLoaded(long id, Class<T> classToCheck) {
-
-        Object o = loadedObjects.get(id);
-        return o != null && classToCheck.isAssignableFrom(o.getClass());
-
-    }
-
+    /**
+     * Bei der Zerstörung eines Objektes durch den Garbage Collector wird
+     * noch einmal die DB-Verbindung geschlossen, da sonst schnell die maximale Anzahl überschritten wird.
+     *
+     * @throws Throwable eventuell auftretende Fehler, hier sehr allgemein
+     */
     @Override
-    protected void finalize() throws Throwable {
+    protected void finalize() throws Throwable{
 
         super.finalize();
         connection.close();

@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * Basisklasse
  *
- * @author Nikita Nalivayko
+ * @author Nikita Nalivayko, auf
  *         <p>
  *         Funktioniert fast identisch zu BasicView, nur dass hier ein VerticalPanel als
  *         Grundlage dient. Inhalte werden immer horizontal zentriert, um das alte Verhalten mit RootPanels
@@ -38,9 +38,9 @@ public abstract class BasicVerticalView extends VerticalPanel {
      * formatierbares HTML-Element. Unter CSS lässt sich das Ergebnis über
      * <code>.headline</code> referenzieren bzw. formatieren.
      *
-     * @param header
-     * @param subHeader
-     * @return
+     * @param header Überschrioft
+     * @param subHeader Unterüberschrift
+     * @return Fertige Überschrift als HTML
      */
     public HTML createHeadline(String header, String subHeader) {
         HTML headline = new HTML();

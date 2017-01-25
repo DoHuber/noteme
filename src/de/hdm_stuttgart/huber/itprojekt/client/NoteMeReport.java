@@ -25,7 +25,7 @@ public class NoteMeReport implements EntryPoint {
     private UserInfo loggedInUser;
     private VerticalPanel loginPanel = new VerticalPanel();
     private Label loginLabel = new Label(
-            "Please sign in to your Google Account to access the cool and nice application.");
+            "Please sign in to your Google AccountEditView to access the cool and nice application.");
     private Anchor signInLink = new Anchor("Sign In");
 
     private ApplicationPanel applicationPanel;

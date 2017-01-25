@@ -1,9 +1,12 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
 /**
- * @author Lisa
+ * Stellt einen Nutzer des Systems dar
+ * Im Grunde das Objekt zur Darstellung der Daten aus der AppEngine-Users-API,
+ * nur um Vor- und Nachnamen, sowie in der DB um eine ID erweitert.
+ *
+ * @author Lisa Küchler
  */
-
 public class UserInfo extends DomainObject {
 
     private static final long serialVersionUID = 1L;
@@ -112,8 +115,7 @@ public class UserInfo extends DomainObject {
         return googleId;
     }
 
-    public void setGoogleId(String googleId) { // f�llt f�r googleId die
-        // NoteUserId weg?
+    public void setGoogleId(String googleId) {
         this.googleId = googleId;
     }
 

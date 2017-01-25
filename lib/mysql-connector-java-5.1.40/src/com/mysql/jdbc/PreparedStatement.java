@@ -1675,7 +1675,7 @@ public class PreparedStatement extends com.mysql.jdbc.StatementImpl implements j
                 }
 
                 //
-                // Account for static part of values clause
+                // AccountEditView for static part of values clause
                 // This is a little naive, because the ?s will be replaced but it gives us some padding, and is less housekeeping to ignore them. We're looking
                 // for a "fuzzy" value here anyway
                 //

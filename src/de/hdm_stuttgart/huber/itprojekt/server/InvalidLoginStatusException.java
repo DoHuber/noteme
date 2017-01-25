@@ -1,5 +1,12 @@
 package de.hdm_stuttgart.huber.itprojekt.server;
 
+/**
+ * Wird geworfen, wenn versucht wird, Methoden, die nur nach Login zulässig sind,
+ * ohne serverseitig angemeldeten Nutzer zu verwenden. Ähnelt ansonsten <code>RuntimeException</code>
+ *
+ * @see RuntimeException
+ * @author Dominik Huber
+ */
 public class InvalidLoginStatusException extends RuntimeException {
 
     /**

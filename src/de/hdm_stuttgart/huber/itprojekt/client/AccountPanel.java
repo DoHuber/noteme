@@ -22,13 +22,13 @@ public class AccountPanel extends PopupPanel {
 
         VerticalPanel contentPanel = new VerticalPanel();
 
-        Anchor myAccountAnchor = new Anchor("My Account");
+        Anchor myAccountAnchor = new Anchor("My AccountEditView");
         myAccountAnchor.addClickHandler(new ClickHandler() {
 
             @Override
             public void onClick(ClickEvent event) {
 
-                ApplicationPanel.getApplicationPanel().replaceContentWith(new Account(loggedInUser));
+                ApplicationPanel.getApplicationPanel().replaceContentWith(new AccountEditView(loggedInUser));
 
             }
 

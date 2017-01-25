@@ -16,6 +16,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.util.Vector;
 
+/**
+ * @see PermissionService
+ */
 public class PermissionServiceImpl extends RemoteServiceServlet implements PermissionService {
 
     /**

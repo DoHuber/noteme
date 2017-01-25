@@ -2,6 +2,11 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
 import java.sql.Date;
 
+/**
+ * Stellt eine Notiz im System dar
+ *
+ * @author Küchler, Behr
+ */
 public class Note extends DomainObject implements Shareable, DateFilterable {
 
     private static final long serialVersionUID = 1L;
@@ -27,48 +32,11 @@ public class Note extends DomainObject implements Shareable, DateFilterable {
         this.id = id;
     }
 
-    /**
-     * @param noteId
-     * @param content
-     * @param title
-     * @param subtitle
-     * @param owner
-     * @param noteBook
-     * @param dueDate
-     * @param creationDate
-     * @param modificationDate
-     */
-    public Note(int noteId, String content, String title, String subtitle, UserInfo owner, Notebook noteBook,
-                Date dueDate, Date creationDate, Date modificationDate) {
-        super();
-        this.id = noteId;
-        this.content = content;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.owner = owner;
-        this.noteBook = noteBook;
-        this.dueDate = dueDate;
-        this.creationDate = creationDate;
-        this.modificationDate = modificationDate;
-    }
-
     @Override
     public String toString() {
         return "Note [id=" + id + ", content=" + content + ", title=" + title + ", subtitle=" + subtitle + ", owner="
                 + owner + ", noteBook=" + noteBook + ", dueDate=" + dueDate + ", creationDate=" + creationDate
                 + ", modificationDate=" + modificationDate + "]";
-    }
-
-    public String toHtmlString() {
-        return "<p> Note <br> [id=" + id + "<br>, content=" + content + "<br>, title=" + title + "<br>, subtitle="
-                + subtitle + "<br>, owner=" + owner.toString() + "<br>, noteBook=" + noteBook + "<br>, dueDate="
-                + dueDate + "<br>, creationDate=" + creationDate + "<br>, modificationDate=" + modificationDate
-                + "] </p>";
-    }
-
-    public boolean isThisDue() {
-        Date now = new Date(System.currentTimeMillis());
-        return now.after(dueDate);
     }
 
     public boolean hasRuntimePermission() {

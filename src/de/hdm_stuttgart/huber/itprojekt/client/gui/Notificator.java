@@ -5,18 +5,20 @@ import com.google.gwt.user.client.Window;
 
 import java.util.ArrayList;
 
+/**
+ * Singleton, verwaltet Notifications für eine Sitzung
+ * Muss ein Singleton sein, da sonst das Stapelfeauture für mehrere Benachrichtigungen
+ * zur gleichen Zeit nicht funktioniert. Zeigt dem Nutzer benachrichtungen an und "stapelt" diese bei Bedarf
+ * übereinander
+ *
+ * @author Dominik Huber
+ */
 public class Notificator {
 
     private static Notificator singleton;
     private ArrayList<NotificationPopup> activeNotifications;
 
-    /**
-     * Singleton, verwaltet Notifications für eine Sitzung
-     * Muss ein Singleton sein, da sonst das Stapelfeauture für mehrere Benachrichtigungen
-     * zur gleichen Zeit nicht funktioniert.
-     *
-     * @author Dominik Huber
-     */
+
 
     protected Notificator() {
 

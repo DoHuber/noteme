@@ -6,6 +6,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import java.sql.*;
 import java.util.Vector;
 
+/**
+ * @see NoteMapper
+ */
 public class NoteBookMapper extends DataMapper {
 
     private static NoteBookMapper noteBookMapper = null;
@@ -73,7 +76,6 @@ public class NoteBookMapper extends DataMapper {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-
     public Notebook findById(long id) throws ClassNotFoundException, SQLException {
 
         Connection connection = DBConnection.getConnection();

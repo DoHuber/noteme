@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Java SE-Servlet, welches für unter http://host/it_projekt/listener eingehende HTTP POST-Requests verantwortlich ist,
+ * Teil der <i>externer Button</i>-Funktionalität
+ */
 public class ExternalButtonListener extends HttpServlet {
 
     /**
@@ -18,6 +22,16 @@ public class ExternalButtonListener extends HttpServlet {
 
     }
 
+    /**
+     * Nach dem Klick auf den externen Button wird der Browser des Nutzers einen HTTP POST - Request an diese URL
+     * ausführen. Dieses Servlet startet eine Session, in welcher der <code>referer</code> aus dem Requestheader
+     * gespeichert wird, anschließend wird der Nutzer an die Applikation weitergeleitet. (via HTTP 302 Found)
+     *
+     * @param request eingehender HTTP-Request
+     * @param response ausgehende HTTP Response
+     * @throws ServletException Wenn serverseitige Fehler auftreten
+     * @throws IOException Bei ungültigen Requests
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -3,7 +3,9 @@ package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 import java.sql.Date;
 
 /**
- * @author elcpt
+ * Stellt ein Notizbuch im System dar.
+ *
+ * @author Huber, Küchler, Behr
  */
 public class Notebook extends DomainObject implements Shareable, DateFilterable {
 
@@ -18,6 +20,7 @@ public class Notebook extends DomainObject implements Shareable, DateFilterable 
     private Date creationDate = null;
     private Date modificationDate = null;
 
+    // Stellt Berechtigungen für den angemeldeten Nutzer, wenn anwendbar, dar
     private Permission runTimePermission;
 
     public Notebook() {

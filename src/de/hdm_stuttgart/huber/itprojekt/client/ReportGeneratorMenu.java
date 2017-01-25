@@ -13,18 +13,14 @@ import de.hdm_stuttgart.huber.itprojekt.shared.report.*;
 
 /**
  * <p>
- * Ein weiterer Showcase. Dieser demonstriert das Anzeigen eines Reports zum
- * Kunden mit der Kundennummer 1. Demonstration der Nutzung des Report
- * Generators.
+ * Basierend auf einem Showcase aus dem Bankprojekt.
  * </p>
  * <p>
  * Ein detaillierter beschriebener Showcase findet sich in
- * {@link CreateAccountDemo}.
  * </p>
  *
  * @author thies
- * @version 1.0
- * @see CreateAccountDemo
+ *
  */
 public class ReportGeneratorMenu extends VerticalPanel {
 

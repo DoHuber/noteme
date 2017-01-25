@@ -27,6 +27,8 @@ import com.google.gwt.user.client.ui.*;
  * A sample toolbar for use with {@link RichTextArea}. It provides a simple UI
  * for all rich text formatting, dynamically displayed only for the available
  * functionality.
+ *
+ * Wurde den GWT-Beispielcode-Repositories entnommen.
  */
 @SuppressWarnings("deprecation")
 public class RichTextToolbar extends Composite {

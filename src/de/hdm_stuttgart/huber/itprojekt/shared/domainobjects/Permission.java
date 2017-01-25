@@ -1,13 +1,20 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.domainobjects;
 
+/**
+ * Stellt Freigaben von teilbaren Objekten dar
+ *
+ * @author Küchler, Behr
+ */
 public class Permission extends DomainObject {
 
     // Hat eclipse mal automatisch generiert
     private static final long serialVersionUID = 1L;
+
     private Level level;
     private UserInfo author;
     private UserInfo beneficiary;
     private Shareable sharedObject;
+
     // Konstruktoren
     public Permission(int id, Level l) {
         this.id = id;

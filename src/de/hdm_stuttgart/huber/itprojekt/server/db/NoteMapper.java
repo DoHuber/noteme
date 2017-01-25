@@ -6,31 +6,43 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import java.sql.*;
 import java.util.Vector;
 
+/**
+ * <code>Mapper</code>, welcher zwischen <code>Note</code>-Objekten und der Datenbank hin- und herübersetzt.
+ * Da die <code>Mapper</code> dieser Applikation sich grundsätzlich sehr ähneln, sei hier nur dieser detailliert beschreiben
+ *
+ * @author Küchler, Behr
+ */
 public class NoteMapper extends DataMapper {
 
     // Statisches Attribut, welches den Singleton-NoteMapper enthält.
     private static NoteMapper noteMapper = null;
+
     private UserInfoMapper noteUserMapper = UserInfoMapper.getUserInfoMapper();
     private NoteBookMapper noteBookMapper = NoteBookMapper.getNoteBookMapper();
 
-    // Nichtöffentlicher Konstruktor, um "unauthorisiertes" Instanziieren dieser
-    // Klasse zu verhindern.
-    protected NoteMapper() throws ClassNotFoundException, SQLException {
+    /**
+     * Nichtöffentlicher Konstruktor, um "unauthorisiertes" Instanziieren dieser
+     * Klasse zu verhindern.
+     *
+     * @throws ClassNotFoundException wenn Treiber nicht gefunden wird
+     * @throws SQLException wenn die Datenbank ein Problem hat
+     */
+    private NoteMapper() throws ClassNotFoundException, SQLException {
 
     }
 
-    // Öffentliche Methode um den Singleton-NoteMapper zu erhalten
+    /**
+     * Gibt den aktuellen <code>Mapper</code> zurück, da dieser als sog. Singleton realisiert ist.
+     *
+     * @return einen <code>NoteMapper</code>
+     */
     public static NoteMapper getNoteMapper() {
 
         if (noteMapper == null) {
 
             try {
                 noteMapper = new NoteMapper();
-            } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
+            } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
 
@@ -39,6 +51,15 @@ public class NoteMapper extends DataMapper {
         return noteMapper;
     }
 
+    /**
+     * Erstellt ein übergebenes <code>Note</code>-Objekt als neuen Eintrag in der note-Tabelle
+     * in der mySQL-Datenbank, gibt das erstelle Objekt mit id zurück
+     *
+     * @param note zu erstellende Notiz
+     * @return Fertig gespeicherte Notiz
+     * @throws ClassNotFoundException wenn
+     * @throws SQLException wenn die Datenbank Probleme macht
+     */
     public Note create(Note note) throws ClassNotFoundException, SQLException {
 
         try {
@@ -87,6 +108,14 @@ public class NoteMapper extends DataMapper {
 
     }
 
+    /**
+     * Gibt die Notiz zurück, die in der Datenbank die übergebene <code>id</code> hat.
+     *
+     * @param id <code>id</code> der zu suchenden Notiz
+     * @return Gggf. gefunden <code>Note</code>, sonst null
+     * @throws ClassNotFoundException im Fehlerfall
+     * @throws SQLException bei Datenbankproblemen, auch Fehleingaben
+     */
     public Note findById(int id) throws ClassNotFoundException, SQLException {
 
 
@@ -128,6 +157,14 @@ public class NoteMapper extends DataMapper {
         return null;
     }
 
+    /**
+     * Speichert die übergebene Notiz via UDPATE in der Datenbank
+     *
+     * @param note Zu speicherende Notiz
+     * @return Gespeicherte Notiz mit aktuellen Werten
+     * @throws ClassNotFoundException im Fehlerfall
+     * @throws SQLException bei Datenbankproblemen
+     */
     public Note save(Note note) throws ClassNotFoundException, SQLException {
 
         try {
@@ -167,6 +204,12 @@ public class NoteMapper extends DataMapper {
         return findById(note.getId());
     }
 
+    /**
+     * Löscht eine übergebene Notiz dauerhaft anhand ihrer <code>id</code> mit DELETE FROM aus der
+     * Datenbank.
+     *
+     * @param note zu löschende Notiz
+     */
     public void delete(Note note) {
 
         try {
@@ -182,6 +225,13 @@ public class NoteMapper extends DataMapper {
 
     }
 
+    /**
+     * Gibt alle Notizen zurück
+     *
+     * @return alle verfügbaren Notizen
+     * @throws ClassNotFoundException im Fehlerfall
+     * @throws SQLException im Fehlerfall
+     */
     public Vector<Note> getAllNotes() throws ClassNotFoundException, SQLException {
 
         try {
@@ -199,6 +249,12 @@ public class NoteMapper extends DataMapper {
 
     }
 
+    /**
+     * Gibt alle Notizen zurück, deren Autor die übergebene id hat.
+     *
+     * @param userId <code>id</code> des Autors
+     * @return alle anwendbaren Notizen
+     */
     public Vector<Note> getAllNotesForUserId(int userId) {
 
         try {
@@ -218,6 +274,12 @@ public class NoteMapper extends DataMapper {
 
     }
 
+    /**
+     * Gibt alle Notizen zurück, deren Autor die übergebene id hat.
+     *
+     * @param userId <code>id</code> des Autors
+     * @return alle anwendbaren Notizen
+     */
     public Vector<Note> getAllNotesForUser(int userId) {
         try {
 
@@ -237,6 +299,12 @@ public class NoteMapper extends DataMapper {
 
     }
 
+    /**
+     * Gibt alle Notizen zurück, die dem übergebenen Notizbuch (der id) zugeordnet sind.
+     *
+     * @param id <code>id</code> des übergebenen Notizbuches
+     * @return alle entsprechenden Notizen
+     */
     public Vector<Note> getAllNotesForNoteBookId(int id) {
 
         try {
@@ -257,6 +325,12 @@ public class NoteMapper extends DataMapper {
 
     }
 
+    /**
+     * Gibt alle Notizen zurück, die mit dem übergebenen Nutzer geteilt wurden.
+     *
+     * @param u Nutzer
+     * @return Notizen
+     */
     public Vector<Note> getAllNotesSharedWith(UserInfo u) {
 
         try {
@@ -276,6 +350,14 @@ public class NoteMapper extends DataMapper {
 
     }
 
+    /**
+     * Helfermethode, macht Note-Objekte aus einem mySQL-<code>ResultSet</code>
+     *
+     * @param rs mysql-ResultSet mit den Ergebnissen einer Abfrage
+     * @return vollständige <code>Note</code>-Objekte
+     * @throws SQLException im Fehlerfall
+     * @throws ClassNotFoundException im Fehlerfall
+     */
     private Vector<Note> makeNotesFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
 
         Vector<Note> v = new Vector<>();
@@ -303,6 +385,12 @@ public class NoteMapper extends DataMapper {
         return v;
     }
 
+    /**
+     * Gibt alle Notizen zurück, die vom übergebenen Nutzer geteilt wurden.
+     *
+     * @param u Nutzer
+     * @return Notizen
+     */
     public Vector<Note> getAllNotesSharedBy(UserInfo u) {
 
         String sql = "SELECT DISTINCT note.id AS id FROM note JOIN permission ON note.id = permission.note_id WHERE note.author_id = ?";

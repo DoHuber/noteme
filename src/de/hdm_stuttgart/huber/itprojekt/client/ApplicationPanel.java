@@ -6,6 +6,11 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * Herzstück der Gui, dieses erweiterte <code>DockLayoutPanel</code> stellt die Applikation dar.
+ * Dabei werden feste Methoden geliefert, mit denen Navigation, Header und Footer gesetzt werden können.
+ * Weiterhin kann der zentrale Inhalt immer laufend ersetzt werden.
+ */
 public class ApplicationPanel extends DockLayoutPanel {
 
     private static ApplicationPanel singleton;

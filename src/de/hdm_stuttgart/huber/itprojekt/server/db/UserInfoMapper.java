@@ -5,6 +5,9 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 import java.sql.*;
 import java.util.Vector;
 
+/**
+ * @see NoteMapper
+ */
 public class UserInfoMapper extends DataMapper {
 
     // Statisches Attribut, welches den Singleton-NoteUserMapper enthält

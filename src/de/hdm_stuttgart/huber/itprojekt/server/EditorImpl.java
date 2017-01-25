@@ -21,10 +21,16 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Vector;
 
+/**
+ * Implementation der Editor-Funktionalität serverseitig. Die Dokumenation im {@link Editor} - Interface
+ * sollte folglich bis auf Helfermethoden auch für diese Klasse genügen.
+ *
+ * @see Editor
+ */
 public class EditorImpl extends RemoteServiceServlet implements Editor {
 
     /**
-     * AUTO-GENERATED
+     * Hat eclipse automatisch generiert
      */
     private static final long serialVersionUID = 1L;
 
@@ -46,10 +52,11 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
     @Override
     @Deprecated
     public String getHelloWorld() {
-        // Sinnlose Methode, gibt einen zufälligen String zurück
-        // Zu Testzwecken, wird dann bezeiten rausgeworfen
+
+        // Sinnlose Methode für Testzwecke (Paradoxon), gibt einen zufälligen String zurück
         SecureRandom random = new SecureRandom();
         return new BigInteger(256, random).toString();
+
     }
 
     @Override
@@ -346,19 +353,13 @@ public class EditorImpl extends RemoteServiceServlet implements Editor {
 
         try {
             userInfoMapper.delete(ui);
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public Vector<Note> getDueNotesForCurrentUser() {
-
-        // TODO performanter implementieren mit eigener Mapper-Funktion
 
         Date today = new Date(System.currentTimeMillis());
         Vector<Note> dueNotes = new Vector<>();
