@@ -1,5 +1,6 @@
 package de.hdm_stuttgart.huber.itprojekt.client.gui;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -13,6 +14,7 @@ import de.hdm_stuttgart.huber.itprojekt.client.ShowNote;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 /**
@@ -26,6 +28,7 @@ public class NoteTable extends FlowPanel {
 
     EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
     DataGrid<Note> table = new DataGrid<Note>();
+	DateTimeFormat datumsFormatDe = DateTimeFormat.getFormat("d.M.y");
     /**
      * Funktion: Löschen, Editieren, und Freigeben - Notizbuchebene
      */
@@ -86,9 +89,9 @@ public class NoteTable extends FlowPanel {
 
             @Override
             public String getValue(Note note) {
-                // !!!! Könnte Fehler verursachen
-                // RICHITGGG Veursacht auch Fehler
-                return note.getCreationDate().toString();
+               
+            	return datumsFormatDe.format(note.getCreationDate());
+            	
             }
         };
         table.addColumn(creationDate, "Creation Date");
@@ -98,7 +101,7 @@ public class NoteTable extends FlowPanel {
             @Override
             public String getValue(Note note) {
 
-                return note.getModificationDate().toString();
+            	return datumsFormatDe.format(note.getModificationDate());
 
             }
         };
@@ -110,8 +113,9 @@ public class NoteTable extends FlowPanel {
             public String getValue(Note note) {
 
                 String resultValue = "Keines gesetzt";
+                
                 if (!(note.getDueDate() == null)) {
-                    resultValue = note.getDueDate().toString();
+                    resultValue = datumsFormatDe.format(note.getDueDate());
                 }
 
                 return resultValue;

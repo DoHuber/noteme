@@ -39,7 +39,6 @@ public class ShowNote extends BasicVerticalView {
     private Label title = new Label("Title");
     private Label subtitle = new Label("Subtitle");
     private Label dueDate = new Label("Due Date");
-    private Grid grid = new Grid(2, 1);
     private Note currentlyDisplayedNote = null;
 
 

@@ -4,7 +4,6 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.*;
-import java.util.Arrays;
 import java.util.Vector;
 
 public class NoteMapper extends DataMapper {

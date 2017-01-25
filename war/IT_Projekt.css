@@ -18,6 +18,10 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 
+.panelspacing {
+	padding-bottom: 2%;
+}
+
 .loadingpanel {
 	
 	background-color: #ffffff;
