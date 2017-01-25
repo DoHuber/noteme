@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -23,7 +24,7 @@ import java.util.Vector;
 public class CreateNote extends BasicVerticalView {
 
     HorizontalPanel contentPanel = new HorizontalPanel();
-    VerticalPanel alignPanel = new VerticalPanel();
+    VerticalPanel leftPanel = new VerticalPanel();
     Button createButton = new Button("Create");
 
     private EditorAsync editorVerwaltung = ClientsideSettings.getEditorVerwaltung();
@@ -39,7 +40,6 @@ public class CreateNote extends BasicVerticalView {
     private Label test = new Label();
     private String source;
     private boolean sourceProvided = false;
-    private Grid grid = new Grid(2, 1);
 
     private CheckBox intoNoteBook = new CheckBox("Put new note into notebook?");
     private NoteBookListBox noteBookSelector = new NoteBookListBox();
@@ -65,63 +65,74 @@ public class CreateNote extends BasicVerticalView {
 
     @Override
     public void run() {
+    	
+    	leftPanel.setHorizontalAlignment(ALIGN_CENTER);
+    	leftPanel.setVerticalAlignment(ALIGN_MIDDLE);
+    	leftPanel.setWidth("100%");
+    	leftPanel.add(createHeadline(getHeadlineText(), getSubHeadlineText()));
 
-        setupAlignPanel();
+        leftPanel.add(title);
+		leftPanel.add(titleTextBox);
+		
+		leftPanel.add(subtitle);
+		leftPanel.add(SubtitleTextBox);
+		
+		if (sourceProvided) {
+		    Label sourceLabel = new Label("Source: " + source);
+		    leftPanel.add(sourceLabel);
+		}
+		
+		leftPanel.add(dueDate);
+		leftPanel.add(dueDateBox);
+		
+		leftPanel.add(test);
+		
+		intoNoteBook.setValue(false);
+		intoNoteBook.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+		
+		    @Override
+		    public void onValueChange(ValueChangeEvent<Boolean> event) {
+		
+		        noteBookSelector.setEnabled(event.getValue());
+		
+		    }
+		
+		});
+		
+		noteBookSelector.setEnabled(false);
+		leftPanel.add(noteBookSelector);
+		addNoteBooksToListBox();
+		
+		leftPanel.add(intoNoteBook);
+		leftPanel.add(createButton);
+		createButton.addClickHandler(new CreateClickHandler());
 
-        createButton.addClickHandler(new CreateClickHandler());
-        grid.setWidget(0, 0, richTextToolbar);
+        VerticalPanel rightPanel = new VerticalPanel();
+        rightPanel.setWidth("100%");
+        rightPanel.setHorizontalAlignment(ALIGN_CENTER);
+        rightPanel.setVerticalAlignment(ALIGN_MIDDLE);
+        
+        int heightPixels = (int) (Window.getClientHeight() * 0.6);
+        noteArea.setStyleName("noteArea");
+        noteArea.setWidth("100%");
+        noteArea.setHeight(Integer.toString(heightPixels) + "px");
+        
+        VerticalPanel sandwich = new VerticalPanel();
+        sandwich.add(richTextToolbar);
+        sandwich.add(noteArea);
+        rightPanel.add(sandwich);
+      
+        contentPanel.setSize("100%", "100%");
+        contentPanel.setHorizontalAlignment(ALIGN_CENTER);
+        contentPanel.setVerticalAlignment(ALIGN_MIDDLE);
 
-        setUpNoteBookSelection();
-
-        noteArea.setSize("100%", "100%");
-        grid.setWidget(1, 0, noteArea);
-
-        contentPanel.add(alignPanel);
-        contentPanel.add(grid);
+        contentPanel.add(leftPanel);
+        contentPanel.add(rightPanel);
+        
+        this.clear();
         this.add(contentPanel);
 
-        noteArea.setStyleName("noteArea");
-
-    }
-
-    private void setupAlignPanel() {
-        alignPanel.add(title);
-        alignPanel.add(titleTextBox);
-
-        alignPanel.add(subtitle);
-        alignPanel.add(SubtitleTextBox);
-
-        if (sourceProvided) {
-            Label sourceLabel = new Label("Source: " + source);
-            alignPanel.add(sourceLabel);
-        }
-
-        alignPanel.add(dueDate);
-        alignPanel.add(dueDateBox);
-
-        alignPanel.add(test);
-        alignPanel.add(createButton);
-    }
-
-    private void setUpNoteBookSelection() {
-
-        noteBookSelector.setEnabled(false);
-        alignPanel.add(noteBookSelector);
-        addNoteBooksToListBox();
-
-        intoNoteBook.setValue(false);
-        intoNoteBook.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
-
-            @Override
-            public void onValueChange(ValueChangeEvent<Boolean> event) {
-
-                noteBookSelector.setEnabled(event.getValue());
-
-            }
-
-        });
-
-        alignPanel.add(intoNoteBook);
+   
 
     }
 
