@@ -1,6 +1,8 @@
 package de.hdm_stuttgart.huber.itprojekt.shared.report;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * <p>
  * Diese Klasse wird benötigt, um auf dem Client die ihm vom Server zur
  * Verfügung gestellten <code>Report</code>-Objekte in ein menschenlesbares

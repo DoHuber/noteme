@@ -3,6 +3,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared.report;
 import java.util.Vector;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * Ein <code>ReportWriter</code>, der Reports mittels Plain Text formatiert. Das
  * im Zielformat vorliegende Ergebnis wird in der Variable
  * <code>reportText</code> abgelegt und kann nach Aufruf der entsprechenden

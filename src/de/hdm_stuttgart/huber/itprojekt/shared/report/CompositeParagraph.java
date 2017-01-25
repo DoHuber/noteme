@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Vector;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * Diese Klasse stellt eine Menge einzelner Absätze (
  * <code>SimpleParagraph</code>-Objekte) dar. Diese werden als Unterabschnitte
  * in einem <code>Vector</code> abgelegt verwaltet.

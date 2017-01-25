@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.Vector;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * Ein zusammengesetzter Report. Dieser Report kann aus einer Menge von
  * Teil-Reports (vgl. Attribut <code>subReports</code>) bestehen.
+ * 
+ * @author thies
  */
 public abstract class CompositeReport extends Report implements Serializable {
 

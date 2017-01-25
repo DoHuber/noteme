@@ -3,6 +3,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared.report;
 import java.io.Serializable;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * Reports benötigen die MÖglichkeit, Text strukturiert abspeichern zu können.
  * Dieser Text kann später durch <code>ReportWriter</code> in verschiedene
  * Zielformate konvertiert werden. Die Verwendung der Klasse <code>String</code>

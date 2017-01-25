@@ -3,6 +3,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared.report;
 import java.util.Vector;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * <p>
  * Ein einfacher Report, der neben den Informationen der Superklasse <code>
  * Report</code> eine Tabelle mit "Positionsdaten" aufweist. Die Tabelle greift

@@ -3,6 +3,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared.report;
 import java.io.Serializable;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * Diese Klasse stellt einzelne Absätze dar. Der Absatzinhalt wird als String
  * gespeichert. Der Anwender sollte in diesem Strinig keinerlei
  * Formatierungssymbole einfügen, da diese in der Regel zielformatspezifisch

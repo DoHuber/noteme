@@ -3,6 +3,8 @@ package de.hdm_stuttgart.huber.itprojekt.shared.report;
 import java.io.Serializable;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * Spalte eines <code>Row</code>-Objekts. <code>Column</code>-Objekte
  * implementieren das <code>Serializable</code>-Interface und können daher als
  * Kopie z.B. vom Server an den Client übertragen werden.

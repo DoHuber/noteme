@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Vector;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * Zeile einer Tabelle eines <code>SimpleReport</code>-Objekts. <code>Row</code>
  * -Objekte implementieren das <code>Serializable</code>-Interface und können
  * daher als Kopie z.B. vom Server an den Client übertragen werden.

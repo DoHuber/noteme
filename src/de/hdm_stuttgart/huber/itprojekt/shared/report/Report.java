@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * Aus dem Bankprojekt übernommen
+ * 
  * <p>
  * Basisklasse aller Reports. Reports sind als <code>Serializable</code>
  * deklariert, damit sie von dem Server an den Client gesendet werden können.
