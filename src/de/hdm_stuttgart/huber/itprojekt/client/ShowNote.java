@@ -7,6 +7,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
+
 import de.hdm_stuttgart.huber.itprojekt.client.gui.IconConstants;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.Notificator;
 import de.hdm_stuttgart.huber.itprojekt.client.gui.RichTextToolbar;
@@ -22,7 +23,7 @@ public class ShowNote extends BasicVerticalView {
      */
 
     private HorizontalPanel contentPanel = new HorizontalPanel();
-    private VerticalPanel alignPanel = new VerticalPanel();
+  
     private Button deleteButton = new Button(IconConstants.ICON_DELETE);
     private Button updateConfirmButton = new Button(IconConstants.ICON_CONFIRM);
     private Button shareButton = new Button(IconConstants.ICON_SHARE);
@@ -69,16 +70,71 @@ public class ShowNote extends BasicVerticalView {
 
     @Override
     public void run() {
+    	
+    	this.clear();
+    	VerticalPanel leftPanel = new VerticalPanel();
+    	leftPanel.setHorizontalAlignment(ALIGN_CENTER);
+    	leftPanel.setVerticalAlignment(ALIGN_MIDDLE);
+    	leftPanel.setWidth("100%");
+    	
+    	VerticalPanel rightPanel = new VerticalPanel();
+    	rightPanel.setVerticalAlignment(ALIGN_MIDDLE);
+    	rightPanel.setHeight("100%");
+    	
+    	leftPanel.add(createHeadline(getHeadlineText(), getSubHeadlineText()));
+    	
+        deleteButton.addClickHandler(new DeleteClickHandler());
+		shareButton.addClickHandler(new ShareClickHandler());
+		updateConfirmButton.addClickHandler(new UpdateClickHandler());
+		
+		shareButton.setStyleName("pure-button");
+		deleteButton.setStyleName("pure-button");
+		updateConfirmButton.setStyleName("pure-button");
 
-        setUpButtons();
+        HorizontalPanel buttonPanel = new HorizontalPanel();
+		buttonPanel.add(shareButton);
+		buttonPanel.add(deleteButton);
+		buttonPanel.add(updateConfirmButton);
+		leftPanel.add(buttonPanel);
 
-        setUpButtonPanel();
+        leftPanel.add(title);
+		leftPanel.add(titleTextBox);
+		titleTextBox.setText(currentlyDisplayedNote.getTitle());
+		leftPanel.add(subtitle);
+		leftPanel.add(subtitleTextBox);
+		subtitleTextBox.setText(currentlyDisplayedNote.getSubtitle());
+		
+		leftPanel.add(empty);
+		leftPanel.add(dueDate);
+		leftPanel.add(dueDateBox);
 
-        setUpPanels();
-
+		dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
+		
+		if (currentlyDisplayedNote.getSource() != null) {
+			leftPanel.add(new Label("Source: " + currentlyDisplayedNote.getSource()));
+		}
+		
+		noteArea.setHTML(currentlyDisplayedNote.getContent());
+		noteArea.setStyleName("noteArea");
+		noteArea.setWidth("100%");
+		int pixelHeight = (int) (Window.getClientHeight() * 0.6);
+		noteArea.setHeight(Integer.toString(pixelHeight) + "px");
+		
+		VerticalPanel sandwich = new VerticalPanel();
+		sandwich.add(richTextToolbar);
+		sandwich.add(noteArea);
+		
+		rightPanel.add(sandwich);
+		
+		contentPanel.add(leftPanel);
+		contentPanel.add(rightPanel);
+		
+		contentPanel.setSize("100%", "100%");
+		
+		this.add(contentPanel);
+		this.setSize("100%", "100%");
+		
         empty.getElement().getStyle().setColor("#660033");
-
-        this.add(contentPanel);
 
         if (currentlyDisplayedNote.hasRuntimePermission()) {
             processNoteWithPermissions();
@@ -117,68 +173,6 @@ public class ShowNote extends BasicVerticalView {
         updateConfirmButton.setVisible(false);
         noteArea.setEnabled(false);
 
-    }
-
-    private void setUpPanels() {
-
-        populateAndDisplayTitles();
-        setUpAlignPanel();
-        setUpContentPanel();
-
-    }
-
-    private void setUpAlignPanel() {
-
-        alignPanel.add(empty);
-        alignPanel.add(dueDate);
-        alignPanel.add(dueDateBox);
-        alignPanel.add(updateConfirmButton);
-        dueDateBox.setValue(currentlyDisplayedNote.getDueDate());
-        
-        if (currentlyDisplayedNote.getSource() != null) {
-        	alignPanel.add(new Label("Source: " + currentlyDisplayedNote.getSource()));
-        }
-
-    }
-
-    private void setUpContentPanel() {
-
-        noteArea.setHTML(currentlyDisplayedNote.getContent());
-        noteArea.setSize("100%", "100%px");
-        noteArea.setStyleName("noteArea");
-
-        grid.setWidget(1, 0, noteArea);
-        grid.setWidget(0, 0, richTextToolbar);
-        contentPanel.add(alignPanel);
-        contentPanel.add(grid);
-    }
-
-    private void populateAndDisplayTitles() {
-        alignPanel.add(title);
-        alignPanel.add(titleTextBox);
-        titleTextBox.setText(currentlyDisplayedNote.getTitle());
-        alignPanel.add(subtitle);
-        alignPanel.add(subtitleTextBox);
-        subtitleTextBox.setText(currentlyDisplayedNote.getSubtitle());
-    }
-
-    private void setUpButtonPanel() {
-
-        HorizontalPanel buttonPanel = new HorizontalPanel();
-        buttonPanel.add(shareButton);
-        buttonPanel.add(deleteButton);
-        this.add(buttonPanel);
-    }
-
-    private void setUpButtons() {
-
-        deleteButton.addClickHandler(new DeleteClickHandler());
-        shareButton.addClickHandler(new ShareClickHandler());
-        updateConfirmButton.addClickHandler(new UpdateClickHandler());
-
-        shareButton.setStyleName("pure-button");
-        deleteButton.setStyleName("pure-button");
-        updateConfirmButton.setStyleName("pure-button");
     }
 
     public void updateNote() {
