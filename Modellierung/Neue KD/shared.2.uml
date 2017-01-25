@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:PapyrusJava="http://www.eclipse.org/papyrus/PapyrusJava/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_8uknkOL1EeafMLBlg2ie4A" name="RootElement">
+    <packagedElement xmi:type="uml:Package" xmi:id="__KsEsOL1EeafMLBlg2ie4A" name="IT-Projekt">
+      <packagedElement xmi:type="uml:Package" xmi:id="__LtYYOL1EeafMLBlg2ie4A" name="de">
+        <packagedElement xmi:type="uml:Package" xmi:id="__Lt_cOL1EeafMLBlg2ie4A" name="hdm_stuttgart">
+          <packagedElement xmi:type="uml:Package" xmi:id="__Lt_ceL1EeafMLBlg2ie4A" name="huber">
+            <packagedElement xmi:type="uml:Package" xmi:id="__Lt_cuL1EeafMLBlg2ie4A" name="itprojekt">
+              <packagedElement xmi:type="uml:Package" xmi:id="__Lt_c-L1EeafMLBlg2ie4A" name="shared">
+                <packagedElement xmi:type="uml:Interface" xmi:id="__Lv0oOL1EeafMLBlg2ie4A" name="Editor" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="__OyhkOL1EeafMLBlg2ie4A" general="__LwbtuL1EeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__OzIoOL1EeafMLBlg2ie4A" name="init" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__O4BIOL1EeafMLBlg2ie4A" name="getHelloWorld" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__O_V4OL1EeafMLBlg2ie4A" type="__O7EceL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PHRsOL1EeafMLBlg2ie4A" name="createNoteBook" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PIf0OL1EeafMLBlg2ie4A" type="__PEOYOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PJt8OL1EeafMLBlg2ie4A" name="notebook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PLjIOL1EeafMLBlg2ie4A" name="saveNoteBook" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PMKMOL1EeafMLBlg2ie4A" type="__PEOYOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PN_YOL1EeafMLBlg2ie4A" name="noteBook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PPNgOL1EeafMLBlg2ie4A" name="getNoteBookById" visibility="private" raisedException="__PSQ0OL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PQboOL1EeafMLBlg2ie4A" type="__PEOYOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PRpwOL1EeafMLBlg2ie4A" name="notebook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PWiQOL1EeafMLBlg2ie4A" name="deleteNoteBook" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PXwYOL1EeafMLBlg2ie4A" name="noteBook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PcB0OL1EeafMLBlg2ie4A" name="createNote" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Pco4OL1EeafMLBlg2ie4A" type="__PY-gOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PdP8OL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PeeEOL1EeafMLBlg2ie4A" name="saveNote" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PfFIOL1EeafMLBlg2ie4A" type="__PY-gOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PgTQOL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PhhYOL1EeafMLBlg2ie4A" name="getNoteById" visibility="private" raisedException="__PSQ0OL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PjWkOL1EeafMLBlg2ie4A" type="__PY-gOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PkksOL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Ply0OL1EeafMLBlg2ie4A" name="deleteNote" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PmZ4OL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PnA8OL1EeafMLBlg2ie4A" name="getAllNotesForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PrSYOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__PwK4OL1EeafMLBlg2ie4A" name="getAllNotesForUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PxZAOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__PynIOL1EeafMLBlg2ie4A" name="user" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Pz1QOL1EeafMLBlg2ie4A" name="getAllNoteBooksForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P0cUOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P1DYOL1EeafMLBlg2ie4A" name="getAllNoteBooksFor" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P2RgOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P3foOL1EeafMLBlg2ie4A" name="u" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P4GsOL1EeafMLBlg2ie4A" name="getAllSharedNotesForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P4GseL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P4GsuL1EeafMLBlg2ie4A" name="getAllSharedNoteBooksForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P4Gs-L1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P4twOL1EeafMLBlg2ie4A" name="getAllNotesSharedByCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P4tweL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P4twuL1EeafMLBlg2ie4A" name="getAllNoteBooksSharedByCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P4tw-L1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P4txOL1EeafMLBlg2ie4A" name="getAllNoteBooks" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P5U0OL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P574OL1EeafMLBlg2ie4A" name="getAllFrom" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P6i8OL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P7xEOL1EeafMLBlg2ie4A" name="nb" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P8YIOL1EeafMLBlg2ie4A" name="getAllNotes" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P8_MOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P8_MeL1EeafMLBlg2ie4A" name="getDueNotesForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P-NUOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__P-0YOL1EeafMLBlg2ie4A" name="saveUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P-0YeL1EeafMLBlg2ie4A" type="__PtuoOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__P_bcOL1EeafMLBlg2ie4A" name="user" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QACgOL1EeafMLBlg2ie4A" name="getSource" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QBQoOL1EeafMLBlg2ie4A" type="__O7EceL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QBQoeL1EeafMLBlg2ie4A" name="getCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QBQouL1EeafMLBlg2ie4A" type="__PtuoOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QB3sOL1EeafMLBlg2ie4A" name="getAllEmails" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QB3seL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QB3suL1EeafMLBlg2ie4A" name="deleteUserInfo" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QCewOL1EeafMLBlg2ie4A" name="ui" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="__O0WwOL1EeafMLBlg2ie4A" name="IllegalArgumentException"/>
+                <packagedElement xmi:type="uml:Interface" xmi:id="__QE7AOL1EeafMLBlg2ie4A" name="EditorAsync" visibility="public">
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QIlYOL1EeafMLBlg2ie4A" name="createNote" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QJMcOL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QKakOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QLosOL1EeafMLBlg2ie4A" name="createNoteBook" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QMPwOL1EeafMLBlg2ie4A" name="noteBook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QNd4OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QOE8OL1EeafMLBlg2ie4A" name="deleteNote" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QPTEOL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QP6IOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QRIQOL1EeafMLBlg2ie4A" name="deleteNoteBook" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QRvUOL1EeafMLBlg2ie4A" name="noteBook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QS9cOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QTkgOL1EeafMLBlg2ie4A" name="getAllNoteBooks" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QVZsOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QWn0OL1EeafMLBlg2ie4A" name="getAllNotes" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QX18OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QYdAOL1EeafMLBlg2ie4A" name="getHelloWorld" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QZEEOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QaSMOL1EeafMLBlg2ie4A" name="getNoteBookById" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QbgUOL1EeafMLBlg2ie4A" name="noteBook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QcHYOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QdVgOL1EeafMLBlg2ie4A" name="getNoteById" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Qd8kOL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QejoOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QgY0OL1EeafMLBlg2ie4A" name="init" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Qg_4OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QiOAOL1EeafMLBlg2ie4A" name="saveNote" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Qi1EOL1EeafMLBlg2ie4A" name="note" type="__PY-gOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QkDMOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Ql4YOL1EeafMLBlg2ie4A" name="saveNoteBook" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QmfcOL1EeafMLBlg2ie4A" name="noteBook" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QntkOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Qo7sOL1EeafMLBlg2ie4A" name="getAllNotesForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QqJ0OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QrX8OL1EeafMLBlg2ie4A" name="getAllNotesForUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QsmEOL1EeafMLBlg2ie4A" name="user" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Qt0MOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__QubQOL1EeafMLBlg2ie4A" name="getAllNoteBooksForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QvpYOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Qw3gOL1EeafMLBlg2ie4A" name="getAllFrom" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QxekOL1EeafMLBlg2ie4A" name="nb" type="__PEOYOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__QyssOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Qz60OL1EeafMLBlg2ie4A" name="saveUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q0h4OL1EeafMLBlg2ie4A" name="user" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q1wAOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Q2XEOL1EeafMLBlg2ie4A" name="getAllSharedNotesForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q2-IOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Q3lMOL1EeafMLBlg2ie4A" name="getAllSharedNoteBooksForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q4zUOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Q5aYOL1EeafMLBlg2ie4A" name="getAllNoteBooksSharedByCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q6BcOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Q6ogOL1EeafMLBlg2ie4A" name="getAllNotesSharedByCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q7PkOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Q72oOL1EeafMLBlg2ie4A" name="getSource" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q8dsOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Q9r0OL1EeafMLBlg2ie4A" name="getCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Q-S4OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Q_hAOL1EeafMLBlg2ie4A" name="deleteUserInfo" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RAIEOL1EeafMLBlg2ie4A" name="ui" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RAvIOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__RBWMOL1EeafMLBlg2ie4A" name="getAllEmails" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RB9QOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__RDLYOL1EeafMLBlg2ie4A" name="getDueNotesForCurrentUser" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RDycOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__REZgOL1EeafMLBlg2ie4A" name="getAllNoteBooksFor" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RFAkOL1EeafMLBlg2ie4A" name="u" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RFnoOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="__RHc0OL1EeafMLBlg2ie4A" name="FieldVerifier" visibility="public">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="__RTDAOL1EeafMLBlg2ie4A" name="isValidName" specification="__RIq8OL1EeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return name != null &amp;&amp; name.length() > 3;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__RIq8OL1EeafMLBlg2ie4A" name="isValidName" visibility="public" isStatic="true" method="__RTDAOL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RRN0OL1EeafMLBlg2ie4A" direction="return">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                    </ownedParameter>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RSb8OL1EeafMLBlg2ie4A" name="name" type="__O7EceL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Interface" xmi:id="__RXUcOL1EeafMLBlg2ie4A" name="PermissionService" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="__RYikOL1EeafMLBlg2ie4A" general="__LwbtuL1EeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__RhFcOL1EeafMLBlg2ie4A" name="shareWith" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RiTkOL1EeafMLBlg2ie4A" name="beneficiary" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RjhsOL1EeafMLBlg2ie4A" name="sharedObject" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Rkv0OL1EeafMLBlg2ie4A" name="l" type="__RdbEeL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__RnMEOL1EeafMLBlg2ie4A" name="shareWith" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RnzIOL1EeafMLBlg2ie4A" name="userEmail" type="__O7EceL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RpBQOL1EeafMLBlg2ie4A" name="sharedObject" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RpoUOL1EeafMLBlg2ie4A" name="l" type="__RdbEeL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Rq2cOL1EeafMLBlg2ie4A" name="getRunTimePermissionFor" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Rug0OL1EeafMLBlg2ie4A" type="__RrdgOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Rvu8OL1EeafMLBlg2ie4A" name="u" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RxkIOL1EeafMLBlg2ie4A" name="sharedObject" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__RyyQOL1EeafMLBlg2ie4A" name="getAllPermissionsFor" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__RzZUOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__R0ncOL1EeafMLBlg2ie4A" name="s" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__R2coOL1EeafMLBlg2ie4A" name="getAllPermissionsCreatedBy" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__R3DsOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__R4R0OL1EeafMLBlg2ie4A" name="u" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__R6HAOL1EeafMLBlg2ie4A" name="deletePermission" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__R7VIOL1EeafMLBlg2ie4A" name="p" type="__RrdgOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__R8jQOL1EeafMLBlg2ie4A" name="getAllPermissions" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__R9xYOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Interface" xmi:id="__R_mkOL1EeafMLBlg2ie4A" name="PermissionServiceAsync" visibility="public">
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SBbwOL1EeafMLBlg2ie4A" name="getRunTimePermissionFor" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SCp4OL1EeafMLBlg2ie4A" name="u" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SD4AOL1EeafMLBlg2ie4A" name="sharedObject" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SFGIOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SG7UOL1EeafMLBlg2ie4A" name="shareWith" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SHiYOL1EeafMLBlg2ie4A" name="beneficiary" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SIwgOL1EeafMLBlg2ie4A" name="sharedObject" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SJ-oOL1EeafMLBlg2ie4A" name="l" type="__RdbEeL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SLMwOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SMa4OL1EeafMLBlg2ie4A" name="getAllPermissionsFor" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SNpAOL1EeafMLBlg2ie4A" name="s" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SO3IOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SQFQOL1EeafMLBlg2ie4A" name="shareWith" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SQsUOL1EeafMLBlg2ie4A" name="userEmail" type="__O7EceL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SR6cOL1EeafMLBlg2ie4A" name="sharedObject" type="__RaXwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__STIkOL1EeafMLBlg2ie4A" name="l" type="__RdbEeL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SUWsOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SVk0OL1EeafMLBlg2ie4A" name="getAllPermissionsCreatedBy" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SWL4OL1EeafMLBlg2ie4A" name="u" type="__PtuoOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SXaAOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SYoIOL1EeafMLBlg2ie4A" name="deletePermission" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SZ2QOL1EeafMLBlg2ie4A" name="p" type="__RrdgOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SbEYOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SbrcOL1EeafMLBlg2ie4A" name="getAllPermissions" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__ScSgOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Interface" xmi:id="__SeHsOL1EeafMLBlg2ie4A" name="ReportGenerator" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="__SfV0OL1EeafMLBlg2ie4A" general="__LwbtuL1EeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Sf84OL1EeafMLBlg2ie4A" name="init" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Sgj8OL1EeafMLBlg2ie4A" name="createAllUserNotebooksR" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SkOUOL1EeafMLBlg2ie4A" type="__ShLAOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SlccOL1EeafMLBlg2ie4A" name="createAllNotebooksR" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SpG0OL1EeafMLBlg2ie4A" type="__SmqkOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SqU8OL1EeafMLBlg2ie4A" name="createAllUserNotesR" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SsxMOL1EeafMLBlg2ie4A" type="__Sq8AOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__SumYOL1EeafMLBlg2ie4A" name="createAllNotesR" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__SyQwOL1EeafMLBlg2ie4A" type="__SvNcOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Sze4OL1EeafMLBlg2ie4A" name="createAllUserPermissionsR" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__S17IOL1EeafMLBlg2ie4A" type="__S0F8OL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__S3wUOL1EeafMLBlg2ie4A" name="createAllPermissionsR" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__S6zoOL1EeafMLBlg2ie4A" type="__S4XYOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TCIYOL1EeafMLBlg2ie4A" name="createCustomReport" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TFywOL1EeafMLBlg2ie4A" type="__TCvcOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TGZ0OL1EeafMLBlg2ie4A" name="type" type="__O7EceL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__THn8OL1EeafMLBlg2ie4A" name="userEmail" type="__O7EceL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TI2EOL1EeafMLBlg2ie4A" name="timespan" type="__S8BwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TJdIOL1EeafMLBlg2ie4A" name="includePermissions">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                    </ownedParameter>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TKrQOL1EeafMLBlg2ie4A" name="dateType" type="__S_FEOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="__ShLAOL1EeafMLBlg2ie4A" name="AllUserNotebooksR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="__SmqkOL1EeafMLBlg2ie4A" name="AllNotebooksR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="__Sq8AOL1EeafMLBlg2ie4A" name="AllUserNotesR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="__SvNcOL1EeafMLBlg2ie4A" name="AllNotesR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="__S0F8OL1EeafMLBlg2ie4A" name="AllUserPermissionsR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="__S4XYOL1EeafMLBlg2ie4A" name="AllPermissionsR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="__TCvcOL1EeafMLBlg2ie4A" name="CustomReport"/>
+                <packagedElement xmi:type="uml:Interface" xmi:id="__TNukOL1EeafMLBlg2ie4A" name="ReportGeneratorAsync" visibility="public">
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TO8sOL1EeafMLBlg2ie4A" name="createAllNotebooksR" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TQK0OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TQx4OL1EeafMLBlg2ie4A" name="createAllUserNotebooksR" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TSAAOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TSnEOL1EeafMLBlg2ie4A" name="createAllUserNotesR" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TT1MOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TUcQOL1EeafMLBlg2ie4A" name="createAllNotesR" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TUcQeL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TVqYOL1EeafMLBlg2ie4A" name="createAllPermissionsR" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TWRcOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TXfkOL1EeafMLBlg2ie4A" name="init" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TYtsOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TZUwOL1EeafMLBlg2ie4A" name="createAllUserPermissionsR" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Tai4OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TeNQOL1EeafMLBlg2ie4A" name="createCustomReport" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__Te0UOL1EeafMLBlg2ie4A" name="type" type="__O7EceL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TgCcOL1EeafMLBlg2ie4A" name="userEmail" type="__O7EceL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__ThQkOL1EeafMLBlg2ie4A" name="timespan" type="__S8BwOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TiesOL1EeafMLBlg2ie4A" name="includePermissions">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                    </ownedParameter>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TjFwOL1EeafMLBlg2ie4A" name="dateType" type="__TbxAOL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TkT4OL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Interface" xmi:id="__TmwIOL1EeafMLBlg2ie4A" name="SharedServices" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="__Tn-QOL1EeafMLBlg2ie4A" general="__LwbtuL1EeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TolUOL1EeafMLBlg2ie4A" name="init" visibility="private" raisedException="__O0WwOL1EeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TpMYOL1EeafMLBlg2ie4A" name="login" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TpzcOL1EeafMLBlg2ie4A" type="__PtuoOL1EeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TrBkOL1EeafMLBlg2ie4A" name="requestUri" type="__O7EceL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TrooOL1EeafMLBlg2ie4A" name="getAllUsers" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TsPsOL1EeafMLBlg2ie4A" type="__Po2IOL1EeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Interface" xmi:id="__Tur8OL1EeafMLBlg2ie4A" name="SharedServicesAsync" visibility="public">
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__Tv6EOL1EeafMLBlg2ie4A" name="init" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TxIMOL1EeafMLBlg2ie4A" name="async" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__TyWUOL1EeafMLBlg2ie4A" name="login" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__TzkcOL1EeafMLBlg2ie4A" name="requestUri" type="__O7EceL1EeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__T0LgOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="__T1ZoOL1EeafMLBlg2ie4A" name="getAllUsers" visibility="private">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="__T2nwOL1EeafMLBlg2ie4A" name="callback" type="__QGJIOL1EeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="__Lv0oeL1EeafMLBlg2ie4A" name="importedTypes">
+      <packagedElement xmi:type="uml:Package" xmi:id="__LwbsOL1EeafMLBlg2ie4A" name="com">
+        <packagedElement xmi:type="uml:Package" xmi:id="__LwbseL1EeafMLBlg2ie4A" name="google">
+          <packagedElement xmi:type="uml:Package" xmi:id="__LwbsuL1EeafMLBlg2ie4A" name="gwt">
+            <packagedElement xmi:type="uml:Package" xmi:id="__Lwbs-L1EeafMLBlg2ie4A" name="user">
+              <packagedElement xmi:type="uml:Package" xmi:id="__LwbtOL1EeafMLBlg2ie4A" name="client">
+                <packagedElement xmi:type="uml:Package" xmi:id="__LwbteL1EeafMLBlg2ie4A" name="rpc">
+                  <packagedElement xmi:type="uml:Interface" xmi:id="__LwbtuL1EeafMLBlg2ie4A" name="RemoteService"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="__QGJIOL1EeafMLBlg2ie4A" name="AsyncCallback"/>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="__O_88OL1EeafMLBlg2ie4A" name="de">
+        <packagedElement xmi:type="uml:Package" xmi:id="__PAkAOL1EeafMLBlg2ie4A" name="hdm_stuttgart">
+          <packagedElement xmi:type="uml:Package" xmi:id="__PByIOL1EeafMLBlg2ie4A" name="huber">
+            <packagedElement xmi:type="uml:Package" xmi:id="__PCZMOL1EeafMLBlg2ie4A" name="itprojekt">
+              <packagedElement xmi:type="uml:Package" xmi:id="__PDAQOL1EeafMLBlg2ie4A" name="shared">
+                <packagedElement xmi:type="uml:Package" xmi:id="__PDnUOL1EeafMLBlg2ie4A" name="domainobjects">
+                  <packagedElement xmi:type="uml:Class" xmi:id="__PEOYOL1EeafMLBlg2ie4A" name="Notebook"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="__PY-gOL1EeafMLBlg2ie4A" name="Note"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="__PtuoOL1EeafMLBlg2ie4A" name="UserInfo"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="__RaXwOL1EeafMLBlg2ie4A" name="Shareable"/>
+                  <packagedElement xmi:type="uml:Package" xmi:id="__RdbEOL1EeafMLBlg2ie4A" name="Permission">
+                    <packagedElement xmi:type="uml:Class" xmi:id="__RdbEeL1EeafMLBlg2ie4A" name="Level"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="__RrdgOL1EeafMLBlg2ie4A" name="Permission"/>
+                  <packagedElement xmi:type="uml:Package" xmi:id="__TbJ8OL1EeafMLBlg2ie4A" name="DateFilterable">
+                    <packagedElement xmi:type="uml:Class" xmi:id="__TbxAOL1EeafMLBlg2ie4A" name="DateType"/>
+                  </packagedElement>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="__S-eAOL1EeafMLBlg2ie4A" name="DateFilterable">
+        <packagedElement xmi:type="uml:Class" xmi:id="__S_FEOL1EeafMLBlg2ie4A" name="DateType"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="__O4oMOL1EeafMLBlg2ie4A" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="__O52UOL1EeafMLBlg2ie4A" name="java">
+        <packagedElement xmi:type="uml:Package" xmi:id="__O7EcOL1EeafMLBlg2ie4A" name="lang">
+          <packagedElement xmi:type="uml:Class" xmi:id="__O7EceL1EeafMLBlg2ie4A" name="String"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="__PSQ0OL1EeafMLBlg2ie4A" name="Exception"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="__PnoAOL1EeafMLBlg2ie4A" name="util">
+          <packagedElement xmi:type="uml:Class" xmi:id="__Po2IOL1EeafMLBlg2ie4A" name="Vector"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="__S8BwOL1EeafMLBlg2ie4A" name="Map"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="__LbrkOL1EeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__LbrkeL1EeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/PapyrusJava/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PapyrusJava_PROFILES/PapyrusJava.profile.uml#_j9REUByGEduN1bTiWJ0lyw"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="__LlckOL1EeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__LlckeL1EeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/Codegen/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Codegen_PROFILES/Codegen.profile.uml#_fPDsIBa-EearhdjjJ6cVzQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="__LsKQOL1EeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__LsKQeL1EeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <PapyrusJava:External xmi:id="__OxTcOL1EeafMLBlg2ie4A" name="com.google.gwt.user.client.rpc.RemoteService" base_Classifier="__LwbtuL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__O2L8OL1EeafMLBlg2ie4A" name="IllegalArgumentException" base_Classifier="__O0WwOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__O-HwOL1EeafMLBlg2ie4A" name="java.lang.String" base_Classifier="__O7EceL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__PGqoOL1EeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook" base_Classifier="__PEOYOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__PUGAOL1EeafMLBlg2ie4A" name="java.lang.Exception" base_Classifier="__PSQ0OL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__PazsOL1EeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note" base_Classifier="__PY-gOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__PqrUOL1EeafMLBlg2ie4A" name="java.util.Vector" base_Classifier="__Po2IOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__Pu8wOL1EeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo" base_Classifier="__PtuoOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__QH-UOL1EeafMLBlg2ie4A" name="com.google.gwt.user.client.rpc.AsyncCallback" base_Classifier="__QGJIOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__RcM8OL1EeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable" base_Classifier="__RaXwOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__Rf3UOL1EeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level" base_Classifier="__RdbEeL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__RtSsOL1EeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission" base_Classifier="__RrdgOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__SjAMOL1EeafMLBlg2ie4A" name="AllUserNotebooksR" base_Classifier="__ShLAOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__SofwOL1EeafMLBlg2ie4A" name="AllNotebooksR" base_Classifier="__SmqkOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__SsKIOL1EeafMLBlg2ie4A" name="AllUserNotesR" base_Classifier="__Sq8AOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__SxCoOL1EeafMLBlg2ie4A" name="AllNotesR" base_Classifier="__SvNcOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__S1UEOL1EeafMLBlg2ie4A" name="AllUserPermissionsR" base_Classifier="__S0F8OL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__S5lgOL1EeafMLBlg2ie4A" name="AllPermissionsR" base_Classifier="__S4XYOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__S928OL1EeafMLBlg2ie4A" name="java.util.Map" base_Classifier="__S8BwOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__TA6QOL1EeafMLBlg2ie4A" name="DateFilterable.DateType" base_Classifier="__S_FEOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__TEkoOL1EeafMLBlg2ie4A" name="CustomReport" base_Classifier="__TCvcOL1EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="__Tc_IOL1EeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.DateFilterable.DateType" base_Classifier="__TbxAOL1EeafMLBlg2ie4A"/>
+</xmi:XMI>

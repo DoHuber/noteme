@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:PapyrusJava="http://www.eclipse.org/papyrus/PapyrusJava/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_DJCUIOL3EeafMLBlg2ie4A" name="RootElement">
+    <packagedElement xmi:type="uml:Package" xmi:id="_H5oVUOL3EeafMLBlg2ie4A" name="IT-Projekt">
+      <packagedElement xmi:type="uml:Package" xmi:id="_H9yckOL3EeafMLBlg2ie4A" name="de">
+        <packagedElement xmi:type="uml:Package" xmi:id="_H9zDoOL3EeafMLBlg2ie4A" name="hdm_stuttgart">
+          <packagedElement xmi:type="uml:Package" xmi:id="_H9zqsOL3EeafMLBlg2ie4A" name="huber">
+            <packagedElement xmi:type="uml:Package" xmi:id="_H90RwOL3EeafMLBlg2ie4A" name="itprojekt">
+              <packagedElement xmi:type="uml:Package" xmi:id="_H9040OL3EeafMLBlg2ie4A" name="shared">
+                <packagedElement xmi:type="uml:Package" xmi:id="_H9040eL3EeafMLBlg2ie4A" name="report">
+                  <packagedElement xmi:type="uml:Class" xmi:id="_H92G8OL3EeafMLBlg2ie4A" name="AllNotebooksR" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_H93VEOL3EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_NkOrMOL4EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IAX2gOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IAZrsOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IAP6sOL3EeafMLBlg2ie4A" name="AllNotebooksR implements Serializable" client="_H92G8OL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_H92uAOL3EeafMLBlg2ie4A" name="SimpleReport" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_ID6SsOL3EeafMLBlg2ie4A" general="_IAdWEOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_ID7g0OL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_ID8u8OL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_ID99EOL3EeafMLBlg2ie4A" name="table" visibility="private" type="_IAi1oOL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_ID_LMOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>new Vector&lt;Row>()</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEBncOL3EeafMLBlg2ie4A" name="addRow" specification="_IEBAYOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.table.addElement(r);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEDcoOL3EeafMLBlg2ie4A" name="removeRow" specification="_IECOgOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.table.removeElement(r);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEEqweL3EeafMLBlg2ie4A" name="getRows" specification="_IEEDsOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.table;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEGf8OL3EeafMLBlg2ie4A" name="toString" specification="_IEFR0OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    String retVal = &quot;&quot;;&#xD;
+    for (Row r : table) {&#xD;
+        retVal = retVal + r.toString();&#xD;
+    }&#xD;
+    return retVal;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEBAYOL3EeafMLBlg2ie4A" name="addRow" visibility="public" method="_IEBncOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEBAYeL3EeafMLBlg2ie4A" name="r" type="_ICxDMOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IECOgOL3EeafMLBlg2ie4A" name="removeRow" visibility="public" method="_IEDcoOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEC1kOL3EeafMLBlg2ie4A" name="r" type="_ICxDMOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEEDsOL3EeafMLBlg2ie4A" name="getRows" visibility="public" method="_IEEqweL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEEqwOL3EeafMLBlg2ie4A" type="_IAi1oOL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEFR0OL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_IEGf8OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEF44OL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IAcvAOL3EeafMLBlg2ie4A" name="CompositeReport" visibility="public" isAbstract="true">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IAdWEeL3EeafMLBlg2ie4A" general="_IAdWEOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_9TO3AOL5EeafMLBlg2ie4A" general="_IAdWEOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IAfLQOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IAhngOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IAlR4OL3EeafMLBlg2ie4A" name="subReports" visibility="private" type="_IAi1oOL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IAmgAOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>new Vector&lt;Report>()</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IAekMOL3EeafMLBlg2ie4A" name="CompositeReport implements Serializable" client="_IAcvAOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IAo8QOL3EeafMLBlg2ie4A" name="addSubReport" specification="_IAnuIOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.subReports.addElement(r);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IAsmoOL3EeafMLBlg2ie4A" name="removeSubReport" specification="_IAqxcOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.subReports.removeElement(r);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IAvp8OL3EeafMLBlg2ie4A" name="getNumSubReports" specification="_IAt0wOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.subReports.size();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IA1JgOL3EeafMLBlg2ie4A" name="getSubReportAt" specification="_IAw4EOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.subReports.elementAt(i);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IA8eQOL3EeafMLBlg2ie4A" name="toString" specification="_IA3lwOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return super.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IAnuIOL3EeafMLBlg2ie4A" name="addSubReport" visibility="public" method="_IAo8QOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IAoVMOL3EeafMLBlg2ie4A" name="r" type="_IAdWEOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IAqxcOL3EeafMLBlg2ie4A" name="removeSubReport" visibility="public" method="_IAsmoOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IAr_kOL3EeafMLBlg2ie4A" name="r" type="_IAdWEOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IAt0wOL3EeafMLBlg2ie4A" name="getNumSubReports" visibility="public" method="_IAvp8OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IAvC4OL3EeafMLBlg2ie4A" direction="return">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IAw4EOL3EeafMLBlg2ie4A" name="getSubReportAt" visibility="public" method="_IA1JgOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IAxfIOL3EeafMLBlg2ie4A" type="_IAdWEOL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IAytQOL3EeafMLBlg2ie4A" name="i">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IA3lwOL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_IA8eQOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IA73MOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IAdWEOL3EeafMLBlg2ie4A" name="Report" visibility="public" isAbstract="true">
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IEQ4AOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IESGIOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IEStMOL3EeafMLBlg2ie4A" name="imprint" visibility="private" type="_IB0A8OL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IET7UOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>null</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IEUiYOL3EeafMLBlg2ie4A" name="headerData" visibility="private" type="_IB0A8OL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IEVwgOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>null</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IEWXkOL3EeafMLBlg2ie4A" name="title" visibility="private" type="_IA4z4eL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IEW-oOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>&quot;Report&quot;</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IEZa4OL3EeafMLBlg2ie4A" name="created" visibility="private" type="_IEXlsOL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IEbQEOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>new Date()</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IEPp4OL3EeafMLBlg2ie4A" name="Report implements Serializable" client="_IAdWEOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEdsUOL3EeafMLBlg2ie4A" name="getImprint" specification="_IEb3IOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.imprint;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEgvoOL3EeafMLBlg2ie4A" name="setImprint" specification="_IEfhgOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.imprint = imprint;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEjL4OL3EeafMLBlg2ie4A" name="getHeaderData" specification="_IEh9wOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.headerData;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEm2QOL3EeafMLBlg2ie4A" name="setHeaderData" specification="_IElBEOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.headerData = headerData;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEp5kOL3EeafMLBlg2ie4A" name="getTitle" specification="_IEoEYOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.title;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IEtj8OL3EeafMLBlg2ie4A" name="setTitle" specification="_IEsV0OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.title = title;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IExOUOL3EeafMLBlg2ie4A" name="getCreated" specification="_IEvZIOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.created;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IE04sOL3EeafMLBlg2ie4A" name="setCreated" specification="_IEzDgOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.created = created;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IE38AOL3EeafMLBlg2ie4A" name="toString" specification="_IE2G0OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return &quot;Report [imprint=&quot; + imprint + &quot;, headerData=&quot; + headerData + &quot;, title=&quot; + title + &quot;, created=&quot; + created + &quot;]&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEb3IOL3EeafMLBlg2ie4A" name="getImprint" visibility="public" method="_IEdsUOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEdFQOL3EeafMLBlg2ie4A" type="_IB0A8OL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEfhgOL3EeafMLBlg2ie4A" name="setImprint" visibility="public" method="_IEgvoOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEgIkOL3EeafMLBlg2ie4A" name="imprint" type="_IB0A8OL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEh9wOL3EeafMLBlg2ie4A" name="getHeaderData" visibility="public" method="_IEjL4OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEik0OL3EeafMLBlg2ie4A" type="_IB0A8OL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IElBEOL3EeafMLBlg2ie4A" name="setHeaderData" visibility="public" method="_IEm2QOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEloIOL3EeafMLBlg2ie4A" name="headerData" type="_IB0A8OL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEoEYOL3EeafMLBlg2ie4A" name="getTitle" visibility="public" method="_IEp5kOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEpSgOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEsV0OL3EeafMLBlg2ie4A" name="setTitle" visibility="public" method="_IEtj8OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEs84OL3EeafMLBlg2ie4A" name="title" type="_IA4z4eL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEvZIOL3EeafMLBlg2ie4A" name="getCreated" visibility="public" method="_IExOUOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IEwnQOL3EeafMLBlg2ie4A" type="_IEXlsOL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IEzDgOL3EeafMLBlg2ie4A" name="setCreated" visibility="public" method="_IE04sOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IE0RoOL3EeafMLBlg2ie4A" name="created" type="_IEXlsOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IE2G0OL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_IE38AOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IE3U8OL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IBAvsOL3EeafMLBlg2ie4A" name="Column" visibility="public">
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IBCk4OL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IBEaEOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IBFoMOL3EeafMLBlg2ie4A" name="value" visibility="private" type="_IA4z4eL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IBG2UOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>&quot;&quot;</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IBB90OL3EeafMLBlg2ie4A" name="Column implements Serializable" client="_IBAvsOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IBKgsOL3EeafMLBlg2ie4A" name="Column" specification="_IBHdYOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IBQAQOL3EeafMLBlg2ie4A" name="Column" specification="_IBMV4OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.value = s;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IBScgOL3EeafMLBlg2ie4A" name="getValue" specification="_IBROYOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return value;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IBURsOL3EeafMLBlg2ie4A" name="setValue" specification="_IBTDkOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.value = value;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IBWG4OL3EeafMLBlg2ie4A" name="toString" specification="_IBU4wOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.value;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IBHdYOL3EeafMLBlg2ie4A" name="Column" visibility="public" method="_IBKgsOL3EeafMLBlg2ie4A"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IBMV4OL3EeafMLBlg2ie4A" name="Column" visibility="public" method="_IBQAQOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IBPZMOL3EeafMLBlg2ie4A" name="s" type="_IA4z4eL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IBROYOL3EeafMLBlg2ie4A" name="getValue" visibility="public" method="_IBScgOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IBR1cOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IBTDkOL3EeafMLBlg2ie4A" name="setValue" visibility="public" method="_IBURsOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IBTqoOL3EeafMLBlg2ie4A" name="value" type="_IA4z4eL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IBU4wOL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_IBWG4OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IBVf0OL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IBfQ0OL3EeafMLBlg2ie4A" name="HTMLReportWriter" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IBhGAOL3EeafMLBlg2ie4A" general="_IBf34OL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_Qa-j8OL6EeafMLBlg2ie4A" general="_IBf34OL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IBiUIOL3EeafMLBlg2ie4A" name="reportText" visibility="private" type="_IA4z4eL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IBmlkOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>&quot;&quot;</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IBtTQOL3EeafMLBlg2ie4A" name="resetReportText" specification="_IBreEOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.reportText = &quot;&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IB8j0OL3EeafMLBlg2ie4A" name="paragraph2HTML" specification="_IB1PEOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    if (p instanceof CompositeParagraph) {&#xD;
+        return this.paragraph2HTML((CompositeParagraph) p);&#xD;
+    } else {&#xD;
+        return this.paragraph2HTML((SimpleParagraph) p);&#xD;
+    }&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICCDYOL3EeafMLBlg2ie4A" name="paragraph2HTML" specification="_IB-ZAOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    StringBuffer result = new StringBuffer();&#xD;
+    for (int i = 0; i &lt; p.getNumParagraphs(); i++) {&#xD;
+        result.append(&quot;&lt;p>&quot;).append(p.getParagraphAt(i)).append(&quot;&lt;/p>&quot;);&#xD;
+    }&#xD;
+    return result.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICG74OL3EeafMLBlg2ie4A" name="paragraph2HTML" specification="_ICEfoOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return &quot;&lt;p>&quot; + p.toString() + &quot;&lt;/p>&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICLNUOL3EeafMLBlg2ie4A" name="customReport2HTML" specification="_ICIxEOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    StringBuilder sb = new StringBuilder();&#xD;
+    sb.append(paragraph2HTML(r.getHeaderData()));&#xD;
+    for (SimpleReport sr : r.getSubReports()) {&#xD;
+        sb.append(simpleReport2HTML(sr));&#xD;
+    }&#xD;
+    sb.append(paragraph2HTML(r.getImprint()));&#xD;
+    return sb.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICO3sOL3EeafMLBlg2ie4A" name="simpleReport2HTML" specification="_ICMbcOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    StringBuilder sb = new StringBuilder();&#xD;
+    sb.append(paragraph2HTML(r.getHeaderData()));&#xD;
+    sb.append(&quot;&lt;table>&quot;);&#xD;
+    for (Row rowElement : r.getRows()) {&#xD;
+        sb.append(&quot;&lt;tr>&quot;);&#xD;
+        for (Column c : rowElement.getColumns()) {&#xD;
+            sb.append(&quot;&lt;td>&quot;);&#xD;
+            sb.append(c.toString());&#xD;
+            sb.append(&quot;&lt;/td>&quot;);&#xD;
+        }&#xD;
+        sb.append(&quot;&lt;/tr>&quot;);&#xD;
+    }&#xD;
+    sb.append(&quot;&lt;/table>&quot;);&#xD;
+    sb.append(paragraph2HTML(r.getImprint()));&#xD;
+    return sb.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICR7AOL3EeafMLBlg2ie4A" name="getHeader" specification="_ICQF0OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return &quot;&lt;html>&lt;head>&lt;title>&lt;/title>&lt;/head>&lt;body>&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICUXQOL3EeafMLBlg2ie4A" name="getTrailer" specification="_ICTJIOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return &quot;&lt;/body>&lt;/html>&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICYBoOL3EeafMLBlg2ie4A" name="process" specification="_ICWzgOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.&#xD;
+    this.resetReportText();&#xD;
+    /*
+         * In diesen Buffer schreiben wir während der Prozessierung sukzessive
+		 * unsere Ergebnisse.
+		 */&#xD;
+    StringBuffer result = new StringBuffer();&#xD;
+    /*
+		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports
+		 * ausgelesen und in HTML-Form übersetzt.
+		 */&#xD;
+    result.append(&quot;&lt;H1>&quot;).append(r.getTitle()).append(&quot;&lt;/H1>&quot;);&#xD;
+    result.append(&quot;&lt;table style=\&quot;width:400px;border:1px solid silver\&quot;>&lt;tr>&quot;);&#xD;
+    result.append(&quot;&lt;td valign=\&quot;top\&quot;>&lt;b>&quot;).append(paragraph2HTML(r.getHeaderData())).append(&quot;&lt;/b>&lt;/td>&quot;);&#xD;
+    result.append(&quot;&lt;td valign=\&quot;top\&quot;>&quot;).append(paragraph2HTML(r.getImprint())).append(&quot;&lt;/td>&quot;);&#xD;
+    result.append(&quot;&lt;/tr>&lt;tr>&lt;td>&lt;/td>&lt;td>&quot;).append(r.getCreated().toString()).append(&quot;&lt;/td>&lt;/tr>&lt;/table>&quot;);&#xD;
+    Vector&lt;Row> rows = r.getRows();&#xD;
+    result.append(&quot;&lt;table style=\&quot;width:400px\&quot;>&quot;);&#xD;
+    for (int i = 0; i &lt; rows.size(); i++) {&#xD;
+        Row row = rows.elementAt(i);&#xD;
+        result.append(&quot;&lt;tr>&quot;);&#xD;
+        for (int k = 0; k &lt; row.getNumColumns(); k++) {&#xD;
+            if (i == 0) {&#xD;
+                result.append(&quot;&lt;td style=\&quot;background:silver;font-weight:bold\&quot;>&quot;).append(row.getColumnAt(k)).append(&quot;&lt;/td>&quot;);&#xD;
+            } else {&#xD;
+                if (i > 1) {&#xD;
+                    result.append(&quot;&lt;td style=\&quot;border-top:1px solid silver\&quot;>&quot;).append(row.getColumnAt(k)).append(&quot;&lt;/td>&quot;);&#xD;
+                } else {&#xD;
+                    result.append(&quot;&lt;td valign=\&quot;top\&quot;>&quot;).append(row.getColumnAt(k)).append(&quot;&lt;/td>&quot;);&#xD;
+                }&#xD;
+            }&#xD;
+        }&#xD;
+        result.append(&quot;&lt;/tr>&quot;);&#xD;
+    }&#xD;
+    result.append(&quot;&lt;/table>&quot;);&#xD;
+    /*
+		 * Zum Schluss wird unser Arbeits-Buffer in einen String umgewandelt und
+		 * der reportText-Variable zugewiesen. Dadurch wird es möglich,
+		 * anschließend das Ergebnis mittels getReportText() auszulesen.
+		 */&#xD;
+    this.reportText = result.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICbsAOL3EeafMLBlg2ie4A" name="process" specification="_ICZ20OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.&#xD;
+    this.resetReportText();&#xD;
+    /*
+		 * In diesen Buffer schreiben wir während der Prozessierung sukzessive
+		 * unsere Ergebnisse.
+		 */&#xD;
+    StringBuffer result = new StringBuffer();&#xD;
+    /*
+		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports
+		 * ausgelesen und in HTML-Form übersetzt.
+		 */&#xD;
+    result.append(&quot;&lt;H1>&quot;).append(r.getTitle()).append(&quot;&lt;/H1>&quot;);&#xD;
+    result.append(&quot;&lt;table>&lt;tr>&quot;);&#xD;
+    if (r.getHeaderData() != null) {&#xD;
+        result.append(&quot;&lt;td>&quot;).append(paragraph2HTML(r.getHeaderData())).append(&quot;&lt;/td>&quot;);&#xD;
+    }&#xD;
+    result.append(&quot;&lt;td>&quot;).append(paragraph2HTML(r.getImprint())).append(&quot;&lt;/td>&quot;);&#xD;
+    result.append(&quot;&lt;/tr>&lt;tr>&lt;td>&lt;/td>&lt;td>&quot;).append(r.getCreated().toString()).append(&quot;&lt;/td>&lt;/tr>&lt;/table>&quot;);&#xD;
+    /*
+		 * Da AllAccountsOfAllCustomersReport ein CompositeReport ist, enthält r
+		 * eine Menge von Teil-Reports des Typs AllAccountsOfCustomerReport. Für
+		 * jeden dieser Teil-Reports rufen wir
+		 * processAllAccountsOfCustomerReport auf. Das Ergebnis des jew. Aufrufs
+		 * fügen wir dem Buffer hinzu.
+		 */&#xD;
+    for (int i = 0; i &lt; r.getNumSubReports(); i++) {&#xD;
+        /*
+			 * AllAccountsOfCustomerReport wird als Typ der SubReports
+			 * vorausgesetzt. Sollte dies in einer erweiterten Form des Projekts
+			 * nicht mehr gelten, so müsste hier eine detailliertere
+			 * Implementierung erfolgen.
+			 */&#xD;
+        AllUserNotebooksR subReport = (AllUserNotebooksR) r.getSubReportAt(i);&#xD;
+        this.process(subReport);&#xD;
+        result.append(this.reportText).append(&quot;\n&quot;);&#xD;
+        /*
+			 * Nach jeder Übersetzung eines Teilreports und anschließendem
+			 * Auslesen sollte die Ergebnisvariable zurückgesetzt werden.
+			 */&#xD;
+        this.resetReportText();&#xD;
+    }&#xD;
+    /*
+		 * Zum Schluss wird unser Arbeits-Buffer in einen String umgewandelt und
+		 * der reportText-Variable zugewiesen. Dadurch wird es möglich,
+		 * anschließend das Ergebnis mittels getReportText() auszulesen.
+		 */&#xD;
+    this.reportText = result.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ICeIQOL3EeafMLBlg2ie4A" name="getReportText" specification="_ICcTEOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.getHeader() + this.reportText + this.getTrailer();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IBreEOL3EeafMLBlg2ie4A" name="resetReportText" visibility="public" method="_IBtTQOL3EeafMLBlg2ie4A"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IB1PEOL3EeafMLBlg2ie4A" name="paragraph2HTML" visibility="public" method="_IB8j0OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IB4SYOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IB6uoOL3EeafMLBlg2ie4A" name="p" type="_IB0A8OL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IB-ZAOL3EeafMLBlg2ie4A" name="paragraph2HTML" visibility="public" method="_ICCDYOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICAOMOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICBcUOL3EeafMLBlg2ie4A" name="p" type="_IB9x8OL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICEfoOL3EeafMLBlg2ie4A" name="paragraph2HTML" visibility="public" method="_ICG74OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICFGsOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICFtwOL3EeafMLBlg2ie4A" name="p" type="_ICD4kOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICIxEOL3EeafMLBlg2ie4A" name="customReport2HTML" visibility="public" method="_ICLNUOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICJ_MOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICKmQOL3EeafMLBlg2ie4A" name="r" type="_ICIKAOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICMbcOL3EeafMLBlg2ie4A" name="simpleReport2HTML" visibility="public" method="_ICO3sOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICNCgOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICNpkOL3EeafMLBlg2ie4A" name="r" type="_H92uAOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICQF0OL3EeafMLBlg2ie4A" name="getHeader" visibility="public" method="_ICR7AOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICRT8OL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICTJIOL3EeafMLBlg2ie4A" name="getTrailer" visibility="public" method="_ICUXQOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICTwMOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICWzgOL3EeafMLBlg2ie4A" name="process" visibility="public" method="_ICYBoOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICXakOL3EeafMLBlg2ie4A" name="r" type="_ICWMcOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICZ20OL3EeafMLBlg2ie4A" name="process" visibility="public" method="_ICbsAOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICad4OL3EeafMLBlg2ie4A" name="r" type="_IAcvAOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICcTEOL3EeafMLBlg2ie4A" name="getReportText" visibility="public" method="_ICeIQOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICdhMOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IBf34OL3EeafMLBlg2ie4A" name="ReportWriter" visibility="public" isAbstract="true">
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICpHYOL3EeafMLBlg2ie4A" name="process" visibility="public" isAbstract="true">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICqVgOL3EeafMLBlg2ie4A" name="r" type="_ICWMcOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ICrjoOL3EeafMLBlg2ie4A" name="process" visibility="public" isAbstract="true">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ICsxwOL3EeafMLBlg2ie4A" name="r" type="_IAcvAOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IB0A8OL3EeafMLBlg2ie4A" name="Paragraph" visibility="public" isAbstract="true">
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IDWSAOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IDYHMOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IDVD4OL3EeafMLBlg2ie4A" name="Paragraph implements Serializable" client="_IB0A8OL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IB9x8OL3EeafMLBlg2ie4A" name="CompositeParagraph" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IDmJoOL3EeafMLBlg2ie4A" general="_IB0A8OL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_4BmlUOL5EeafMLBlg2ie4A" general="_IB0A8OL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IDn-0OL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IDol4OL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IDp0AOL3EeafMLBlg2ie4A" name="subParagraphs" visibility="private" type="_IAi1oOL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IDqbEOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>new Vector&lt;SimpleParagraph>()</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IDmwsOL3EeafMLBlg2ie4A" name="CompositeParagraph implements Serializable" client="_IB9x8OL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDsQQOL3EeafMLBlg2ie4A" name="addSubParagraph" specification="_IDrCIOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.subParagraphs.addElement(p);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDuFcOL3EeafMLBlg2ie4A" name="removeSubParagraph" specification="_IDs3UOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.subParagraphs.removeElement(p);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDwhsOL3EeafMLBlg2ie4A" name="getSubParagraphs" specification="_IDvTkOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.subParagraphs;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDxv0eL3EeafMLBlg2ie4A" name="getNumParagraphs" specification="_IDxIwOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.subParagraphs.size();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ID0MEOL3EeafMLBlg2ie4A" name="getParagraphAt" specification="_IDy98OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.subParagraphs.elementAt(i);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ID3PYOL3EeafMLBlg2ie4A" name="toString" specification="_ID1aMOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    /*
+		 * Wir legen einen leeren Buffer an, in den wir sukzessive sämtliche
+		 * String-Repräsentationen der Unterabschnitte eintragen.
+		 */&#xD;
+    StringBuffer result = new StringBuffer();&#xD;
+    // Schleife über alle Unterabschnitte&#xD;
+    for (int i = 0; i &lt; this.subParagraphs.size(); i++) {&#xD;
+        SimpleParagraph p = this.subParagraphs.elementAt(i);&#xD;
+        /*
+			 * den jew. Unterabschnitt in einen String wandeln und an den Buffer
+			 * hängen.
+			 */&#xD;
+        result.append(p.toString()).append(&quot;\n&quot;);&#xD;
+    }&#xD;
+    /*
+		 * Schließlich wird der Buffer in einen String umgewandelt und
+		 * zurückgegeben.
+		 */&#xD;
+    return result.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDrCIOL3EeafMLBlg2ie4A" name="addSubParagraph" visibility="public" method="_IDsQQOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDrpMOL3EeafMLBlg2ie4A" name="p" type="_ICD4kOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDs3UOL3EeafMLBlg2ie4A" name="removeSubParagraph" visibility="public" method="_IDuFcOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDteYOL3EeafMLBlg2ie4A" name="p" type="_ICD4kOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDvTkOL3EeafMLBlg2ie4A" name="getSubParagraphs" visibility="public" method="_IDwhsOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDv6oOL3EeafMLBlg2ie4A" type="_IAi1oOL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDxIwOL3EeafMLBlg2ie4A" name="getNumParagraphs" visibility="public" method="_IDxv0eL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDxv0OL3EeafMLBlg2ie4A" direction="return">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDy98OL3EeafMLBlg2ie4A" name="getParagraphAt" visibility="public" method="_ID0MEOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDy98eL3EeafMLBlg2ie4A" type="_ICD4kOL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDzlAOL3EeafMLBlg2ie4A" name="i">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ID1aMOL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_ID3PYOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ID2oUOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_ICD4kOL3EeafMLBlg2ie4A" name="SimpleParagraph" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IFpYEOL3EeafMLBlg2ie4A" general="_IB0A8OL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_bxcF4OL6EeafMLBlg2ie4A" general="_IB0A8OL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IFqmMOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IFsbYOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IFtpgOL3EeafMLBlg2ie4A" name="text" visibility="private" type="_IA4z4eL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IFu3oOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>&quot;&quot;</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IFp_IOL3EeafMLBlg2ie4A" name="SimpleParagraph implements Serializable" client="_ICD4kOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IFyiAOL3EeafMLBlg2ie4A" name="SimpleParagraph" specification="_IFvesOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IF4BkOL3EeafMLBlg2ie4A" name="SimpleParagraph" specification="_IF0XMOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.text = value;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IF7E4OL3EeafMLBlg2ie4A" name="getText" specification="_IF5PsOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.text;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IF86EOL3EeafMLBlg2ie4A" name="setText" specification="_IF7r8OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.text = text;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IF-vQOL3EeafMLBlg2ie4A" name="toString" specification="_IF9hIOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.text;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IFvesOL3EeafMLBlg2ie4A" name="SimpleParagraph" visibility="public" method="_IFyiAOL3EeafMLBlg2ie4A"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IF0XMOL3EeafMLBlg2ie4A" name="SimpleParagraph" visibility="public" method="_IF4BkOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IF2zcOL3EeafMLBlg2ie4A" name="value" type="_IA4z4eL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IF5PsOL3EeafMLBlg2ie4A" name="getText" visibility="public" method="_IF7E4OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IF52wOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IF7r8OL3EeafMLBlg2ie4A" name="setText" visibility="public" method="_IF86EOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IF8TAOL3EeafMLBlg2ie4A" name="text" type="_IA4z4eL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IF9hIOL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_IF-vQOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IF-IMOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_ICIKAOL3EeafMLBlg2ie4A" name="CustomReport" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IGBykOL3EeafMLBlg2ie4A" general="_IAdWEOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_Cj8isOL6EeafMLBlg2ie4A" general="_IAdWEOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IGDAsOL3EeafMLBlg2ie4A" name="subReports" visibility="private" type="_IAi1oOL3EeafMLBlg2ie4A" isUnique="false"/>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IGGEAOL3EeafMLBlg2ie4A" name="CustomReport" specification="_IGEO0OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    subReports = new Vector&lt;>();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IGIgQOL3EeafMLBlg2ie4A" name="getSubReports" specification="_IGGrEOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return subReports;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IGKVceL3EeafMLBlg2ie4A" name="getSubReportAt" specification="_IGJHUOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return subReports.get(index);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IGMxsOL3EeafMLBlg2ie4A" name="addSubReport" specification="_IGLjkOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    subReports.add(r);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IGQcEOL3EeafMLBlg2ie4A" name="toString" specification="_IGOm4OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    String s;&#xD;
+    s = super.toString();&#xD;
+    for (SimpleReport r : subReports) {&#xD;
+        s = s + r.toString();&#xD;
+    }&#xD;
+    return s;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IGEO0OL3EeafMLBlg2ie4A" name="CustomReport" visibility="public" method="_IGGEAOL3EeafMLBlg2ie4A"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IGGrEOL3EeafMLBlg2ie4A" name="getSubReports" visibility="public" method="_IGIgQOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IGH5MOL3EeafMLBlg2ie4A" type="_IAi1oOL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IGJHUOL3EeafMLBlg2ie4A" name="getSubReportAt" visibility="public" method="_IGKVceL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IGJuYOL3EeafMLBlg2ie4A" type="_H92uAOL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IGKVcOL3EeafMLBlg2ie4A" name="index">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IGLjkOL3EeafMLBlg2ie4A" name="addSubReport" visibility="public" method="_IGMxsOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IGMKoOL3EeafMLBlg2ie4A" name="r" type="_H92uAOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IGOm4OL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_IGQcEOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IGP1AOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_ICWMcOL3EeafMLBlg2ie4A" name="AllUserNotebooksR" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IEI8MOL3EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_tbf-wOL4EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IEKKUOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IELYcOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IEJjQOL3EeafMLBlg2ie4A" name="AllUserNotebooksR implements Serializable" client="_ICWMcOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IChLkOL3EeafMLBlg2ie4A" name="AllUserNotesR" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IChyoOL3EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_w8RW0OL4EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_ICjn0OL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_ICldAOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_ICiZsOL3EeafMLBlg2ie4A" name="AllUserNotesR implements Serializable" client="_IChLkOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_ICxDMOL3EeafMLBlg2ie4A" name="Row" visibility="public">
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_ICy4YOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IC0tkOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IC2iwOL3EeafMLBlg2ie4A" name="columns" visibility="private" type="_IAi1oOL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IC3w4OL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>new Vector&lt;Column>()</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_ICxqQOL3EeafMLBlg2ie4A" name="Row implements Serializable" client="_ICxDMOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IC8CUOL3EeafMLBlg2ie4A" name="addColumn" specification="_IC4X8OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.columns.addElement(c);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDATwOL3EeafMLBlg2ie4A" name="addColumn" specification="_IC-ekOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.columns.addElement(new Column(s));&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDDXEOL3EeafMLBlg2ie4A" name="removeColumn" specification="_IDBh4OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.columns.removeElement(c);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDGaYOL3EeafMLBlg2ie4A" name="getColumns" specification="_IDElMOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.columns;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDI2oOL3EeafMLBlg2ie4A" name="getNumColumns" specification="_IDHogOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.columns.size();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDLS4OL3EeafMLBlg2ie4A" name="getColumnAt" specification="_IDJdsOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.columns.elementAt(i);&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IDNvIOL3EeafMLBlg2ie4A" name="toString" specification="_IDMhAOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return &quot;Row [columns=&quot; + columns + &quot;]&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IC4X8OL3EeafMLBlg2ie4A" name="addColumn" visibility="public" method="_IC8CUOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IC6NIOL3EeafMLBlg2ie4A" name="c" type="_IBAvsOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IC-ekOL3EeafMLBlg2ie4A" name="addColumn" visibility="public" method="_IDATwOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IC_FoOL3EeafMLBlg2ie4A" name="s" type="_IA4z4eL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDBh4OL3EeafMLBlg2ie4A" name="removeColumn" visibility="public" method="_IDDXEOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDCwAOL3EeafMLBlg2ie4A" name="c" type="_IBAvsOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDElMOL3EeafMLBlg2ie4A" name="getColumns" visibility="public" method="_IDGaYOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDFzUOL3EeafMLBlg2ie4A" type="_IAi1oOL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDHogOL3EeafMLBlg2ie4A" name="getNumColumns" visibility="public" method="_IDI2oOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDIPkOL3EeafMLBlg2ie4A" direction="return">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDJdsOL3EeafMLBlg2ie4A" name="getColumnAt" visibility="public" method="_IDLS4OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDKEwOL3EeafMLBlg2ie4A" type="_IBAvsOL3EeafMLBlg2ie4A" direction="return"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDKr0OL3EeafMLBlg2ie4A" name="i">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IDMhAOL3EeafMLBlg2ie4A" name="toString" visibility="public" method="_IDNvIOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IDNIEOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IDPkUOL3EeafMLBlg2ie4A" name="AllUserPermissionsR" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IDQLYOL3EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_0F1v0OL4EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IDRZgOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IDSAkOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IDQycOL3EeafMLBlg2ie4A" name="AllUserPermissionsR implements Serializable" client="_IDPkUOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IDajcOL3EeafMLBlg2ie4A" name="AllPermissionsR" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IDajceL3EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_lePNQOL4EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IDbxkOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IDc_sOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IDbKgOL3EeafMLBlg2ie4A" name="AllPermissionsR implements Serializable" client="_IDajcOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IDeN0OL3EeafMLBlg2ie4A" name="Filter" visibility="public"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IDgDAOL3EeafMLBlg2ie4A" name="AllNotesR" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IDgqEOL3EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_aEwzkOL4EeafMLBlg2ie4A" general="_H92uAOL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IDh4MOL3EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IDjGUOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>1L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_IDhRIOL3EeafMLBlg2ie4A" name="AllNotesR implements Serializable" client="_IDgDAOL3EeafMLBlg2ie4A" supplier="_H96_cOL3EeafMLBlg2ie4A" contract="_H96_cOL3EeafMLBlg2ie4A"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_IFWdIOL3EeafMLBlg2ie4A" name="PlainTextReportWriter" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_IFXEMOL3EeafMLBlg2ie4A" general="_IBf34OL3EeafMLBlg2ie4A"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_VypMMOL6EeafMLBlg2ie4A" general="_IBf34OL3EeafMLBlg2ie4A"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_IFXrQOL3EeafMLBlg2ie4A" name="reportText" visibility="private" type="_IA4z4eL3EeafMLBlg2ie4A" isUnique="false">
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_IFYSUOL3EeafMLBlg2ie4A" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>&quot;&quot;</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IFaHgOL3EeafMLBlg2ie4A" name="resetReportText" specification="_IFZgcOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    this.reportText = &quot;&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IFdK0OL3EeafMLBlg2ie4A" name="getHeader" specification="_IFbVoOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    // Wir benötigen für Demozwecke keinen Header.&#xD;
+    return &quot;&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IFfAAeL3EeafMLBlg2ie4A" name="getTrailer" specification="_IFdx4OL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    // markieren.&#xD;
+    return &quot;___________________________________________&quot;;&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IFiDUOL3EeafMLBlg2ie4A" name="process" specification="_IFg1MOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.&#xD;
+    this.resetReportText();&#xD;
+    /*
+         * In diesen Buffer schreiben wir während der Prozessierung sukzessive
+		 * unsere Ergebnisse.
+		 */&#xD;
+    StringBuffer result = new StringBuffer();&#xD;
+    /*
+		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports
+		 * ausgelesen und in Text-Form übersetzt.
+		 */&#xD;
+    result.append(&quot;*** &quot;).append(r.getTitle()).append(&quot; ***\n\n&quot;);&#xD;
+    result.append(r.getHeaderData()).append(&quot;\n&quot;);&#xD;
+    result.append(&quot;Erstellt am: &quot;).append(r.getCreated().toString()).append(&quot;\n\n&quot;);&#xD;
+    Vector&lt;Row> rows = r.getRows();&#xD;
+    for (Row row : rows) {&#xD;
+        for (int k = 0; k &lt; row.getNumColumns(); k++) {&#xD;
+            result.append(row.getColumnAt(k)).append(&quot;\t ; \t&quot;);&#xD;
+        }&#xD;
+        result.append(&quot;\n&quot;);&#xD;
+    }&#xD;
+    result.append(&quot;\n&quot;);&#xD;
+    result.append(r.getImprint()).append(&quot;\n&quot;);&#xD;
+    /*
+		 * Zum Schluss wird unser Arbeits-Buffer in einen String umgewandelt und
+		 * der reportText-Variable zugewiesen. Dadurch wird es möglich,
+		 * anschließend das Ergebnis mittels getReportText() auszulesen.
+		 */&#xD;
+    this.reportText = result.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IFkfkOL3EeafMLBlg2ie4A" name="process" specification="_IFjRcOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    // Zunächst löschen wir das Ergebnis vorhergehender Prozessierungen.&#xD;
+    this.resetReportText();&#xD;
+    /*
+		 * In diesen Buffer schreiben wir während der Prozessierung sukzessive
+		 * unsere Ergebnisse.
+		 */&#xD;
+    StringBuffer result = new StringBuffer();&#xD;
+    /*
+		 * Nun werden Schritt für Schritt die einzelnen Bestandteile des Reports
+		 * ausgelesen und in Text-Form übersetzt.
+		 */&#xD;
+    result.append(&quot;*** &quot;).append(r.getTitle()).append(&quot; ***\n\n&quot;);&#xD;
+    if (r.getHeaderData() != null)&#xD;
+        result.append(r.getHeaderData()).append(&quot;\n&quot;);&#xD;
+    result.append(&quot;Erstellt am: &quot;).append(r.getCreated().toString()).append(&quot;\n\n&quot;);&#xD;
+    /*
+		 * Da AllAccountsOfAllCustomersReport ein CompositeReport ist, enthält r
+		 * eine Menge von Teil-Reports des Typs AllAccountsOfCustomerReport. Für
+		 * jeden dieser Teil-Reports rufen wir
+		 * processAllAccountsOfCustomerReport auf. Das Ergebnis des jew. Aufrufs
+		 * fügen wir dem Buffer hinzu.
+		 */&#xD;
+    for (int i = 0; i &lt; r.getNumSubReports(); i++) {&#xD;
+        /*
+			 * AllAccountsOfCustomerReport wird als Typ der SubReports
+			 * vorausgesetzt. Sollte dies in einer erweiterten Form des Projekts
+			 * nicht mehr gelten, so müsste hier eine detailliertere
+			 * Implementierung erfolgen.
+			 */&#xD;
+        AllUserNotebooksR subReport = (AllUserNotebooksR) r.getSubReportAt(i);&#xD;
+        this.process(subReport);&#xD;
+        // Ein Form Feed wäre hier statt der 5 Leerzeilen auch denkbar...&#xD;
+        result.append(this.reportText).append(&quot;\n\n\n\n\n&quot;);&#xD;
+        /*
+			 * Nach jeder Übersetzung eines Teilreports und anschließendem
+			 * Auslesen sollte die Ergebnisvariable zurückgesetzt werden.
+			 */&#xD;
+        this.resetReportText();&#xD;
+    }&#xD;
+    /*
+		 * Zum Schluss wird unser Arbeits-Buffer in einen String umgewandelt und
+		 * der reportText-Variable zugewiesen. Dadurch wird es möglich,
+		 * anschließend das Ergebnis mittels getReportText() auszulesen.
+		 */&#xD;
+    this.reportText = result.toString();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_IFm70OL3EeafMLBlg2ie4A" name="getReportText" specification="_IFltsOL3EeafMLBlg2ie4A">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    return this.getHeader() + this.reportText + this.getTrailer();&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IFZgcOL3EeafMLBlg2ie4A" name="resetReportText" visibility="public" method="_IFaHgOL3EeafMLBlg2ie4A"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IFbVoOL3EeafMLBlg2ie4A" name="getHeader" visibility="public" method="_IFdK0OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IFcjwOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IFdx4OL3EeafMLBlg2ie4A" name="getTrailer" visibility="public" method="_IFfAAeL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IFfAAOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IFg1MOL3EeafMLBlg2ie4A" name="process" visibility="public" method="_IFiDUOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IFhcQOL3EeafMLBlg2ie4A" name="r" type="_ICWMcOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IFjRcOL3EeafMLBlg2ie4A" name="process" visibility="public" method="_IFkfkOL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IFj4gOL3EeafMLBlg2ie4A" name="r" type="_IAcvAOL3EeafMLBlg2ie4A"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_IFltsOL3EeafMLBlg2ie4A" name="getReportText" visibility="public" method="_IFm70OL3EeafMLBlg2ie4A">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_IFmUwOL3EeafMLBlg2ie4A" type="_IA4z4eL3EeafMLBlg2ie4A" direction="return"/>
+                    </ownedOperation>
+                  </packagedElement>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_H938IOL3EeafMLBlg2ie4A" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_H95KQOL3EeafMLBlg2ie4A" name="java">
+        <packagedElement xmi:type="uml:Package" xmi:id="_H96YYOL3EeafMLBlg2ie4A" name="io">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_H96_cOL3EeafMLBlg2ie4A" name="Serializable"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_IAiOkOL3EeafMLBlg2ie4A" name="util">
+          <packagedElement xmi:type="uml:Class" xmi:id="_IAi1oOL3EeafMLBlg2ie4A" name="Vector"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_IEXlsOL3EeafMLBlg2ie4A" name="Date"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_IA4z4OL3EeafMLBlg2ie4A" name="lang">
+          <packagedElement xmi:type="uml:Class" xmi:id="_IA4z4eL3EeafMLBlg2ie4A" name="String"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_H9Yz8OL3EeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_H9aCEOL3EeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/PapyrusJava/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PapyrusJava_PROFILES/PapyrusJava.profile.uml#_j9REUByGEduN1bTiWJ0lyw"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_H9jMAOL3EeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_H9kaIOL3EeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/Codegen/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Codegen_PROFILES/Codegen.profile.uml#_fPDsIBa-EearhdjjJ6cVzQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_H9wAUOL3EeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_H9wnYOL3EeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <PapyrusJava:External xmi:id="_IAPToOL3EeafMLBlg2ie4A" name="java.io.Serializable" base_Classifier="_H96_cOL3EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_IAkDwOL3EeafMLBlg2ie4A" name="java.util.Vector" base_Classifier="_IAi1oOL3EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_IA6pEOL3EeafMLBlg2ie4A" name="java.lang.String" base_Classifier="_IA4z4eL3EeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_IBJ5oOL3EeafMLBlg2ie4A" base_BehavioralFeature="_IBHdYOL3EeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_IBNkAOL3EeafMLBlg2ie4A" base_BehavioralFeature="_IBMV4OL3EeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_IEYz0OL3EeafMLBlg2ie4A" name="java.util.Date" base_Classifier="_IEXlsOL3EeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_IFxT4OL3EeafMLBlg2ie4A" base_BehavioralFeature="_IFvesOL3EeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_IF1lUOL3EeafMLBlg2ie4A" base_BehavioralFeature="_IF0XMOL3EeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_IGFc8OL3EeafMLBlg2ie4A" base_BehavioralFeature="_IGEO0OL3EeafMLBlg2ie4A"/>
+</xmi:XMI>
