@@ -4,6 +4,7 @@ import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo;
 
 import java.sql.*;
+import java.util.Arrays;
 import java.util.Vector;
 
 public class NoteMapper extends DataMapper {
@@ -89,9 +90,6 @@ public class NoteMapper extends DataMapper {
 
     public Note findById(int id) throws ClassNotFoundException, SQLException {
 
-        if (isObjectLoaded(id, Note.class)) {
-            return (Note) loadedObjects.get(id);
-        }
 
         try {
 
@@ -101,14 +99,26 @@ public class NoteMapper extends DataMapper {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
 
-                Note note = new Note(rs.getInt("id"), rs.getString("content"), rs.getString("title"),
-                        rs.getString("subtitle"), UserInfoMapper.getUserInfoMapper().findById(rs.getInt("author_id")),
-                        NoteBookMapper.getNoteBookMapper().findById(rs.getInt("notebook_id")),
-                        rs.getDate("creation_date"), rs.getDate("due_date"), rs.getDate("modification_date"));
+            	Note n = new Note(id);
+            	
+            	// Textfelder
+            	n.setTitle(rs.getString("title"));
+            	n.setSubtitle(rs.getString("subtitle"));
+            	n.setContent(rs.getString("content"));
+            	n.setSource(rs.getString("note_source"));
 
-                loadedObjects.put(rs.getInt("id"), note);
-
-                return note;
+            	// Daten
+            	n.setCreationDate(rs.getDate("creation_date"));
+            	n.setDueDate(rs.getDate("due_date"));
+            	n.setModificationDate(rs.getDate("modification_date"));
+            	
+            	// Verweise
+            	UserInfoMapper uim = UserInfoMapper.getUserInfoMapper();
+            	n.setOwner(uim.findById(rs.getInt("author_id")));
+            	n.setNoteBook(NoteBookMapper.getNoteBookMapper().findById(rs.getLong("notebook_id")));
+            
+            	return n;
+            	
             }
 
         } catch (SQLException sqlExp) {
