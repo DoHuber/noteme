@@ -14,7 +14,6 @@ import de.hdm_stuttgart.huber.itprojekt.client.ShowNote;
 import de.hdm_stuttgart.huber.itprojekt.shared.EditorAsync;
 import de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note;
 
-import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 /**
