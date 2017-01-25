@@ -85,10 +85,6 @@ public class ShowNote extends BasicVerticalView {
         deleteButton.addClickHandler(new DeleteClickHandler());
 		shareButton.addClickHandler(new ShareClickHandler());
 		updateConfirmButton.addClickHandler(new UpdateClickHandler());
-		
-		shareButton.setStyleName("pure-button");
-		deleteButton.setStyleName("pure-button");
-		updateConfirmButton.setStyleName("pure-button");
 
         HorizontalPanel buttonPanel = new HorizontalPanel();
 		buttonPanel.add(shareButton);

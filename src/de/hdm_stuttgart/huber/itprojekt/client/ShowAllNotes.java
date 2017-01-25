@@ -62,8 +62,6 @@ public class ShowAllNotes extends BasicVerticalView {
         VerticalPanel fPanel2 = new VerticalPanel();
         FlowPanel buttonsPanel = new FlowPanel();
 
-        buttonsPanel.setStyleName("buttonsPanel");
-
         sharedWithBtn.addClickHandler(new SharedWithClickHandler());
         allNotesBtn.addClickHandler(new AllNotesClickHandler());
         sharedByBtn.addClickHandler(new SharedByClickHandler());
@@ -94,7 +92,6 @@ public class ShowAllNotes extends BasicVerticalView {
         this.add(nt);
         currentTable = nt;
        
-
     }
 
     private class AllNotesClickHandler implements ClickHandler {
