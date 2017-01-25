@@ -1,0 +1,1328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:PapyrusJava="http://www.eclipse.org/papyrus/PapyrusJava/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_wHX94OLyEeafMLBlg2ie4A" name="RootElement">
+    <packagedElement xmi:type="uml:Package" xmi:id="_4p28UOLyEeafMLBlg2ie4A" name="IT-Projekt">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4tHrsOLyEeafMLBlg2ie4A" name="de">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4tKH8OLyEeafMLBlg2ie4A" name="hdm_stuttgart">
+          <packagedElement xmi:type="uml:Package" xmi:id="_4tL9IOLyEeafMLBlg2ie4A" name="huber">
+            <packagedElement xmi:type="uml:Package" xmi:id="_4tNLQOLyEeafMLBlg2ie4A" name="itprojekt">
+              <packagedElement xmi:type="uml:Package" xmi:id="_4tPAcOLyEeafMLBlg2ie4A" name="server">
+                <packagedElement xmi:type="uml:Class" xmi:id="_4tUgAOLyEeafMLBlg2ie4A" name="SharedServicesImpl" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="_4wskIOLyEeafMLBlg2ie4A" general="_4tdC4OLyEeafMLBlg2ie4A"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_4xJ3IOLyEeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_4xM6cOLyEeafMLBlg2ie4A" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>1L</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_4xcyEOLyEeafMLBlg2ie4A" name="userInfoMapper" visibility="private" type="_4xWrcOLyEeafMLBlg2ie4A" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_4xfOUOLyEeafMLBlg2ie4A" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>UserInfoMapper.getUserInfoMapper()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4w7NoOLyEeafMLBlg2ie4A" name="SharedServicesImpl implements SharedServices" client="_4tUgAOLyEeafMLBlg2ie4A" supplier="_4w1uEOLyEeafMLBlg2ie4A" contract="_4w1uEOLyEeafMLBlg2ie4A"/>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4xqNcOLyEeafMLBlg2ie4A" name="init" specification="_4xhDgOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4x-9kOLyEeafMLBlg2ie4A" name="login" specification="_4x1MkOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserService userService = UserServiceFactory.getUserService();&#xD;
+    UserInfo userInfo = new UserInfo();&#xD;
+    userInfoMapper = UserInfoMapper.getUserInfoMapper();&#xD;
+    if (userService.isUserLoggedIn()) {&#xD;
+        User user = userService.getCurrentUser();&#xD;
+        userInfo.setLoggedIn(true);&#xD;
+        userInfo.setEmailAddress(user.getEmail());&#xD;
+        userInfo.setNickname(user.getNickname());&#xD;
+        userInfo.setLogoutUrl(userService.createLogoutURL(requestUri));&#xD;
+        userInfo.setGoogleId(user.getUserId());&#xD;
+        // Registration aktuell noch etwas unzeremoniell&#xD;
+        if (!userInfoMapper.isUserRegistered(userInfo.getEmailAddress())) {&#xD;
+            userInfoMapper.registerUser(userInfo);&#xD;
+        }&#xD;
+        UserInfo someUser = userInfoMapper.findByEmailAdress(user.getEmail());&#xD;
+        userInfo.setFirstName(someUser.getFirstName());&#xD;
+        userInfo.setSurName(someUser.getSurName());&#xD;
+        userInfo.setId(someUser.getId());&#xD;
+        userInfo.setAdminStatus(userService.isUserAdmin());&#xD;
+    } else {&#xD;
+        userInfo.setLoggedIn(false);&#xD;
+        userInfo.setLoginUrl(userService.createLoginURL(requestUri));&#xD;
+    }&#xD;
+    return userInfo;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4yIHgOLyEeafMLBlg2ie4A" name="getAllUsers" specification="_4yAywOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return userInfoMapper.getAllUserInfos();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4xhDgOLyEeafMLBlg2ie4A" name="init" visibility="public" method="_4xqNcOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4x1MkOLyEeafMLBlg2ie4A" name="login" visibility="public" method="_4x-9kOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4x76QOLyEeafMLBlg2ie4A" type="_4x3o0OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4x9IYOLyEeafMLBlg2ie4A" name="requestUri" type="_4xwUEOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4yAywOLyEeafMLBlg2ie4A" name="getAllUsers" visibility="public" method="_4yIHgOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yG5YOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_4xi4sOLyEeafMLBlg2ie4A" name="IllegalArgumentException"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_4yOOIOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="_4yTGoOLyEeafMLBlg2ie4A" general="_4yPcQOLyEeafMLBlg2ie4A"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_4yWxAOLyEeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_4ydesOLyEeafMLBlg2ie4A" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>-6623416840322170431L</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4yq6EOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" specification="_4yiXMOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4y0rEOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" specification="_4yt9YOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    super(message);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4zCGcOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" specification="_4y6xsOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4zQI4OLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" specification="_4zFJwOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_40AW0OLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" specification="_4zVBYOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    super(message, cause, enableSuppression, writableStackTrace);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4yiXMOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" visibility="public" method="_4yq6EOLyEeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4yt9YOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" visibility="public" method="_4y0rEOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yzc8OLyEeafMLBlg2ie4A" name="message" type="_4xwUEOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4y6xsOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" visibility="public" method="_4zCGcOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4zA4UOLyEeafMLBlg2ie4A" name="cause" type="_4y2gQOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4zFJwOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" visibility="public" method="_4zQI4OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4zKpUOLyEeafMLBlg2ie4A" name="message" type="_4xwUEOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4zNsoOLyEeafMLBlg2ie4A" name="cause" type="_4y2gQOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4zVBYOLyEeafMLBlg2ie4A" name="InvalidLoginStatusException" visibility="public" method="_40AW0OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4z4bAOLyEeafMLBlg2ie4A" name="message" type="_4xwUEOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4z7eUOLyEeafMLBlg2ie4A" name="cause" type="_4y2gQOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4z9TgOLyEeafMLBlg2ie4A" name="enableSuppression">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                    </ownedParameter>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4z_IsOLyEeafMLBlg2ie4A" name="writableStackTrace">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                    </ownedParameter>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_4yPcQOLyEeafMLBlg2ie4A" name="RuntimeException"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_40T40OLyEeafMLBlg2ie4A" name="EditorImpl" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="_40VG8OLyEeafMLBlg2ie4A" general="_4tdC4OLyEeafMLBlg2ie4A"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_40bNkOLyEeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_40dCwOLyEeafMLBlg2ie4A" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>1L</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_40iiUOLyEeafMLBlg2ie4A" name="noteMapper" visibility="private" type="_40eQ4OLyEeafMLBlg2ie4A" isUnique="false"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_40pQAOLyEeafMLBlg2ie4A" name="noteBookMapper" visibility="private" type="_40k-kOLyEeafMLBlg2ie4A" isUnique="false"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_40sTUOLyEeafMLBlg2ie4A" name="userInfoMapper" visibility="private" type="_4xWrcOLyEeafMLBlg2ie4A" isUnique="false"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_40zBAOLyEeafMLBlg2ie4A" name="permissionMapper" visibility="private" type="_40uvkOLyEeafMLBlg2ie4A" isUnique="false"/>
+                  <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_40ZYYOLyEeafMLBlg2ie4A" name="EditorImpl implements Editor" client="_40T40OLyEeafMLBlg2ie4A" supplier="_40VuAOLyEeafMLBlg2ie4A" contract="_40VuAOLyEeafMLBlg2ie4A"/>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_403ScOLyEeafMLBlg2ie4A" name="init" specification="_4002MOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    this.noteMapper = NoteMapper.getNoteMapper();&#xD;
+    this.noteBookMapper = NoteBookMapper.getNoteBookMapper();&#xD;
+    this.userInfoMapper = UserInfoMapper.getUserInfoMapper();&#xD;
+    this.permissionMapper = PermissionMapper.getPermissionMapper();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_408K8OLyEeafMLBlg2ie4A" name="getHelloWorld" specification="_405usOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    // Sinnlose Methode, gibt einen zufälligen String zurück&#xD;
+    // Zu Testzwecken, wird dann bezeiten rausgeworfen&#xD;
+    SecureRandom random = new SecureRandom();&#xD;
+    return new BigInteger(256, random).toString();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_41HxIOLyEeafMLBlg2ie4A" name="createNoteBook" specification="_41C4oOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Date currentDate = new Date(System.currentTimeMillis());&#xD;
+    noteBook.setCreationDate(currentDate);&#xD;
+    noteBook.setModificationDate(currentDate);&#xD;
+    noteBook.setOwner(getCurrentUser());&#xD;
+    return noteBookMapper.create(noteBook);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_41Oe0OLyEeafMLBlg2ie4A" name="saveNoteBook" specification="_41KNYOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    try {&#xD;
+        return noteBookMapper.save(noteBook);&#xD;
+    } catch (ClassNotFoundExceptionSQLException |  e) {&#xD;
+        e.printStackTrace();&#xD;
+        return null;&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_41Y24OLyEeafMLBlg2ie4A" name="getNoteBookById" specification="_41Q7EOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return noteBookMapper.findById(notebook.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_41dvYOLyEeafMLBlg2ie4A" name="deleteNoteBook" specification="_41bTIOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Note> notesToDelete = getAllFrom(noteBook);&#xD;
+    for (Note row : notesToDelete) {&#xD;
+        noteMapper.delete(row);&#xD;
+    }&#xD;
+    noteBookMapper.delete(noteBook);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_41oHcOLyEeafMLBlg2ie4A" name="createNote" specification="_41j2AOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Date currentDate = new Date(System.currentTimeMillis());&#xD;
+    note.setCreationDate(currentDate);&#xD;
+    note.setModificationDate(currentDate);&#xD;
+    note.setOwner(this.getCurrentUser());&#xD;
+    try {&#xD;
+        return noteMapper.create(note);&#xD;
+    } catch (Exception e) {&#xD;
+        e.printStackTrace();&#xD;
+    }&#xD;
+    // TODO&#xD;
+    return null;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_41u1IOLyEeafMLBlg2ie4A" name="saveNote" specification="_41rKwOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    // Aus Gründen der Sichtbarkeit (oder war das PHP?)&#xD;
+    Note newNote = note;&#xD;
+    try {&#xD;
+        noteMapper.save(newNote);&#xD;
+        newNote = noteMapper.findById(newNote.getId());&#xD;
+    } catch (Exception e) {&#xD;
+        e.printStackTrace();&#xD;
+    }&#xD;
+    return newNote;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4150QOLyEeafMLBlg2ie4A" name="getNoteById" specification="_41yfgOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return noteMapper.findById(note.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_41-swOLyEeafMLBlg2ie4A" name="deleteNote" specification="_417pcOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    noteMapper.delete(note);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42EMUOLyEeafMLBlg2ie4A" name="getAllNotes" specification="_42BJAOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    try {&#xD;
+        return noteMapper.getAllNotes();&#xD;
+    } catch (Exception e) {&#xD;
+        e.printStackTrace();&#xD;
+        return new Vector&lt;Note>();&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42IdwOLyEeafMLBlg2ie4A" name="getAllNoteBooks" specification="_42GBgOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    try {&#xD;
+        return noteBookMapper.getAllNoteBooks();&#xD;
+    } catch (Exception e) {&#xD;
+        e.printStackTrace();&#xD;
+        return null;&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42NWQOLyEeafMLBlg2ie4A" name="getAllNotesForCurrentUser" specification="_42K6AOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserInfo currentUser = getCurrentUser();&#xD;
+    return noteMapper.getAllNotesForUserId(currentUser.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42S10OLyEeafMLBlg2ie4A" name="getAllNoteBooksFor" specification="_42PygOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return noteBookMapper.getAllNoteBooksForUserId(u.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42XHQOLyEeafMLBlg2ie4A" name="getCurrentUser" specification="_42UrAOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserService userService = UserServiceFactory.getUserService();&#xD;
+    if (!userService.isUserLoggedIn()) {&#xD;
+        throw new InvalidLoginStatusException(&quot;Kein User eingeloggt. Funktion an falscher Stelle verwendet?&quot;);&#xD;
+    }&#xD;
+    User currentGoogleUser = userService.getCurrentUser();&#xD;
+    return userInfoMapper.findUserByGoogleId(currentGoogleUser.getUserId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42bYsOLyEeafMLBlg2ie4A" name="getAllNoteBooksForCurrentUser" specification="_42Y8cOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserInfo currentUser = getCurrentUser();&#xD;
+    return noteBookMapper.getAllNoteBooksForUserId(currentUser.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42hfUOLyEeafMLBlg2ie4A" name="getAllFrom" specification="_42d08OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    int noteBookId = nb.getId();&#xD;
+    return noteMapper.getAllNotesForNoteBookId(noteBookId);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42oNAOLyEeafMLBlg2ie4A" name="saveUser" specification="_42j7kOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    try {&#xD;
+        return userInfoMapper.save(user);&#xD;
+    } catch (Exception e) {&#xD;
+        e.printStackTrace();&#xD;
+        return null;&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42secOLyEeafMLBlg2ie4A" name="getAllSharedNotesForCurrentUser" specification="_42qCMOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Note> v = noteMapper.getAllNotesSharedWith(getCurrentUser());&#xD;
+    for (Note row : v) {&#xD;
+        Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);&#xD;
+        row.setRunTimePermission(p);&#xD;
+    }&#xD;
+    return v;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42wI0OLyEeafMLBlg2ie4A" name="getAllSharedNoteBooksForCurrentUser" specification="_42tskOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Notebook> v = noteBookMapper.getAllNoteBooksSharedWith(getCurrentUser());&#xD;
+    for (Notebook row : v) {&#xD;
+        Permission p = permissionMapper.getPermissionFor(getCurrentUser(), row);&#xD;
+        row.setRunTimePermission(p);&#xD;
+    }&#xD;
+    return v;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_42zzMOLyEeafMLBlg2ie4A" name="getAllNotesSharedByCurrentUser" specification="_42x-AOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserInfo u = getCurrentUser();&#xD;
+    return noteMapper.getAllNotesSharedBy(u);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_424EoOLyEeafMLBlg2ie4A" name="getAllNoteBooksSharedByCurrentUser" specification="_421oYOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return noteBookMapper.getAllNoteBooksSharedBy(getCurrentUser());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_428WEOLyEeafMLBlg2ie4A" name="getSource" specification="_425SwOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    HttpSession session = this.getThreadLocalRequest().getSession();&#xD;
+    String source = (String) session.getAttribute(&quot;source&quot;);&#xD;
+    System.out.println(&quot;Session object: &quot; + session.toString());&#xD;
+    if (source == null) {&#xD;
+        System.out.println(&quot;Source string found to be null.&quot;);&#xD;
+        source = &quot;none&quot;;&#xD;
+    }&#xD;
+    // Attribut entfernen, damit der Client nicht verwirrt wird&#xD;
+    session.removeAttribute(&quot;source&quot;);&#xD;
+    return source;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_43AAcOLyEeafMLBlg2ie4A" name="getAllEmails" specification="_42-LQOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return userInfoMapper.getAllEmailAdresses();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_43E48OLyEeafMLBlg2ie4A" name="getAllNotesForUser" specification="_43B1oOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return noteMapper.getAllNotesForUser(user.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_43JxcOLyEeafMLBlg2ie4A" name="deleteUserInfo" specification="_43GuIOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    // TODO Auto-generated method stub&#xD;
+    Vector&lt;Notebook> vector = noteBookMapper.getAllNoteBooksForUserId(ui.getId());&#xD;
+    for (Notebook nb : vector) {&#xD;
+        deleteNoteBook(nb);&#xD;
+    }&#xD;
+    Vector&lt;Note> vectorNotes = noteMapper.getAllNotesForUserId(ui.getId());&#xD;
+    for (Note n : vectorNotes) {&#xD;
+        deleteNote(n);&#xD;
+    }&#xD;
+    Vector&lt;Permission> vectorPermissions = permissionMapper.getAllPermissionsCreatedBy(ui);&#xD;
+    for (Permission p : vectorPermissions) {&#xD;
+        permissionMapper.deletePermission(p);&#xD;
+    }&#xD;
+    Vector&lt;Permission> vectorPerm = permissionMapper.getAllPermissionsFor(ui);&#xD;
+    for (Permission p : vectorPerm) {&#xD;
+        permissionMapper.deletePermission(p);&#xD;
+    }&#xD;
+    try {&#xD;
+        userInfoMapper.delete(ui);&#xD;
+    } catch (ClassNotFoundException e) {&#xD;
+        e.printStackTrace();&#xD;
+    } catch (SQLException e) {&#xD;
+        e.printStackTrace();&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_43OC4OLyEeafMLBlg2ie4A" name="getDueNotesForCurrentUser" specification="_43LmoOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    // TODO performanter implementieren mit eigener Mapper-Funktion&#xD;
+    Date today = new Date(System.currentTimeMillis());&#xD;
+    Vector&lt;Note> dueNotes = new Vector&lt;>();&#xD;
+    Vector&lt;Note> allNotesCurrentUser = getAllNotesForCurrentUser();&#xD;
+    if (allNotesCurrentUser == null || allNotesCurrentUser.isEmpty()) {&#xD;
+        return new Vector&lt;Note>();&#xD;
+    }&#xD;
+    for (Note n : allNotesCurrentUser) {&#xD;
+        if (n.getDueDate() != null) {&#xD;
+            if (n.getDueDate().before(today) || n.getDueDate().equals(today)) {&#xD;
+                dueNotes.add(n);&#xD;
+            }&#xD;
+        }&#xD;
+    }&#xD;
+    return dueNotes;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4002MOLyEeafMLBlg2ie4A" name="init" visibility="public" method="_403ScOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_405usOLyEeafMLBlg2ie4A" name="getHelloWorld" visibility="public" method="_408K8OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_40680OLyEeafMLBlg2ie4A" type="_4xwUEOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_41C4oOLyEeafMLBlg2ie4A" name="createNoteBook" visibility="public" method="_41HxIOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41Et0OLyEeafMLBlg2ie4A" type="_40-nMOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41GjAOLyEeafMLBlg2ie4A" name="noteBook" type="_40-nMOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_41KNYOLyEeafMLBlg2ie4A" name="saveNoteBook" visibility="public" method="_41Oe0OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41LbgOLyEeafMLBlg2ie4A" type="_40-nMOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41NQsOLyEeafMLBlg2ie4A" name="noteBook" type="_40-nMOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_41Q7EOLyEeafMLBlg2ie4A" name="getNoteBookById" visibility="public" method="_41Y24OLyEeafMLBlg2ie4A" raisedException="_41VMgOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41SJMOLyEeafMLBlg2ie4A" type="_40-nMOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41T-YOLyEeafMLBlg2ie4A" name="notebook" type="_40-nMOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_41bTIOLyEeafMLBlg2ie4A" name="deleteNoteBook" visibility="public" method="_41dvYOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41chQOLyEeafMLBlg2ie4A" name="noteBook" type="_40-nMOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_41j2AOLyEeafMLBlg2ie4A" name="createNote" visibility="public" method="_41oHcOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41lrMOLyEeafMLBlg2ie4A" type="_41fkkOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41m5UOLyEeafMLBlg2ie4A" name="note" type="_41fkkOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_41rKwOLyEeafMLBlg2ie4A" name="saveNote" visibility="public" method="_41u1IOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41sY4OLyEeafMLBlg2ie4A" type="_41fkkOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41uOEOLyEeafMLBlg2ie4A" name="note" type="_41fkkOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_41yfgOLyEeafMLBlg2ie4A" name="getNoteById" visibility="public" method="_4150QOLyEeafMLBlg2ie4A" raisedException="_41VMgOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_41ztoOLyEeafMLBlg2ie4A" type="_41fkkOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_413YAOLyEeafMLBlg2ie4A" name="note" type="_41fkkOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_417pcOLyEeafMLBlg2ie4A" name="deleteNote" visibility="public" method="_41-swOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_419eoOLyEeafMLBlg2ie4A" name="note" type="_41fkkOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42BJAOLyEeafMLBlg2ie4A" name="getAllNotes" visibility="public" method="_42EMUOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42CXIOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42GBgOLyEeafMLBlg2ie4A" name="getAllNoteBooks" visibility="public" method="_42IdwOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42HPoOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42K6AOLyEeafMLBlg2ie4A" name="getAllNotesForCurrentUser" visibility="public" method="_42NWQOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42MIIOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42PygOLyEeafMLBlg2ie4A" name="getAllNoteBooksFor" visibility="public" method="_42S10OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42QZkOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42RnsOLyEeafMLBlg2ie4A" name="u" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42UrAOLyEeafMLBlg2ie4A" name="getCurrentUser" visibility="public" method="_42XHQOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42WgMOLyEeafMLBlg2ie4A" type="_4x3o0OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42Y8cOLyEeafMLBlg2ie4A" name="getAllNoteBooksForCurrentUser" visibility="public" method="_42bYsOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42aKkOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42d08OLyEeafMLBlg2ie4A" name="getAllFrom" visibility="public" method="_42hfUOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42fDEOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42gRMOLyEeafMLBlg2ie4A" name="nb" type="_40-nMOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42j7kOLyEeafMLBlg2ie4A" name="saveUser" visibility="public" method="_42oNAOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42lJsOLyEeafMLBlg2ie4A" type="_4x3o0OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42m-4OLyEeafMLBlg2ie4A" name="user" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42qCMOLyEeafMLBlg2ie4A" name="getAllSharedNotesForCurrentUser" visibility="public" method="_42secOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42rQUOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42tskOLyEeafMLBlg2ie4A" name="getAllSharedNoteBooksForCurrentUser" visibility="public" method="_42wI0OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42u6sOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42x-AOLyEeafMLBlg2ie4A" name="getAllNotesSharedByCurrentUser" visibility="public" method="_42zzMOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42zMIOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_421oYOLyEeafMLBlg2ie4A" name="getAllNoteBooksSharedByCurrentUser" visibility="public" method="_424EoOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_4222gOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_425SwOLyEeafMLBlg2ie4A" name="getSource" visibility="public" method="_428WEOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_427vAOLyEeafMLBlg2ie4A" type="_4xwUEOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_42-LQOLyEeafMLBlg2ie4A" name="getAllEmails" visibility="public" method="_43AAcOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_42_ZYOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_43B1oOLyEeafMLBlg2ie4A" name="getAllNotesForUser" visibility="public" method="_43E48OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_43DDwOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_43Dq0OLyEeafMLBlg2ie4A" name="user" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_43GuIOLyEeafMLBlg2ie4A" name="deleteUserInfo" visibility="public" method="_43JxcOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_43IjUOLyEeafMLBlg2ie4A" name="ui" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_43LmoOLyEeafMLBlg2ie4A" name="getDueNotesForCurrentUser" visibility="public" method="_43OC4OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_43M0wOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_43XM0OLyEeafMLBlg2ie4A" name="PermissionServiceImpl" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="_43Ya8OLyEeafMLBlg2ie4A" general="_4tdC4OLyEeafMLBlg2ie4A"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_43gWwOLyEeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_43lPQOLyEeafMLBlg2ie4A" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>-1339547511763075795L</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_43nEcOLyEeafMLBlg2ie4A" name="permissionMapper" visibility="private" type="_40uvkOLyEeafMLBlg2ie4A" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_43pgsOLyEeafMLBlg2ie4A" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>PermissionMapper.getPermissionMapper()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_43ehkOLyEeafMLBlg2ie4A" name="PermissionServiceImpl implements PermissionService" client="_43XM0OLyEeafMLBlg2ie4A" supplier="_43ZCAOLyEeafMLBlg2ie4A" contract="_43ZCAOLyEeafMLBlg2ie4A"/>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_43vAQOLyEeafMLBlg2ie4A" name="PermissionServiceImpl" specification="_43qu0OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_436mcOLyEeafMLBlg2ie4A" name="PermissionServiceImpl" specification="_431G4OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    super(delegate);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_44LFIOLyEeafMLBlg2ie4A" name="shareWith" specification="_44DwYOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Permission p = permissionMapper.getPermissionFor(beneficiary, sharedObject);&#xD;
+    if (p == null) {&#xD;
+        p = new Permission();&#xD;
+        p.setLevel(l);&#xD;
+        setCurrentUserAsAuthor(p, beneficiary);&#xD;
+        createNewPermission(p, beneficiary, sharedObject);&#xD;
+    } else {&#xD;
+        upgradeExistingPermissionTo(p, l);&#xD;
+    }&#xD;
+    if (sharedObject.getType() == 'b') {&#xD;
+        Vector&lt;Note> notesToShare = NoteMapper.getNoteMapper().getAllNotesForNoteBookId(sharedObject.getId());&#xD;
+        for (Note row : notesToShare) {&#xD;
+            shareWith(beneficiary, row, l);&#xD;
+        }&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_44U2IOLyEeafMLBlg2ie4A" name="setCurrentUserAsAuthor" specification="_44QksOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserService userService = UserServiceFactory.getUserService();&#xD;
+    if (!userService.isUserLoggedIn()) {&#xD;
+        throw new InvalidLoginStatusException(&quot;Kein User eingeloggt. Funktion an falscher Stelle verwendet?&quot;);&#xD;
+    }&#xD;
+    User currentGoogleUser = userService.getCurrentUser();&#xD;
+    UserInfo author = UserInfoMapper.getUserInfoMapper().findUserByGoogleId(currentGoogleUser.getUserId());&#xD;
+    p.setAuthor(author);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_44cK4OLyEeafMLBlg2ie4A" name="createNewPermission" specification="_44XSYOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    p.setBeneficiary(beneficiary);&#xD;
+    p.setSharedObject(sharedObject);&#xD;
+    permissionMapper.createPermission(p);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_44kGsOLyEeafMLBlg2ie4A" name="upgradeExistingPermissionTo" specification="_44f1QOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    p.setLevel(l);&#xD;
+    permissionMapper.savePermission(p);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_44spkOLyEeafMLBlg2ie4A" name="shareWith" specification="_44nKAOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserInfo userToShareWith = UserInfoMapper.getUserInfoMapper().findByEmailAdress(userEmail);&#xD;
+    shareWith(userToShareWith, sharedObject, l);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_440lYOLyEeafMLBlg2ie4A" name="getRunTimePermissionFor" specification="_44vs4OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Permission p = permissionMapper.getPermissionFor(u, sharedObject);&#xD;
+    return p;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_447TEOLyEeafMLBlg2ie4A" name="getAllPermissionsFor" specification="_443BoOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return permissionMapper.getAllPermissionsFor(s);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_45ALkOLyEeafMLBlg2ie4A" name="deletePermission" specification="_449vUOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    permissionMapper.deletePermission(p);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_45GSMOLyEeafMLBlg2ie4A" name="getAllPermissionsCreatedBy" specification="_45Cn0OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return permissionMapper.getAllPermissionsCreatedBy(u);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_45LKsOLyEeafMLBlg2ie4A" name="getAllPermissions" specification="_45IHYOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return permissionMapper.getAllPermissions();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_43qu0OLyEeafMLBlg2ie4A" name="PermissionServiceImpl" visibility="public" method="_43vAQOLyEeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_431G4OLyEeafMLBlg2ie4A" name="PermissionServiceImpl" visibility="public" method="_436mcOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_435YUOLyEeafMLBlg2ie4A" name="delegate" type="_43xcgOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_44DwYOLyEeafMLBlg2ie4A" name="shareWith" visibility="public" method="_44LFIOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44FlkOLyEeafMLBlg2ie4A" name="beneficiary" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44HawOLyEeafMLBlg2ie4A" name="sharedObject" type="_438boOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44Io4OLyEeafMLBlg2ie4A" name="l" type="_44AGAOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_44QksOLyEeafMLBlg2ie4A" name="setCurrentUserAsAuthor" visibility="private" method="_44U2IOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44SZ4OLyEeafMLBlg2ie4A" name="p" type="_44M6UOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44ToAOLyEeafMLBlg2ie4A" name="beneficiary" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_44XSYOLyEeafMLBlg2ie4A" name="createNewPermission" visibility="private" method="_44cK4OLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44YggOLyEeafMLBlg2ie4A" name="p" type="_44M6UOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44ZuoOLyEeafMLBlg2ie4A" name="beneficiary" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44bj0OLyEeafMLBlg2ie4A" name="sharedObject" type="_438boOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_44f1QOLyEeafMLBlg2ie4A" name="upgradeExistingPermissionTo" visibility="private" method="_44kGsOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44hDYOLyEeafMLBlg2ie4A" name="p" type="_44M6UOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44i4kOLyEeafMLBlg2ie4A" name="l" type="_44AGAOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_44nKAOLyEeafMLBlg2ie4A" name="shareWith" visibility="public" method="_44spkOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44o_MOLyEeafMLBlg2ie4A" name="userEmail" type="_4xwUEOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44qNUOLyEeafMLBlg2ie4A" name="sharedObject" type="_438boOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44sCgOLyEeafMLBlg2ie4A" name="l" type="_44AGAOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_44vs4OLyEeafMLBlg2ie4A" name="getRunTimePermissionFor" visibility="public" method="_440lYOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44w7AOLyEeafMLBlg2ie4A" type="_44M6UOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44ywMOLyEeafMLBlg2ie4A" name="u" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44z-UOLyEeafMLBlg2ie4A" name="sharedObject" type="_438boOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_443BoOLyEeafMLBlg2ie4A" name="getAllPermissionsFor" visibility="public" method="_447TEOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44420OLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_446E8OLyEeafMLBlg2ie4A" name="s" type="_438boOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_449vUOLyEeafMLBlg2ie4A" name="deletePermission" visibility="public" method="_45ALkOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_44-9cOLyEeafMLBlg2ie4A" name="p" type="_44M6UOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_45Cn0OLyEeafMLBlg2ie4A" name="getAllPermissionsCreatedBy" visibility="public" method="_45GSMOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_45D18OLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_45FEEOLyEeafMLBlg2ie4A" name="u" type="_4x3o0OLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_45IHYOLyEeafMLBlg2ie4A" name="getAllPermissions" visibility="public" method="_45LKsOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_45J8kOLyEeafMLBlg2ie4A" type="_4yCA4OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_46QIwOLyEeafMLBlg2ie4A" name="ReportGeneratorImpl" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="_46TMEOLyEeafMLBlg2ie4A" general="_4tdC4OLyEeafMLBlg2ie4A"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_46c9EOLyEeafMLBlg2ie4A" name="editor" visibility="private" type="_40VuAOLyEeafMLBlg2ie4A" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_46eyQOLyEeafMLBlg2ie4A" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>null</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_46ag0OLyEeafMLBlg2ie4A" name="ReportGeneratorImpl implements ReportGenerator" client="_46QIwOLyEeafMLBlg2ie4A" supplier="_46UaMOLyEeafMLBlg2ie4A" contract="_46UaMOLyEeafMLBlg2ie4A"/>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_46k44OLyEeafMLBlg2ie4A" name="ReportGeneratorImpl" specification="_46gncOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_46ojQOLyEeafMLBlg2ie4A" name="init" specification="_46muEOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    /*
+		 * Ein ReportGeneratorImpl-Objekt instantiiert für seinen Eigenbedarf
+		 * eine BankVerwaltungImpl-Instanz.
+		 */&#xD;
+    EditorImpl a = new EditorImpl();&#xD;
+    a.init();&#xD;
+    this.editor = a;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_46s0sOLyEeafMLBlg2ie4A" name="getNoteBookVerwaltung" specification="_46qYcOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    return this.editor;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_461-oOLyEeafMLBlg2ie4A" name="createAllUserNotebooksR" specification="_46vQ8OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserInfo u = editor.getCurrentUser();&#xD;
+    return createAllUserNotebooksReportFor(u, new HashMap&lt;String, java.sql.Date>(), null);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_47LV0OLyEeafMLBlg2ie4A" name="createAllUserNotebooksReportFor" specification="_47DaAOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Notebook> allNoteBooksForUserId = NoteBookMapper.getNoteBookMapper().getAllNoteBooksForUserId(u.getId());&#xD;
+    if (!timespan.isEmpty()) {&#xD;
+        filterForTimes(allNoteBooksForUserId, timespan, dateType);&#xD;
+        if (allNoteBooksForUserId.isEmpty()) {&#xD;
+            return null;&#xD;
+        }&#xD;
+    }&#xD;
+    AllUserNotebooksR report = new AllUserNotebooksR();&#xD;
+    report.setTitle(&quot;All notebooks from User&quot;);&#xD;
+    report.setCreated(new Date(System.currentTimeMillis()));&#xD;
+    String sb = &quot;Number of notebooks:&quot; + allNoteBooksForUserId.size();&#xD;
+    report.setHeaderData(new SimpleParagraph(sb));&#xD;
+    Row headline = new Row();&#xD;
+    headline.addColumn((new Column(&quot;Title&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Subtitle&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Username&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Creation Date&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Modification Date&quot;)));&#xD;
+    report.addRow(headline);&#xD;
+    for (Notebook element : allNoteBooksForUserId) {&#xD;
+        Row r = new Row();&#xD;
+        r.addColumn(new Column(element.getTitle()));&#xD;
+        r.addColumn(new Column(element.getSubtitle()));&#xD;
+        r.addColumn(new Column(element.getOwner().getNickname()));&#xD;
+        r.addColumn(new Column(element.getCreationDate().toString()));&#xD;
+        r.addColumn(new Column(element.getModificationDate().toString()));&#xD;
+        report.addRow(r);&#xD;
+    }&#xD;
+    report.setImprint(new SimpleParagraph(&quot;-----------------------------------------&quot;));&#xD;
+    return report;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_47T4sOLyEeafMLBlg2ie4A" name="createAllNotebooksR" specification="_47NLAOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Notebook> allNoteBooks = NoteBookMapper.getNoteBookMapper().getAllNoteBooks();&#xD;
+    AllNotebooksR report2 = new AllNotebooksR();&#xD;
+    report2.setTitle(&quot;All notebooks of all User&quot;);&#xD;
+    report2.setCreated(new Date(System.currentTimeMillis()));&#xD;
+    String sb = &quot;Number of Notebooks:&quot; + allNoteBooks.size();&#xD;
+    report2.setHeaderData(new SimpleParagraph(sb));&#xD;
+    Row headline = new Row();&#xD;
+    headline.addColumn((new Column(&quot;Title&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Subtitle&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Username&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Creation Date&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Modification Date&quot;)));&#xD;
+    report2.addRow(headline);&#xD;
+    for (Notebook element : allNoteBooks) {&#xD;
+        Row r = new Row();&#xD;
+        r.addColumn(new Column(element.getTitle()));&#xD;
+        r.addColumn(new Column(element.getSubtitle()));&#xD;
+        r.addColumn(new Column(element.getOwner().getNickname()));&#xD;
+        r.addColumn(new Column(element.getCreationDate().toString()));&#xD;
+        r.addColumn(new Column(element.getModificationDate().toString()));&#xD;
+        report2.addRow(r);&#xD;
+    }&#xD;
+    report2.setImprint(new SimpleParagraph(&quot;------------------------------------------&quot;));&#xD;
+    return report2;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_47dCoOLyEeafMLBlg2ie4A" name="createAllUserNotesR" specification="_47Vt4OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserInfo u = editor.getCurrentUser();&#xD;
+    return createAllUserNotesReportFor(u, new HashMap&lt;String, java.sql.Date>(), null);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_47qeAOLyEeafMLBlg2ie4A" name="createAllUserNotesReportFor" specification="_47iiMOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Note> allNotesForUserId = new Vector&lt;>();&#xD;
+    allNotesForUserId = NoteMapper.getNoteMapper().getAllNotesForUserId(u.getId());&#xD;
+    if (!timespan.isEmpty()) {&#xD;
+        filterForTimes(allNotesForUserId, timespan, dateType);&#xD;
+        if (allNotesForUserId.isEmpty()) {&#xD;
+            return null;&#xD;
+        }&#xD;
+    }&#xD;
+    AllUserNotesR report2 = new AllUserNotesR();&#xD;
+    report2.setTitle(&quot;All Notes of current User&quot;);&#xD;
+    report2.setCreated(new Date(System.currentTimeMillis()));&#xD;
+    String sb = &quot;Number of notes:&quot; + allNotesForUserId.size();&#xD;
+    report2.setHeaderData(new SimpleParagraph(sb));&#xD;
+    Row headline = new Row();&#xD;
+    headline.addColumn((new Column(&quot;Title&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Subtitle&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Username&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Creation Date&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Modification Date&quot;)));&#xD;
+    report2.addRow(headline);&#xD;
+    for (Note element : allNotesForUserId) {&#xD;
+        Row r = new Row();&#xD;
+        r.addColumn(new Column(element.getTitle()));&#xD;
+        r.addColumn(new Column(element.getSubtitle()));&#xD;
+        r.addColumn(new Column(element.getOwner().getNickname()));&#xD;
+        r.addColumn(new Column(element.getCreationDate().toString()));&#xD;
+        r.addColumn(new Column(element.getModificationDate().toString()));&#xD;
+        report2.addRow(r);&#xD;
+    }&#xD;
+    report2.setImprint(new SimpleParagraph(&quot;-----------------------------------------&quot;));&#xD;
+    return report2;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_47xywOLyEeafMLBlg2ie4A" name="createAllNotesR" specification="_47sTMOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Note> allNotes = new Vector&lt;>();&#xD;
+    try {&#xD;
+        allNotes = NoteMapper.getNoteMapper().getAllNotes();&#xD;
+    } catch (ClassNotFoundException e) {&#xD;
+        e.printStackTrace();&#xD;
+    } catch (SQLException e) {&#xD;
+        e.printStackTrace();&#xD;
+    }&#xD;
+    AllNotesR report = new AllNotesR();&#xD;
+    report.setTitle(&quot;All Notes of all User&quot;);&#xD;
+    report.setCreated(new Date(System.currentTimeMillis()));&#xD;
+    String sb = &quot;Anzahl der Notebooks:&quot; + allNotes.size();&#xD;
+    report.setHeaderData(new SimpleParagraph(sb));&#xD;
+    Row headline = new Row();&#xD;
+    headline.addColumn((new Column(&quot;Title&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Subtitle&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Username&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Creation Date&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Modification Date&quot;)));&#xD;
+    report.addRow(headline);&#xD;
+    for (Note element : allNotes) {&#xD;
+        Row r = new Row();&#xD;
+        r.addColumn(new Column(element.getTitle()));&#xD;
+        r.addColumn(new Column(element.getSubtitle()));&#xD;
+        r.addColumn(new Column(element.getOwner().getNickname()));&#xD;
+        r.addColumn(new Column(element.getCreationDate().toString()));&#xD;
+        r.addColumn(new Column(element.getModificationDate().toString()));&#xD;
+        report.addRow(r);&#xD;
+    }&#xD;
+    report.setImprint(new SimpleParagraph(&quot;-------------------------------------------&quot;));&#xD;
+    return report;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_474gcOLyEeafMLBlg2ie4A" name="createAllUserPermissionsR" specification="_47zA4OLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    UserInfo u = editor.getCurrentUser();&#xD;
+    return createAllUserPermissionsReportFor(u);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_47-AAOLyEeafMLBlg2ie4A" name="createAllUserPermissionsReportFor" specification="_476VoOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Permission> allPermissionsCreatedBy = new Vector&lt;>();&#xD;
+    allPermissionsCreatedBy.addAll(PermissionMapper.getPermissionMapper().getAllPermissionsCreatedBy(u));&#xD;
+    if (allPermissionsCreatedBy.isEmpty()) {&#xD;
+        return null;&#xD;
+    }&#xD;
+    AllUserPermissionsR report = new AllUserPermissionsR();&#xD;
+    report.setTitle(&quot;All Permission from User&quot;);&#xD;
+    report.setCreated(new Date(System.currentTimeMillis()));&#xD;
+    String sb = &quot;Number of permissions:&quot; + allPermissionsCreatedBy.size();&#xD;
+    report.setHeaderData(new SimpleParagraph(sb));&#xD;
+    Row headline = new Row();&#xD;
+    headline.addColumn((new Column(&quot;Autor&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Shared Object&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Level&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Beneficiary&quot;)));&#xD;
+    report.addRow(headline);&#xD;
+    for (Permission element : allPermissionsCreatedBy) {&#xD;
+        Row r = new Row();&#xD;
+        r.addColumn(new Column(element.getAuthor().toString()));&#xD;
+        r.addColumn(new Column(element.getSharedObject().toString()));&#xD;
+        r.addColumn(new Column(Integer.toString(element.getLevelAsInt())));&#xD;
+        r.addColumn(new Column(element.getBeneficiary().toString()));&#xD;
+        report.addRow(r);&#xD;
+    }&#xD;
+    report.setImprint(new SimpleParagraph(&quot;----------------------------------------&quot;));&#xD;
+    return report;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_48FUwOLyEeafMLBlg2ie4A" name="createAllPermissionsR" specification="_47_1MOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Permission> allPermissions = PermissionMapper.getPermissionMapper().getAllPermissions();&#xD;
+    AllPermissionsR report = new AllPermissionsR();&#xD;
+    report.setTitle(&quot;All Permission of all User&quot;);&#xD;
+    report.setCreated(new Date(System.currentTimeMillis()));&#xD;
+    String sb = &quot;Number of Permission:&quot; + allPermissions.size();&#xD;
+    report.setHeaderData(new SimpleParagraph(sb));&#xD;
+    Row headline = new Row();&#xD;
+    headline.addColumn((new Column(&quot;Autor&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Shared Object&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Level&quot;)));&#xD;
+    headline.addColumn((new Column(&quot;Beneficiary&quot;)));&#xD;
+    report.addRow(headline);&#xD;
+    for (Permission element : allPermissions) {&#xD;
+        Row r = new Row();&#xD;
+        r.addColumn(new Column(element.getAuthor().toString()));&#xD;
+        r.addColumn(new Column(element.getSharedObject().toString()));&#xD;
+        r.addColumn(new Column(Integer.toString(element.getLevelAsInt())));&#xD;
+        r.addColumn(new Column(element.getBeneficiary().toString()));&#xD;
+        report.addRow(r);&#xD;
+    }&#xD;
+    report.setImprint(new SimpleParagraph(&quot;---------------------------------------&quot;));&#xD;
+    return report;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_48XBkOLyEeafMLBlg2ie4A" name="createCustomReport" specification="_48IYEOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;UserInfo> applicableUsers = new Vector&lt;UserInfo>();&#xD;
+    if (userEmail.equals(&quot;none&quot;)) {&#xD;
+        applicableUsers = new SharedServicesImpl().getAllUsers();&#xD;
+        System.out.println(&quot;Calling the Mapper for all Users&quot;);&#xD;
+    } else {&#xD;
+        applicableUsers.add(UserInfoMapper.getUserInfoMapper().findByEmailAdress(userEmail));&#xD;
+        System.out.println(&quot;Calling the Mapper for User with email: &quot; + userEmail);&#xD;
+    }&#xD;
+    System.out.println(&quot;User Email: &quot; + userEmail);&#xD;
+    System.out.println(&quot;Applicable user count: &quot; + Integer.toString(applicableUsers.size()));&#xD;
+    System.out.println(Arrays.toString(applicableUsers.toArray()));&#xD;
+    System.out.println(&quot;Type: &quot; + type);&#xD;
+    System.out.println(&quot;Include Perms: &quot; + Boolean.toString(includePermissions));&#xD;
+    CustomReport report = new CustomReport();&#xD;
+    report.setTitle(&quot;Custom Report, created on: &quot; + new Date().toString());&#xD;
+    for (UserInfo currentUser : applicableUsers) {&#xD;
+        if (type.equals(&quot;notes&quot;)) {&#xD;
+            if (includePermissions) {&#xD;
+                appendNotesWithPermissionsTo(report, currentUser, timespan, dateType);&#xD;
+            } else {&#xD;
+                appendNotesToReport(report, currentUser, timespan, dateType);&#xD;
+            }&#xD;
+        } else if (type.equals(&quot;notebooks&quot;)) {&#xD;
+            if (includePermissions) {&#xD;
+                appendNoteBooksWithPermissionsTo(report, currentUser, timespan, dateType);&#xD;
+            } else {&#xD;
+                appendNoteBooksToReport(report, currentUser, timespan, dateType);&#xD;
+            }&#xD;
+        } else if (type.equals(&quot;permissions&quot;)) {&#xD;
+            SimpleReport toAdd = createAllUserPermissionsReportFor(currentUser);&#xD;
+            if (toAdd != null) {&#xD;
+                toAdd.setHeaderData(new SimpleParagraph(&quot;Permissions von: &quot; + currentUser.toString()));&#xD;
+                report.addSubReport(toAdd);&#xD;
+            }&#xD;
+        }&#xD;
+    }&#xD;
+    report.setHeaderData(new SimpleParagraph(&quot;Custom Report on &quot; + type + &quot;, includes Permissions: &quot; + Boolean.toString(includePermissions)));&#xD;
+    report.setImprint(new SimpleParagraph(&quot;End of Custom Report&quot;));&#xD;
+    return report;&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_48mSIOLyEeafMLBlg2ie4A" name="filterForTimes" specification="_48gLgOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    // Der Synchronisation wegen, sonst hagelt es eine&#xD;
+    // ConcurrentModificationException&#xD;
+    // Erhebend, soweit in Java zu sein&#xD;
+    Vector&lt;DateFilterable> syncedVector = (Vector&lt;DateFilterable>) new Vector&lt;>(dataSet);&#xD;
+    for (DateFilterable element : syncedVector) {&#xD;
+        if (timespan.containsKey(&quot;from&quot;)) {&#xD;
+            if (element.getDate(dateType).before(timespan.get(&quot;from&quot;))) {&#xD;
+                dataSet.remove(element);&#xD;
+                continue;&#xD;
+            }&#xD;
+        }&#xD;
+        if (timespan.containsKey(&quot;to&quot;)) {&#xD;
+            if (element.getDate(dateType).after(timespan.get(&quot;to&quot;))) {&#xD;
+                dataSet.remove(element);&#xD;
+            }&#xD;
+        }&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_48wqMOLyEeafMLBlg2ie4A" name="appendNoteBooksToReport" specification="_48ouYOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SimpleReport toAdd = createAllUserNotebooksReportFor(currentUser, timespan, dateType);&#xD;
+    if (toAdd != null) {&#xD;
+        report.addSubReport(toAdd);&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_4850IOLyEeafMLBlg2ie4A" name="appendNoteBooksWithPermissionsTo" specification="_48zGcOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Notebook> allNoteBooks = editor.getAllNoteBooksFor(currentUser);&#xD;
+    PermissionService permService = new PermissionServiceImpl();&#xD;
+    System.out.println(&quot;Appending Notebooks w/Permissions Report&quot;);&#xD;
+    System.out.println(&quot;User has &quot; + Integer.toString(allNoteBooks.size()) + &quot; Notebooks.&quot;);&#xD;
+    System.out.println(Arrays.toString(allNoteBooks.toArray()));&#xD;
+    System.out.println(&quot;User is: &quot; + currentUser.toString());&#xD;
+    if (!timespan.isEmpty()) {&#xD;
+        filterForTimes(allNoteBooks, timespan, dateType);&#xD;
+    }&#xD;
+    for (Notebook element : allNoteBooks) {&#xD;
+        SimpleReport reportOnNotebook = new SimpleReport();&#xD;
+        reportOnNotebook.setTitle(&quot;Report on Notebook &quot; + element.getTitle());&#xD;
+        reportOnNotebook.setHeaderData(new SimpleParagraph(element.toString()));&#xD;
+        Vector&lt;Permission> permissionsForNote = permService.getAllPermissionsFor(element);&#xD;
+        Row headerRow = new Row();&#xD;
+        headerRow.addColumn(new Column(&quot;id&quot;));&#xD;
+        headerRow.addColumn(new Column(&quot;Author&quot;));&#xD;
+        headerRow.addColumn(new Column(&quot;Beneficiary&quot;));&#xD;
+        headerRow.addColumn(new Column(&quot;Level&quot;));&#xD;
+        reportOnNotebook.addRow(headerRow);&#xD;
+        int permissionCounter = 0;&#xD;
+        for (Permission p : permissionsForNote) {&#xD;
+            Row row = new Row();&#xD;
+            row.addColumn(Integer.toString(p.getId()));&#xD;
+            row.addColumn(p.getAuthor().toString());&#xD;
+            row.addColumn(p.getBeneficiary().toString());&#xD;
+            row.addColumn(Integer.toString(p.getLevelAsInt()));&#xD;
+            reportOnNotebook.addRow(row);&#xD;
+            permissionCounter++;&#xD;
+        }&#xD;
+        reportOnNotebook.setImprint(new SimpleParagraph(&quot;Notebook has &quot; + Integer.toString(permissionCounter) + &quot; Permissions&quot;));&#xD;
+        report.addSubReport(reportOnNotebook);&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_49EzQOLyEeafMLBlg2ie4A" name="appendNotesToReport" specification="_4883cOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    System.out.println(&quot;Appending Notes Report&quot;);&#xD;
+    SimpleReport toAdd = createAllUserNotesReportFor(currentUser, timespan, dateType);&#xD;
+    if (toAdd != null) {&#xD;
+        report.addSubReport(toAdd);&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_49SOoOLyEeafMLBlg2ie4A" name="appendNotesWithPermissionsTo" specification="_49JEsOLyEeafMLBlg2ie4A">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Vector&lt;Note> allNotes = editor.getAllNotesForUser(currentUser);&#xD;
+    PermissionService permService = new PermissionServiceImpl();&#xD;
+    System.out.println(&quot;Appending Notes w/Permissions Report&quot;);&#xD;
+    System.out.println(&quot;User has &quot; + Integer.toString(allNotes.size()) + &quot; Notes.&quot;);&#xD;
+    System.out.println(Arrays.toString(allNotes.toArray()));&#xD;
+    System.out.println(&quot;User is: &quot; + currentUser.toString());&#xD;
+    if (!timespan.isEmpty()) {&#xD;
+        filterForTimes(allNotes, timespan, dateType);&#xD;
+    }&#xD;
+    for (Note element : allNotes) {&#xD;
+        SimpleReport reportOnNote = new SimpleReport();&#xD;
+        reportOnNote.setTitle(&quot;Report on Note&quot; + element.getTitle());&#xD;
+        reportOnNote.setHeaderData(new SimpleParagraph(element.toString()));&#xD;
+        Vector&lt;Permission> permissionsForNote = permService.getAllPermissionsFor(element);&#xD;
+        Row headerRow = new Row();&#xD;
+        headerRow.addColumn(new Column(&quot;id&quot;));&#xD;
+        headerRow.addColumn(new Column(&quot;Author&quot;));&#xD;
+        headerRow.addColumn(new Column(&quot;Beneficiary&quot;));&#xD;
+        headerRow.addColumn(new Column(&quot;Level&quot;));&#xD;
+        reportOnNote.addRow(headerRow);&#xD;
+        int permissionCounter = 0;&#xD;
+        for (Permission p : permissionsForNote) {&#xD;
+            Row row = new Row();&#xD;
+            row.addColumn(Integer.toString(p.getId()));&#xD;
+            row.addColumn(p.getAuthor().toString());&#xD;
+            row.addColumn(p.getBeneficiary().toString());&#xD;
+            row.addColumn(Integer.toString(p.getLevelAsInt()));&#xD;
+            reportOnNote.addRow(row);&#xD;
+            permissionCounter++;&#xD;
+        }&#xD;
+        reportOnNote.setImprint(new SimpleParagraph(&quot;Note has &quot; + Integer.toString(permissionCounter) + &quot; Permissions&quot;));&#xD;
+        report.addSubReport(reportOnNote);&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_46gncOLyEeafMLBlg2ie4A" name="ReportGeneratorImpl" visibility="public" method="_46k44OLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_46muEOLyEeafMLBlg2ie4A" name="init" visibility="public" method="_46ojQOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_46qYcOLyEeafMLBlg2ie4A" name="getNoteBookVerwaltung" visibility="protected" method="_46s0sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_46sNoOLyEeafMLBlg2ie4A" type="_40VuAOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_46vQ8OLyEeafMLBlg2ie4A" name="createAllUserNotebooksR" visibility="public" method="_461-oOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_460JcOLyEeafMLBlg2ie4A" type="_46wfEOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_47DaAOLyEeafMLBlg2ie4A" name="createAllUserNotebooksReportFor" visibility="public" method="_47LV0OLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47FPMOLyEeafMLBlg2ie4A" type="_46wfEOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47GdUOLyEeafMLBlg2ie4A" name="u" type="_464a4OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47ISgOLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47JgoOLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_47NLAOLyEeafMLBlg2ie4A" name="createAllNotebooksR" visibility="public" method="_47T4sOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47SDgOLyEeafMLBlg2ie4A" type="_47PAMOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_47Vt4OLyEeafMLBlg2ie4A" name="createAllUserNotesR" visibility="public" method="_47dCoOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47b0gOLyEeafMLBlg2ie4A" type="_47W8AOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_47iiMOLyEeafMLBlg2ie4A" name="createAllUserNotesReportFor" visibility="public" method="_47qeAOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47jwUOLyEeafMLBlg2ie4A" type="_47W8AOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47k-cOLyEeafMLBlg2ie4A" name="u" type="_464a4OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47mzoOLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47oo0OLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_47sTMOLyEeafMLBlg2ie4A" name="createAllNotesR" visibility="public" method="_47xywOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_47v9kOLyEeafMLBlg2ie4A" type="_47s6QOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_47zA4OLyEeafMLBlg2ie4A" name="createAllUserPermissionsR" visibility="public" method="_474gcOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_473SUOLyEeafMLBlg2ie4A" type="_47zn8OLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_476VoOLyEeafMLBlg2ie4A" name="createAllUserPermissionsReportFor" visibility="public" method="_47-AAOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_477jwOLyEeafMLBlg2ie4A" type="_47zn8OLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_478x4OLyEeafMLBlg2ie4A" name="u" type="_464a4OLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_47_1MOLyEeafMLBlg2ie4A" name="createAllPermissionsR" visibility="public" method="_48FUwOLyEeafMLBlg2ie4A" raisedException="_4xi4sOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48DfkOLyEeafMLBlg2ie4A" type="_48AcQOLyEeafMLBlg2ie4A" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_48IYEOLyEeafMLBlg2ie4A" name="createCustomReport" visibility="public" method="_48XBkOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48NQkOLyEeafMLBlg2ie4A" type="_48JmMOLyEeafMLBlg2ie4A" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48PFwOLyEeafMLBlg2ie4A" name="type" type="_4xwUEOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48Q68OLyEeafMLBlg2ie4A" name="userEmail" type="_4xwUEOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48SwIOLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48T-QOLyEeafMLBlg2ie4A" name="includePermissions">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                    </ownedParameter>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48WagOLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_48gLgOLyEeafMLBlg2ie4A" name="filterForTimes" visibility="private" method="_48mSIOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48iAsOLyEeafMLBlg2ie4A" name="dataSet" type="_48b6EOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48jO0OLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48kc8OLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_48ouYOLyEeafMLBlg2ie4A" name="appendNoteBooksToReport" visibility="private" method="_48wqMOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48p8gOLyEeafMLBlg2ie4A" name="report" type="_48JmMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48rxsOLyEeafMLBlg2ie4A" name="currentUser" type="_464a4OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48tm4OLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48vcEOLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_48zGcOLyEeafMLBlg2ie4A" name="appendNoteBooksWithPermissionsTo" visibility="private" method="_4850IOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48ztgOLyEeafMLBlg2ie4A" name="report" type="_48JmMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_481isOLyEeafMLBlg2ie4A" name="currentUser" type="_464a4OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_482w0OLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_484mAOLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_4883cOLyEeafMLBlg2ie4A" name="appendNotesToReport" visibility="private" method="_49EzQOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_48-soOLyEeafMLBlg2ie4A" name="report" type="_48JmMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_49Ah0OLyEeafMLBlg2ie4A" name="currentUser" type="_464a4OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_49Bv8OLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_49DlIOLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_49JEsOLyEeafMLBlg2ie4A" name="appendNotesWithPermissionsTo" visibility="private" method="_49SOoOLyEeafMLBlg2ie4A">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_49K54OLyEeafMLBlg2ie4A" name="report" type="_48JmMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_49MvEOLyEeafMLBlg2ie4A" name="currentUser" type="_464a4OLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_49OkQOLyEeafMLBlg2ie4A" name="timespan" type="_467eMOLyEeafMLBlg2ie4A"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_49QZcOLyEeafMLBlg2ie4A" name="dateType" type="_46_voOLyEeafMLBlg2ie4A"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_46wfEOLyEeafMLBlg2ie4A" name="AllUserNotebooksR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_464a4OLyEeafMLBlg2ie4A" name="UserInfo"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_467eMOLyEeafMLBlg2ie4A" name="Map"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_47PAMOLyEeafMLBlg2ie4A" name="AllNotebooksR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_47W8AOLyEeafMLBlg2ie4A" name="AllUserNotesR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_47s6QOLyEeafMLBlg2ie4A" name="AllNotesR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_47zn8OLyEeafMLBlg2ie4A" name="AllUserPermissionsR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_48AcQOLyEeafMLBlg2ie4A" name="AllPermissionsR"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_48JmMOLyEeafMLBlg2ie4A" name="CustomReport"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_48b6EOLyEeafMLBlg2ie4A" name="Vector"/>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_4tVuIOLyEeafMLBlg2ie4A" name="importedTypes">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4tW8QOLyEeafMLBlg2ie4A" name="com">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4tXjUOLyEeafMLBlg2ie4A" name="google">
+          <packagedElement xmi:type="uml:Package" xmi:id="_4tYxcOLyEeafMLBlg2ie4A" name="gwt">
+            <packagedElement xmi:type="uml:Package" xmi:id="_4tZ_kOLyEeafMLBlg2ie4A" name="user">
+              <packagedElement xmi:type="uml:Package" xmi:id="_4tbNsOLyEeafMLBlg2ie4A" name="server">
+                <packagedElement xmi:type="uml:Package" xmi:id="_4tb0wOLyEeafMLBlg2ie4A" name="rpc">
+                  <packagedElement xmi:type="uml:Class" xmi:id="_4tdC4OLyEeafMLBlg2ie4A" name="RemoteServiceServlet"/>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_4wvAYOLyEeafMLBlg2ie4A" name="de">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4ww1kOLyEeafMLBlg2ie4A" name="hdm_stuttgart">
+          <packagedElement xmi:type="uml:Package" xmi:id="_4wyqwOLyEeafMLBlg2ie4A" name="huber">
+            <packagedElement xmi:type="uml:Package" xmi:id="_4wz44OLyEeafMLBlg2ie4A" name="itprojekt">
+              <packagedElement xmi:type="uml:Package" xmi:id="_4w0f8OLyEeafMLBlg2ie4A" name="shared">
+                <packagedElement xmi:type="uml:Interface" xmi:id="_4w1uEOLyEeafMLBlg2ie4A" name="SharedServices"/>
+                <packagedElement xmi:type="uml:Package" xmi:id="_4x2asOLyEeafMLBlg2ie4A" name="domainobjects">
+                  <packagedElement xmi:type="uml:Class" xmi:id="_4x3o0OLyEeafMLBlg2ie4A" name="UserInfo"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_40-nMOLyEeafMLBlg2ie4A" name="Notebook"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_41fkkOLyEeafMLBlg2ie4A" name="Note"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_438boOLyEeafMLBlg2ie4A" name="Shareable"/>
+                  <packagedElement xmi:type="uml:Package" xmi:id="_43_e8OLyEeafMLBlg2ie4A" name="Permission">
+                    <packagedElement xmi:type="uml:Class" xmi:id="_44AGAOLyEeafMLBlg2ie4A" name="Level"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_44M6UOLyEeafMLBlg2ie4A" name="Permission"/>
+                  <packagedElement xmi:type="uml:Package" xmi:id="_46_IkOLyEeafMLBlg2ie4A" name="DateFilterable">
+                    <packagedElement xmi:type="uml:Class" xmi:id="_46_voOLyEeafMLBlg2ie4A" name="DateType"/>
+                  </packagedElement>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Interface" xmi:id="_40VuAOLyEeafMLBlg2ie4A" name="Editor"/>
+                <packagedElement xmi:type="uml:Interface" xmi:id="_43ZCAOLyEeafMLBlg2ie4A" name="PermissionService"/>
+                <packagedElement xmi:type="uml:Interface" xmi:id="_46UaMOLyEeafMLBlg2ie4A" name="ReportGenerator"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Package" xmi:id="_4xUPMOLyEeafMLBlg2ie4A" name="server">
+                <packagedElement xmi:type="uml:Package" xmi:id="_4xWEYOLyEeafMLBlg2ie4A" name="db">
+                  <packagedElement xmi:type="uml:Class" xmi:id="_4xWrcOLyEeafMLBlg2ie4A" name="UserInfoMapper"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_40eQ4OLyEeafMLBlg2ie4A" name="NoteMapper"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_40k-kOLyEeafMLBlg2ie4A" name="NoteBookMapper"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_40uvkOLyEeafMLBlg2ie4A" name="PermissionMapper"/>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_45RRUOLyEeafMLBlg2ie4A" name="javax">
+        <packagedElement xmi:type="uml:Package" xmi:id="_45SfcOLyEeafMLBlg2ie4A" name="servlet">
+          <packagedElement xmi:type="uml:Package" xmi:id="_45TGgOLyEeafMLBlg2ie4A" name="http">
+            <packagedElement xmi:type="uml:Class" xmi:id="_45TtkOLyEeafMLBlg2ie4A" name="HttpServlet"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_45hwAOLyEeafMLBlg2ie4A" name="HttpServletRequest"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_45laYOLyEeafMLBlg2ie4A" name="HttpServletResponse"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_45t9QOLyEeafMLBlg2ie4A" name="ServletException"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_4xtQwOLyEeafMLBlg2ie4A" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4xvF8OLyEeafMLBlg2ie4A" name="java">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4xvtAOLyEeafMLBlg2ie4A" name="lang">
+          <packagedElement xmi:type="uml:Class" xmi:id="_4xwUEOLyEeafMLBlg2ie4A" name="String"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_4y2gQOLyEeafMLBlg2ie4A" name="Throwable"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_41VMgOLyEeafMLBlg2ie4A" name="Exception"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_43xcgOLyEeafMLBlg2ie4A" name="Object"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_4yAyweLyEeafMLBlg2ie4A" name="util">
+          <packagedElement xmi:type="uml:Class" xmi:id="_4yCA4OLyEeafMLBlg2ie4A" name="Vector"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_45xnoOLyEeafMLBlg2ie4A" name="io">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_45y1wOLyEeafMLBlg2ie4A" name="IOException"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_4rXYMOLyEeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_4rZ0cOLyEeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/PapyrusJava/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PapyrusJava_PROFILES/PapyrusJava.profile.uml#_j9REUByGEduN1bTiWJ0lyw"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_4rmowOLyEeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_4rmoweLyEeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/Codegen/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Codegen_PROFILES/Codegen.profile.uml#_fPDsIBa-EearhdjjJ6cVzQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_4rxA0OLyEeafMLBlg2ie4A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_4rxA0eLyEeafMLBlg2ie4A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <PapyrusJava:External xmi:id="_4wqH4OLyEeafMLBlg2ie4A" name="com.google.gwt.user.server.rpc.RemoteServiceServlet" base_Classifier="_4tdC4OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4w5YcOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.SharedServices" base_Classifier="_4w1uEOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4xbj8OLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.server.db.UserInfoMapper" base_Classifier="_4xWrcOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4xl8AOLyEeafMLBlg2ie4A" name="IllegalArgumentException" base_Classifier="_4xi4sOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4xzXYOLyEeafMLBlg2ie4A" name="java.lang.String" base_Classifier="_4xwUEOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4x6FEOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.UserInfo" base_Classifier="_4x3o0OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4yEdIOLyEeafMLBlg2ie4A" name="java.util.Vector" base_Classifier="_4yCA4OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4yRRcOLyEeafMLBlg2ie4A" name="RuntimeException" base_Classifier="_4yPcQOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_4ymooOLyEeafMLBlg2ie4A" base_BehavioralFeature="_4yiXMOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_4yxAsOLyEeafMLBlg2ie4A" base_BehavioralFeature="_4yt9YOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4y5jkOLyEeafMLBlg2ie4A" name="java.lang.Throwable" base_Classifier="_4y2gQOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_4y91AOLyEeafMLBlg2ie4A" base_BehavioralFeature="_4y6xsOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_4zHmAOLyEeafMLBlg2ie4A" base_BehavioralFeature="_4zFJwOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_4z1-wOLyEeafMLBlg2ie4A" base_BehavioralFeature="_4zVBYOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_40YKQOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.Editor" base_Classifier="_40VuAOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_40hUMOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.server.db.NoteMapper" base_Classifier="_40eQ4OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_40oB4OLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.server.db.NoteBookMapper" base_Classifier="_40k-kOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_40xy4OLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.server.db.PermissionMapper" base_Classifier="_40uvkOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_41BqgOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Notebook" base_Classifier="_40-nMOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_41XowOLyEeafMLBlg2ie4A" name="java.lang.Exception" base_Classifier="_41VMgOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_41in4OLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Note" base_Classifier="_41fkkOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_43dTcOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.PermissionService" base_Classifier="_43ZCAOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_43tLEOLyEeafMLBlg2ie4A" base_BehavioralFeature="_43qu0OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_43z4wOLyEeafMLBlg2ie4A" name="java.lang.Object" base_Classifier="_43xcgOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_433jIOLyEeafMLBlg2ie4A" base_BehavioralFeature="_431G4OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_43-Q0OLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Shareable" base_Classifier="_438boOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_44B7MOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission.Level" base_Classifier="_44AGAOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_44PWkOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.Permission" base_Classifier="_44M6UOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_45WJ0OLyEeafMLBlg2ie4A" name="javax.servlet.http.HttpServlet" base_Classifier="_45TtkOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_45kMQOLyEeafMLBlg2ie4A" name="javax.servlet.http.HttpServletRequest" base_Classifier="_45hwAOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_45n2oOLyEeafMLBlg2ie4A" name="javax.servlet.http.HttpServletResponse" base_Classifier="_45laYOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_45wZgOLyEeafMLBlg2ie4A" name="javax.servlet.ServletException" base_Classifier="_45t9QOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_450q8OLyEeafMLBlg2ie4A" name="java.io.IOException" base_Classifier="_45y1wOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_46YroOLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.ReportGenerator" base_Classifier="_46UaMOLyEeafMLBlg2ie4A"/>
+  <standard:Create xmi:id="_46icoOLyEeafMLBlg2ie4A" base_BehavioralFeature="_46gncOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_46y7UOLyEeafMLBlg2ie4A" name="AllUserNotebooksR" base_Classifier="_46wfEOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_466QEOLyEeafMLBlg2ie4A" name="UserInfo" base_Classifier="_464a4OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_4696cOLyEeafMLBlg2ie4A" name="Map" base_Classifier="_467eMOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_47CL4OLyEeafMLBlg2ie4A" name="de.hdm_stuttgart.huber.itprojekt.shared.domainobjects.DateFilterable.DateType" base_Classifier="_46_voOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_47Q1YOLyEeafMLBlg2ie4A" name="AllNotebooksR" base_Classifier="_47PAMOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_47ZYQOLyEeafMLBlg2ie4A" name="AllUserNotesR" base_Classifier="_47W8AOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_47vWgOLyEeafMLBlg2ie4A" name="AllNotesR" base_Classifier="_47s6QOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_472EMOLyEeafMLBlg2ie4A" name="AllUserPermissionsR" base_Classifier="_47zn8OLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_48CRcOLyEeafMLBlg2ie4A" name="AllPermissionsR" base_Classifier="_48AcQOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_48MCcOLyEeafMLBlg2ie4A" name="CustomReport" base_Classifier="_48JmMOLyEeafMLBlg2ie4A"/>
+  <PapyrusJava:External xmi:id="_48eWUOLyEeafMLBlg2ie4A" name="Vector" base_Classifier="_48b6EOLyEeafMLBlg2ie4A"/>
+</xmi:XMI>
