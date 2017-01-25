@@ -50,6 +50,7 @@ public class Account extends BasicVerticalView {
         name.setText(loggedInUser.getFirstName());
         surname.setText(loggedInUser.getSurName());
         email.setText(loggedInUser.getEmailAddress());
+        email.setEnabled(false);
 
         deleteButton.addClickHandler(new DeleteClickHandler());
         logOutUrl = loggedInUser.getLogoutUrl();

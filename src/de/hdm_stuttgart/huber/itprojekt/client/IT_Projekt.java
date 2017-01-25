@@ -228,6 +228,8 @@ public class IT_Projekt implements EntryPoint {
     }
 
     public void createUser() {
+    	
+    	user.add(new Label("Please register:"));
 
         user.add(name);
         user.add(nameBox);
