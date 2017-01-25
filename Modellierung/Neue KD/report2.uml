@@ -894,7 +894,6 @@
                     </ownedAttribute>
                     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_QGsgkOL7EeafMLBlg2ie4A" name="AllPermissionsR implements Serializable" client="_QGrScOL7EeafMLBlg2ie4A" supplier="_QCpHAeL7EeafMLBlg2ie4A" contract="_QCpHAeL7EeafMLBlg2ie4A"/>
                   </packagedElement>
-                  <packagedElement xmi:type="uml:Class" xmi:id="_QGxZEOL7EeafMLBlg2ie4A" name="Filter" visibility="public"/>
                   <packagedElement xmi:type="uml:Class" xmi:id="_QG0cYOL7EeafMLBlg2ie4A" name="AllNotesR" visibility="public">
                     <generalization xmi:type="uml:Generalization" xmi:id="_QG1DcOL7EeafMLBlg2ie4A" general="_QCnR0eL7EeafMLBlg2ie4A"/>
                     <ownedAttribute xmi:type="uml:Property" xmi:id="_QG24oOL7EeafMLBlg2ie4A" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">

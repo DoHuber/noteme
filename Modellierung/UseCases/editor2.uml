@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_zVI0YJn2EeablpjWrqHyLA" name="RootElement">
   <packagedElement xmi:type="uml:Actor" xmi:id="_3D92kJn2EeablpjWrqHyLA" name="User"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="_3D-doJn2EeablpjWrqHyLA" memberEnd="_3D-do5n2EeablpjWrqHyLA _3D-dpJn2EeablpjWrqHyLA">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3D-doZn2EeablpjWrqHyLA" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3D-dopn2EeablpjWrqHyLA" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_3D-do5n2EeablpjWrqHyLA" name="notiz(buch) erstellen" type="_3D_Espn2EeablpjWrqHyLA" association="_3D-doJn2EeablpjWrqHyLA"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_3D-dpJn2EeablpjWrqHyLA" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_3D-doJn2EeablpjWrqHyLA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_3D-dpZn2EeablpjWrqHyLA" memberEnd="_3D-dqJn2EeablpjWrqHyLA _3D-dqZn2EeablpjWrqHyLA">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3D-dppn2EeablpjWrqHyLA" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3D-dp5n2EeablpjWrqHyLA" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_3D-dqJn2EeablpjWrqHyLA" name="notiz(buch) verwalten" type="_3D_EsZn2EeablpjWrqHyLA" association="_3D-dpZn2EeablpjWrqHyLA"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_3D-dqZn2EeablpjWrqHyLA" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_3D-dpZn2EeablpjWrqHyLA"/>
-  </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_3D_EsJn2EeablpjWrqHyLA" name="Editor">
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_EsZn2EeablpjWrqHyLA" name="Notizbücher verwalten"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_3D_Espn2EeablpjWrqHyLA" name="Notizbuch erstellen"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_ZqWbwJn3EeablpjWrqHyLA" name="Notizbuch freigeben"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_v3Ev4OMlEeaqzM46I5amkw" name="Notizbuch erstellen"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_1ZcMQOMlEeaqzM46I5amkw" name="Notizbuch bearbeiten"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_dqPYwJn3EeablpjWrqHyLA" memberEnd="_dqQm4Zn3EeablpjWrqHyLA _dqRN8Jn3EeablpjWrqHyLA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_dqP_0Jn3EeablpjWrqHyLA" source="org.eclipse.papyrus">
@@ -26,5 +12,19 @@
     </eAnnotations>
     <ownedEnd xmi:type="uml:Property" xmi:id="_dqQm4Zn3EeablpjWrqHyLA" name="notizbücher freigeben" type="_ZqWbwJn3EeablpjWrqHyLA" association="_dqPYwJn3EeablpjWrqHyLA"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_dqRN8Jn3EeablpjWrqHyLA" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_dqPYwJn3EeablpjWrqHyLA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_40gk8OMlEeaqzM46I5amkw" memberEnd="_40qV8uMlEeaqzM46I5amkw _40qV8-MlEeaqzM46I5amkw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_40qV8OMlEeaqzM46I5amkw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_40qV8eMlEeaqzM46I5amkw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_40qV8uMlEeaqzM46I5amkw" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_40gk8OMlEeaqzM46I5amkw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_40qV8-MlEeaqzM46I5amkw" name="notizbuch bearbeiten" type="_1ZcMQOMlEeaqzM46I5amkw" association="_40gk8OMlEeaqzM46I5amkw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_52cjEOMlEeaqzM46I5amkw" memberEnd="_52cjE-MlEeaqzM46I5amkw _52cjFOMlEeaqzM46I5amkw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_52cjEeMlEeaqzM46I5amkw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_52cjEuMlEeaqzM46I5amkw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_52cjE-MlEeaqzM46I5amkw" name="user" type="_3D92kJn2EeablpjWrqHyLA" association="_52cjEOMlEeaqzM46I5amkw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_52cjFOMlEeaqzM46I5amkw" name="notizbuch erstellen" type="_v3Ev4OMlEeaqzM46I5amkw" association="_52cjEOMlEeaqzM46I5amkw"/>
   </packagedElement>
 </uml:Model>
