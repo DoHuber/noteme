@@ -2,6 +2,7 @@ package de.hdm_stuttgart.huber.itprojekt.client.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
@@ -35,6 +36,7 @@ public class NotebookTable extends FlowPanel {
      */
     private Notebook selected = null;
     private Vector<Notebook> noteB;
+    private DateTimeFormat datumsFormatDe = DateTimeFormat.getFormat("d.M.y");
 
     public NotebookTable(Vector<Notebook> list) {
         this.noteB = list;
@@ -82,8 +84,9 @@ public class NotebookTable extends FlowPanel {
 
             @Override
             public String getValue(Notebook noteB) {
-                // !!!! Könnte Fehler verursachen
-                return noteB.getCreationDate().toString();
+                
+            	return datumsFormatDe.format(noteB.getCreationDate());
+            	
             }
         };
         table.addColumn(creationDate, "Creation Date");
